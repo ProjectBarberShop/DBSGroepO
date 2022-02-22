@@ -20,7 +20,7 @@
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                @enderror
+                            @enderror
 					    </div>                           
                      </div>
                      <div class="form-outline mb-4">
@@ -43,11 +43,11 @@
                         <label class="form-check-label" for="remember"> Remember password </label>
                      </div>
                      <button type="submit" class="btn btn-primary btn-lg btn-block">{{ __('Login') }}</button>
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif            
+                    @if (Route::has('password.request'))
+                        <a class="btn btn-link" href="{{ route('password.request') }}">
+                           {{ __('Forgot Your Password?') }}
+                        </a>
+                    @endif            
                </div>
             </div>
             </form>
