@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Auth\LogoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,5 +18,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/home', function () {
+    return View::make('cms.home');
+});
+
+Route::group(['middleware' => ['auth']], function() {
+    Route::get('/logout', [LogoutController::class , 'logout']);
+ });
+
+
 
 Auth::routes();
