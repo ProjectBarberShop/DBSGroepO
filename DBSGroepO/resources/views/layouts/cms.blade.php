@@ -84,7 +84,7 @@
                 <i class="ion ion-person" style="font-size: 16px"></i> Welkom {{ Auth::user()->name }}</i>
             </a>
             <p></p>
-            <a href="{{route('logout')}}" class="d-block">
+            <a href="{{url('cms/signout')}}" class="d-block">
                 <i class="ion-log-out" style="font-size: 16px"></i> Uitloggen</i>
             </a>
         </div>
@@ -323,7 +323,6 @@
               <p>Level 1</p>
             </a>
           </li>
-          
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

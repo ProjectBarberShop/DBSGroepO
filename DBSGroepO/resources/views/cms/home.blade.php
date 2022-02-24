@@ -12,7 +12,7 @@
       <div class="icon">
          <i class="ion ion-camera"></i>
       </div>
-      <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+      <a href="{{url('cms/fotos')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
    </div>
 </div>
 <!-- ./col -->
@@ -26,7 +26,7 @@
       <div class="icon">
          <i class="ion ion-compose"></i>
       </div>
-      <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+      <a href="{{url('cms/paginas')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
    </div>
 </div>
 <!-- ./col -->
@@ -40,7 +40,7 @@
       <div class="icon">
          <i class="ion ion-person-add"></i>
       </div>
-      <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+      <a href="{{url('cms/contact')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
    </div>
 </div>
 <!-- ./col -->
@@ -54,7 +54,7 @@
       <div class="icon">
          <i class="ion ion-ios-videocam"></i>
       </div>
-      <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+      <a href="{{url('cms/videos')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
    </div>
 </div>
 
@@ -71,7 +71,6 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
                     {{ __('You are logged in!') }}
                 </div>
             </div>

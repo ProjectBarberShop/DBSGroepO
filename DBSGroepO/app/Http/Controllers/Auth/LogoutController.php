@@ -20,6 +20,6 @@ class LogoutController extends Controller
         
         Auth::logout();
 
-        return redirect('login');
+        return redirect('cms/login');
     }
 }
