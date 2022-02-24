@@ -1,8 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Auth\RegisterController;
+use Illuminate\Support\Facades\Password;
+use App\Http\Controllers\FotoController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -18,15 +23,25 @@ use App\Http\Controllers\Auth\LogoutController;
 Route::get('/', function () {
     return view('welcome');
 });
+Auth::routes();
 
-Route::get('/home', function () {
-    return View::make('cms.home');
+Route::group([
+    'prefix' => 'cms'
+], function() {
+    Route::get('signout', function() {
+        Session::flush();
+        Auth::logout();
+        return Redirect("/login");
+    });
+    Route::group(['middleware' => ['auth']], function() {
+       
+        Route::get('/fotos' , [FotoController::class , 'index']);
+        Route::get('/paginas' , [FotoController::class , 'index']);
+        Route::get('/contact' , [FotoController::class , 'index']);
+        Route::get('/videos' , [FotoController::class , 'index']);
+        Route::get('/home', function () {
+            return View::make('cms.home');
+        });
+    });
 });
 
-Route::group(['middleware' => ['auth']], function() {
-    Route::get('/logout', [LogoutController::class , 'logout']);
- });
-
-
-
-Auth::routes();
