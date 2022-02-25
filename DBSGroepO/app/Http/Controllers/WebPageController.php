@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Webpages;
 
-class FotoController extends Controller
+class WebPageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +14,8 @@ class FotoController extends Controller
      */
     public function index()
     {
-        return view('cms.fotos.index');
+        $data = Webpages::all();
+        return view('cms.webpages.index' ,['webpages' => $data]);
     }
 
     /**
