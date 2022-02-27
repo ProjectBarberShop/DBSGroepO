@@ -6,6 +6,7 @@
   <title>Barbershop | Dashboard</title>
 
   <script type="text/javascript" src="{{ asset('js/adminlts.js') }}" defer></script>
+  <script src="https://cdn.tiny.cloud/1/8g15vw4dufcpo94n1f86rvcmv7vqqi7pacte3g6cgy0ln3fb/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -229,5 +230,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/overlayscrollbars/1.5.2/js/jquery.overlayScrollbars.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
+
+<!-- tinyMc -->
+<!-- ./endTinyMc -->
 </body>
 </html>

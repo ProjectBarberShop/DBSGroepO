@@ -41,7 +41,7 @@ Route::group([
     Route::resource('contact', FotoController::class)->only(['index']);
     Route::resource('videos', FotoController::class)->only(['index']);
     Route::resource('profile', UserController::class)->only(['index']);
-    Route::resource('paginas', WebPageController::class)->only(['index']);
+    Route::resource('paginas', WebPageController::class);
     Route::get('/home', function () {
         return View::make('cms.home');
         });

@@ -36,7 +36,7 @@ class WebPageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       //
     }
 
     /**
@@ -58,7 +58,8 @@ class WebPageController extends Controller
      */
     public function edit($id)
     {
-        //
+        $page = Webpages::find($id);
+        return view('cms.webpages.edit' , compact('page'));
     }
 
     /**
@@ -70,7 +71,10 @@ class WebPageController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $webpage = Webpages::find($id);
+        $webpage->body = $request->input('body');
+        $webpage->save();
+        return redirect()->route('paginas.index')->with('success','Product updated successfully');
     }
 
     /**

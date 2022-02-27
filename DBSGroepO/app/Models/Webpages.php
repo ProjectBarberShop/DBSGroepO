@@ -10,4 +10,8 @@ class Webpages extends Model
     use HasFactory;
     protected $table= 'webpages';
     protected $primaryKey = 'id';
+
+    protected $fillable = [
+        'body'
+    ];
 }
