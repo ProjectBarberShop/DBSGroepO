@@ -25,7 +25,7 @@ class WebPageController extends Controller
      */
     public function create()
     {
-        //
+        return view('cms.webpages.create');
     }
 
     /**
@@ -36,7 +36,13 @@ class WebPageController extends Controller
      */
     public function store(Request $request)
     {
-       //
+       $request->validate([
+           'body' => 'required'
+       ]);
+
+       Webpages::create($request->all());
+
+       return redirect()->route('paginas.index')->with('success','Pagina succesvol toegevoegd');
     }
 
     /**
@@ -74,7 +80,7 @@ class WebPageController extends Controller
         $webpage = Webpages::find($id);
         $webpage->body = $request->input('body');
         $webpage->save();
-        return redirect()->route('paginas.index')->with('success','Product updated successfully');
+        return redirect()->route('paginas.index')->with('success','Pagina succesvol bijgewerkt');
     }
 
     /**

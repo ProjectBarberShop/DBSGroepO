@@ -1,8 +1,21 @@
 @extends('layouts.cms')
 
 @section('content')
+
+@if ($message = Session::get('success'))
+        <div class="alert alert-success">
+            <p>{{ $message }}</p>
+        </div>
+    @endif
 <section class="content">
    <div class="container-fluid">
+      <div class="row">
+         <div class="col-lg-12 margin-tb">
+               <div class="pull-right">
+                  <a class="btn btn-success" href="{{ route('paginas.create') }}"> Nieuwe pagina maken</a>
+               </div>
+         </div>
+      </div>
       <div class="row">
          <div class="col-12">
             <div class="card">
@@ -27,6 +40,7 @@
                            <td>{{$w->body}}</td>
                            <td>{{$w->created_at}}</td>
                            <td><a class="btn btn-primary" href="{{ route('paginas.edit',$w->id) }}">Bijwerken</a></td>
+                           
                         </tr>
                         @endforeach
                      </tbody>
