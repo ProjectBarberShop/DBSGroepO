@@ -77,6 +77,9 @@ class WebPageController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'body' => 'required'
+        ]);
         $webpage = Webpages::find($id);
         $webpage->body = $request->input('body');
         $webpage->save();
