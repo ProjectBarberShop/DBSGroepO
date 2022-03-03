@@ -28,13 +28,14 @@ Auth::routes();
 Route::group([
     'prefix' => 'cms'
 ], function() {
-    Route::get('signout', function() {
+    Route::get('/signout', function() {
+
         Session::flush();
         Auth::logout();
         return Redirect("/login");
     });
     Route::group(['middleware' => ['auth']], function() {
-       
+
         Route::get('/fotos' , [FotoController::class , 'index']);
         Route::get('/paginas' , [FotoController::class , 'index']);
         Route::get('/contact' , [FotoController::class , 'index']);
