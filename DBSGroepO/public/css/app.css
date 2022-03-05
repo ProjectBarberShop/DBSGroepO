@@ -60,8 +60,13 @@
   --bs-body-bg: #f8fafc;
 }
 
+
 .bg-yellow {
     background-color: yellow;
+}
+
+.text-yellow{
+    color:yellow;
 }
 
 *,
@@ -3953,6 +3958,7 @@ textarea.form-control-lg {
 }
 .nav-link:hover, .nav-link:focus {
   color: #0a58ca;
+
 }
 .nav-link.disabled {
   color: #6c757d;
