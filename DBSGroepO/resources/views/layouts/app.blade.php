@@ -41,8 +41,8 @@
 <div id="app">
     {{--start header--}}
     <div class="container-fluid  p-0 text-center">
-        <img src="{{asset('assets/images/skyline-banner.jpg')}}" alt="AdminLTE Logo" class="img-fluid w-100"
-             style="height: 10rem;">
+        <img src="{{asset('assets/images/skyline-met-naam.jpg')}}" alt="AdminLTE Logo" class="img-fluid w-100"
+             style="height: 11rem;">
 
     </div>
 
