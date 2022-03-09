@@ -162,6 +162,14 @@ p {
   margin-bottom: 1rem;
 }
 
+footer p{
+    font-size: 1rem;
+}
+
+footer h6{
+    color:yellow;
+}
+
 abbr[title],
 abbr[data-bs-original-title] {
   -webkit-text-decoration: underline dotted;
@@ -601,6 +609,10 @@ progress {
 }
 .blockquote-footer::before {
   content: "— ";
+}
+
+nav div ul li a{
+    color: yellow;
 }
 
 .img-fluid {
@@ -3763,6 +3775,19 @@ textarea.form-control-lg {
   overflow: hidden;
   border-top: 1px solid rgba(0, 0, 0, 0.15);
 }
+.dropdown-item-custom {
+    display: block;
+    width: 100%;
+    padding: 0.25rem 1rem;
+    clear: both;
+    font-weight: 400;
+    color: #212529;
+    text-align: inherit;
+    text-decoration: none;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+}
 
 .dropdown-item {
   display: block;
@@ -3950,6 +3975,7 @@ textarea.form-control-lg {
   color: #0d6efd;
   text-decoration: none;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+  font-size: 1.25rem;
 }
 @media (prefers-reduced-motion: reduce) {
   .nav-link {
@@ -4058,7 +4084,7 @@ textarea.form-control-lg {
   padding-top: 0.32rem;
   padding-bottom: 0.32rem;
   margin-right: 1rem;
-  font-size: 1.125rem;
+  font-size: 1.5rem;
   text-decoration: none;
   white-space: nowrap;
 }

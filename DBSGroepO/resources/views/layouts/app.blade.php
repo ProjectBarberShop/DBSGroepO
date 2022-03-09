@@ -40,15 +40,15 @@
 <body class="bg-white">
 <div id="app">
     {{--start header--}}
-    <div class="container-fluid  p-0 text-center">
+    <div class="container-fluid bg-yellow pb-3 text-center">
         <img src="{{asset('assets/images/skyline-met-naam.jpg')}}" alt="AdminLTE Logo" class="img-fluid w-100"
              style="height: 11rem;">
-
+        <p class="text-center h3 "><strong>Met overtuiging plezierig zingen</strong></p>
     </div>
 
-    <nav class="navbar navbar-expand-md navbar-dark bg-danger">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-danger ">
 
-        <p class="navbar-brand" href="#">Barbershop</p>
+        <a class="navbar-brand " href="/">Barbershop</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -57,7 +57,7 @@
         <div class="collapse navbar-collapse " id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto nav-fill w-75">
                 <li class="nav-item">
-                    <a class="nav-link hove" style="color: yellow" href="/">Home </a>
+                    <a class="nav-link " style="color: yellow" href="/">Home </a>
                 </li>
                 <li class="nav-item dropdown active">
                     <a class="nav-link dropdown-toggle" style="color: yellow" href="#" id="navbarDropdown" role="button"
@@ -65,10 +65,10 @@
                         Even voorstellen
                     </a>
                     <div class="dropdown-menu bg-danger" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item " style="color: yellow" href="#">Dirigent</a>
-                        <a class="dropdown-item" style="color: yellow" href="#">Wie zijn wij</a>
-                        <a class="dropdown-item" style="color: yellow" href="#">Repetoire</a>
-                        <a class="dropdown-item" style="color: yellow" href="#">Koorleden</a>
+                        <a class="dropdown-item-custom " style="color: yellow" href="#">Dirigent</a>
+                        <a class="dropdown-item-custom" style="color: yellow" href="#">Wie zijn wij</a>
+                        <a class="dropdown-item-custom" style="color: yellow" href="#">Repetoire</a>
+                        <a class="dropdown-item-custom" style="color: yellow" href="#">Koorleden</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown active">
@@ -77,8 +77,8 @@
                         Optredens
                     </a>
                     <div class="dropdown-menu bg-danger" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" style="color: yellow" href="#">Album</a>
-                        <a class="dropdown-item" style="color: yellow" href="#">Muzieklijst</a>
+                        <a class="dropdown-item-custom" style="color: yellow" href="#">Album</a>
+                        <a class="dropdown-item-custom" style="color: yellow" href="#">Muzieklijst</a>
                     </div>
                 </li>
                 <li class="nav-item active">
@@ -120,7 +120,7 @@
     {{--start footer--}}
     <footer class="text-center text-lg-start text-white bg-danger">
         <!-- Grid container -->
-        <div class="container p-4 pb-0 ">
+        <div class="container  pb-0 ">
             <!-- Section: Links -->
             <section class="">
                 <!--Grid row-->
@@ -128,54 +128,28 @@
                     <!-- Grid column -->
                     <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
                         <h6 class="text-uppercase mb-4 font-weight-bold">
-                            Company name
+                            Duketown Barbershop Singers
                         </h6>
-                        <p class="text-yellow">
-                            Here you can use rows and columns to organize your footer
-                            content. Lorem ipsum dolor sit amet, consectetur adipisicing
+                        <p >
+                             Lorem ipsum dolor sit amet, consectetur adipisicing
                             elit.
                         </p>
                     </div>
                     <!-- Grid column -->
 
-                    <hr class="w-100 clearfix d-md-none"/>
-
-                    <!-- Grid column -->
-                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-                        <h6 class="text-uppercase mb-4 font-weight-bold">Products</h6>
-                        <p>
-                            <a class="text-white">MDBootstrap</a>
-                        </p>
-                        <p>
-                            <a class="text-white">MDWordPress</a>
-                        </p>
-                        <p>
-                            <a class="text-white">BrandFlow</a>
-                        </p>
-                        <p>
-                            <a class="text-white">Bootstrap Angular</a>
-                        </p>
-                    </div>
-                    <!-- Grid column -->
 
                     <hr class="w-100 clearfix d-md-none"/>
 
                     <!-- Grid column -->
-                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
-                        <h6 class="text-uppercase mb-4 font-weight-bold">
-                            Useful links
+                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3 m-3">
+                        <h6 class="text-uppercase mb-4 font-weight-bold ">
+                            Lid worden?
                         </h6>
                         <p>
-                            <a class="text-white">Your Account</a>
+                            Mail naar:
                         </p>
-                        <p>
-                            <a class="text-white">Become an Affiliate</a>
-                        </p>
-                        <p>
-                            <a class="text-white">Shipping Rates</a>
-                        </p>
-                        <p>
-                            <a class="text-white">Help</a>
+                        <p class="text-white">
+                            <a class="text-white"  href="mailto:secretaris@duketownbarbershopsingers.nl"> <u>secretaris@duketownbarbershopsingers.nl</u></a>
                         </p>
                     </div>
 
@@ -183,12 +157,17 @@
                     <hr class="w-100 clearfix d-md-none"/>
 
                     <!-- Grid column -->
-                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3 m-auto">
                         <h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
-                        <p><i class="fas fa-home mr-3"></i> New York, NY 10012, US</p>
-                        <p><i class="fas fa-envelope mr-3"></i> info@gmail.com</p>
-                        <p><i class="fas fa-phone mr-3"></i> + 01 234 567 88</p>
-                        <p><i class="fas fa-print mr-3"></i> + 01 234 567 89</p>
+                        <p><i class="fas fa-home mr-3"></i> Bordeslaan 191, 5223 MK 's-Hertogenbosch</p>
+                        <p><i class="fas fa-envelope mr-3"></i>
+                            <a
+                                class="text-white"
+                                href="mailto:info@duketownbarbershopsingers.nl">
+                                <u>info@duketownbarbershopsingers.nl</u>
+                            </a>
+                        </p>
+                        <p><i class="fas fa-phone mr-3"></i> +31 06 22 45 78 37</p>
                     </div>
                     <!-- Grid column -->
                 </div>
@@ -206,8 +185,8 @@
                         <!-- Copyright -->
                         <div class="p-3">
                             © {{now()->year}} Copyright:
-                            <a class="text-white" href="https://mdbootstrap.com/"
-                            >MDBootstrap.com</a
+                            <a class="text-white" href=" www.duketownbs.nl"
+                            > www.duketownbs.nl</a
                             >
                         </div>
                         <!-- Copyright -->
@@ -221,6 +200,7 @@
                             class="btn btn-outline-light btn-floating m-1"
                             class="text-white"
                             role="button"
+                            href="https://www.facebook.com/DuketownBarbershopSingers"
                         ><i class="fab fa-facebook-f"></i
                             ></a>
 
@@ -230,14 +210,6 @@
                             class="text-white"
                             role="button"
                         ><i class="fab fa-twitter"></i
-                            ></a>
-
-                        <!-- Google -->
-                        <a
-                            class="btn btn-outline-light btn-floating m-1"
-                            class="text-white"
-                            role="button"
-                        ><i class="fab fa-google"></i
                             ></a>
 
                         <!-- Instagram -->
