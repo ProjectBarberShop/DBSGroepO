@@ -12,6 +12,9 @@ use App\Http\Controllers\WebPageController;
 use App\Http\Controllers\FotoController;
 use App\Http\Controllers\UserController;
 
+use App\Http\Controllers\ContactController;
+use App\Http\Requests\ContactFormRequest;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,6 +30,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 Auth::routes();
+
+Route::get('/contact-us', 
+[ContactController::class, 'contact']);
+Route::post('/contact-us', 
+    [ContactController::class, 'storeMessage'])->name('validate.form');
 
 Route::group([
     'prefix' => 'cms'
