@@ -17,14 +17,14 @@
          </div>
       </div>
       <div class="row">
-         <div class="col-12">
+         <div class="col-12 col-sm-12">
             <div class="card">
                <div class="card-header">
                   <h3 class="card-title">Pagina's met context</h3>
                </div>
                <!-- /.card-header -->
                <div class="card-body">
-                  <table id="example2" class="table table-bordered table-hover">
+                  <table id="" class="table table-bordered table-hover">
                      <thead>
                         <tr>
                            <th>id</th>
