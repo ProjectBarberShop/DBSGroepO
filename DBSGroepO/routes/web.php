@@ -28,6 +28,8 @@ Route::get('/', function () {
 });
 Auth::routes();
 
+Route::get('/{slug}' , [WebPageController::class , 'show']);
+
 Route::group([
     'prefix' => 'cms'
 ], function() {

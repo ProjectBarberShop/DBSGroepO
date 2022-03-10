@@ -24,6 +24,7 @@
                 @csrf
                 <div class="card-body">
                     <textarea name="body"></textarea>
+                    </br>
                     <input name="title"></input>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 text-center">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Webpages;
+use Illuminate\Support\Str;
 
 class WebPageController extends Controller
 {
@@ -42,7 +43,7 @@ class WebPageController extends Controller
            'title' => 'required',
        ]);
 
-       $slug = str_slug($request->input('title'));
+       $slug = Str::slug($request->input('title'));
        $body = $request->input('body');
 
        $data = array(
@@ -60,9 +61,10 @@ class WebPageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        $pagecontent = Webpages::all()->where('slug', $slug);
+        return view('contentpage' , compact('pagecontent'));
     }
 
     /**
@@ -92,7 +94,7 @@ class WebPageController extends Controller
         ]);
         $webpage = Webpages::find($id);
         $webpage->body = $request->input('body');
-        $webpage->slug = str_slug($request->input('title'));
+        $webpage->slug = Str::slug($request->input('title'));
         $webpage->save();
         return redirect()->route('paginas.index')->with('success','Pagina succesvol bijgewerkt');
     }
