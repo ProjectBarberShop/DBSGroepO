@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Webpages;
 
-class FotoController extends Controller
+class WebPageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +14,12 @@ class FotoController extends Controller
      */
     public function index()
     {
-        return view('cms.fotos.index');
+        $data = Webpages::all(); 
+        foreach($data as $d) {
+            $d->body = strip_tags($d->body);
+        }     
+        
+        return view('cms.webpages.index' ,['webpages' => $data]);
     }
 
     /**
@@ -23,7 +29,7 @@ class FotoController extends Controller
      */
     public function create()
     {
-        //
+        return view('cms.webpages.create');
     }
 
     /**
@@ -34,7 +40,13 @@ class FotoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       $request->validate([
+           'body' => 'required'
+       ]);
+
+       Webpages::create($request->all());
+
+       return redirect()->route('paginas.index')->with('success','Pagina succesvol toegevoegd');
     }
 
     /**
@@ -56,7 +68,8 @@ class FotoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $page = Webpages::find($id);
+        return view('cms.webpages.edit' , compact('page'));
     }
 
     /**
@@ -68,7 +81,13 @@ class FotoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'body' => 'required'
+        ]);
+        $webpage = Webpages::find($id);
+        $webpage->body = $request->input('body');
+        $webpage->save();
+        return redirect()->route('paginas.index')->with('success','Pagina succesvol bijgewerkt');
     }
 
     /**
