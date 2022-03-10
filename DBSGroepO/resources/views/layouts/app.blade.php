@@ -57,7 +57,7 @@
         <div class="collapse navbar-collapse " id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto nav-fill w-75">
                 <li class="nav-item">
-                    <a class="nav-link " style="color: yellow" href="/">Home </a>
+                    <a class="nav-link "  href="/">Home </a>
                 </li>
                 <li class="nav-item dropdown active">
                     <a class="nav-link dropdown-toggle" style="color: yellow" href="#" id="navbarDropdown" role="button"
@@ -65,10 +65,10 @@
                         Even voorstellen
                     </a>
                     <div class="dropdown-menu bg-danger" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item-custom " style="color: yellow" href="#">Dirigent</a>
-                        <a class="dropdown-item-custom" style="color: yellow" href="#">Wie zijn wij</a>
-                        <a class="dropdown-item-custom" style="color: yellow" href="#">Repetoire</a>
-                        <a class="dropdown-item-custom" style="color: yellow" href="#">Koorleden</a>
+                        <a class="dropdown-item-custom "  href="#">Dirigent</a>
+                        <a class="dropdown-item-custom"  href="#">Wie zijn wij</a>
+                        <a class="dropdown-item-custom"  href="#">Repetoire</a>
+                        <a class="dropdown-item-custom"  href="#">Koorleden</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown active">
@@ -77,8 +77,8 @@
                         Optredens
                     </a>
                     <div class="dropdown-menu bg-danger" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item-custom" style="color: yellow" href="#">Album</a>
-                        <a class="dropdown-item-custom" style="color: yellow" href="#">Muzieklijst</a>
+                        <a class="dropdown-item-custom"  href="#">Album</a>
+                        <a class="dropdown-item-custom"  href="#">Muzieklijst</a>
                     </div>
                 </li>
                 <li class="nav-item active">
@@ -141,7 +141,7 @@
                     <hr class="w-100 clearfix d-md-none"/>
 
                     <!-- Grid column -->
-                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3 m-3">
+                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3 m- m flex-md-wrap">
                         <h6 class="text-uppercase mb-4 font-weight-bold ">
                             Lid worden?
                         </h6>
@@ -181,9 +181,9 @@
             <section class="p-3 pt-0">
                 <div class="row d-flex align-items-center">
                     <!-- Grid column -->
-                    <div class="col-md-7 col-lg-8 text-center text-md-start">
+                    <div class="col-md-7 col-lg-4 text-center text-md-start">
                         <!-- Copyright -->
-                        <div class="p-3">
+                        <div class="p-3 h5">
                             © {{now()->year}} Copyright:
                             <a class="text-white" href=" www.duketownbs.nl"
                             > www.duketownbs.nl</a
@@ -192,9 +192,13 @@
                         <!-- Copyright -->
                     </div>
                     <!-- Grid column -->
-
+                    <div class="col-md-5 col-lg-4 ml-lg-4 text-center text-md-center">
+                        <div class="p3 h5">
+                            Kvk: 2738282
+                        </div>
+                    </div>
                     <!-- Grid column -->
-                    <div class="col-md-5 col-lg-4 ml-lg-0 text-center text-md-end">
+                    <div class="col-md-5 col-lg-2 ml-lg-1 text-center text-md-end p-0">
                         <!-- Facebook -->
                         <a
                             class="btn btn-outline-light btn-floating m-1"
