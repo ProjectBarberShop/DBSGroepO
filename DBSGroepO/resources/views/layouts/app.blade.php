@@ -59,8 +59,8 @@
                 <li class="nav-item">
                     <a class="nav-link "  href="/">Home </a>
                 </li>
-                <li class="nav-item dropdown active">
-                    <a class="nav-link dropdown-toggle" style="color: yellow" href="#" id="navbarDropdown" role="button"
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Even voorstellen
                     </a>
@@ -71,8 +71,8 @@
                         <a class="dropdown-item-custom"  href="#">Koorleden</a>
                     </div>
                 </li>
-                <li class="nav-item dropdown active">
-                    <a class="nav-link dropdown-toggle" style="color: yellow" href="#" id="navbarDropdown" role="button"
+                <li class="nav-item dropdown ">
+                    <a class="nav-link dropdown-toggle"  href="#" id="navbarDropdown" role="button"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Optredens
                     </a>
@@ -81,14 +81,14 @@
                         <a class="dropdown-item-custom"  href="#">Muzieklijst</a>
                     </div>
                 </li>
-                <li class="nav-item active">
-                    <a class="nav-link " style="color: yellow" href="#">Introductiecursus</a>
+                <li class="nav-item">
+                    <a class="nav-link "  href="#">Introductiecursus</a>
                 </li>
-                <li class="nav-item active">
-                    <a class="nav-link " style="color: yellow" href="#">Agenda</a>
+                <li class="nav-item">
+                    <a class="nav-link "  href="#">Agenda</a>
                 </li>
-                <li class="nav-item active">
-                    <a class="nav-link " style="color: yellow" href="#">Informatie</a>
+                <li class="nav-item">
+                    <a class="nav-link " href="#">Informatie</a>
                 </li>
             </ul>
             @if (Route::has('login'))
