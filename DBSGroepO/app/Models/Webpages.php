@@ -12,6 +12,7 @@ class Webpages extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'body'
+        'body',
+        'slug'
     ];
 }

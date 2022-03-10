@@ -36,7 +36,7 @@
       </li>
     </ul>
     <!-- Right navbar links -->
-    <ul class="navbar-nav ml-auto">  
+    <ul class="navbar-nav ml-auto">
       <li class="nav-item">
         <a class="nav-link" data-widget="fullscreen" href="#" role="button">
           <i class="fas fa-expand-arrows-alt"></i>
@@ -58,8 +58,8 @@
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-       
-        <div class="info">       
+
+        <div class="info">
             <a  href="{{url('cms/profile')}}" class="d-block">
                 <i class="ion ion-person" style="font-size: 16px"></i> Welkom {{ Auth::user()->name }}</i>
             </a>
@@ -215,15 +215,15 @@
             @yield('content')
         </div>
     </section>
-          
-  <footer class="main-footer fixed-bottom">
+
+  <footer class="main-footer">
     <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
       <b>Version</b> 3.2.0
     </div>
   </footer>
-  
+
 </div>
 <!-- ./wrapper -->
 <!-- scripts -->

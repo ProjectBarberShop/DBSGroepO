@@ -12,16 +12,18 @@
             @csrf
             @method('PUT')
                 <div class="card-body">
-                    <textarea name="body" id="{{$page-> id}}" value="{{$page -> body}}">{{$page -> body}}</textarea>
+                    <textarea name="body" id="{{$page-> id}}">{{$page -> body}}</textarea>
+                    </br>
+                    <input name="title" value="{{$page -> slug}}"/>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                         <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
-                
+
             </form>
             <div class="pull-right">
                     <a class="btn btn-primary" href="{{ route('paginas.index') }}"> Back</a>
-            </div> 
+            </div>
         </div>
     </div>
 </section>

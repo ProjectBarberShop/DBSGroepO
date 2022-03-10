@@ -14,11 +14,8 @@ class WebPageController extends Controller
      */
     public function index()
     {
-        $data = Webpages::all(); 
-        foreach($data as $d) {
-            $d->body = strip_tags($d->body);
-        }     
-        
+        $data = Webpages::all();
+
         return view('cms.webpages.index' ,['webpages' => $data]);
     }
 
@@ -41,10 +38,18 @@ class WebPageController extends Controller
     public function store(Request $request)
     {
        $request->validate([
-           'body' => 'required'
+           'body' => 'required',
+           'title' => 'required',
        ]);
 
-       Webpages::create($request->all());
+       $slug = str_slug($request->input('title'));
+       $body = $request->input('body');
+
+       $data = array(
+           'body' => $body,
+           'slug' => $slug,
+       );
+       Webpages::create($data);
 
        return redirect()->route('paginas.index')->with('success','Pagina succesvol toegevoegd');
     }
@@ -82,10 +87,12 @@ class WebPageController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'body' => 'required'
+            'body' => 'required',
+            'title' => 'required'
         ]);
         $webpage = Webpages::find($id);
         $webpage->body = $request->input('body');
+        $webpage->slug = str_slug($request->input('title'));
         $webpage->save();
         return redirect()->route('paginas.index')->with('success','Pagina succesvol bijgewerkt');
     }
