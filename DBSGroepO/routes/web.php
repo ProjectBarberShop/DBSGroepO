@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Password;
 use App\Http\Controllers\FotoController;
 
@@ -21,9 +22,15 @@ use App\Http\Controllers\FotoController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('Home/home');
 });
 Auth::routes();
+
+Route::group([
+    'prefix' => 'barbershop'
+], function() {
+    Route::resource('home', HomeController::class)->only(['index']);
+});
 
 Route::group([
     'prefix' => 'cms'
@@ -34,14 +41,13 @@ Route::group([
         return Redirect("/login");
     });
     Route::group(['middleware' => ['auth']], function() {
-       
-        Route::get('/fotos' , [FotoController::class , 'index']);
-        Route::get('/paginas' , [FotoController::class , 'index']);
-        Route::get('/contact' , [FotoController::class , 'index']);
-        Route::get('/videos' , [FotoController::class , 'index']);
-        Route::get('/home', function () {
-            return View::make('cms.home');
+    Route::resource('fotos', FotoController::class)->only(['index']);
+    Route::resource('contact', FotoController::class)->only(['index']);
+    Route::resource('videos', FotoController::class)->only(['index']);
+    Route::resource('profile', UserController::class)->only(['index']);
+    Route::resource('paginas', WebPageController::class);
+    Route::get('/home', function () {
+        return View::make('cms.home');
         });
     });
 });
-
