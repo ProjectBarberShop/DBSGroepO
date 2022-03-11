@@ -2,13 +2,17 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Password;
+
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HomeController;
-use Illuminate\Support\Facades\Password;
-use App\Http\Controllers\FotoController;
 
+
+use App\Http\Controllers\WebPageController;
+use App\Http\Controllers\FotoController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
