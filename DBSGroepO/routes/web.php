@@ -21,16 +21,10 @@ use App\Http\Controllers\FotoController;
 |
 */
 
-Route::get('/', function () {
-    return view('Home/home');
-});
+Route::resource('home', HomeController::class)->only(['index']);
+
 Auth::routes();
 
-Route::group([
-    'prefix' => 'barbershop'
-], function() {
-    Route::resource('home', HomeController::class)->only(['index']);
-});
 
 Route::group([
     'prefix' => 'cms'
