@@ -21,7 +21,7 @@ use App\Http\Controllers\FotoController;
 |
 */
 
-Route::resource('home', HomeController::class)->only(['index']);
+Route::resource('/', HomeController::class)->only(['index']);
 
 Auth::routes();
 
