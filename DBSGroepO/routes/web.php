@@ -11,6 +11,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\WebPageController;
 use App\Http\Controllers\FotoController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PreformanceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +27,7 @@ use App\Http\Controllers\UserController;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::resource('optredens', PreformanceController::class)->only(['index']);
 Auth::routes();
 
 Route::group([
