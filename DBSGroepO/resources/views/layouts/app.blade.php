@@ -6,7 +6,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Barbershop</title>
 
     <!-- Scripts -->
     <script type="text/javascript" src="{{ asset('js/app.js') }}" defer></script>
@@ -45,7 +45,57 @@
         <p class="text-center h3 "><strong>Met overtuiging plezierig zingen</strong></p>
     </div>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-danger ">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+        <div class="container-fluid">
+            <a href="/" class="navbar-brand">Barbershop</a>
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ">
+                    <a href="/" class="nav-item nav-link ">Home</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Even voorstellen</a>
+                        <div class="dropdown-menu bg-danger">
+                            <a href="#" class="dropdown-item-custom">Dirigent</a>
+                            <a href="#" class="dropdown-item-custom">Wie zijn wij</a>
+                            <a href="#" class="dropdown-item-custom">Repetoire</a>
+                            <a href="#" class="dropdown-item-custom">Koorleden</a>
+                        </div>
+                    </div>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Optredens</a>
+                        <div class="dropdown-menu bg-danger">
+                            <a href="#" class="dropdown-item-custom">Album</a>
+                            <a href="#" class="dropdown-item-custom">Muzieklijst</a>
+                        </div>
+                    </div>
+                    <a href="#" class="nav-item nav-link">Introductiecursus</a>
+                    <a href="#" class="nav-item nav-link">Agenda</a>
+                    <a href="#" class="nav-item nav-link">Informatie</a>
+                </div>
+                <div class="navbar-nav ms-auto">
+                    @if (Route::has('login'))
+                            @auth
+                                <ul class="navbar-nav">
+                                    <li class="nav-item active">
+                                        <a href="/cms/home" class="nav-link font-semi-bold">CMS</a>
+                                    </li>
+                                </ul>
+
+                            @else
+                                <ul class="navbar-nav">
+                                    <li class="nav-item active">
+                                        <a href="{{ route('login') }}" class=" nav-link  ">Log in</a>
+                                    </li>
+                                </ul>
+                            @endauth
+                    @endif
+                </div>
+            </div>
+        </div>
+    </nav>
+    {{--<nav class="navbar navbar-expand-lg navbar-dark bg-danger ">
 
         <a class="navbar-brand " href="/">Barbershop</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -109,7 +159,7 @@
                 </div>
             @endif
         </div>
-    </nav>
+    </nav>--}}
     {{--end header--}}
 
     <main>
