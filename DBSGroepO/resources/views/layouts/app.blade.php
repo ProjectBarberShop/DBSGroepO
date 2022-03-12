@@ -41,8 +41,7 @@
 <div id="app">
     {{--start header--}}
     <div class="container-fluid bg-yellow pb-3 text-center">
-        <img src="{{asset('assets/images/skyline-met-naam.jpg')}}" alt="AdminLTE Logo" class="img-fluid w-100"
-             style="height: 11rem;">
+        <img src="{{asset('assets/images/skyline-met-naam.jpg')}}" alt="Banner" class="img-fluid w-100 h-11">
         <p class="text-center h3 "><strong>Met overtuiging plezierig zingen</strong></p>
     </div>
 
