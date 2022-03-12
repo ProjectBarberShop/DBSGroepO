@@ -33,7 +33,8 @@ Auth::routes();
 Route::group([
     'prefix' => 'cms'
 ], function() {
-    Route::get('signout', function() {
+    Route::get('/signout', function() {
+
         Session::flush();
         Auth::logout();
         return Redirect("/login");

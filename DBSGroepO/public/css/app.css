@@ -60,6 +60,15 @@
   --bs-body-bg: #f8fafc;
 }
 
+
+.bg-yellow {
+    background-color: yellow;
+}
+
+.text-yellow{
+    color:yellow;
+}
+
 *,
 *::before,
 *::after {
@@ -151,6 +160,14 @@ h6, .h6 {
 p {
   margin-top: 0;
   margin-bottom: 1rem;
+}
+
+footer p{
+    font-size: 1rem;
+}
+
+footer h6{
+    color:yellow;
 }
 
 abbr[title],
@@ -592,6 +609,10 @@ progress {
 }
 .blockquote-footer::before {
   content: "— ";
+}
+
+nav div ul li a{
+    color: yellow;
 }
 
 .img-fluid {
@@ -3754,6 +3775,23 @@ textarea.form-control-lg {
   overflow: hidden;
   border-top: 1px solid rgba(0, 0, 0, 0.15);
 }
+.dropdown-item-custom {
+    display: block;
+    width: 100%;
+    padding: 0.25rem 1rem;
+    clear: both;
+    font-weight: 400;
+    color: yellow;
+    text-align: inherit;
+    text-decoration: none;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+}
+
+.dropdown-item-custom:hover {
+    color: yellow;
+}
 
 .dropdown-item {
   display: block;
@@ -3941,7 +3979,11 @@ textarea.form-control-lg {
   color: #0d6efd;
   text-decoration: none;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+  font-size: 1.25rem;
+  margin-left: 0.5rem;
 }
+
+
 @media (prefers-reduced-motion: reduce) {
   .nav-link {
     transition: none;
@@ -3949,11 +3991,16 @@ textarea.form-control-lg {
 }
 .nav-link:hover, .nav-link:focus {
   color: #0a58ca;
+
 }
 .nav-link.disabled {
   color: #6c757d;
   pointer-events: none;
   cursor: default;
+}
+
+a.nav-link {
+    color:yellow;
 }
 
 .nav-tabs {
@@ -4048,7 +4095,7 @@ textarea.form-control-lg {
   padding-top: 0.32rem;
   padding-bottom: 0.32rem;
   margin-right: 1rem;
-  font-size: 1.125rem;
+  font-size: 1.5rem;
   text-decoration: none;
   white-space: nowrap;
 }
@@ -4474,18 +4521,18 @@ textarea.form-control-lg {
 .navbar-dark .navbar-brand:hover, .navbar-dark .navbar-brand:focus {
   color: #fff;
 }
-.navbar-dark .navbar-nav .nav-link {
-  color: rgba(255, 255, 255, 0.55);
+.navbar-dark .navbar-nav .nav-link  {
+  color: yellow;
 }
 .navbar-dark .navbar-nav .nav-link:hover, .navbar-dark .navbar-nav .nav-link:focus {
-  color: rgba(255, 255, 255, 0.75);
+  color: yellow;
 }
 .navbar-dark .navbar-nav .nav-link.disabled {
   color: rgba(255, 255, 255, 0.25);
 }
 .navbar-dark .navbar-nav .show > .nav-link,
 .navbar-dark .navbar-nav .nav-link.active {
-  color: #fff;
+  color: yellow;
 }
 .navbar-dark .navbar-toggler {
   color: rgba(255, 255, 255, 0.55);
@@ -6971,6 +7018,10 @@ textarea.form-control-lg {
 
 .min-vw-100 {
   min-width: 100vw !important;
+}
+
+.h-11 {
+    height: 11rem;
 }
 
 .h-25 {
