@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Password;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\HomeController;
+
 
 use App\Http\Controllers\WebPageController;
 use App\Http\Controllers\FotoController;
@@ -23,10 +25,10 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::resource('/', HomeController::class)->only(['index']);
+
 Auth::routes();
+
 
 Route::group([
     'prefix' => 'cms'
@@ -48,4 +50,3 @@ Route::group([
         });
     });
 });
-
