@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Agendapunt;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AgendaController extends Controller
 {
@@ -15,15 +17,23 @@ class AgendaController extends Controller
     public function index(Request $request)
     {
         if($request->ajax()) {
-       
-            $data = Agendapunt::whereDate('start', '>=', $request->start)
-                      ->whereDate('end',   '<=', $request->end)
-                      ->get(['id', 'title', 'start', 'end']);
- 
+            if($request->category != '0') {
+                $data = DB::table('agenda')
+                ->join('agenda_category', 'agenda.id', '=', 'agenda_category.agendapunt_id')
+                ->join('category', 'category.id', '=', 'agenda_category.category_id')
+                ->where('agenda_category.category_id', '=', $request->category)
+                ->select('agenda.*')
+                ->get();
+            }
+            else {
+                $data = Agendapunt::whereDate('start', '>=', $request->start)
+                       ->whereDate('end',   '<=', $request->end)->first()->get();
+            }
+
             return response()->json($data);
         }
-
-        return View('agenda.index');
+        $categories = Category::all();
+        return View('agenda.index', compact('categories'));
     }
 
     /**

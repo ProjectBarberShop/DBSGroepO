@@ -21,23 +21,40 @@
                <h1>Agenda</h1>
             </div>
          </div>
+         <div class="row">
+            <div class="offset-md-12">
+            <select onchange="refreshCalendar()" name="" id="dropdown">
+               <option value="0"></option>
+               @foreach($categories as $c)
+                  <option value="{{$c->id}}">{{$c->title}}</option>
+               @endforeach
+            </select>
+            </div>
+         </div>
          <div id='calendar'></div>
       </div>
       <script>
          $(document).ready(function () {
             
-         var SITEURL = "{{ url('/') }}";
-           
+         var SITEURL = "{{ url('/') }}";  
          $.ajaxSetup({
              headers: {
              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
              }
          });
-           
          var calendar = $('#calendar').fullCalendar({
+                            eventSources: [
+                                 {
+                                    url: SITEURL + "/agenda",
+                                    method: 'GET',
+                                    data: function() {
+                                       return{ category: document.getElementById("dropdown").value}
+                                    },
+                                 }
+                             ],
                              height: 500,
                              editable: false,
-                             events: SITEURL + "/agenda",
+                             //events: SITEURL + "/agenda",
                              displayEventTime: true,
                              editable: false,
                              eventRender: function (event, element, view) {
@@ -50,7 +67,23 @@
                              selectable: false,
                              selectHelper: true,
                          });
+
          });
+         function refreshCalendar() {
+            // var SITEURL = "{{ url('/') }}" + "/agenda"; 
+            // var ev1 = {
+            //                         "url": SITEURL + "/agenda",
+            //                         "method": 'GET',
+            //                         "data": {
+            //                            category: document.getElementById("dropdown").value,
+            //                         },
+            //                      }
+
+            // console.log("runt");
+            // $('#calendar').fullCalendar("removeEventSource")
+            // $('#calendar').fullCalendar("addEventSource", ev)
+            $('#calendar').fullCalendar("refetchEvents");
+         }
            
       </script>
    </body>
