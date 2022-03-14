@@ -4,7 +4,7 @@
 @if ($message = Session::get('success'))
     <div class="alert alert-success alert-dismissible" role="alert">
         <strong>{{ $message }}</strong>
-    </div>  
+    </div>
     <script>
         $("document").ready(function(){
             setTimeout(function(){
@@ -39,31 +39,31 @@
                             @csrf
                             <div class="form-group">
                                 <label class="form-label" for="title">Onderwerp:&#42;</label>
-                                <input type="text" name="title" class="form-control"></input>
+                                <input type="text" name="title" class="form-control" required></input>
                             </div>
                             <div class="form-group">
                                 <label class="form-label" for="firstname">Voornaam:&#42;</label>
-                                <input type="text" name="firstname" class="form-control"></input>
+                                <input type="text" name="firstname" class="form-control" required></input>
                             </div>
                             <div class="form-group">
                                 <label class="form-label" for="preposition">Tussenvoegsel:</label>
-                                <input type="text" name="preposition" class="form-control"></input>
+                                <input type="text" name="preprosition" class="form-control"></input>
                             </div>
                             <div class="form-group">
                                 <label class="form-label" for="surname">Achternaam:&#42;</label>
-                                <input type="text" name="surname" class="form-control"></input>
+                                <input type="text" name="surname" class="form-control" required></input>
                             </div>
                             <div class="form-group">
                                 <label class="form-label" for="email">E-mail:&#42;</label>
-                                <input type="text" name="email" class="form-control"></input>
+                                <input type="email" name="email" class="form-control" required></input>
                             </div>
                             <div class="form-group">
                                 <label class="form-label" for="phonenumber">Telefoon nummer:&#42;</label>
-                                <input type="text" name="phonenumber" class="form-control"></input>
+                                <input type="number" name="phonenumber" class="form-control" pattern="^((\+|00(\s|\s?\-\s?)?)31(\s|\s?\-\s?)?(\(0\)[\-\s]?)?|0)[1-9]((\s|\s?\-\s?)?[0-9])((\s|\s?-\s?)?[0-9])((\s|\s?-\s?)?[0-9])\s?[0-9]\s?[0-9]\s?[0-9]\s?[0-9]\s?[0-9]$" required></input>
                             </div>
                             <div class="form-group">
                                 <label class="form-label" for="message">Bericht:&#42;</label>
-                                <textarea name="message" id="contactmsg" cols="30" rows="10" class="form-control"></textarea>
+                                <textarea name="message" id="contactmsg" cols="30" rows="10" class="form-control" required></textarea>
                             </div>
                         <button type="submint" class="btn btn-primary float-right">Verzenden</button>
                     </form>

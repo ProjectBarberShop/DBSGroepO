@@ -20,14 +20,14 @@ class ContactSeeder extends Seeder
         $faker = Faker::create('nl');
         $path = __DIR__ . "/../../resources/views/contact/contact.blade.php";
         $file = file_get_contents($path);
-        
+
         \DB::table('contact-requests')->insert([
             'title' => str::random(10),
             'firstname' => str::random(10),
             'preprosition' => str::random(10),
             'lastname' => str::random(10),
             'email' =>  Str::random(10).'@gmail.com',
-            'phonenumber' =>  $faker->phoneNumber, 
+            'phonenumber' =>  $faker->phoneNumber,
             'message' => str::random(256),
         ]);
 

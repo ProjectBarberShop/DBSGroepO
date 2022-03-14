@@ -6,12 +6,12 @@ class Form extends Model
 {
     use HasFactory;
     public $fillable = [
-        'firstname', 
+        'firstname',
         'preprosition',
         'lastname',
-        'email', 
-        'phonenumber', 
-        'title', 
+        'email',
+        'phonenumber',
+        'title',
         'message'
     ];
 }

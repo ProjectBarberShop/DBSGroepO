@@ -30,7 +30,7 @@ class ContactController extends Controller
         return view('contact.contact');
     }
 
-    public function storeMessage(ContactFormRequest $request) 
+    public function storeMessage(ContactFormRequest $request)
     {
         $firstname = $request->input('firstname');
         $preprosition = $request->input('preprosition');
@@ -41,7 +41,7 @@ class ContactController extends Controller
         $message = $request->input('message');
         $currentdatetime = Carbon::now();
         $currentdatetime->toDateTimeString();
-        
+
         $data=array(
                 'firstname' => $firstname,
                 'preprosition' => $preprosition,
@@ -53,9 +53,9 @@ class ContactController extends Controller
                 'created_at' => $currentdatetime,
                 'updated_at' => $currentdatetime
             );
-        
+
         \DB::table('contact-requests')->insert($data);
-        
+
         return back()->with('success','Verzoek succesvol ingediend');
     }
 }
