@@ -14,7 +14,11 @@ class WebPageController extends Controller
      */
     public function index()
     {
-        $data = Webpages::all();
+        $data = Webpages::all(); 
+        foreach($data as $d) {
+            $d->body = strip_tags($d->body);
+        }     
+        
         return view('cms.webpages.index' ,['webpages' => $data]);
     }
 
