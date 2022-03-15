@@ -20,7 +20,7 @@ class AgendaSeeder extends Seeder
     public function run()
     {
         $categorylength = Category::all()->count();
-        $categories = Category::find(mt_rand(0, $categorylength));
+        $categories = Category::find(mt_rand(1, $categorylength));
         $sampledata = [
             'title'=>str::random(10),
             'description'=>str::random(100),
@@ -31,7 +31,7 @@ class AgendaSeeder extends Seeder
         $agenda = Agendapunt::create($sampledata);
         $agenda->Categories()->attach($categories);
 
-        $categories = Category::find(mt_rand(0, $categorylength));
+        $categories = Category::find(mt_rand(1, $categorylength));
         $sampledata = [
             'title'=>str::random(10),
             'description'=>str::random(100),
