@@ -6,6 +6,8 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Illuminate\support\Str;
+
 class ContactSeeder extends Seeder
 {
     /**
@@ -15,7 +17,11 @@ class ContactSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('contact-requests')->insert([
+        $faker = Faker::create('nl');
+        $path = __DIR__ . "/../../resources/views/contact/contact.blade.php";
+        $file = file_get_contents($path);
+
+        \DB::table('contact-requests')->insert([
             'title' => str::random(10),
             'firstname' => str::random(10),
             'preprosition' => str::random(10),
@@ -23,6 +29,10 @@ class ContactSeeder extends Seeder
             'email' =>  Str::random(10).'@gmail.com',
             'phonenumber' => rand(0,10),
             'message' => str::random(256),
+        ]);
+
+        \DB::table('webpages')->insert([
+            'body' => $file
         ]);
     }
 }
