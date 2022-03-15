@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Password;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\HomeController;
+
 
 use App\Http\Controllers\WebPageController;
 use App\Http\Controllers\FotoController;
@@ -24,16 +26,16 @@ use App\Http\Controllers\PreformanceController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 Route::resource('optredens', PreformanceController::class)->only(['index']);
+Route::resource('/', HomeController::class)->only(['index']);
 Auth::routes();
+
 
 Route::group([
     'prefix' => 'cms'
 ], function() {
-    Route::get('signout', function() {
+    Route::get('/signout', function() {
+
         Session::flush();
         Auth::logout();
         return Redirect("/login");
@@ -49,4 +51,3 @@ Route::group([
         });
     });
 });
-
