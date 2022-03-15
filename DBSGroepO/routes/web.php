@@ -26,7 +26,6 @@ use App\Http\Controllers\UserController;
 */
 
 Route::resource('/', HomeController::class)->only(['index']);
-
 Auth::routes();
 
 
