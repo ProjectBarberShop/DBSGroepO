@@ -1,17 +1,24 @@
 <?php
+
 namespace App\Models;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-class Form extends Model
+
+class Contact extends Model
 {
     use HasFactory;
-    public $fillable = [
+    
+    protected $table = 'contacts';
+    protected $primaryKey = 'id';
+
+    protected $fillable = [
         'firstname',
-        'preprosition',
+        'preposition',
         'lastname',
         'email',
         'phonenumber',
-        'title',
-        'message'
+        'is_published'
     ];
+
 }
