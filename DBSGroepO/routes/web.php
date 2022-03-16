@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AgendaController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -9,6 +10,9 @@ use App\Http\Controllers\WebPageController;
 use App\Http\Controllers\FotoController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PreformanceController;
+
+use App\Http\Controllers\ContactController;
+use App\Http\Requests\ContactFormRequest;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,16 +32,10 @@ Auth::routes();
 
 Route::get('/{slug}' , [WebPageController::class , 'show']);
 
-Route::get('/contact-us', 
+Route::get('/contact-us',
 [ContactController::class, 'contact']);
-Route::post('/contact-us', 
+Route::post('/contact-us',
     [ContactController::class, 'storeMessage'])->name('validate.form');
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Auth::routes();
 
 Route::group([
     'prefix' => 'cms'
@@ -58,4 +56,3 @@ Route::group([
         });
     });
 });
-
