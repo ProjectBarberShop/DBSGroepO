@@ -107,7 +107,7 @@
         <!-- Grid container -->
         <div class="container  pb-0 ">
             <!-- Section: Links -->
-            <section class="">
+            <section>
                 <!--Grid row-->
                 <div class="row">
                     <!-- Grid column -->
@@ -115,10 +115,20 @@
                         <h6 class="text-uppercase mb-4 font-weight-bold">
                             Duketown Barbershop Singers
                         </h6>
-                        <p >
-                             Lorem ipsum dolor sit amet, consectetur adipisicing
-                            elit.
-                        </p>
+                        <p>Sponsors en contactpersonen</p>
+                        @foreach($contactsdata as $c)
+                        @if(!empty($c))
+                        <div class="card bg-secondary mb-2">
+                            <div class="card-header">
+                                <h5 class="card-title">{{$c->firstname}} {{$c->preposition}} {{$c->lastname}}</h5>
+                            </div>
+                            <div class="card-body">
+                                {{$c->email}} <br>
+                                {{$c->phonenumber}} <br>
+                            </div>
+                        </div>
+                        @endif
+                        @endforeach
                     </div>
                     <!-- Grid column -->
 

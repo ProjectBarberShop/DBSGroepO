@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Contact;
+use Illuminate\Contracts\View\View;
 
 class ContactsController extends Controller
 {
@@ -12,7 +13,7 @@ class ContactsController extends Controller
         $contactsdata = Contact::all();
         return view('cms.contactpersonen.index', compact('contactsdata'));
     }
-    
+
     public function store(Request $request) {
         $request->validate([
             'firstname' => 'required',
@@ -22,14 +23,12 @@ class ContactsController extends Controller
         ]);
         
         $contactsdata = new Contact;
-
         $contactsdata->firstname = $request->input('firstname');
         $contactsdata->preposition = $request->input('preposition');
         $contactsdata->lastname = $request->input('lastname');
         $contactsdata->email = $request->input('email');
         $contactsdata->phonenumber = $request->input('phonenumber');
-        $contactsdata->is_published = isset($request['ispublished']) ? 1 : 0;
-
+        $contactsdata->is_published = isset($request['ispublished']) ? true : false;
         $contactsdata->save();
 
         return redirect(route('contactpersonen.index'));
@@ -37,7 +36,7 @@ class ContactsController extends Controller
 
     public function edit($id)
     {        
-        $contactdata = Contact::findOrFail($id);
+        $contactdata = Contact::find($id);
         return view('cms.contactpersonen.edit', compact('contactdata'));
     }
 
@@ -55,9 +54,9 @@ class ContactsController extends Controller
         $webpage->lastname = $request->input('lastname');
         $webpage->email = $request->input('email');
         $webpage->phonenumber = $request->input('phonenumber');
-        $webpage->is_published = isset($request['ispublished']) ? 1 : 0;
-
+        $webpage->is_published = isset($request['ispublished']) ? true : false;
         $webpage->save();
+
         return redirect()->route('contactpersonen.index')->with('success','Pagina succesvol bijgewerkt');
     }
 
