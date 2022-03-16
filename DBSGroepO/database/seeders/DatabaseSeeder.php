@@ -16,6 +16,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             ContactSeeder::class,
+            CatagorySeeder::class,
+            AgendaSeeder::class,
         ]);
     }
 }
