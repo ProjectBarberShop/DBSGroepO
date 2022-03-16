@@ -8,15 +8,11 @@ use Illuminate\Support\Facades\Password;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
-
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\WebPageController;
 use App\Http\Controllers\FotoController;
 use App\Http\Controllers\UserController;
-
-use App\Http\Controllers\ContactController;
-use App\Http\Requests\ContactFormRequest;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +35,11 @@ Route::get('/contact-us',
 Route::post('/contact-us', 
     [ContactController::class, 'storeMessage'])->name('validate.form');
 
+Route::get('/', function () {
+    return view('welcome');
+});
+Auth::routes();
+
 Route::group([
     'prefix' => 'cms'
 ], function() {
@@ -58,3 +59,4 @@ Route::group([
         });
     });
 });
+
