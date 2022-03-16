@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AgendaController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Password;
@@ -28,15 +29,16 @@ use App\Http\Requests\ContactFormRequest;
 |
 */
 
-Route::resource('/', HomeController::class)->only(['index']);
+Route::resource('agenda', AgendaController::class)->only(['index']);
 
+Route::resource('/', HomeController::class)->only(['index']);
 Auth::routes();
+
 
 Route::get('/contact-us', 
 [ContactController::class, 'contact']);
 Route::post('/contact-us', 
     [ContactController::class, 'storeMessage'])->name('validate.form');
-
 
 Route::group([
     'prefix' => 'cms'
