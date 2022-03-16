@@ -14,6 +14,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\WebPageController;
 use App\Http\Controllers\FotoController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PreformanceController;
 
 use App\Http\Controllers\ContactController;
 use App\Http\Requests\ContactFormRequest;
@@ -30,6 +31,7 @@ use App\Http\Requests\ContactFormRequest;
 */
 
 Route::resource('agenda', AgendaController::class)->only(['index']);
+Route::resource('/optredens', PreformanceController::class);
 Route::resource('/', HomeController::class)->only(['index']);
 Auth::routes();
 
