@@ -30,7 +30,6 @@ use App\Http\Requests\ContactFormRequest;
 */
 
 Route::resource('agenda', AgendaController::class)->only(['index']);
-
 Route::resource('/', HomeController::class)->only(['index']);
 Auth::routes();
 
