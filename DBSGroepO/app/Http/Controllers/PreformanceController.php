@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use DB;
+use App\Models\Agendapunt;
 
 class PreformanceController extends Controller
 {
     public function index(Request $request)
     {
         
-        $preformances = DB::table('agenda')->get();
+        $preformances = Agendapunt::all(); 
         return view('preformance.preformance', ['optredens'=>$preformances]);
     }
 }
