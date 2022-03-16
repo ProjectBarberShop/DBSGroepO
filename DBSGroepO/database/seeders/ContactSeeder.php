@@ -23,7 +23,7 @@ class ContactSeeder extends Seeder
             'preprosition' => str::random(10),
             'lastname' => str::random(10),
             'email' =>  Str::random(10).'@gmail.com',
-            'phonenumber' => rand(1, 10), 
+            'phonenumber' => rand(1,10), 
             'message' => str::random(256),
         ]);
     }

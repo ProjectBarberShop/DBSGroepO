@@ -66,6 +66,7 @@
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Optredens</a>
                         <div class="dropdown-menu bg-danger">
+                            <a href="{{ route('optredens.index') }}" class="dropdown-item-custom">alle optredens</a>
                             <a href="#" class="dropdown-item-custom">Album</a>
                             <a href="#" class="dropdown-item-custom">Muzieklijst</a>
                         </div>
