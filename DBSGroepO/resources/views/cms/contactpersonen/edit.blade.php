@@ -15,11 +15,7 @@
     <label for="phone">Telefoonnummer:</label>
     <input type="tel" name="phonenumber" value="{{$contactdata->phonenumber}}"> 
     <label for="ispublished">Publiceren:</label>
-    @if($contactdata->is_published)
-    <input type="checkbox" name="ispublished" checked>
-    @else
-    <input type="checkbox" name="ispublished">
-    @endif
+    <input type="checkbox" name="ispublished" {{ $contactdata->is_published ? 'checked' : '' }}>
     <button type="submit" class="btn btn-primary float-right mt-4">+</button>
 </form>
 @endsection

@@ -12,7 +12,7 @@
       <div class="card-body">
           {{$c->email}} <br>
           {{$c->phonenumber}} <br>
-          @if($c->is_published == 1)
+          @if($c->is_published)
           Gepubliceerd op de website
           @else
           Niet gepubliceerd op de website
@@ -22,8 +22,8 @@
             <form action="{{ route('contactpersonen.destroy', $c->id) }}" method="POST">
                 @method('DELETE')
                 @csrf
-                <button type="submit" class="btn btn-primary">delete</button>
             </form>
+            <button type="submit" class="btn btn-primary" onclick="confirmSubmit()">Verwijderen</button>
           </div>
       </div>
     </div>
@@ -59,3 +59,11 @@
   </div>
 </div>
 @endsection
+<script>
+  function confirmSubmit() {
+    event.preventDefault();
+    if(confirm("Weet u zeker dat u dit contact wilt verwijderen?")) {
+      document.querySelector("form").submit();
+    }
+  }
+</script>
