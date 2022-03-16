@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('webpages', function (Blueprint $table) {
             $table->id();
             $table->longtext('body');
+            $table->string('slug');
             $table->timestamps();
         });
     }

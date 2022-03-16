@@ -29,26 +29,29 @@
                         <tr>
                            <th>id</th>
                            <th>body</th>
+                           <th>slug</th>
                            <th>created_at</th>
                            <th>Bijwerken</th>
                         </tr>
                      </thead>
                      <tbody>
-                        @foreach($webpages as $w) 
+                        @foreach($webpages as $w)
                         <tr>
                            <td>{{$w->id}}</td>
-                           <td>{{$w->body}}</td>
+                           <td>{{strip_tags($w->body)}}</td>
+                           <td>{{$w->slug}}</td>
                            <td>{{$w->created_at}}</td>
                            <td><a class="btn btn-primary" href="{{ route('paginas.edit',$w->id) }}">Bijwerken</a></td>
-                           
+
                         </tr>
                         @endforeach
                      </tbody>
                      <tfoot>
                         <tr>
                            <th>id</th>
-                           <th>title</th>
                            <th>body</th>
+                           <th>slug</th>
+                           <th>created_at</th>
                            <th>Bijwerken</th>
                         </tr>
                      </tfoot>

@@ -35,6 +35,7 @@ Route::resource('/optredens', PreformanceController::class);
 Route::resource('/', HomeController::class)->only(['index']);
 Auth::routes();
 
+Route::get('/{slug}' , [WebPageController::class , 'show']);
 
 Route::get('/contact-us', 
 [ContactController::class, 'contact']);

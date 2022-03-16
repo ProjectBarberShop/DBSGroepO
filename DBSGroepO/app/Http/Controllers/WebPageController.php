@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Webpages;
+use Illuminate\Support\Str;
 
 class WebPageController extends Controller
 {
@@ -14,11 +15,8 @@ class WebPageController extends Controller
      */
     public function index()
     {
-        $data = Webpages::all(); 
-        foreach($data as $d) {
-            $d->body = strip_tags($d->body);
-        }     
-        
+        $data = Webpages::all();
+
         return view('cms.webpages.index' ,['webpages' => $data]);
     }
 
@@ -41,10 +39,18 @@ class WebPageController extends Controller
     public function store(Request $request)
     {
        $request->validate([
-           'body' => 'required'
+           'body' => 'required',
+           'title' => 'required',
        ]);
 
-       Webpages::create($request->all());
+       $slug = Str::slug($request->input('title'));
+       $body = $request->input('body');
+
+       $data = array(
+           'body' => $body,
+           'slug' => $slug,
+       );
+       Webpages::create($data);
 
        return redirect()->route('paginas.index')->with('success','Pagina succesvol toegevoegd');
     }
@@ -55,9 +61,10 @@ class WebPageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        $pagecontent = Webpages::all()->where('slug', $slug);
+        return view('contentpage' , compact('pagecontent'));
     }
 
     /**
@@ -82,10 +89,12 @@ class WebPageController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'body' => 'required'
+            'body' => 'required',
+            'title' => 'required'
         ]);
         $webpage = Webpages::find($id);
         $webpage->body = $request->input('body');
+        $webpage->slug = Str::slug($request->input('title'));
         $webpage->save();
         return redirect()->route('paginas.index')->with('success','Pagina succesvol bijgewerkt');
     }

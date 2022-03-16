@@ -21,18 +21,20 @@
                 <h3 class="card-title">Pagina's met context</h3>
             </div>
             <form action="{{ route('paginas.store') }}" method="POST">
-                @csrf  
+                @csrf
                 <div class="card-body">
-                    <textarea name="body" id="" value=""></textarea>
+                    <textarea name="body"></textarea>
+                    </br>
+                    <input name="title"></input>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
-                            
+
             </form>
             <div class="pull-right">
                 <a class="btn btn-primary" href="{{ route('paginas.index') }}"> Back</a>
-            </div>  
+            </div>
         </div>
     </div>
 </section>
