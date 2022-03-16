@@ -19,8 +19,8 @@ return new class extends Migration
             $table->mediumtext('description');
             $table->dateTime('start')->require;
             $table->dateTime('end')->require;
-            $table->string('location')->require;
-            $table->text('locationURL')->require;
+            $table->string('location')->nullable();
+            $table->text('locationURL')->nullable();
             $table->timestamps();
         });
     }

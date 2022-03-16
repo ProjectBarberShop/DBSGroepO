@@ -30,8 +30,8 @@ use App\Http\Requests\ContactFormRequest;
 |
 */
 
-Route::resource('optredens', PreformanceController::class)->only(['index']);
 Route::resource('agenda', AgendaController::class)->only(['index']);
+Route::resource('/optredens', PreformanceController::class);
 Route::resource('/', HomeController::class)->only(['index']);
 Auth::routes();
 
