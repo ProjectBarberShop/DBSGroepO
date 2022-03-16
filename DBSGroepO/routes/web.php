@@ -28,16 +28,11 @@ Auth::routes();
 
 Route::get('/{slug}' , [WebPageController::class , 'show']);
 
-Route::get('/contact-us', 
+Route::get('/contact-us',
 [ContactController::class, 'contact']);
-Route::post('/contact-us', 
+Route::post('/contact-us',
     [ContactController::class, 'storeMessage'])->name('validate.form');
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Auth::routes();
 
 Route::group([
     'prefix' => 'cms'
