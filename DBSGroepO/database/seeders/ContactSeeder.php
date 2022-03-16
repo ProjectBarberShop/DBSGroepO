@@ -17,14 +17,18 @@ class ContactSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('contact-requests')->insert([
+        \DB::table('contact-requests')->insert([
             'title' => str::random(10),
             'firstname' => str::random(10),
             'preprosition' => str::random(10),
             'lastname' => str::random(10),
             'email' =>  Str::random(10).'@gmail.com',
-            'phonenumber' => rand(1,10), 
+            'phonenumber' => rand(1,10),
             'message' => str::random(256),
+        ]);
+
+        \DB::table('webpages')->insert([
+            'body' => $file
         ]);
     }
 }
