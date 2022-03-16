@@ -17,6 +17,10 @@ class ContactSeeder extends Seeder
      */
     public function run()
     {
+        $faker = Faker::create('nl');
+        $path = __DIR__ . "/../../resources/views/contact/contact.blade.php";
+        $file = file_get_contents($path);
+
         \DB::table('contact-requests')->insert([
             'title' => str::random(10),
             'firstname' => str::random(10),
