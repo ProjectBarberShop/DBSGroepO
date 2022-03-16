@@ -123,6 +123,12 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{url('cms/contactpersonen')}}" class="nav-link">
+              <i class="nav-icon far ion ion-person" md="md-person"></i>
+              <p>Contactpersonen</p>
+            </a>
+          </li>
           <li class="nav-header">Example multi lvl</li>
           <li class="nav-item">
             <a href="#" class="nav-link">

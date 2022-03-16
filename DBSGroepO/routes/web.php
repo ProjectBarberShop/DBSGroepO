@@ -8,9 +8,9 @@ use Illuminate\Support\Facades\Password;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
+
 use App\Http\Controllers\HomeController;
-
-
+use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\WebPageController;
 use App\Http\Controllers\FotoController;
 use App\Http\Controllers\UserController;
@@ -43,14 +43,13 @@ Route::group([
     'prefix' => 'cms'
 ], function() {
     Route::get('/signout', function() {
-
         Session::flush();
         Auth::logout();
         return Redirect("/login");
     });
     Route::group(['middleware' => ['auth']], function() {
     Route::resource('fotos', FotoController::class)->only(['index']);
-    Route::resource('contact', FotoController::class)->only(['index']);
+    Route::resource('contactpersonen', ContactsController::class);
     Route::resource('videos', FotoController::class)->only(['index']);
     Route::resource('profile', UserController::class)->only(['index']);
     Route::resource('paginas', WebPageController::class);

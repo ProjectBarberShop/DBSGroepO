@@ -57,7 +57,20 @@
       <a href="{{url('cms/videos')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
    </div>
 </div>
-
+<!-- ./col -->
+<div class="col-lg-3 col-6">
+   <!-- small box -->
+   <div class="small-box bg-secondary">
+      <div class="inner">
+         <h3></h3>
+         <p>{{__("Contactpersonen")}}</p>
+      </div>
+      <div class="icon">
+         <i class="ion ion-person"></i>
+      </div>
+      <a href="{{url('cms/contactpersonen')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+   </div>
+</div>
 
 <div class="container">
     <div class="row justify-content-center">
