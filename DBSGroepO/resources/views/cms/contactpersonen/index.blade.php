@@ -20,6 +20,7 @@
           <div class="d-flex flex-row justify-content-end mt-4">
             <a href="{{ route('contactpersonen.edit', $c->id) }}" class="mr-2 btn btn-primary">Bijwerken</a>
             <form action="{{ route('contactpersonen.destroy', $c->id) }}" method="POST">
+                <input type="hidden" name="{{$c->firstname}} {{$c->preposition}} {{$c->lastname}}">
                 @method('DELETE')
                 @csrf
             </form>
@@ -62,7 +63,7 @@
 <script>
   function confirmSubmit() {
     event.preventDefault();
-    if(confirm("Weet u zeker dat u dit contact wilt verwijderen?")) {
+    if(confirm("Weet u zeker dat u " + document.querySelector("form input").name + " wilt verwijderen?")) {
       document.querySelector("form").submit();
     }
   }
