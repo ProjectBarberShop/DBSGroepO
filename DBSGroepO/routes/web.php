@@ -2,11 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Password;
 
-use App\Http\Controllers\Auth\AuthController;
-use App\Http\Controllers\Auth\LogoutController;
-use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\WebPageController;
