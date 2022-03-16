@@ -37,6 +37,7 @@ Route::post('/contact-us',
 Route::get('/', function () {
     return view('welcome');
 });
+
 Auth::routes();
 
 Route::group([
