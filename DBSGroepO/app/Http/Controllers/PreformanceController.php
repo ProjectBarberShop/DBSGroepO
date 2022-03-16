@@ -10,7 +10,7 @@ class PreformanceController extends Controller
     public function index(Request $request)
     {
         
-        $preformances = DB::select('select * from agenda');
+        $preformances = DB::table('agenda')->get();
         return view('preformance.preformance', ['optredens'=>$preformances]);
     }
 }
