@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AgendaController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Password;
@@ -7,10 +8,15 @@ use Illuminate\Support\Facades\Password;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\HomeController;
+
 
 use App\Http\Controllers\WebPageController;
 use App\Http\Controllers\FotoController;
 use App\Http\Controllers\UserController;
+
+use App\Http\Controllers\ContactController;
+use App\Http\Requests\ContactFormRequest;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,17 +29,22 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::resource('agenda', AgendaController::class)->only(['index']);
+Route::resource('/', HomeController::class)->only(['index']);
 Auth::routes();
 
 Route::get('/{slug}' , [WebPageController::class , 'show']);
 
+Route::get('/contact-us', 
+[ContactController::class, 'contact']);
+Route::post('/contact-us', 
+    [ContactController::class, 'storeMessage'])->name('validate.form');
+
 Route::group([
     'prefix' => 'cms'
 ], function() {
-    Route::get('signout', function() {
+    Route::get('/signout', function() {
+
         Session::flush();
         Auth::logout();
         return Redirect("/login");
@@ -49,4 +60,3 @@ Route::group([
         });
     });
 });
-
