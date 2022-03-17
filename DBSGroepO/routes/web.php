@@ -13,6 +13,8 @@ use App\Http\Controllers\PreformanceController;
 
 use App\Http\Controllers\ContactController;
 use App\Http\Requests\ContactFormRequest;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Illuminate\Support\Facades\View;
 
 /*
 |--------------------------------------------------------------------------
