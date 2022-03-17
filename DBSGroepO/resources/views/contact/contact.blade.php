@@ -35,7 +35,7 @@
                         Mijn vraag of verzoek
                     </h3>
                     <div class="card-body">
-                        <form method="POST" enctype="multipart/form-data" action="{{ route('validate.form') }}">
+                        <form method="POST" enctype="multipart/form-data" action="{{ route('contact.store') }}">
                             @csrf
                             <div class="form-group">
                                 <label class="form-label" for="title">Onderwerp:&#42;</label>

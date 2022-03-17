@@ -28,14 +28,11 @@ use App\Http\Requests\ContactFormRequest;
 Route::resource('agenda', AgendaController::class)->only(['index']);
 Route::resource('/optredens', PreformanceController::class);
 Route::resource('/', HomeController::class)->only(['index']);
+Route::resource('/contact', ContactController::class);
 Auth::routes();
 
 Route::get('/{slug}' , [WebPageController::class , 'show']);
 
-Route::get('/contact-us',
-[ContactController::class, 'contact']);
-Route::post('/contact-us',
-    [ContactController::class, 'storeMessage'])->name('validate.form');
 
 Route::group([
     'prefix' => 'cms'
