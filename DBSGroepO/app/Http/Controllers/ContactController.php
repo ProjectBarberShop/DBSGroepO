@@ -25,12 +25,12 @@ class ContactController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function contact()
+    public function index()
     {
         return view('contact.contact');
     }
 
-    public function storeMessage(ContactFormRequest $request)
+    public function store(ContactFormRequest $request)
     {
         $firstname = $request->input('firstname');
         $preprosition = $request->input('preprosition');

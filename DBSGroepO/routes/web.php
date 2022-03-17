@@ -32,10 +32,7 @@ Auth::routes();
 
 Route::get('/{slug}' , [WebPageController::class , 'show']);
 
-Route::get('/contact-us',
-[ContactController::class, 'contact']);
-Route::post('/contact-us',
-    [ContactController::class, 'storeMessage'])->name('validate.form');
+Route::resource('/contact', ContactController::class);
 
 Route::group([
     'prefix' => 'cms'
