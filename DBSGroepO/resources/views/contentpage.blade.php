@@ -5,7 +5,8 @@
         <div class="row">
             <div class="col-md-6 offset-md-3">
             @foreach($pagecontent as $w)
-                {!!($w->body)!!}
+                {!!html_entity_decode($w->body)!!}
+
             @endforeach
             </div>
         </div>

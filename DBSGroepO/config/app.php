@@ -163,6 +163,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        Alaouy\Youtube\YoutubeServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -171,6 +172,7 @@ return [
         /*
          * Application Service Providers...
          */
+        App\Providers\YoutubeServiceProvider::class,
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
@@ -189,6 +191,9 @@ return [
     | the aliases are "lazy" loaded so they don't hinder performance.
     |
     */
+
+    'Youtube' => Alaouy\Youtube\Facades\Youtube::class,
+
 
     'aliases' => Facade::defaultAliases()->merge([
         // ...

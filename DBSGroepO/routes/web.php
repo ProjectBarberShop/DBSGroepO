@@ -12,6 +12,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PreformanceController;
 
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\YoutubeController;
 use App\Http\Requests\ContactFormRequest;
 
 /*
@@ -47,6 +48,7 @@ Route::group([
     Route::resource('contactpersonen', ContactsController::class);
     Route::resource('videos', FotoController::class)->only(['index']);
     Route::resource('profile', UserController::class)->only(['index']);
+    Route::resource('youtube' ,YoutubeController::class);
     Route::resource('paginas', WebPageController::class);
     Route::get('/home', function () {
         return View::make('cms.home');
