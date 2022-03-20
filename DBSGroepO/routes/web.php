@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AgendaCMSController;
 use App\Http\Controllers\AgendaController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -48,6 +49,7 @@ Route::group([
     Route::resource('videos', FotoController::class)->only(['index']);
     Route::resource('profile', UserController::class)->only(['index']);
     Route::resource('paginas', WebPageController::class);
+    Route::resource('agenda', AgendaCMSController::class)->only(['index']);
     Route::get('/home', function () {
         return View::make('cms.home');
         });
