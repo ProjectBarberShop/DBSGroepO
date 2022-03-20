@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AgendaController;
+use App\Http\Controllers\FooterController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -48,6 +49,7 @@ Route::group([
     Route::resource('videos', FotoController::class)->only(['index']);
     Route::resource('profile', UserController::class)->only(['index']);
     Route::resource('paginas', WebPageController::class);
+    Route::resource('footer', FooterController::class);
     Route::get('/home', function () {
         return View::make('cms.home');
         });
