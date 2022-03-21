@@ -124,6 +124,14 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="{{url('cms/agenda')}}" class="nav-link">
+              <i class="nav-icon far ion ion-ios-calendar"></i>
+              <p>
+                Agenda
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="{{url('cms/contactpersonen')}}" class="nav-link">
               <i class="nav-icon far ion ion-person" md="md-person"></i>
               <p>Contactpersonen</p>
