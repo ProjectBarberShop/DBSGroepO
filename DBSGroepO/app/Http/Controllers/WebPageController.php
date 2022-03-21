@@ -39,18 +39,23 @@ class WebPageController extends Controller
     public function store(Request $request)
     {
        $request->validate([
-           'body' => 'required',
-           'title' => 'required',
+           'template_id' => 'required',
+           'title_card' => 'required',
+           'colom_title_text' => 'required',
+           'colomn_text' => 'required',
+           'main_text' => 'required',
+           'slug' => 'required',
        ]);
 
-       $slug = Str::slug($request->input('title'));
-       $body = $request->input('body');
+       $webpage = new Webpages;
+       $webpage = Str::slug($request->input('title'));
+       $webpage = $request->input('template_id');
+       $webpage = $request->input('title_card');
+       $webpage = $request->input('colom_title_text');
+       $webpage = $request->input('main_text');
+       $webpage = $request->input('colomn_text');
 
-       $data = array(
-           'body' => $body,
-           'slug' => $slug,
-       );
-       Webpages::create($data);
+       Webpages::create($webpage);
 
        return redirect()->route('paginas.index')->with('success','Pagina succesvol toegevoegd');
     }
