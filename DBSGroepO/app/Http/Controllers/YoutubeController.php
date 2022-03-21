@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Providers\YoutubeServiceProvider as Provider;
+use App\Models\Youtube;
 use Illuminate\Http\Request;
 
 class YoutubeController extends Controller
@@ -14,7 +14,9 @@ class YoutubeController extends Controller
      */
     public function index()
     {
-        return view('cms.youtube.index');
+        $videos = Youtube::all();
+        return view('cms.youtube.index' ,['videos' => $videos]);
+
     }
 
     /**
@@ -80,6 +82,7 @@ class YoutubeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Youtube::find($id)->delete();
+        return redirect(route('youtube.index'));
     }
 }
