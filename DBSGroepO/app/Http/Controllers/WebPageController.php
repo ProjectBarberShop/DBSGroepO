@@ -40,17 +40,19 @@ class WebPageController extends Controller
     {
        $request->validate([
            'template_id' => 'required',
-           'title_card' => 'required',
-           'colom_title_text' => 'required',
-           'colomn_text' => 'required',
            'main_text' => 'required',
            'slug' => 'required',
        ]);
 
+       foreach ($request->multiInput as $key => $value) {
+           $value->
+            Webpages::create($value);
+        }
        $webpage = new Webpages;
        $webpage = Str::slug($request->input('title'));
        $webpage = $request->input('template_id');
        $webpage = $request->input('title_card');
+       $webpage = $request->input('card_images');
        $webpage = $request->input('colom_title_text');
        $webpage = $request->input('main_text');
        $webpage = $request->input('colomn_text');
