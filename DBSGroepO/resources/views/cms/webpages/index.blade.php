@@ -32,6 +32,7 @@
                            <th>slug</th>
                            <th>created_at</th>
                            <th>Bijwerken</th>
+                           <th>Verwijderen</th>
                         </tr>
                      </thead>
                      <tbody>
@@ -42,7 +43,14 @@
                            <td>{{$w->slug}}</td>
                            <td>{{$w->created_at}}</td>
                            <td><a class="btn btn-primary" href="{{ route('paginas.edit',$w->id) }}">Bijwerken</a></td>
-
+                           <td>
+                                <form action="{{ route('paginas.destroy', $w->id) }}" method="POST">
+                                    <a class="btn btn-primary" href="{{ route('paginas.destroy', $w->id) }}">
+                                    @method('DELETE')
+                                    @csrf
+                                    <button type="submit" class="btn btn-primary">Verwijderen</button>
+                                </form>
+                            </td>
                         </tr>
                         @endforeach
                      </tbody>
@@ -53,6 +61,7 @@
                            <th>slug</th>
                            <th>created_at</th>
                            <th>Bijwerken</th>
+                           <th>Verwijderen</th>
                         </tr>
                      </tfoot>
                   </table>

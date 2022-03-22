@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Webpages;
 use App\Models\colom_context as context_colomn;
 use App\Models\colloms_webpage;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class WebPageController extends Controller
@@ -74,7 +75,12 @@ class WebPageController extends Controller
      */
     public function show($slug)
     {
-        $pagecontent = Webpages::all()->where('slug', $slug);
+        $pagecontent = DB::table('webpage')
+        ->join('colloms_webpage', 'webpage.id', '=', 'colloms_webpage.webpage_id')
+        ->join('collomn_context', 'collomn_context.id', '=', 'colloms_webpage.collomn_context_id')
+        ->where('webpage.slug' ,$slug)
+        ->select('webpage.main_text' , 'collomn_context.*')
+        ->get();
         return view('contentpage' , compact('pagecontent'));
     }
 
@@ -119,7 +125,7 @@ class WebPageController extends Controller
     public function destroy($id)
     {
         Webpages::find($id)->delete();
-        
-        return redirect(route('contactpersonen.index'));
+
+        return redirect()->route('paginas.index');
     }
 }

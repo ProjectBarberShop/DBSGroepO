@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('colloms_webpage', function (Blueprint $table) {
-            $table->foreignId('webpage_id')->references('id')->on('webpage');
-            $table->foreignId('collomn_context_id')->references('id')->on('collomn_context');
+            $table->foreignId('webpage_id')->references('id')->on('webpage')->cascadeOnDelete();
+            $table->foreignId('collomn_context_id')->references('id')->on('collomn_context')->cascadeOnDelete();
             $table->timestamps();
         });
     }
