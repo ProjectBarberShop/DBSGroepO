@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Webpages;
+use App\Models\colom_context as context_colomn;
+use App\Models\colloms_webpage;
 use Illuminate\Support\Str;
 
 class WebPageController extends Controller
@@ -39,25 +41,27 @@ class WebPageController extends Controller
     public function store(Request $request)
     {
        $request->validate([
-           'template_id' => 'required',
            'main_text' => 'required',
            'slug' => 'required',
+           'multiInput.*.colom_title_text' => 'required',
+           'multiInput.*.colomn_text' => 'required',
        ]);
-
-       foreach ($request->multiInput as $key => $value) {
-           $value->
-            Webpages::create($value);
-        }
        $webpage = new Webpages;
-       $webpage = Str::slug($request->input('title'));
-       $webpage = $request->input('template_id');
-       $webpage = $request->input('title_card');
-       $webpage = $request->input('card_images');
-       $webpage = $request->input('colom_title_text');
-       $webpage = $request->input('main_text');
-       $webpage = $request->input('colomn_text');
-
-       Webpages::create($webpage);
+       $webpage->template_id = 1;
+       $webpage->slug = Str::slug($request->input('slug'));
+       $webpage->main_text = $request->input('main_text');
+       $webpage->save();
+       $webpageID = Webpages::latest('id')->first();
+       if($request->multiInput != null) {
+        foreach($request->multiInput as $key => $value) {
+            context_colomn::create($value);
+            $contextID = context_colomn::latest('id')->first();
+            $webpagecontexttable = new colloms_webpage;
+            $webpagecontexttable->webpage_id = $webpageID->id;
+            $webpagecontexttable->collomn_context_id = $contextID->id;
+            $webpagecontexttable->save();
+        }
+    }
 
        return redirect()->route('paginas.index')->with('success','Pagina succesvol toegevoegd');
     }
@@ -114,6 +118,8 @@ class WebPageController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Webpages::find($id)->delete();
+        
+        return redirect(route('contactpersonen.index'));
     }
 }

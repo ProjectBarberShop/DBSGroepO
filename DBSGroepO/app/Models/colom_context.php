@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class colomn_context extends Model
+class colom_context extends Model
 {
     use HasFactory;
     protected $table = 'collomn_context';
@@ -15,6 +15,7 @@ class colomn_context extends Model
         'colom_title_text',
         'colomn_text',
     ];
+
     public function Webpages() {
         return $this->belongsToMany(Webpages::class, 'colloms_webpage');
     }

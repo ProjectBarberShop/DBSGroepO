@@ -38,7 +38,7 @@
                         @foreach($webpages as $w)
                         <tr>
                            <td>{{$w->id}}</td>
-                           <td>{{strip_tags($w->body)}}</td>
+                           <td>{{strip_tags($w->main_text)}}</td>
                            <td>{{$w->slug}}</td>
                            <td>{{$w->created_at}}</td>
                            <td><a class="btn btn-primary" href="{{ route('paginas.edit',$w->id) }}">Bijwerken</a></td>
