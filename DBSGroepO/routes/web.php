@@ -1,19 +1,20 @@
 <?php
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\CardController;
 use App\Http\Controllers\FotoController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\ContactController;
-
 use App\Http\Controllers\WebPageController;
 use App\Http\Controllers\YoutubeController;
 use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\PreformanceController;
-use Illuminate\Support\Facades\Session;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,6 +51,10 @@ Route::group([
     Route::resource('profile', UserController::class)->only(['index']);
     Route::resource('youtube' ,YoutubeController::class);
     Route::resource('paginas', WebPageController::class);
+    Route::controller(CardController::class)->group(function(){
+        Route::get('paginas/{pagina}/card/create' , 'create')->name('card.create');
+        Route::post('paginas/{pagina}/card' , 'store')->name('card.store');
+    });
     Route::get('/home', function () {
         return View::make('cms.home');
         });

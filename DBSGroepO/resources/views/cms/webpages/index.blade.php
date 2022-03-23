@@ -24,7 +24,7 @@
                </div>
                <!-- /.card-header -->
                <div class="card-body">
-                  <table id="" class="table table-bordered table-hover">
+                  <table id="table_id" class="table table-bordered table-hover">
                      <thead>
                         <tr>
                            <th>id</th>
@@ -33,6 +33,7 @@
                            <th>created_at</th>
                            <th>Bijwerken</th>
                            <th>Verwijderen</th>
+                           <th>Card toevoegen</th>
                         </tr>
                      </thead>
                      <tbody>
@@ -51,6 +52,7 @@
                                     <button type="submit" class="btn btn-primary">Verwijderen</button>
                                 </form>
                             </td>
+                            <td><a class="btn btn-primary" href="{{ route('card.create' , $w) }}"> Nieuwe cards maken</a></td>
                         </tr>
                         @endforeach
                      </tbody>
@@ -62,6 +64,7 @@
                            <th>created_at</th>
                            <th>Bijwerken</th>
                            <th>Verwijderen</th>
+                           <th>Card toevoegen</th>
                         </tr>
                      </tfoot>
                   </table>
@@ -73,5 +76,9 @@
    </div>
 </section>
 
-
+<script>
+    $(document).ready( function () {
+    $('#table_id').DataTable();
+    } );
+</script>
 @endsection
