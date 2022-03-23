@@ -81,7 +81,8 @@ class WebPageController extends Controller
         ->where('webpage.slug' ,$slug)
         ->select('webpage.main_text' , 'collomn_context.*')
         ->get();
-        return view('contentpage' , compact('pagecontent'));
+        $webpage = Webpages::all()->where('slug', $slug);
+        return view('contentpage' , compact('pagecontent' , 'webpage'));
     }
 
     /**
