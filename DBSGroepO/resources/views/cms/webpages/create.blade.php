@@ -20,7 +20,6 @@
         </div>
        <label for="slug">Link pagina:</label>
        <input class="mt-4" type="text" name="slug" placeholder="url-link">
-       <br>
        <div class="row justify-content-center" id="multiForm">
           <div class="col-12" >
              <div class="card">
