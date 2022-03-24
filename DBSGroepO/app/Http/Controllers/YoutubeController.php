@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Webpages;
 use App\Models\Youtube;
 use Illuminate\Http\Request;
 
@@ -26,7 +27,8 @@ class YoutubeController extends Controller
      */
     public function create()
     {
-        //
+        $webpage = Webpages::all();
+        return view('cms.youtube.create' , ['webpage' => $webpage]);
     }
 
     /**
@@ -37,8 +39,19 @@ class YoutubeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'multiInputYoutube.*.YoutubeKey' => 'required',
+            'multiInput.*.Webpage' => 'required',
+        ]);
+        foreach($request->multiInputYoutube as $key => $value) {
+            $youtube = new Youtube;
+            $youtube->youtube_video_key = $value;
+            $youtube->save();
+            
+        }
+        return redirect()->route('youtube.index')->with('success','Youtube video succesvol toegevoegd');
     }
+
 
     /**
      * Display the specified resource.

@@ -14,4 +14,8 @@ class Youtube extends Model
     protected $fillable = [
         'youtube_video_key',
     ];
+
+    public function Webpage() {
+        return $this->belongsToMany(Webpage::class, 'Youtube_webpage');
+    }
 }

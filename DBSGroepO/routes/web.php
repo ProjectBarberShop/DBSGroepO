@@ -49,7 +49,9 @@ Route::group([
     Route::resource('contactpersonen', ContactsController::class);
     Route::resource('videos', FotoController::class)->only(['index']);
     Route::resource('profile', UserController::class)->only(['index']);
+
     Route::resource('youtube' ,YoutubeController::class);
+
     Route::resource('paginas', WebPageController::class);
     Route::controller(CardController::class)->group(function(){
         Route::get('paginas/{pagina}/card/create' , 'create')->name('card.create');
