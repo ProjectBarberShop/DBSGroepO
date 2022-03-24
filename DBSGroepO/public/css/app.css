@@ -69,6 +69,12 @@
     color:yellow;
 }
 
+@media only screen and (max-width: 470px) {
+    .h3.slogan {
+        font-size: 1rem;
+    }
+}
+
 *,
 *::before,
 *::after {
@@ -7021,7 +7027,7 @@ a.nav-link {
 }
 
 .h-11 {
-    height: 11rem;
+    max-height: 11rem;
 }
 
 .h-25 {

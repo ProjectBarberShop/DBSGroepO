@@ -51,8 +51,8 @@
 <div id="app">
     {{--start header--}}
     <div class="container-fluid bg-yellow pb-3 text-center">
-        <img src="{{asset('assets/images/skyline-met-naam.jpg')}}" alt="Banner" class="img-fluid w-100 h-11">
-        <p class="text-center h3 "><strong>Met overtuiging plezierig zingen</strong></p>
+        <img src="{{asset('assets/images/skyline-met-naam.jpg')}}" alt="Banner" class="img-fluid w-100 h-auto h-11">
+        <p class="text-center h3 slogan "><strong>Met overtuiging plezierig zingen</strong></p>
     </div>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
@@ -154,7 +154,7 @@
                             Mail naar:
                         </p>
                         <p class="text-white">
-                            <a class="text-white"  href="mailto:secretaris@duketownbarbershopsingers.nl"> <u>secretaris@duketownbarbershopsingers.nl</u></a>
+                            <a class="text-white"  href="mailto:secretaris@duketownbarbershopsingers.nl"> <u>{{$footerdata->secretaryemail}}</u></a>
                         </p>
                     </div>
 
@@ -164,15 +164,15 @@
                     <!-- Grid column -->
                     <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3 m-auto">
                         <h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
-                        <p><i class="fas fa-home mr-3"></i> Bordeslaan 191, 5223 MK 's-Hertogenbosch</p>
+                        <p><i class="fas fa-home mr-3"></i> {{$footerdata->address}}</p>
                         <p><i class="fas fa-envelope mr-3"></i>
                             <a
                                 class="text-white"
                                 href="mailto:info@duketownbarbershopsingers.nl">
-                                <u>info@duketownbarbershopsingers.nl</u>
+                                <u>{{$footerdata->email}}</u>
                             </a>
                         </p>
-                        <p><i class="fas fa-phone mr-3"></i> +31 06 22 45 78 37</p>
+                        <p><i class="fas fa-phone mr-3"></i> {{$footerdata->phonenumber}}</p>
                     </div>
                     <!-- Grid column -->
                 </div>
@@ -199,7 +199,7 @@
                     <!-- Grid column -->
                     <div class="col-md-5 col-lg-4 ml-lg-4 text-center text-md-center">
                         <div class="p3 h5">
-                            Kvk: 2738282
+                            Kvk: {{$footerdata->kvk}}
                         </div>
                     </div>
                     <!-- Grid column -->
@@ -209,7 +209,7 @@
                             class="btn btn-outline-light btn-floating m-1"
                             class="text-white"
                             role="button"
-                            href="https://www.facebook.com/DuketownBarbershopSingers"
+                            href="{{$footerdata->facebookurl}}"
                         ><i class="fab fa-facebook-f"></i
                             ></a>
 
