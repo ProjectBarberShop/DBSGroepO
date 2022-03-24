@@ -28,9 +28,9 @@
             </thead>
             <tbody>
             <tr>
-                <td><input type="text" name="multiInputYoutube[0][YoutubeKey]" class="form-control" required/></td>
+                <td><input type="text" name="multiInput[0][youtube_video_key]" class="form-control" required/></td>
                 <td>
-                    <select type="text" name="multiInput[0][Webpage]" class="form-control">
+                    <select type="text" name="multiWebpage[0][Webpage]" class="form-control">
                         @foreach($webpage as $w)
                             <option value="{{$w->id}}">{{$w->slug}}</option>
                         @endforeach
@@ -51,10 +51,13 @@
 </section>
 
 <script>
+    $(document).ready( function () {
+    $('#multiForm').DataTable();
+    } );
     var i = 0;
     $("#addRemoveIp").click(function () {
         ++i;
-        $("#multiForm").append('<tr><td><input type="text" name="multiInputYoutube['+i+'][YoutubeKey]" class="form-control" required/></td><td><select type="text" name="multiInput['+i+'][Webpage]" class="form-control"> @foreach($webpage as $w) <option value="{{$w->id}}">{{$w->slug}}</option> @endforeach </select></td><td><button type="button" class="remove-item btn btn-danger">Delete</button></td></tr>');
+        $("#multiForm").append('<tr><td><input type="text" name="multiInput['+i+'][youtube_video_key]" class="form-control" required/></td><td><select type="text" name="multiWebpage['+i+'][Webpage]" class="form-control"> @foreach($webpage as $w) <option value="{{$w->id}}">{{$w->slug}}</option> @endforeach </select></td><td><button type="button" class="remove-item btn btn-danger">Delete</button></td></tr>');
     });
     $(document).on('click', '.remove-item', function () {
         $(this).parents('tr').remove();

@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('youtube_webpage', function (Blueprint $table) {
-            $table->foreignId('webpage_id')->references('id')->on('webpage')->cascadeOnDelete();
+            $table->foreignId('webpages_id')->references('id')->on('webpage')->cascadeOnDelete();
             $table->foreignId('youtube_id')->references('id')->on('youtube')->cascadeOnDelete();
             $table->timestamps();
         });
