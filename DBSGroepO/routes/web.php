@@ -15,6 +15,8 @@ use App\Http\Controllers\WebPageController;
 use App\Http\Controllers\YoutubeController;
 use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\PreformanceController;
+use App\Http\Controllers\AgendaController;
+use App\Http\Controllers\FooterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,6 +57,8 @@ Route::group([
         Route::get('paginas/{pagina}/card/create' , 'create')->name('card.create');
         Route::post('paginas/{pagina}/card' , 'store')->name('card.store');
     });
+    Route::resource('footer', FooterController::class);
+
     Route::get('/home', function () {
         return View::make('cms.home');
         });

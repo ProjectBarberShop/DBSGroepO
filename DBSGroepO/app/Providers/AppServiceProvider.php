@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Contact;
+use App\Models\Footer;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -26,7 +27,9 @@ class AppServiceProvider extends ServiceProvider
     {
         view()->composer('layouts.app', function($view) {
             $contactsdata = Contact::where('is_published', true)->get();
-            $view->with(['contactsdata' => $contactsdata]);
+            $footerdata = Footer::find(1);
+            $view->with(['contactsdata' => $contactsdata,
+                         'footerdata' => $footerdata]);
         });
     }
 }
