@@ -15,7 +15,6 @@ use App\Http\Controllers\WebPageController;
 use App\Http\Controllers\YoutubeController;
 use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\PreformanceController;
-use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\FooterController;
 
 /*
