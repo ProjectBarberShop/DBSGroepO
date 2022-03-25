@@ -71,7 +71,16 @@ class FooterController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $footercontent = Footer::where('id', $id)->update([
+        $request->validate([
+            'address' => 'required',
+            'email' => 'required',
+            'phonenumber' => 'required',
+            'secretaryemail' => 'required',
+            'kvk' => 'required',
+            'facebookurl' => 'required',
+        ])
+
+        Footer::where('id', $id)->update([
             'address' => $request->input('address'),
             'email' => $request->input('email'),
             'phonenumber' => $request->input('phonenumber'),
