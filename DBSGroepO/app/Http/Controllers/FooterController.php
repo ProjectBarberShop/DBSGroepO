@@ -78,7 +78,7 @@ class FooterController extends Controller
             'secretaryemail' => 'required',
             'kvk' => 'required',
             'facebookurl' => 'required',
-        ])
+        ]);
 
         Footer::where('id', $id)->update([
             'address' => $request->input('address'),
