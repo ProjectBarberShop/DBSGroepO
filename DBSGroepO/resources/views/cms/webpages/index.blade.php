@@ -27,46 +27,44 @@
                   <table id="table_id" class="table table-bordered table-hover">
                      <thead>
                         <tr>
-                           <th>id</th>
-                           <th>body</th>
-                           <th>slug</th>
-                           <th>created_at</th>
+                           <th>Hoofdtekst</th>
+                           <th>Pagina title</th>
+                           <th>Toegevoegd op</th>
+                           <th>Card toevoegen</th>
+                           <th>Youtube video toevoegen</th>
                            <th>Bijwerken</th>
                            <th>Verwijderen</th>
-                           <th>Card toevoegen</th>
                         </tr>
                      </thead>
                      <tbody>
                         @foreach($webpages as $w)
                         <tr>
-                           <td>{{$w->id}}</td>
                            <td>{{strip_tags($w->main_text)}}</td>
                            <td>{{$w->slug}}</td>
                            <td>{{$w->created_at}}</td>
-                           <td><a class="btn btn-primary" href="{{ route('paginas.edit',$w->id) }}">Bijwerken</a></td>
-                           <td>
+                            <td><a class="btn btn-primary" href="{{ route('card.create' , $w->id) }}"> Nieuwe cards maken</a></td>
+                            <td><a class="btn btn-primary" href="{{ route('youtube.createMultiple' , $w->id) }}"> Youtube video toevoegen</a></td>
+                            <td><a class="btn btn-success" href="{{ route('paginas.edit',$w->id) }}">Bijwerken</a></td>
+                            <td>
                                 <form action="{{ route('paginas.destroy', $w->id) }}" method="POST">
-                                    <a class="btn btn-primary" href="{{ route('paginas.destroy', $w->id) }}">
                                     @method('DELETE')
                                     @csrf
-                                    <button type="submit" class="btn btn-primary">Verwijderen</button>
+                                    <button type="submit" class="btn btn-danger">Verwijderen</button>
                                 </form>
                             </td>
-                            <td><a class="btn btn-primary" href="{{ route('card.create' , $w->id) }}"> Nieuwe cards maken</a></td>
-                            <td><a class="btn btn-success" href="{{ route('youtube.create' , $w->id) }}"> Youtube video toevoegen</a></td>
                           </div>
                         </tr>
                         @endforeach
                      </tbody>
                      <tfoot>
                         <tr>
-                           <th>id</th>
-                           <th>body</th>
-                           <th>slug</th>
-                           <th>created_at</th>
+                           <th>Hoofdtekst</th>
+                           <th>Pagina title</th>
+                           <th>Toegevoegd op</th>
+                           <th>Card toevoegen</th>
+                           <th>Youtube video toevoegen</th>
                            <th>Bijwerken</th>
                            <th>Verwijderen</th>
-                           <th>Card toevoegen</th>
                         </tr>
                      </tfoot>
                   </table>

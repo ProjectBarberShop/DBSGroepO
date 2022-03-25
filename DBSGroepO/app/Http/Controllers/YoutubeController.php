@@ -22,8 +22,30 @@ class YoutubeController extends Controller
         ->join('webpage', 'webpage.id', '=', 'youtube_webpage.webpages_id')
         ->select('webpage.slug' , 'youtube.youtube_video_key' , 'youtube.id')
         ->get();
-        return view('cms.youtube.index' ,['webpageTitles' => $webpageTitles]);
+        $webpage = Webpages::all();
+        return view('cms.youtube.index' ,['webpageTitles' => $webpageTitles , 'webpages' => $webpage]);
 
+    }
+
+
+    public function create()
+    {
+        $webpage = Webpages::all();
+        return view('cms.youtube.create' , ['webpage' => $webpage]);
+    }
+
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'youtube_video_key' => 'required',
+            'webpageID' => 'required',
+        ]);
+        $youtube = new Youtube;
+        $youtube->youtube_video_key = $request->input('youtube_video_key');
+        $youtube->save();
+        $youtube->WebPageYoutubeLink()->attach($request->input('webpageID'));
+        return redirect()->route('youtube.index')->with('success','Youtube video succesvol toegevoegd');
     }
 
     /**
@@ -31,10 +53,9 @@ class YoutubeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Webpages $pagina)
+    public function createMultiple(Webpages $pagina)
     {
-
-        return view('cms.youtube.create' , ['pageID' => $pagina->id]);
+        return view('cms.youtube.createMultiple' , ['pageID' => $pagina->id]);
     }
 
     /**
@@ -43,11 +64,10 @@ class YoutubeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request , $pageID)
+    public function storeMultiple(Request $request , $pageID)
     {
         $request->validate([
             'multiInput.*.youtube_video_key' => 'required',
-            'multiWebpage.*.Webpage' => 'required',
         ]);
         foreach($request->multiInput as $key => $value) {
             $youtube = Youtube::create($value);

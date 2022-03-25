@@ -50,11 +50,10 @@ Route::group([
     Route::resource('contactpersonen', ContactsController::class);
     Route::resource('videos', FotoController::class)->only(['index']);
     Route::resource('profile', UserController::class)->only(['index']);
-    Route::resource('youtube', YoutubeController::class)->only(['index' , 'edit' , 'update' , 'destroy']);
+    Route::resource('youtube', YoutubeController::class);
     Route::controller(YoutubeController::class)->group(function(){
-
-        Route::get('paginas/{pagina}/youtube/create' , 'create')->name('youtube.create');
-        Route::post('paginas/{pagina}/youtube' , 'store')->name('youtube.store');
+        Route::get('paginas/{pagina}/youtube/create' , 'createMultiple')->name('youtube.createMultiple');
+        Route::post('paginas/{pagina}/youtube' , 'storeMultiple')->name('youtube.storeMultiple');
     });
     Route::resource('paginas', WebPageController::class);
     Route::controller(CardController::class)->group(function(){
