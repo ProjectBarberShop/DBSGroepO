@@ -103,24 +103,15 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{url('cms/paginas')}}" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
               <p>
                 Pagina's
-                <i class="fas fa-angle-left right"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="pages/forms/general.html" class="nav-link">
-                  <i class="far fa fa-file nav-icon"></i>
-                  <p>Contact page test</p>
-                </a>
-              </li>
-            </ul>
           </li>
           <li class="nav-item">
-            <a href="{{url('cms/home')}}" class="nav-link">
+            <a href="{{url('cms/youtube')}}" class="nav-link">
               <i class="nav-icon far ion ion-ios-videocam"></i>
               <p>
                 Video's

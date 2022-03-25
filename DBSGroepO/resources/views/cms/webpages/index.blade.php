@@ -52,7 +52,9 @@
                                     <button type="submit" class="btn btn-primary">Verwijderen</button>
                                 </form>
                             </td>
-                            <td><a class="btn btn-primary" href="{{ route('card.create' , $w) }}"> Nieuwe cards maken</a></td>
+                            <td><a class="btn btn-primary" href="{{ route('card.create' , $w->id) }}"> Nieuwe cards maken</a></td>
+                            <td><a class="btn btn-success" href="{{ route('youtube.create' , $w->id) }}"> Youtube video toevoegen</a></td>
+                          </div>
                         </tr>
                         @endforeach
                      </tbody>

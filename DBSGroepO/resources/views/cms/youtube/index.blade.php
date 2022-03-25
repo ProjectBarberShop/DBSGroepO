@@ -9,14 +9,11 @@
 <section>
     <div class="container-fluid">
         <div class="row">
-           <div class="col-lg-12 margin-tb">
-                 <div class="pull-right">
-                    <a class="btn btn-success" href="{{ route('youtube.create') }}"> Nieuwe pagina maken</a>
-                 </div>
-           </div>
+            <p>Overzicht van alle youtube video's<p>
         </div>
         <div class="row">
             @foreach($webpageTitles as $v)
+
                 <div class="col-md-4 d-flex ">
                     <div class="card card-primary">
                         <div class="card-header">

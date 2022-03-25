@@ -12,7 +12,7 @@
     </div>
 @endif
 <section class="content">
-    <form action="{{ route('youtube.store') }}" method="POST">
+    <form action="{{ route('youtube.store' , $pageID) }}" method="POST">
         @csrf
         <div class="pull-right md-8 ">
             <a class="btn btn-primary md-4" href="{{ route('youtube.index') }}"> Back</a>
@@ -22,27 +22,18 @@
             <thead>
                 <tr>
                     <th>Youtube key</th>
-                    <th>Webpage</th>
                     <th>Rij toevoegen</th>
                 </tr>
             </thead>
             <tbody>
             <tr>
                 <td><input type="text" name="multiInput[0][youtube_video_key]" class="form-control" required/></td>
-                <td>
-                    <select type="text" name="multiWebpage[0][Webpage]" class="form-control">
-                        @foreach($webpage as $w)
-                            <option value="{{$w->id}}">{{$w->slug}}</option>
-                        @endforeach
-                    </select>
-                </td>
                 <td><input type="button" name="add" value="Add" id="addRemoveIp" class="btn btn-outline-dark" required></td>
             </tr>
             </tbody>
             <tfoot>
                 <tr>
                     <th>Youtube key</th>
-                    <th>Webpage</th>
                     <th>Rij toevoegen</th>
                 </tr>
             </tfoot>
@@ -57,7 +48,7 @@
     var i = 0;
     $("#addRemoveIp").click(function () {
         ++i;
-        $("#multiForm").append('<tr><td><input type="text" name="multiInput['+i+'][youtube_video_key]" class="form-control" required/></td><td><select type="text" name="multiWebpage['+i+'][Webpage]" class="form-control"> @foreach($webpage as $w) <option value="{{$w->id}}">{{$w->slug}}</option> @endforeach </select></td><td><button type="button" class="remove-item btn btn-danger">Delete</button></td></tr>');
+        $("#multiForm").append('<tr><td><input type="text" name="multiInput['+i+'][youtube_video_key]" class="form-control" required/></td><td><button type="button" class="remove-item btn btn-danger">Delete</button></td></tr>');
     });
     $(document).on('click', '.remove-item', function () {
         $(this).parents('tr').remove();

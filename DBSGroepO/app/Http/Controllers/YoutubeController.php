@@ -6,6 +6,7 @@ use App\Models\Youtube;
 use App\Models\Webpages;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Symfony\Component\Console\Input\Input;
 
 class YoutubeController extends Controller
 {
@@ -19,7 +20,7 @@ class YoutubeController extends Controller
         $webpageTitles = DB::table('youtube_webpage')
         ->join('youtube', 'youtube.id', '=', 'youtube_webpage.youtube_id')
         ->join('webpage', 'webpage.id', '=', 'youtube_webpage.webpages_id')
-        ->select('webpage.slug' , 'youtube.youtube_video_key' , 'webpage.id')
+        ->select('webpage.slug' , 'youtube.youtube_video_key' , 'youtube.id')
         ->get();
         return view('cms.youtube.index' ,['webpageTitles' => $webpageTitles]);
 
@@ -30,14 +31,10 @@ class YoutubeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Webpages $pagina)
     {
-        $webpage = Webpages::all();
-        if($webpage->count() > 0) {
-            return view('cms.youtube.create' , ['webpage' => $webpage]);
-        } else {
-            return redirect()->route('youtube.index');
-        }
+
+        return view('cms.youtube.create' , ['pageID' => $pagina->id]);
     }
 
     /**
@@ -46,7 +43,7 @@ class YoutubeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request , $pageID)
     {
         $request->validate([
             'multiInput.*.youtube_video_key' => 'required',
@@ -54,11 +51,7 @@ class YoutubeController extends Controller
         ]);
         foreach($request->multiInput as $key => $value) {
             $youtube = Youtube::create($value);
-
-            foreach($request->multiWebpage as $v => $vv) {
-                $youtube->WebPageYoutubeLink()->attach($vv);
-            }
-
+            $youtube->WebPageYoutubeLink()->attach($pageID);
         }
         return redirect()->route('youtube.index')->with('success','Youtube video succesvol toegevoegd');
     }
