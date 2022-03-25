@@ -13,11 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('webpage', function (Blueprint $table) {
+        Schema::create('collomn_context', function (Blueprint $table) {
             $table->id();
-            $table->integer('template_id');
-            $table->longtext('main_text');
-            $table->string('slug');
+            $table->string('colom_title_text');
+            $table->longtext('colomn_text');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('webpages');
+        Schema::dropIfExists('collomns_context');
     }
 };

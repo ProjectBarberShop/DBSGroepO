@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Webpages;
+use App\Models\colom_context as context_colomn;
+use App\Models\colloms_webpage;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class WebPageController extends Controller
@@ -39,18 +42,27 @@ class WebPageController extends Controller
     public function store(Request $request)
     {
        $request->validate([
-           'body' => 'required',
-           'title' => 'required',
+           'main_text' => 'required',
+           'slug' => 'required',
+           'multiInput.*.colom_title_text' => 'required',
+           'multiInput.*.colomn_text' => 'required',
        ]);
-
-       $slug = Str::slug($request->input('title'));
-       $body = $request->input('body');
-
-       $data = array(
-           'body' => $body,
-           'slug' => $slug,
-       );
-       Webpages::create($data);
+       $webpage = new Webpages;
+       $webpage->template_id = 1;
+       $webpage->slug = Str::slug($request->input('slug'));
+       $webpage->main_text = $request->input('main_text');
+       $webpage->save();
+       $webpageID = Webpages::latest('id')->first();
+       if($request->multiInput != null) {
+        foreach($request->multiInput as $key => $value) {
+            context_colomn::create($value);
+            $contextID = context_colomn::latest('id')->first();
+            $webpagecontexttable = new colloms_webpage;
+            $webpagecontexttable->webpage_id = $webpageID->id;
+            $webpagecontexttable->collomn_context_id = $contextID->id;
+            $webpagecontexttable->save();
+        }
+    }
 
        return redirect()->route('paginas.index')->with('success','Pagina succesvol toegevoegd');
     }
@@ -63,8 +75,14 @@ class WebPageController extends Controller
      */
     public function show($slug)
     {
-        $pagecontent = Webpages::all()->where('slug', $slug);
-        return view('contentpage' , compact('pagecontent'));
+        $pagecontent = DB::table('webpage')
+        ->join('colloms_webpage', 'webpage.id', '=', 'colloms_webpage.webpage_id')
+        ->join('collomn_context', 'collomn_context.id', '=', 'colloms_webpage.collomn_context_id')
+        ->where('webpage.slug' ,$slug)
+        ->select('webpage.main_text' , 'collomn_context.*')
+        ->get();
+        $webpage = Webpages::all()->where('slug', $slug);
+        return view('contentpage' , compact('pagecontent' , 'webpage'));
     }
 
     /**
@@ -107,6 +125,8 @@ class WebPageController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Webpages::find($id)->delete();
+
+        return redirect()->route('paginas.index');
     }
 }
