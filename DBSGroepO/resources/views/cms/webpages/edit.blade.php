@@ -12,7 +12,7 @@
             @csrf
             @method('PUT')
                 <div class="card-body">
-                    <textarea name="body" id="{{$page-> id}}">{{$page -> body}}</textarea>
+                    <textarea name="body" id="{{$page-> id}}">{{$page -> main_text}}</textarea>
                     </br>
                     <input name="title" value="{{$page -> slug}}"/>
                 </div>

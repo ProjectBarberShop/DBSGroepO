@@ -13,11 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('webpage', function (Blueprint $table) {
+        Schema::create('youtube', function (Blueprint $table) {
             $table->id();
-            $table->integer('template_id');
-            $table->longtext('main_text');
-            $table->string('slug');
+            $table->string('youtube_video_key')->require;
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('webpages');
+        Schema::dropIfExists('youtube');
     }
 };

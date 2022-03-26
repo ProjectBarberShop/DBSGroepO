@@ -13,11 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('webpage', function (Blueprint $table) {
-            $table->id();
-            $table->integer('template_id');
-            $table->longtext('main_text');
-            $table->string('slug');
+        Schema::create('colloms_webpage', function (Blueprint $table) {
+            $table->foreignId('webpage_id')->references('id')->on('webpage')->cascadeOnDelete();
+            $table->foreignId('collomn_context_id')->references('id')->on('collomn_context')->cascadeOnDelete();
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('webpages');
+        Schema::dropIfExists('colloms_webpage');
     }
 };
