@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('navbarItems', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable(false);
-            $table->string("link")->nullable(false);
+            $table->string("link")->nullable(true)->default('#');
             $table->timestamps();
         });
     }
