@@ -45,7 +45,8 @@
     <link href="{{ asset('css/loginscreen.css') }}" rel="stylesheet">
     <link href="{{ asset('css/contact.css') }}" rel="stylesheet">
 
-
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/nl_NL/sdk.js#xfbml=1&version=v13.0" nonce="BRVg9Kka"></script>
 </head>
 <body class="bg-white">
 <div id="app">
@@ -108,10 +109,36 @@
     </nav>
     {{--end header--}}
 
-    <main>
+    <main class="d-flex bd-highlight">
+        <div class="w-100">
         @yield('content')
-    </main>
+        </div>
+        <section id="sidebar" class="flex-shrink-1 bg-danger my-5 card p-3 position-sticky sticky-top h-100 mx-auto">
+            <div class="h-75 card-body">
+                <div id="sidebarInfoLogin">  
+                    <div id="sidebarFacebook" class=" bg-yellow mb-3">
+                        <h4 class="text-center"><b> Facebook </b></h4>
+                        <div class="fb-page w-100 " data-href="https://www.facebook.com/DuketownBarbershopSingers" 
+                        data-tabs="timeline"  data-height="400" data-small-header="true" 
+                        data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+                        <blockquote cite="https://www.facebook.com/DuketownBarbershopSingers" class="fb-xfbml-parse-ignore">
+                            <a href="https://www.facebook.com/DuketownBarbershopSingers">Duketown Barbershop Singers</a>
+                        </blockquote>
+                    </div>
+                </div>
+                <div id="sidebarAgenda" class="rounded bg-yellow w-100">
+                    <h4 class="text-center"><b> Agenda </b></h4>
+                        <div class="overflow-auto p-2 mh-25" style="max-Height: 300px">
+                            @foreach ($schedules as $schedule)
+                                <p><b>{{ $schedule->title}}:</b> <br> begint op: {{ $schedule->start}}</p>
+                                <hr>
+                            @endforeach
+                        </div>
+                </div>
+            </div>
 
+    </section>
+    </main>
     {{--start footer--}}
     <footer class="text-center text-lg-start text-white bg-danger">
         <!-- Grid container -->
