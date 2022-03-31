@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\NavbarItem;
 use Illuminate\Http\Request;
 
 class NavbarController extends Controller
@@ -13,7 +14,9 @@ class NavbarController extends Controller
      */
     public function index()
     {
+        $navitems = NavbarItem::all();
 
+        return view('cms.navbar.index', compact('navitems'));
     }
 
     /**

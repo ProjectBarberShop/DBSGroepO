@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('dropdownItems', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('navbarItem_id')->constrained('navbarItems');
+            $table->foreignId('navbar_item_id')->constrained('navbarItems');
             $table->string('name')->nullable(false);
             $table->string("link")->nullable(false);
             $table->timestamps();

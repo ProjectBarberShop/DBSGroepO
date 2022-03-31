@@ -9,6 +9,8 @@ class DropdownItem extends Model
 {
     use HasFactory;
 
+    protected $table = 'dropdownitems';
+
     public function navbarItem(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(NavbarItem::class);

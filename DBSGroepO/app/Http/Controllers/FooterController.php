@@ -71,6 +71,7 @@ class FooterController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $request->validate([
             'address' => 'required',
             'email' => 'required',
