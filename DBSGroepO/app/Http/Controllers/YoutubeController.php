@@ -96,7 +96,10 @@ class YoutubeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $youtube = Youtube::find($id);
+        $webpage = Webpages::all();
+
+        return view('cms.youtube.edit' , ['youtube' => $youtube , 'webpage' => $webpage]);
     }
 
     /**
@@ -106,9 +109,18 @@ class YoutubeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id , $webpage)
     {
-        //
+        $request->validate([
+            'youtube_video_key' => 'required',
+            'webpageID' => 'required',
+        ]);
+        $youtube = Youtube::find($id);
+        $youtube->youtube_video_key = $request->input('youtube_video_key');
+        $youtube->save();
+        $youtube->WebPageYoutubeLink()->wherePivot('webpages_id' , $webpage)->wherePivot('youtube_id' , $id)->updateExistingPivot($webpage, ['webpages_id' => $request->input('webpageID')]);
+
+        return redirect()->route('youtube.index')->with('success','Youtube video succesvol bijgewerkt');
     }
 
     /**
