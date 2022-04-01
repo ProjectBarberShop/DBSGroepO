@@ -37,7 +37,16 @@ class NavbarController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+        ]);
+
+        $navitem = new NavbarItem();
+        $navitem->name = $request->input('name');
+        $navitem->link = $request->input('link');
+        $navitem->save();
+
+        return redirect(route('navbar.index'));
     }
 
     /**

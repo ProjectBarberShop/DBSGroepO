@@ -19,5 +19,24 @@
                 </div>
             </div>
         @endforeach
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="card card-primary">
+                        <div class="card-header bg-danger">
+                            <h3 class="card-title">Voeg item toe</h3>
+                        </div>
+                        <div class="card-body">
+                            <form action="{{ route('navbar.store') }}" method="POST" class="d-flex flex-column">
+                                @csrf
+                                <label for="name">Naam:</label>
+                                <input type="text" name="name" placeholder="Naam">
+                                <label for="link">Link:</label>
+                                <input type="text" name="link" placeholder="Link">
+                                <button type="submit" class="btn btn-primary float-right mt-4">+</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 @endsection
