@@ -10,8 +10,8 @@
                     </div>
                     <div class="card-body">
                         <p class="mb-1">Naam: {{$item->name}}</p> <br>
+                        <p class="mb-1">Dropdown items: {{$item->dropdownItems->count()}}</p> <br>
                         <a class="mb-1" href="{{$item->link}}">Link: {{$item->link}}</a> <br>
-
                         <div class="d-flex flex-row justify-content-end mt-4">
                             <a href="{{ route('navbar.edit', $item->id) }}" class="mr-2 btn btn-primary">Bijwerken</a>
                         </div>
