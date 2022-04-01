@@ -21,7 +21,7 @@ class AgendaController extends Controller
                 $data = DB::table('agenda')
                 ->join('agenda_category', 'agenda.id', '=', 'agenda_category.agendapunt_id')
                 ->join('category', 'category.id', '=', 'agenda_category.category_id')
-                ->where('agenda_category.category_id', '=', $request->category)
+                ->where('agenda_category.category_name', '=', $request->category)
                 ->select('agenda.*')
                 ->get();
             }

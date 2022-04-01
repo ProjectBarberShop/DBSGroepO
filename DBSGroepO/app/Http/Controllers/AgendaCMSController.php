@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Agendapunt;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AgendaCMSController extends Controller
 {
@@ -12,10 +14,25 @@ class AgendaCMSController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $agendapunten = Agendapunt::get();
-        return view('cms.agenda.index', compact('agendapunten'));
+        if($request->input("category") != "") {
+            $agendapunten = DB::table('agenda')
+             ->join('agenda_category', 'agenda.id', '=', 'agenda_category.agendapunt_id')
+             ->join('category', 'category.id', '=', 'agenda_category.category_id')
+             ->where('agenda_category.category_id', '=', $request->input("category"))
+             ->select('agenda.*', 'category.title as category_title')
+             ->get();
+        }
+        else {
+            $agendapunten = DB::table('agenda')
+             ->join('agenda_category', 'agenda.id', '=', 'agenda_category.agendapunt_id')
+             ->join('category', 'category.id', '=', 'agenda_category.category_id')
+             ->select('agenda.*', 'category.title as category_title')
+             ->get();
+        }
+        $categories = Category::get();
+        return view('cms.agenda.index', compact('agendapunten', 'categories'));
     }
 
     /**
