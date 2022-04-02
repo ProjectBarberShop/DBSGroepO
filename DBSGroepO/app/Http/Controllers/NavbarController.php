@@ -40,10 +40,12 @@ class NavbarController extends Controller
         $request->validate([
             'name' => 'required',
         ]);
-
         $navitem = new NavbarItem();
+        $link = $request->input('link');
         $navitem->name = $request->input('name');
-        $navitem->link = $request->input('link');
+        if(!(empty($link))){
+            $navitem->link = $request->input('link');
+        }
         $navitem->save();
 
         return redirect(route('navbar.index'));

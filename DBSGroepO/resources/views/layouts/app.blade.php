@@ -146,6 +146,7 @@
                     <hr class="w-100 clearfix d-md-none"/>
 
                     <!-- Grid column -->
+                    @if(!empty($footerdata))
                     <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3 m- m flex-md-wrap">
                         <h6 class="text-uppercase mb-4 font-weight-bold ">
                             Lid worden?
@@ -234,6 +235,7 @@
             </section>
             <!-- Section: Copyright -->
         </div>
+    @endif
         <!-- Grid container -->
     </footer>
     {{--   end footer--}}
