@@ -8,19 +8,16 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use Illuminate\Contracts\Session\Session;
-use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\CardController;
 use App\Http\Controllers\FotoController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\WebPageController;
 use App\Http\Controllers\YoutubeController;
 use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\PreformanceController;
-use App\Http\Controllers\FooterController;
 
 /*
 |--------------------------------------------------------------------------
