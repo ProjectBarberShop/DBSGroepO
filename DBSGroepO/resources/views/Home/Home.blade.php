@@ -73,16 +73,6 @@
     <p>Op <a href="https://www.google.com/maps/dir//Bilderdijkstraat+23,+5216+TA+%27s-Hertogenbosch/@51.6840306,5.3272158,17z/data=!4m9!4m8!1m0!1m5!1m1!1s0x47c6ef0401e43ce9:0xe1672863df7d1e8b!2m2!1d5.3294045!2d51.6840306!3e0">deze locatie</a> kunt u ons vinden.</p>
   </div>
 
-    <?php
-    use App\Models\NavbarItem;
-    $navitems = NavbarItem::all();
-
-        foreach($navitems as $item){
-            echo $item->name;
-            foreach($item->dropdownItems as $dropdownItem)
-            echo $dropdownItem->name;
-        }
-    ?>
 </section>
 @endsection
 
