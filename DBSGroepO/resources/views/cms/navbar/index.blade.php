@@ -49,12 +49,10 @@
 @endsection
 
 <script>
-    function confirmSubmit(id) {
+    function confirmSubmit(item) {
         event.preventDefault();
-        let itemName = id.name.replace(' ', '');
-        let formId = itemName + id.id;
-        console.log("form id is " + formId);
-        console.log(document.querySelector("#" + formId));
+        let itemName = item.name.replace(' ', '');
+        let formId = itemName + item.id;
         if(confirm("Weet u zeker dat u " + document.querySelector("#" + formId + " input").name + " wilt verwijderen?")) {
             document.querySelector("#" + formId).submit();
         }

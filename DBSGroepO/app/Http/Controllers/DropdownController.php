@@ -31,6 +31,42 @@ class DropdownController extends Controller
         return redirect(route('navbar.edit', $request->input('navItemId')));
     }
 
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $dropdowndata = DropdownItem::find($id);
+        return view('cms.navbar.dropdownedit', compact('dropdowndata'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required',
+
+        ]);
+
+        DropdownItem::where('id', $id)->update([
+            'name' => $request->input('name'),
+            'link' => $request->input('link'),
+        ]);
+
+        $navItemId = $request->input('navbarItemId');
+
+        return redirect(route('navbar.edit', $navItemId));
+    }
+
     public function destroy(int $id) {
 
         $item =  DropdownItem::find($id);

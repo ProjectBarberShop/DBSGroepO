@@ -25,12 +25,12 @@
                         <a class="mb-1" href="{{$item->link}}">Link: {{$item->link}}</a> <br>
                         <div class="d-flex flex-row justify-content-end mt-4">
                             <a href="{{ route('dropdown.edit', $item->id) }}" class="mr-2 btn btn-primary">Bijwerken</a>
-                            <form id="deleteForm" action="{{ route('dropdown.destroy', $item->id) }}" method="POST">
+                            <form id="{{str_replace(' ', '', $item->name).$item->id}}" action="{{ route('dropdown.destroy', $item->id) }}" method="POST">
                                 <input type="hidden" name="{{$item->name}}">
                                 @method('DELETE')
                                 @csrf
                             </form>
-                            <button type="submit" class="btn btn-danger" onclick="confirmSubmit()">Verwijderen</button>
+                            <button type="submit" class="btn btn-danger" onclick="confirmSubmit({{$item}})">Verwijderen</button>
                         </div>
                     </div>
                 </div>
@@ -61,10 +61,12 @@
 @endsection
 
 <script>
-    function confirmSubmit() {
+    function confirmSubmit(item) {
         event.preventDefault();
-        if(confirm("Weet u zeker dat u " + document.querySelector("#deleteForm input").name + " wilt verwijderen?")) {
-            document.querySelector("#deleteForm").submit();
+        let itemName = item.name.replace(' ', '');
+        let formId = itemName + item.id;
+        if(confirm("Weet u zeker dat u " + document.querySelector("#" + formId + " input").name + " wilt verwijderen?")) {
+            document.querySelector("#" + formId).submit();
         }
     }
 </script>
