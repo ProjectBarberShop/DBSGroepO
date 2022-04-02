@@ -4,7 +4,9 @@ namespace App\Providers;
 
 use App\Models\Contact;
 use App\Models\Footer;
+use App\Models\NavbarItem;
 use Database\Seeders\FooterSeeder;
+use Database\Seeders\NavbarSeeder;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -29,6 +31,7 @@ class AppServiceProvider extends ServiceProvider
         view()->composer('layouts.app', function($view) {
             $contactsdata = Contact::where('is_published', true)->get();
             $footerdata = Footer::find(1);
+            $navbardata = NavbarItem::all();
 
             if($footerdata == null){
                 $seeder = new FooterSeeder();
@@ -36,8 +39,17 @@ class AppServiceProvider extends ServiceProvider
                 $footerdata = Footer::find(1);
             }
 
+            if($navbardata == null){
+                $seeder = new NavbarSeeder();
+                $seeder->run();
+                $navbardata = NavbarItem::all();
+            }
+
+
+
             $view->with(['contactsdata' => $contactsdata,
-                         'footerdata' => $footerdata]);
+                         'footerdata' => $footerdata,
+                         'navbardata' => $navbardata]);
         });
     }
 }
