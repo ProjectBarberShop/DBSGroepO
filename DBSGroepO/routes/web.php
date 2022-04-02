@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AgendaController;
+use App\Http\Controllers\DropdownController;
 use App\Http\Controllers\FooterController;
 use App\Http\Controllers\NavbarController;
 use Illuminate\Support\Facades\Route;
@@ -52,6 +53,7 @@ Route::group([
     Route::resource('paginas', WebPageController::class);
     Route::resource('footer', FooterController::class);
     Route::resource('navbar', NavbarController::class);
+    Route::resource('dropdown', DropdownController::class);
     Route::get('/home', function () {
         return View::make('cms.home');
         });

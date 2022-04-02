@@ -70,7 +70,8 @@ class NavbarController extends Controller
      */
     public function edit($id)
     {
-
+        $navdata = NavbarItem::find($id);
+        return view('cms.navbar.edit', compact('navdata'));
     }
 
     /**
@@ -82,7 +83,17 @@ class NavbarController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'name' => 'required',
 
+        ]);
+
+        NavbarItem::where('id', $id)->update([
+            'name' => $request->input('name'),
+            'link' => $request->input('link'),
+        ]);
+
+        return redirect(route('navbar.edit', $id));
     }
 
     /**
@@ -93,6 +104,7 @@ class NavbarController extends Controller
      */
     public function destroy($id)
     {
-        //
+        NavbarItem::find($id)->delete();
+        return redirect(route('navbar.index'));
     }
 }

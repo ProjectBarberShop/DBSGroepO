@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             AgendaSeeder::class,
             Footerseeder::class,
             NavbarSeeder::class,
+            UserSeeder::class,
         ]);
     }
 }

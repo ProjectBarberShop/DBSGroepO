@@ -14,10 +14,17 @@
                         <a class="mb-1" href="{{$item->link}}">Link: {{$item->link}}</a> <br>
                         <div class="d-flex flex-row justify-content-end mt-4">
                             <a href="{{ route('navbar.edit', $item->id) }}" class="mr-2 btn btn-primary">Bijwerken</a>
+                            <form id="{{str_replace(' ', '', $item->name).$item->id}}"  action="{{ route('navbar.destroy', $item->id) }}" method="POST">
+                                <input type="hidden" name="{{$item->name}}">
+                                @method('DELETE')
+                                @csrf
+                            </form>
+                            <button type="submit" class="btn btn-danger" onclick="confirmSubmit({{$item}})">Verwijderen</button>
                         </div>
                     </div>
                 </div>
             </div>
+
         @endforeach
             <div class="row">
                 <div class="col-md-3">
@@ -40,3 +47,16 @@
             </div>
 
 @endsection
+
+<script>
+    function confirmSubmit(id) {
+        event.preventDefault();
+        let itemName = id.name.replace(' ', '');
+        let formId = itemName + id.id;
+        console.log("form id is " + formId);
+        console.log(document.querySelector("#" + formId));
+        if(confirm("Weet u zeker dat u " + document.querySelector("#" + formId + " input").name + " wilt verwijderen?")) {
+            document.querySelector("#" + formId).submit();
+        }
+    }
+</script>
