@@ -63,8 +63,9 @@
 <script>
     function confirmSubmit(item) {
         event.preventDefault();
-        let itemName = item.name.replace(' ', '');
+        let itemName = item.name.replace(/\s/g,'');
         let formId = itemName + item.id;
+        console.log(formId);
         if(confirm("Weet u zeker dat u " + document.querySelector("#" + formId + " input").name + " wilt verwijderen?")) {
             document.querySelector("#" + formId).submit();
         }
