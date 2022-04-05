@@ -13,11 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('webpage', function (Blueprint $table) {
+        Schema::create('footer', function (Blueprint $table) {
             $table->id();
-            $table->integer('template_id');
-            $table->longtext('main_text');
-            $table->string('slug');
+            $table->string('address');
+            $table->string('email');
+            $table->string('phonenumber');
+            $table->string('secretaryemail');
+            $table->integer('kvk');
+            $table->string('facebookurl');
             $table->timestamps();
         });
     }
@@ -29,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('webpages');
+        Schema::dropIfExists('footer');
     }
 };
