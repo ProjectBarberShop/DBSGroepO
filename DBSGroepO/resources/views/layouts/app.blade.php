@@ -64,27 +64,23 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ">
-                    <a href="/" class="nav-item nav-link ">Home</a>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Even voorstellen</a>
-                        <div class="dropdown-menu bg-danger">
-                            <a href="#" class="dropdown-item-custom">Dirigent</a>
-                            <a href="#" class="dropdown-item-custom">Wie zijn wij</a>
-                            <a href="#" class="dropdown-item-custom">Repetoire</a>
-                            <a href="#" class="dropdown-item-custom">Koorleden</a>
-                        </div>
-                    </div>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Optredens</a>
-                        <div class="dropdown-menu bg-danger">
-                            <a href="{{ route('optredens.index') }}" class="dropdown-item-custom">Alle optredens</a>
-                            <a href="#" class="dropdown-item-custom">Album</a>
-                            <a href="#" class="dropdown-item-custom">Muzieklijst</a>
-                        </div>
-                    </div>
-                    <a href="#" class="nav-item nav-link">Introductiecursus</a>
-                    <a href="#" class="nav-item nav-link">Agenda</a>
-                    <a href="#" class="nav-item nav-link">Informatie</a>
+
+                    @foreach($navbardata as $item)
+                        @if($item->dropdownItems->count() < 1)
+                            <a href="{{$item->link}}" class="nav-item nav-link ">{{$item->name}}</a>
+                        @endif
+                        @if($item->dropdownItems->count() >= 1)
+                            <div class="nav-item dropdown">
+                                <a href="{{$item->link}}" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">{{$item->name}}</a>
+                                <div class="dropdown-menu bg-danger">
+                                    @foreach($item->dropdownItems as $ddItem)
+                                        <a href="{{$ddItem->link}}" class="dropdown-item-custom">{{$ddItem->name}}</a>
+                                    @endforeach
+                                </div>
+                            </div>
+                        @endif
+                    @endforeach
+
                 </div>
                 <div class="navbar-nav ms-auto">
                     @if (Route::has('login'))
@@ -173,6 +169,7 @@
                     <hr class="w-100 clearfix d-md-none"/>
 
                     <!-- Grid column -->
+                    @if(!empty($footerdata))
                     <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3 m- m flex-md-wrap">
                         <h6 class="text-uppercase mb-4 font-weight-bold ">
                             Lid worden?
@@ -261,6 +258,7 @@
             </section>
             <!-- Section: Copyright -->
         </div>
+    @endif
         <!-- Grid container -->
     </footer>
     {{--   end footer--}}

@@ -18,6 +18,8 @@ class DatabaseSeeder extends Seeder
             CatagorySeeder::class,
             AgendaSeeder::class,
             Footerseeder::class,
+            NavbarSeeder::class,
+            UserSeeder::class,
         ]);
     }
 }

@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Footer;
-use Database\Seeders\FooterSeeder;
+use App\Models\NavbarItem;
 use Illuminate\Http\Request;
 
-class FooterController extends Controller
+class NavbarController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +14,9 @@ class FooterController extends Controller
      */
     public function index()
     {
-        $footerdata = Footer::all()->first();
+        $navitems = NavbarItem::all();
 
-        return view('cms.footer.index', compact('footerdata'));
+        return view('cms.navbar.index', compact('navitems'));
     }
 
     /**
@@ -38,7 +37,18 @@ class FooterController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+        ]);
+        $navitem = new NavbarItem();
+        $link = $request->input('link');
+        $navitem->name = $request->input('name');
+        if(!(empty($link))){
+            $navitem->link = $request->input('link');
+        }
+        $navitem->save();
+
+        return redirect(route('navbar.index'));
     }
 
     /**
@@ -60,8 +70,8 @@ class FooterController extends Controller
      */
     public function edit($id)
     {
-        $footerdata = Footer::find($id);
-        return view('cms.footer.edit', compact('footerdata'));
+        $navdata = NavbarItem::find($id);
+        return view('cms.navbar.edit', compact('navdata'));
     }
 
     /**
@@ -73,27 +83,17 @@ class FooterController extends Controller
      */
     public function update(Request $request, $id)
     {
-
         $request->validate([
-            'address' => 'required',
-            'email' => 'required',
-            'phonenumber' => 'required',
-            'secretaryemail' => 'required',
-            'kvk' => 'required',
-            'facebookurl' => 'required',
-        ]);
-
-        Footer::where('id', $id)->update([
-            'address' => $request->input('address'),
-            'email' => $request->input('email'),
-            'phonenumber' => $request->input('phonenumber'),
-            'secretaryemail' => $request->input('secretaryemail'),
-            'kvk' => $request->input('kvk'),
-            'facebookurl' => $request->input('facebookurl')
+            'name' => 'required',
 
         ]);
 
-        return redirect('cms/footer');
+        NavbarItem::where('id', $id)->update([
+            'name' => $request->input('name'),
+            'link' => $request->input('link'),
+        ]);
+
+        return redirect(route('navbar.edit', $id));
     }
 
     /**
@@ -104,6 +104,7 @@ class FooterController extends Controller
      */
     public function destroy($id)
     {
-        //
+        NavbarItem::find($id)->delete();
+        return redirect(route('navbar.index'));
     }
 }
