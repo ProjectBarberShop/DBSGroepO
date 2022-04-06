@@ -52,8 +52,9 @@ Route::group([
     Route::resource('contactpersonen', ContactsController::class);
     Route::resource('videos', FotoController::class)->only(['index']);
     Route::resource('profile', UserController::class)->only(['index']);
-    Route::resource('youtube', YoutubeController::class);
+    Route::resource('youtube', YoutubeController::class)->except('update');
     Route::controller(YoutubeController::class)->group(function(){
+        Route::put('youtube/{youtube}/{id}' , 'update')->name('youtube.update');
         Route::get('paginas/{pagina}/youtube/create' , 'createMultiple')->name('youtube.createMultiple');
         Route::post('paginas/{pagina}/youtube' , 'storeMultiple')->name('youtube.storeMultiple');
     });
