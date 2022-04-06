@@ -109,7 +109,8 @@
         <div class="w-100">
         @yield('content')
         </div>
-        <section id="sidebar" class="flex-shrink-1 bg-danger my-5 card p-3 position-sticky sticky-top h-100 mx-auto">
+        <div id="sidebar" class="my-5 p-3 h-100 mx-auto position-sticky sticky-top">
+        <section class="flex-shrink-1 bg-danger card h-100 mx-auto d-none d-sm-block">
             <div class="h-75 card-body">
                 <div id="sidebarInfoLogin">  
                     <div id="sidebarFacebook" class=" bg-yellow mb-3">
@@ -132,7 +133,7 @@
                         </div>
                 </div>
             </div>
-
+            </div>
     </section>
     </main>
     {{--start footer--}}
@@ -265,3 +266,8 @@
 </div>
 </body>
 </html>
+<script>
+if (window.location.href.indexOf("login") > -1 || window.location.href.indexOf("register") > -1 ) {
+      document.getElementById('sidebar').style.display = 'none';
+    }
+    </script>
