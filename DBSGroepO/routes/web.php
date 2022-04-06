@@ -30,7 +30,7 @@ use App\Http\Controllers\PreformanceController;
 |
 */
 
-Route::resource('agenda', AgendaController::class)->only(['index']);
+Route::get('/agenda', [AgendaController::class , 'index'])->name('webpage_agenda.index');
 Route::resource('/optredens', PreformanceController::class);
 Route::resource('/', HomeController::class)->only(['index']);
 Route::resource('/contact', ContactController::class);
