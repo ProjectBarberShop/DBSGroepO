@@ -55,10 +55,9 @@
         <img src="{{asset('assets/images/skyline-met-naam.jpg')}}" alt="Banner" class="img-fluid w-100 h-auto h-11">
         <p class="text-center h3 slogan "><strong>Met overtuiging plezierig zingen</strong></p>
     </div>
-
     <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
         <div class="container-fluid">
-            <a href="/" class="navbar-brand">Barbershop</a>
+            <a href="#" class="navbar-brand">Barbershop</a>
             <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -67,14 +66,14 @@
 
                     @foreach($navbardata as $item)
                         @if($item->dropdownItems->count() < 1)
-                            <a href="{{$item->link}}" class="nav-item nav-link ">{{$item->name}}</a>
+                            <a href="{{$item->link}}" id="{{$item->id}}" class="nav-item nav-link ">{{$item->name}}</a>
                         @endif
                         @if($item->dropdownItems->count() >= 1)
                             <div class="nav-item dropdown">
-                                <a href="{{$item->link}}" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">{{$item->name}}</a>
+                                <a href="{{$item->link}}" id="{{$item->id}}" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">{{$item->name}}</a>
                                 <div class="dropdown-menu bg-danger">
                                     @foreach($item->dropdownItems as $ddItem)
-                                        <a href="{{$ddItem->link}}" class="dropdown-item-custom">{{$ddItem->name}}</a>
+                                        <a href="{{$ddItem->link}}" id="{{$item->id}}"  class="dropdown-item-custom">{{$ddItem->name}}</a>
                                     @endforeach
                                 </div>
                             </div>
@@ -111,11 +110,11 @@
         </div>
         <section id="sidebar" class="flex-shrink-1 bg-danger my-5 card p-3 position-sticky sticky-top h-100 mx-auto">
             <div class="h-75 card-body">
-                <div id="sidebarInfoLogin">  
+                <div id="sidebarInfoLogin">
                     <div id="sidebarFacebook" class=" bg-yellow mb-3">
                         <h4 class="text-center"><b> Facebook </b></h4>
-                        <div class="fb-page w-100 " data-href="https://www.facebook.com/DuketownBarbershopSingers" 
-                        data-tabs="timeline"  data-height="400" data-small-header="true" 
+                        <div class="fb-page w-100 " data-href="https://www.facebook.com/DuketownBarbershopSingers"
+                        data-tabs="timeline"  data-height="400" data-small-header="true"
                         data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
                         <blockquote cite="https://www.facebook.com/DuketownBarbershopSingers" class="fb-xfbml-parse-ignore">
                             <a href="https://www.facebook.com/DuketownBarbershopSingers">Duketown Barbershop Singers</a>
@@ -263,5 +262,26 @@
     </footer>
     {{--   end footer--}}
 </div>
+
+<script>
+   let links =  document.querySelectorAll(".navbar-nav a");
+   links.forEach(link => {
+       link.addEventListener('click', () => {
+           links.forEach(l => l.classList.remove('active'));
+           sessionStorage.clear();
+           sessionStorage.setItem('activeLink', link.id);
+           document.getElementById(link.id).classList.add('active');
+       });
+   });
+
+   window.onload = () => {
+       links.forEach(l => l.classList.remove('active'));
+       if(sessionStorage.getItem('activeLink') != null) {
+           let activeLink = document.getElementById(sessionStorage.getItem('activeLink'));
+           activeLink.classList.add('active');
+       }
+   }
+
+</script>
 </body>
 </html>
