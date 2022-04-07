@@ -18,7 +18,7 @@ class Webpages extends Model
     ];
 
     public function ColomContext() {
-        return $this->belongsToMany(colom_context::class, 'colloms_webpage');
+        return $this->belongsToMany(colom_context::class);
     }
 
     public function cardImage() {

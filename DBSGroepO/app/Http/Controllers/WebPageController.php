@@ -5,8 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Webpages;
 use App\Models\colom_context as context_colomn;
-use App\Models\colloms_webpage;
-use Illuminate\Support\Facades\DB;
+use App\Models\colom_context_webpages;
 use Illuminate\Support\Str;
 
 class WebPageController extends Controller
@@ -57,9 +56,9 @@ class WebPageController extends Controller
         foreach($request->multiInput as $key => $value) {
             context_colomn::create($value);
             $contextID = context_colomn::latest('id')->first();
-            $webpagecontexttable = new colloms_webpage;
-            $webpagecontexttable->webpage_id = $webpageID->id;
-            $webpagecontexttable->collomn_context_id = $contextID->id;
+            $webpagecontexttable = new colom_context_webpages;
+            $webpagecontexttable->webpages_id = $webpageID->id;
+            $webpagecontexttable->colom_context_id = $contextID->id;
             $webpagecontexttable->save();
         }
     }
@@ -75,12 +74,7 @@ class WebPageController extends Controller
      */
     public function show($slug)
     {
-        $pagecontent = DB::table('webpage')
-        ->join('colloms_webpage', 'webpage.id', '=', 'colloms_webpage.webpage_id')
-        ->join('collomn_context', 'collomn_context.id', '=', 'colloms_webpage.collomn_context_id')
-        ->where('webpage.slug' ,$slug)
-        ->select('webpage.main_text' , 'collomn_context.*')
-        ->get();
+        $pagecontent = Webpages::with('ColomContext')->where('slug' , $slug)->get();
         $webpage = Webpages::all()->where('slug', $slug);
         return view('contentpage' , compact('pagecontent' , 'webpage'));
     }
