@@ -2,9 +2,11 @@
 namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-class Form extends Model
+class Contactrequest extends Model
 {
     use HasFactory;
+    protected $table= 'contact-requests';
+
     public $fillable = [
         'firstname',
         'preprosition',

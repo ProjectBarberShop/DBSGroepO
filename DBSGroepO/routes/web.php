@@ -11,7 +11,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\FooterController;
 use App\Http\Controllers\NavbarController;
-use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ContactFormController;
 use App\Http\Controllers\WebPageController;
 use App\Http\Controllers\YoutubeController;
 use App\Http\Controllers\ContactsController;
@@ -33,7 +33,7 @@ use App\Http\Controllers\PreformanceController;
 Route::get('/agenda', [AgendaController::class , 'index'])->name('webpage_agenda.index');
 Route::resource('/optredens', PreformanceController::class);
 Route::resource('/', HomeController::class)->only(['index']);
-Route::resource('/contact', ContactController::class);
+Route::resource('/contact', ContactFormController::class);
 Auth::routes();
 
 Route::get('/{slug}' , [WebPageController::class , 'show']);
