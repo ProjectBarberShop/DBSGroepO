@@ -25,11 +25,7 @@ class AgendaCMSController extends Controller
              ->get();
         }
         else {
-            $agendapunten = DB::table('agenda')
-             ->join('agenda_category', 'agenda.id', '=', 'agenda_category.agendapunt_id')
-             ->join('category', 'category.id', '=', 'agenda_category.category_id')
-             ->select('agenda.*', 'category.title as category_title')
-             ->get();
+            $agendapunten = Agendapunt::with('Categories')->get();
         }
         $categories = Category::get();
         return view('cms.agenda.index', compact('agendapunten', 'categories'));
