@@ -12,6 +12,6 @@ class Category extends Model
     protected $primaryKey = 'id';
 
     public function Agenda() {
-        return $this->belongsToMany(Agendapunt::class, 'agenda_category');
+        return $this->belongsToMany(Agendapunt::class);
     }
 }

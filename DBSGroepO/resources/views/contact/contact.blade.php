@@ -50,8 +50,8 @@
                                 <input type="text" name="preprosition" class="form-control"></input>
                             </div>
                             <div class="form-group">
-                                <label class="form-label" for="surname">Achternaam:&#42;</label>
-                                <input type="text" name="surname" class="form-control" required></input>
+                                <label class="form-label" for="lastname">Achternaam:&#42;</label>
+                                <input type="text" name="lastname" class="form-control" required></input>
                             </div>
                             <div class="form-group">
                                 <label class="form-label" for="email">E-mail:&#42;</label>

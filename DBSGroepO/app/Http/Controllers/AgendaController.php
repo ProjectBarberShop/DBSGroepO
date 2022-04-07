@@ -19,9 +19,9 @@ class AgendaController extends Controller
         if($request->ajax()) {
             if($request->category != '0') {
                 $data = DB::table('agenda')
-                ->join('agenda_category', 'agenda.id', '=', 'agenda_category.agendapunt_id')
-                ->join('category', 'category.id', '=', 'agenda_category.category_id')
-                ->where('agenda_category.category_name', '=', $request->category)
+                ->join('agendapunt_category', 'agenda.id', '=', 'agendapunt_category.agendapunt_id')
+                ->join('category', 'category.id', '=', 'agendapunt_category.category_id')
+                ->where('agendapunt_category.category_id', '=', $request->category)
                 ->select('agenda.*')
                 ->get();
             }
@@ -29,7 +29,6 @@ class AgendaController extends Controller
                 $data = Agendapunt::whereDate('start', '>=', $request->start)
                        ->whereDate('end',   '<=', $request->end)->first()->get();
             }
-
             return response()->json($data);
         }
         $categories = Category::all();
