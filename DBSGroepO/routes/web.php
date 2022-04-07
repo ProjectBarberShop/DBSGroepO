@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\CardController;
-use App\Http\Controllers\FotoController;
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 
@@ -48,7 +48,7 @@ Route::group([
         return Redirect("/login");
     });
     Route::group(['middleware' => ['auth']], function() {
-    Route::resource('fotos', FotoController::class)->only(['index']);
+    Route::resource('fotos', ImageController::class);
     Route::resource('contactpersonen', ContactsController::class);
     Route::resource('videos', FotoController::class)->only(['index']);
     Route::resource('profile', UserController::class)->only(['index']);

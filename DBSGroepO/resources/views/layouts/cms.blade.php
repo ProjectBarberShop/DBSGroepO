@@ -86,21 +86,12 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{url('cms/fotos')}}" class="nav-link">
               <i class="nav-icon fas fa fa-image"></i>
               <p>
                 Foto's
-                <i class="fas fa-angle-left right"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="" class="nav-link">
-                  <i class="far fa-folder nav-icon"></i>
-                  <p>General</p>
-                </a>
-              </li>
-            </ul>
           </li>
           <li class="nav-item">
             <a href="{{url('cms/paginas')}}" class="nav-link">
