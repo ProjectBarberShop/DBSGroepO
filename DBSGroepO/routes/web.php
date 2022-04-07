@@ -17,7 +17,7 @@ use App\Http\Controllers\YoutubeController;
 use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\DropdownController;
 use App\Http\Controllers\AgendaCMSController;
-use App\Http\Controllers\PreformanceController;
+use App\Http\Controllers\PerformanceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,7 +31,7 @@ use App\Http\Controllers\PreformanceController;
 */
 
 Route::get('/agenda', [AgendaController::class , 'index'])->name('webpage_agenda.index');
-Route::resource('/optredens', PreformanceController::class);
+Route::resource('/optredens', PerformanceController::class);
 Route::resource('/', HomeController::class)->only(['index']);
 Route::resource('/contact', ContactFormController::class);
 Auth::routes();
