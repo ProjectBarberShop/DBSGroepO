@@ -7,18 +7,20 @@
             @foreach ($webpage as $w)
                 <p>{!!$w->main_text!!}</p>
             @endforeach
-            @foreach ($pagecontent as $p)
-                @if($pagecontent->count() > 1)
-                <div class="col-md-6">
-                    <h2>{{$p->colom_title_text}}</h2>
-                    <p>{!!$p->colomn_text!!}</p>
-                </div>
-                @else
-                <div class="col-md-12">
-                    <h2>{{$p->colom_title_text}}</h2>
-                    <p>{!!$p->colomn_text!!}<p>
-                </div>
-                @endif
+            @foreach ($pagecontent as $collomcontext)
+                @foreach($collomcontext->ColomContext as $p)
+                    @if($collomcontext->ColomContext->count() > 1)
+                    <div class="col-md-6">
+                        <h2>{{$p->colom_title_text}}</h2>
+                        <p>{!!$p->colomn_text!!}</p>
+                    </div>
+                    @else
+                    <div class="col-md-12">
+                        <h2>{{$p->colom_title_text}}</h2>
+                        <p>{!!$p->colomn_text!!}</p>
+                    </div>
+                    @endif
+                @endforeach
              @endforeach
                 {{-- @if($youtube_key != null)
                     @component('components.youtube')

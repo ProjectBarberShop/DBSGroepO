@@ -17,6 +17,6 @@ class colom_context extends Model
     ];
 
     public function Webpages() {
-        return $this->belongsToMany(Webpages::class, 'colloms_webpage');
+        return $this->belongsToMany(Webpages::class);
     }
 }
