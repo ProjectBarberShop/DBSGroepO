@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('youtube_webpage', function (Blueprint $table) {
+        Schema::create('webpages_youtube', function (Blueprint $table) {
             $table->foreignId('webpages_id')->references('id')->on('webpage')->cascadeOnDelete();
             $table->foreignId('youtube_id')->references('id')->on('youtube')->cascadeOnDelete();
             $table->timestamps();
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('youtube_webpage');
+        Schema::dropIfExists('webpages_youtube');
     }
 };
