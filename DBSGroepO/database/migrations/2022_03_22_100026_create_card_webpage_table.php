@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('card_webpage', function (Blueprint $table) {
-            $table->foreignId('webpage_id')->references('id')->on('webpage');
-            $table->foreignId('card_image_id')->references('id')->on('card_image');
+            $table->foreignId('webpage_id')->references('id')->on('webpage')->cascadeOnDelete();
+            $table->foreignId('card_image_id')->references('id')->on('card_image')->cascadeOnDelete();
             $table->timestamps();
         });
     }
