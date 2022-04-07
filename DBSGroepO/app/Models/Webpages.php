@@ -28,4 +28,8 @@ class Webpages extends Model
     public function Youtube() {
         return $this->belongsToMany(Youtube::class, 'youtube_webpage');
     }
+
+    public function newsletter() {
+        return $this->belongsToMany(Newsletter::class, 'newsletter_webpage');
+    }
 }

@@ -16,6 +16,7 @@ use App\Http\Controllers\YoutubeController;
 use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\PreformanceController;
 use App\Http\Controllers\FooterController;
+use App\Http\Controllers\NewsletterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,7 +37,6 @@ Auth::routes();
 
 Route::get('/{slug}' , [WebPageController::class , 'show']);
 
-
 Route::group([
     'prefix' => 'cms'
 ], function() {
@@ -50,6 +50,10 @@ Route::group([
     Route::resource('contactpersonen', ContactsController::class);
     Route::resource('videos', FotoController::class)->only(['index']);
     Route::resource('profile', UserController::class)->only(['index']);
+    Route::resource('nieuwsbrieven', NewsletterController::class);
+    Route::controller(NewsletterController::class)->group(function(){
+        Route::get('/nieuws', 'getNews')->name('nieuws');
+    });
     Route::resource('youtube', YoutubeController::class);
     Route::controller(YoutubeController::class)->group(function(){
         Route::get('paginas/{pagina}/youtube/create' , 'createMultiple')->name('youtube.createMultiple');

@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
 <section id="contentHome">
 <div id="carouselExampleIndicators" class="  carousel slide carousel-fade w-75 p-3 mx-auto" data-bs-ride="carousel">
   <div class="carousel-indicators">
@@ -40,21 +39,21 @@
 
 <div class="container">
       <div class="response"></div>
-      <div id='calendar'></div>  
+      <div id='calendar'></div>
   </div>
 
   <div class="container">
     <div class="d-inline p-2">
     <h3 class="text-left">Over ons</h3>
-      <p class="text-left"> 
+      <p class="text-left">
         In mei 1990 richtte dirigent Ger van Aart de Duketown Barbershop Singers op. De Duketown Barbershop Singers uit ‘s-Hertogenbosch (Duketown) zijn een groep enthousiaste mannen die zich met veel plezier toeleggen op het beoefenen van barbershopzang en -entertainment. Het repertoire bestaat onder andere uit jazz, musical en ballads in barbershopstijl en close harmony.
-        De leden komen uit de wijde regio van ‘s-Hertogenbosch in leeftijd variërend van eind vijftig tot reeds enige tijd gepensioneerd. We repeteren het hele jaar elke dinsdag. Daarna is er de Afterglow met een glaasje en enige zangnootjes. Het koor streeft naar tien optredens per jaar. De huidige dirigent is Stef Fennis.<br> 
+        De leden komen uit de wijde regio van ‘s-Hertogenbosch in leeftijd variërend van eind vijftig tot reeds enige tijd gepensioneerd. We repeteren het hele jaar elke dinsdag. Daarna is er de Afterglow met een glaasje en enige zangnootjes. Het koor streeft naar tien optredens per jaar. De huidige dirigent is Stef Fennis.<br>
         </p>
         </div>
         <hr>
         <div class="d-block p-2">
         <h3 class="text-left">De community</h3>
-        <p class="text-left"> 
+        <p class="text-left">
         Dankzij een internationaal standaardrepertoire kunnen onze zangers bijna overal ter wereld zingen met ruim zeventigduizend andere barbershopzangers.
         De Duketown Barbershop Singers is aangesloten bij de HH-Dutch Association of Barbershop Singers (HH-DABS), een overkoepelende organisatie van barbershopzangers in Nederland.<br>
         </p>
@@ -62,7 +61,7 @@
         <hr>
         <div class="d-block p-2">
         <h3 class="text-left">Lid worden</h3>
-        <p class="text-left"> 
+        <p class="text-left">
         na een introductieperiode van maximaal 3 maanden wordt het aspirant lid beoordeeld. Hij zingt in een kwartet zijn partij de songs Heart of my Heart en My Wild Irish Rose. Bij succesvol afzingen treedt hij toe tot het koor. De contributie bedraagt, inclusief de door DBS verstrekte kleding, maandelijks euro; 20,--.
         Kom luisteren tijdens de repetitie. We repeteren op dinsdagavond van 19:00 tot 22:15 uur in de Rietlandenschool, Pieter Langendijksingel 1, 5216 JZ s-Hertogenbosch. Ingang Koorleden door de gele deuren: Bilderdijkstraat, tegenover Bilderdijkstraat 23).<br>
       </p>
@@ -74,9 +73,3 @@
   </div>
 </section>
 @endsection
-
-
-
-
-
-

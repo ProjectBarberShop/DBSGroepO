@@ -85,6 +85,7 @@
                     <a href="#" class="nav-item nav-link">Introductiecursus</a>
                     <a href="#" class="nav-item nav-link">Agenda</a>
                     <a href="#" class="nav-item nav-link">Informatie</a>
+                    <a href="{{ route('nieuws') }}" class="nav-item nav-link">Nieuws</a>
                 </div>
                 <div class="navbar-nav ms-auto">
                     @if (Route::has('login'))
@@ -111,15 +112,29 @@
 
     <main class="d-flex bd-highlight">
         <div class="w-100">
+        @if(!empty($newsletterdata))
+        <div class="img-responsive d-flex align-items-center justify-content-center">
+            <img src="{{url($newsletterdata->imagepath)}}">
+            <div class="position-absolute text-center w-100 d-flex justify-content-center">
+                <div class="position-absolute bg-yellow w-100 h-100 opacity-50"></div>
+                <div class="p-4 position-relative w-50">
+                    <h1 class="m-0">{{$newsletterdata->title}}</h1>
+                    <p class="m-0 fs-4">
+                        {{$newsletterdata->message}}
+                    </p>
+                </div>
+            </div>
+        </div>
+        @endif
         @yield('content')
         </div>
         <section id="sidebar" class="flex-shrink-1 bg-danger my-5 card p-3 position-sticky sticky-top h-100 mx-auto">
             <div class="h-75 card-body">
-                <div id="sidebarInfoLogin">  
+                <div id="sidebarInfoLogin">
                     <div id="sidebarFacebook" class=" bg-yellow mb-3">
                         <h4 class="text-center"><b> Facebook </b></h4>
-                        <div class="fb-page w-100 " data-href="https://www.facebook.com/DuketownBarbershopSingers" 
-                        data-tabs="timeline"  data-height="400" data-small-header="true" 
+                        <div class="fb-page w-100 " data-href="https://www.facebook.com/DuketownBarbershopSingers"
+                        data-tabs="timeline"  data-height="400" data-small-header="true"
                         data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
                         <blockquote cite="https://www.facebook.com/DuketownBarbershopSingers" class="fb-xfbml-parse-ignore">
                             <a href="https://www.facebook.com/DuketownBarbershopSingers">Duketown Barbershop Singers</a>
@@ -136,7 +151,6 @@
                         </div>
                 </div>
             </div>
-
     </section>
     </main>
     {{--start footer--}}

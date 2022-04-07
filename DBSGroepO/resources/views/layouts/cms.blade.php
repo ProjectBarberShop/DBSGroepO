@@ -23,7 +23,7 @@
 
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
 
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js" defer></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js" defer></script>
 
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -120,8 +120,14 @@
           </li>
           <li class="nav-item">
             <a href="{{url('cms/contactpersonen')}}" class="nav-link">
-              <i class="nav-icon far ion ion-person" md="md-person"></i>
+              <i class="nav-icon far ion ion-person"></i>
               <p>Contactpersonen</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{url('cms/nieuwsbrieven')}}" class="nav-link">
+              <i class="nav-icon far ion-ios-paper"></i>
+              <p>Nieuwsbrieven</p>
             </a>
           </li>
           <li class="nav-header">Example multi lvl</li>
