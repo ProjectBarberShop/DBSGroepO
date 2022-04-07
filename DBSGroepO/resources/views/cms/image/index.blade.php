@@ -31,7 +31,7 @@
                     <button type="submit" class="btn btn-primary">Nee</button>
                     @endif
                 </form></td>
-            <td class="mx-auto"><img src="data:image/jpg;base64,{{ chunk_split(base64_encode($img->photo)) }}" class="w-25 h-25 "></td>
+                <td><img src="data:image/jpg;base64,{{ chunk_split(base64_encode($img->photo)) }}" class="w-25 h-25 "></td>
             <td> 
                 <form action="{{ route('fotos.destroy', $img->id) }}" method="POST">
                 <input type="hidden" id="{{$img->title}}" name="{{$img->title}}">
