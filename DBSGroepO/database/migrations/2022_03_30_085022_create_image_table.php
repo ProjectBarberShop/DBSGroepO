@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('image', function (Blueprint $table) {
-            $table->id();
+            $table->id()->onDelete('cascade');
             $table->string('title')->require;
             $table->boolean('useInSlider')->require;
             $table->timestamps();
