@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('dropdownItems', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('navbar_item_id')->constrained('navbarItems')->onDelete('cascade');
+            $table->foreignId('navbar_item_id')->constrained('navbarItems')->cascadeOnDelete();
             $table->string('name')->nullable(false);
             $table->string("link")->nullable(false)->default('#');
             $table->timestamps();
