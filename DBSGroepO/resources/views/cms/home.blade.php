@@ -71,6 +71,19 @@
       <a href="{{url('cms/agenda')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
    </div>
 </div>
+   <div class="small-box bg-secondary">
+      <div class="inner">
+         <h3></h3>
+         <p>{{__("Nieuwsbrieven")}}</p>
+      </div>
+      <div class="icon">
+         <i class="ion ion-ios-paper"></i>
+      </div>
+      <a href="{{url('cms/nieuwsbrieven')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+   </div>
+</div>
+<!-- ./col -->
+
 <!-- ./col -->
 <div class="col-lg-3 col-6">
     <!-- small box -->

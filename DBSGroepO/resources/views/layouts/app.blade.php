@@ -63,7 +63,6 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ">
-
                     @foreach($navbardata as $item)
                         @if($item->dropdownItems->count() < 1)
                             <a href="{{$item->link}}" id="{{$item->id}}" class="nav-item nav-link ">{{$item->name}}</a>
@@ -79,7 +78,6 @@
                             </div>
                         @endif
                     @endforeach
-
                 </div>
                 <div class="navbar-nav ms-auto">
                     @if (Route::has('login'))
@@ -106,6 +104,20 @@
 
     <main class="d-flex bd-highlight">
         <div class="w-100">
+        @if(!empty($newsletterdata))
+        <div class="img-responsive d-flex align-items-center justify-content-center">
+            <img src="{{url($newsletterdata->imagepath)}}">
+            <div class="position-absolute text-center w-100 d-flex justify-content-center">
+                <div class="position-absolute bg-yellow w-100 h-100 opacity-50"></div>
+                <div class="p-4 position-relative w-50">
+                    <h1 class="m-0">{{$newsletterdata->title}}</h1>
+                    <p class="m-0 fs-4">
+                        {{$newsletterdata->message}}
+                    </p>
+                </div>
+            </div>
+        </div>
+        @endif
         @yield('content')
         </div>
         <div id="sidebar" class="my-5 p-3 h-100 mx-auto position-sticky sticky-top w-25">
@@ -132,7 +144,7 @@
                         </div>
                 </div>
             </div>
-            </div>
+        </div>
     </section>
     </main>
     {{--start footer--}}
