@@ -18,9 +18,9 @@ class AgendaCMSController extends Controller
     {
         if($request->input("category") != "") {
             $agendapunten = DB::table('agenda')
-             ->join('agenda_category', 'agenda.id', '=', 'agenda_category.agendapunt_id')
-             ->join('category', 'category.id', '=', 'agenda_category.category_id')
-             ->where('agenda_category.category_id', '=', $request->input("category"))
+             ->join('agendapunt_category', 'agenda.id', '=', 'agendapunt_category.agendapunt_id')
+             ->join('category', 'category.id', '=', 'agendapunt_category.category_id')
+             ->where('agendapunt_category.category_id', '=', $request->input("category"))
              ->select('agenda.*', 'category.title as category_title')
              ->get();
         }
