@@ -2,38 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Agendapunt;
-use App\Models\Category;
+use App\Models\NavbarItem;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
-class AgendaController extends Controller
+class NavbarController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        if($request->ajax()) {
-            if($request->category != '0') {
-                $data = DB::table('agenda')
-                ->join('agenda_category', 'agenda.id', '=', 'agenda_category.agendapunt_id')
-                ->join('category', 'category.id', '=', 'agenda_category.category_id')
-                ->where('agenda_category.category_name', '=', $request->category)
-                ->select('agenda.*')
-                ->get();
-            }
-            else {
-                $data = Agendapunt::whereDate('start', '>=', $request->start)
-                       ->whereDate('end',   '<=', $request->end)->first()->get();
-            }
+        $navitems = NavbarItem::all();
 
-            return response()->json($data);
-        }
-        $categories = Category::all();
-        return View('agenda.index', compact('categories'));
+        return view('cms.navbar.index', compact('navitems'));
     }
 
     /**
@@ -54,7 +37,18 @@ class AgendaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+        ]);
+        $navitem = new NavbarItem();
+        $link = $request->input('link');
+        $navitem->name = $request->input('name');
+        if(!(empty($link))){
+            $navitem->link = $request->input('link');
+        }
+        $navitem->save();
+
+        return redirect(route('navbar.index'));
     }
 
     /**
@@ -76,7 +70,8 @@ class AgendaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $navdata = NavbarItem::find($id);
+        return view('cms.navbar.edit', compact('navdata'));
     }
 
     /**
@@ -88,7 +83,17 @@ class AgendaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+
+        ]);
+
+        NavbarItem::where('id', $id)->update([
+            'name' => $request->input('name'),
+            'link' => $request->input('link'),
+        ]);
+
+        return redirect(route('navbar.edit', $id));
     }
 
     /**
@@ -99,6 +104,7 @@ class AgendaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        NavbarItem::find($id)->delete();
+        return redirect(route('navbar.index'));
     }
 }

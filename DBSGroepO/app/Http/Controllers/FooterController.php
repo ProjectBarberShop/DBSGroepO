@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Footer;
+use Database\Seeders\FooterSeeder;
 use Illuminate\Http\Request;
 
 class FooterController extends Controller
@@ -15,6 +16,7 @@ class FooterController extends Controller
     public function index()
     {
         $footerdata = Footer::all()->first();
+
         return view('cms.footer.index', compact('footerdata'));
     }
 
@@ -71,6 +73,7 @@ class FooterController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $request->validate([
             'address' => 'required',
             'email' => 'required',

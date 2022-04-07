@@ -7,7 +7,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class AgendaController extends Controller
+class AgendaCMSController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,24 +16,23 @@ class AgendaController extends Controller
      */
     public function index(Request $request)
     {
-        if($request->ajax()) {
-            if($request->category != '0') {
-                $data = DB::table('agenda')
-                ->join('agenda_category', 'agenda.id', '=', 'agenda_category.agendapunt_id')
-                ->join('category', 'category.id', '=', 'agenda_category.category_id')
-                ->where('agenda_category.category_name', '=', $request->category)
-                ->select('agenda.*')
-                ->get();
-            }
-            else {
-                $data = Agendapunt::whereDate('start', '>=', $request->start)
-                       ->whereDate('end',   '<=', $request->end)->first()->get();
-            }
-
-            return response()->json($data);
+        if($request->input("category") != "") {
+            $agendapunten = DB::table('agenda')
+             ->join('agenda_category', 'agenda.id', '=', 'agenda_category.agendapunt_id')
+             ->join('category', 'category.id', '=', 'agenda_category.category_id')
+             ->where('agenda_category.category_id', '=', $request->input("category"))
+             ->select('agenda.*', 'category.title as category_title')
+             ->get();
         }
-        $categories = Category::all();
-        return View('agenda.index', compact('categories'));
+        else {
+            $agendapunten = DB::table('agenda')
+             ->join('agenda_category', 'agenda.id', '=', 'agenda_category.agendapunt_id')
+             ->join('category', 'category.id', '=', 'agenda_category.category_id')
+             ->select('agenda.*', 'category.title as category_title')
+             ->get();
+        }
+        $categories = Category::get();
+        return view('cms.agenda.index', compact('agendapunten', 'categories'));
     }
 
     /**
