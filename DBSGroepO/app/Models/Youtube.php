@@ -15,7 +15,7 @@ class Youtube extends Model
         'youtube_video_key',
     ];
 
-    public function WebPageYoutubeLink() {
-        return $this->belongsToMany(Webpages::class, 'Youtube_webpage');
+    public function Webpage() {
+        return $this->belongsToMany(Webpages::class);
     }
 }

@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Youtube;
 use App\Models\Webpages;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Symfony\Component\Console\Input\Input;
 
 class YoutubeController extends Controller
 {
@@ -17,14 +15,8 @@ class YoutubeController extends Controller
      */
     public function index()
     {
-        $webpageTitles = DB::table('youtube_webpage')
-        ->join('youtube', 'youtube.id', '=', 'youtube_webpage.youtube_id')
-        ->join('webpage', 'webpage.id', '=', 'youtube_webpage.webpages_id')
-        ->select('webpage.slug' , 'youtube.youtube_video_key' , 'youtube.id')
-        ->get();
-        $webpage = Webpages::all();
-        return view('cms.youtube.index' ,['webpageTitles' => $webpageTitles , 'webpages' => $webpage]);
-
+        $webpageTitles = Youtube::with('Webpage')->get();
+        return view('cms.youtube.index' ,['webpageTitles' => $webpageTitles]);
     }
 
 
@@ -44,7 +36,7 @@ class YoutubeController extends Controller
         $youtube = new Youtube;
         $youtube->youtube_video_key = $request->input('youtube_video_key');
         $youtube->save();
-        $youtube->WebPageYoutubeLink()->attach($request->input('webpageID'));
+        $youtube->Webpage()->attach($request->input('webpageID'));
         return redirect()->route('youtube.index')->with('success','Youtube video succesvol toegevoegd');
     }
 
@@ -71,7 +63,7 @@ class YoutubeController extends Controller
         ]);
         foreach($request->multiInput as $key => $value) {
             $youtube = Youtube::create($value);
-            $youtube->WebPageYoutubeLink()->attach($pageID);
+            $youtube->Webpage()->attach($pageID);
         }
         return redirect()->route('youtube.index')->with('success','Youtube video succesvol toegevoegd');
     }
@@ -96,7 +88,10 @@ class YoutubeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $youtube = Youtube::find($id);
+        $webpage = Webpages::all();
+
+        return view('cms.youtube.edit' , ['youtube' => $youtube , 'webpage' => $webpage]);
     }
 
     /**
@@ -106,9 +101,18 @@ class YoutubeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id , $webpage)
     {
-        //
+        $request->validate([
+            'youtube_video_key' => 'required',
+            'webpageID' => 'required',
+        ]);
+        $youtube = Youtube::find($id);
+        $youtube->youtube_video_key = $request->input('youtube_video_key');
+        $youtube->save();
+        $youtube->Webpage()->wherePivot('webpages_id' , $webpage)->wherePivot('youtube_id' , $id)->updateExistingPivot($webpage, ['webpages_id' => $request->input('webpageID')]);
+
+        return redirect()->route('youtube.index')->with('success','Youtube video succesvol bijgewerkt');
     }
 
     /**

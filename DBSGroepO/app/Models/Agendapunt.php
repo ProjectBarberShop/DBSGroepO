@@ -19,6 +19,6 @@ class Agendapunt extends Model
     ];
 
     public function Categories() {
-        return $this->belongsToMany(Category::class, 'agenda_category');
+        return $this->belongsToMany(Category::class);
     }
 }

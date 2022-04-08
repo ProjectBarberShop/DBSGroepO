@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<section id="contentpreformance">
+<section id="contentperformance">
     @foreach ($optredens as $pref)
     <div class="card">
         <div class="d-block p-2">

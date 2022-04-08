@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('agenda_category', function (Blueprint $table) {
-            $table->foreignId('agendapunt_id')->references('id')->on('agenda');
-            $table->foreignId('category_id')->references('id')->on('category');
+        Schema::create('agendapunt_category', function (Blueprint $table) {
+            $table->foreignId('agendapunt_id')->references('id')->on('agenda')->cascadeOnDelete();
+            $table->foreignId('category_id')->references('id')->on('category')->cascadeOnDelete();
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('agenda_category');
+        Schema::dropIfExists('agendapunt_category');
     }
 };

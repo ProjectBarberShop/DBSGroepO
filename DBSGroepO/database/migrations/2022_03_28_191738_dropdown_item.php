@@ -13,9 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('card_webpage', function (Blueprint $table) {
-            $table->foreignId('webpage_id')->references('id')->on('webpage')->cascadeOnDelete();
-            $table->foreignId('card_image_id')->references('id')->on('card_image')->cascadeOnDelete();
+        Schema::create('dropdownItems', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('navbar_item_id')->constrained('navbarItems')->cascadeOnDelete();
+            $table->string('name')->nullable(false);
+            $table->string("link")->nullable(false)->default('#');
             $table->timestamps();
         });
     }
@@ -27,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('card_webpage');
+        Schema::dropIfExists('dropdownItems');
     }
 };

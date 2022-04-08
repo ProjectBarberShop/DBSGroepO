@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\NavbarItem;
 use Illuminate\Http\Request;
 
-class FotoController extends Controller
+class NavbarController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +14,9 @@ class FotoController extends Controller
      */
     public function index()
     {
-        return view('cms.fotos.index');
+        $navitems = NavbarItem::all();
+
+        return view('cms.navbar.index', compact('navitems'));
     }
 
     /**
@@ -34,7 +37,18 @@ class FotoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+        ]);
+        $navitem = new NavbarItem();
+        $link = $request->input('link');
+        $navitem->name = $request->input('name');
+        if(!(empty($link))){
+            $navitem->link = $request->input('link');
+        }
+        $navitem->save();
+
+        return redirect(route('navbar.index'));
     }
 
     /**
@@ -56,7 +70,8 @@ class FotoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $navdata = NavbarItem::find($id);
+        return view('cms.navbar.edit', compact('navdata'));
     }
 
     /**
@@ -68,7 +83,17 @@ class FotoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+
+        ]);
+
+        NavbarItem::where('id', $id)->update([
+            'name' => $request->input('name'),
+            'link' => $request->input('link'),
+        ]);
+
+        return redirect(route('navbar.edit', $id));
     }
 
     /**
@@ -79,6 +104,7 @@ class FotoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        NavbarItem::find($id)->delete();
+        return redirect(route('navbar.index'));
     }
 }

@@ -13,11 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('youtube_webpage', function (Blueprint $table) {
-            $table->foreignId('webpages_id')->references('id')->on('webpage')->cascadeOnDelete();
-            $table->foreignId('youtube_id')->references('id')->on('youtube')->cascadeOnDelete();
+        Schema::create('image', function (Blueprint $table) {
+            $table->id()->onDelete('cascade');
+            $table->string('title')->require;
+            $table->boolean('useInSlider')->require;
             $table->timestamps();
         });
+        DB::statement("ALTER TABLE image ADD photo MEDIUMBLOB");
     }
 
     /**
@@ -27,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('youtube_webpage');
+        Schema::dropIfExists('image');
     }
 };

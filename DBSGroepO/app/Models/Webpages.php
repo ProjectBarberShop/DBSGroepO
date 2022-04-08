@@ -18,15 +18,15 @@ class Webpages extends Model
     ];
 
     public function ColomContext() {
-        return $this->belongsToMany(colom_context::class, 'colloms_webpage');
+        return $this->belongsToMany(colom_context::class);
     }
 
     public function cardImage() {
         return $this->belongsToMany(card_images::class, 'card_webpage');
     }
 
-    public function Youtube() {
-        return $this->belongsToMany(Youtube::class, 'youtube_webpage');
+    public function youtube() {
+        return $this->belongsToMany(Youtube::class);
     }
 
     public function newsletter() {

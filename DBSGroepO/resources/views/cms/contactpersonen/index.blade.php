@@ -19,12 +19,12 @@
           @endif<br>
           <div class="d-flex flex-row justify-content-end mt-4">
             <a href="{{ route('contactpersonen.edit', $c->id) }}" class="mr-2 btn btn-primary">Bijwerken</a>
-            <form action="{{ route('contactpersonen.destroy', $c->id) }}" method="POST">
+            <form id="{{str_replace(' ', '', $c->firstname).$c->id}}" action="{{ route('contactpersonen.destroy', $c->id) }}" method="POST">
                 <input type="hidden" name="{{$c->firstname}} {{$c->preposition}} {{$c->lastname}}">
                 @method('DELETE')
                 @csrf
             </form>
-            <button type="submit" class="btn btn-primary" onclick="confirmSubmit()">Verwijderen</button>
+            <button type="submit" class="btn btn-primary" onclick="confirmSubmit({{$c}})">Verwijderen</button>
           </div>
       </div>
     </div>
@@ -40,8 +40,8 @@
       </div>
       <div class="card-body">
       <form action="{{ route('contactpersonen.store') }}" method="POST" class="d-flex flex-column">
-        @csrf  
-        <label for="firstname">Voornaam:</label>  
+        @csrf
+        <label for="firstname">Voornaam:</label>
         <input type="text" name="firstname" placeholder="Voornaam">
         <label for="preposition">Tussenvoegsel:</label>
         <input type="text" name="preposition" placeholder="Tussenvoegsel">
@@ -50,7 +50,7 @@
         <label for="email">Email:</label>
         <input type="email" name="email" placeholder="Email">
         <label for="phone">Telefoonnummer:</label>
-        <input type="tel" name="phonenumber" placeholder="Telefoonnummer"> 
+        <input type="tel" name="phonenumber" placeholder="Telefoonnummer">
         <label for="ispublished">Publiceren:</label>
         <input type="checkbox" name="ispublished" placeholder="Publiceren">
         <button type="submit" class="btn btn-primary float-right mt-4">+</button>
@@ -61,10 +61,12 @@
 </div>
 @endsection
 <script>
-  function confirmSubmit() {
-    event.preventDefault();
-    if(confirm("Weet u zeker dat u " + document.querySelector("form input").name + " wilt verwijderen?")) {
-      document.querySelector("form").submit();
-    }
+  function confirmSubmit(item) {
+      event.preventDefault();
+      let itemName = item.firstname.replace(/\s/g,'');
+      let formId = itemName + item.id;
+      if(confirm("Weet u zeker dat u " + document.querySelector("#" + formId + " input").name + " wilt verwijderen?")) {
+          document.querySelector("#" + formId).submit();
+      }
   }
 </script>

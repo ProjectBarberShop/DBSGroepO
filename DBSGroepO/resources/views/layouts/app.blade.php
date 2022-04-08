@@ -55,37 +55,29 @@
         <img src="{{asset('assets/images/skyline-met-naam.jpg')}}" alt="Banner" class="img-fluid w-100 h-auto h-11">
         <p class="text-center h3 slogan "><strong>Met overtuiging plezierig zingen</strong></p>
     </div>
-
     <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
         <div class="container-fluid">
-            <a href="/" class="navbar-brand">Barbershop</a>
+            <a href="#" class="navbar-brand">Barbershop</a>
             <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ">
-                    <a href="/" class="nav-item nav-link ">Home</a>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Even voorstellen</a>
-                        <div class="dropdown-menu bg-danger">
-                            <a href="#" class="dropdown-item-custom">Dirigent</a>
-                            <a href="#" class="dropdown-item-custom">Wie zijn wij</a>
-                            <a href="#" class="dropdown-item-custom">Repetoire</a>
-                            <a href="#" class="dropdown-item-custom">Koorleden</a>
-                        </div>
-                    </div>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Optredens</a>
-                        <div class="dropdown-menu bg-danger">
-                            <a href="{{ route('optredens.index') }}" class="dropdown-item-custom">Alle optredens</a>
-                            <a href="#" class="dropdown-item-custom">Album</a>
-                            <a href="#" class="dropdown-item-custom">Muzieklijst</a>
-                        </div>
-                    </div>
-                    <a href="#" class="nav-item nav-link">Introductiecursus</a>
-                    <a href="#" class="nav-item nav-link">Agenda</a>
-                    <a href="#" class="nav-item nav-link">Informatie</a>
-                    <a href="{{ route('nieuws') }}" class="nav-item nav-link">Nieuws</a>
+                    @foreach($navbardata as $item)
+                        @if($item->dropdownItems->count() < 1)
+                            <a href="{{$item->link}}" id="{{$item->id}}" class="nav-item nav-link ">{{$item->name}}</a>
+                        @endif
+                        @if($item->dropdownItems->count() >= 1)
+                            <div class="nav-item dropdown">
+                                <a href="{{$item->link}}" id="{{$item->id}}" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">{{$item->name}}</a>
+                                <div class="dropdown-menu bg-danger">
+                                    @foreach($item->dropdownItems as $ddItem)
+                                        <a href="{{$ddItem->link}}" id="{{$item->id}}"  class="dropdown-item-custom">{{$ddItem->name}}</a>
+                                    @endforeach
+                                </div>
+                            </div>
+                        @endif
+                    @endforeach
                 </div>
                 <div class="navbar-nav ms-auto">
                     @if (Route::has('login'))
@@ -128,7 +120,8 @@
         @endif
         @yield('content')
         </div>
-        <section id="sidebar" class="flex-shrink-1 bg-danger my-5 card p-3 position-sticky sticky-top h-100 mx-auto">
+        <div id="sidebar" class="my-5 p-3 h-100 mx-auto position-sticky sticky-top w-25">
+        <section class="flex-shrink-1 bg-danger card h-100 mx-auto d-none d-sm-block">
             <div class="h-75 card-body">
                 <div id="sidebarInfoLogin">
                     <div id="sidebarFacebook" class=" bg-yellow mb-3">
@@ -150,6 +143,7 @@
                             @endforeach
                         </div>
                 </div>
+            </div>
             </div>
     </section>
     </main>
@@ -187,6 +181,7 @@
                     <hr class="w-100 clearfix d-md-none"/>
 
                     <!-- Grid column -->
+                    @if(!empty($footerdata))
                     <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3 m- m flex-md-wrap">
                         <h6 class="text-uppercase mb-4 font-weight-bold ">
                             Lid worden?
@@ -275,9 +270,36 @@
             </section>
             <!-- Section: Copyright -->
         </div>
+    @endif
         <!-- Grid container -->
     </footer>
     {{--   end footer--}}
 </div>
+
+<script>
+   let links =  document.querySelectorAll(".navbar-nav a");
+   links.forEach(link => {
+       link.addEventListener('click', () => {
+           links.forEach(l => l.classList.remove('active'));
+           sessionStorage.clear();
+           sessionStorage.setItem('activeLink', link.id);
+           document.getElementById(link.id).classList.add('active');
+       });
+   });
+
+   window.onload = () => {
+       links.forEach(l => l.classList.remove('active'));
+       if(sessionStorage.getItem('activeLink') != null) {
+           let activeLink = document.getElementById(sessionStorage.getItem('activeLink'));
+           activeLink.classList.add('active');
+       }
+   }
+
+</script>
 </body>
 </html>
+<script>
+if (window.location.href.indexOf("login") > -1 || window.location.href.indexOf("register") > -1 ) {
+      document.getElementById('sidebar').style.display = 'none';
+    }
+    </script>

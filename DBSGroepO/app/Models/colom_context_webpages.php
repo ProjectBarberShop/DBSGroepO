@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class colloms_webpage extends Model
+class colom_context_webpages extends Model
 {
     use HasFactory;
-    protected $table = 'colloms_webpage';
+    protected $table = 'colom_context_webpages';
 
     protected $fillable =  [
-        'webpage_id',
-        'collomn_context_id',
+        'webpages_id',
+        'colom_context_id',
     ];
 }
