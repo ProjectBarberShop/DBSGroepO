@@ -3,30 +3,35 @@
 @section('content')
 
 <section id="contentHome">
-<div id="carouselExampleIndicators" class="  carousel slide carousel-fade w-75 p-3 mx-auto" data-bs-ride="carousel">
+<div id="carouselExampleIndicators" class="carousel slide carousel-fade w-75 h-25 p-3 mx-auto bg-danger" data-bs-ride="carousel">
   <div class="carousel-indicators">
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4" aria-label="Slide 5"></button>
+    @for ($i = 0; $i < $slider->count(); $i++)
+      @if($i == 0)
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ $i }}" class="active" aria-current="true" aria-label="Slide {{ $i }}"></button>
+      @else
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ $i }}" aria-label="Slide {{ $i }}"></button>
+      @endif
+    @endfor
   </div>
   <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="{{asset('assets/images/TempFotos/Foto1.jpg')}}"" class="d-block w-100" style="height:300px; width;500px" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="{{asset('assets/images/TempFotos/Foto2.jpg')}}" class="d-block w-100"  style="height:300px; width;500px"alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="{{asset('assets/images/TempFotos/Foto3.jpg')}}" class="d-block w-100"  style="height:300px; width;500px"alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="{{asset('assets/images/TempFotos/Foto4.jpg')}}" class="d-block w-100"  style="height:300px; width;500px"alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="{{asset('assets/images/TempFotos/Foto5.jpg')}}" class="d-block w-100"  style="height:300px; width;500px"alt="...">
-    </div>
+  @for ($i = 0; $i < $slider->count(); $i++)
+      @if($i == 0)
+      <div class="carousel-item active">
+        <img src="data:image/jpg;base64,{{ chunk_split(base64_encode($slider[$i]->photo)) }}" style="float: left;
+    height: 300px;
+    object-fit: contain;"class="d-block w-100" alt="...">
+      </div>
+      @else
+      <div class="carousel-item">
+        <img src="data:image/jpg;base64,{{ chunk_split(base64_encode($slider[$i]->photo)) }}" style="float: left;
+    height: 300px;
+    object-fit: contain;" class="d-block w-100" alt="...">
+      </div>
+      @endif
+    @endfor
+    @foreach ($slider as $img)
+      
+    @endforeach
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -37,11 +42,6 @@
     <span class="visually-hidden">Next</span>
   </button>
 </div>
-
-<div class="container">
-      <div class="response"></div>
-      <div id='calendar'></div>
-  </div>
 
   <div class="container">
     <div class="d-inline p-2">
