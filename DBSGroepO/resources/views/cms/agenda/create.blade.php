@@ -22,6 +22,14 @@
                     <label for="end">Eind</label>
                     <input type="datetime-local" class="form-control" name="end" required>
                 </div>
+                <div class="form-group">
+                    <select name="category" class="form-select" aria-label="Categorie">
+                        <option selected></option>
+                        @foreach($categories as $c)
+                        <option value="{{$c->id}}">{{$c->title}}</option>
+                        @endforeach
+                    </select>
+                </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>

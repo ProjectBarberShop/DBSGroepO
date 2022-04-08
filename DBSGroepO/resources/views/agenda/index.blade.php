@@ -12,7 +12,7 @@
       <div class="offset-md-12">
       <select onchange="refreshCalendar()" name="" id="dropdown">
          <option value="0"></option>
-         @foreach($Category as $c)
+         @foreach($categories as $c)
             <option value="{{$c->id}}">{{$c->title}}</option>
          @endforeach
       </select>

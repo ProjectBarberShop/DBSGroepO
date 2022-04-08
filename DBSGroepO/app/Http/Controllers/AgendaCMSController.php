@@ -19,19 +19,13 @@ class AgendaCMSController extends Controller
     public function index(Request $request)
     {
         if($request->input("category") != "") {
-            // $agendapunten = DB::table('agenda')
-            //  ->join('agendapunt_category', 'agenda.id', '=', 'agendapunt_category.agendapunt_id')
-            //  ->join('category', 'category.id', '=', 'agendapunt_category.category_id')
-            //  ->where('agendapunt_category.category_id', '=', $request->input("category"))
-            //  ->select('agenda.*', 'category.title as category_title')
-            //  ->get();
             $cats[] = $request->input("category");
             $agendapunten = Agendapunt::whereHas('Category', function($q) use($cats) {
                 $q->whereIn('category_id', $cats);
-            })->get();
+            })->paginate(5);
         }
         else {
-            $agendapunten = Agendapunt::with('Category')->get();
+            $agendapunten = Agendapunt::with('Category')->paginate(5);
         }
         $categories = Category::get();
         return view('cms.agenda.index', compact('agendapunten', 'categories'));
@@ -44,7 +38,8 @@ class AgendaCMSController extends Controller
      */
     public function create()
     {
-        return view('cms.agenda.create');
+        $categories = Category::get();
+        return view('cms.agenda.create', compact('categories'));
     }
 
     /**
@@ -55,8 +50,9 @@ class AgendaCMSController extends Controller
      */
     public function store(Request $request)
     {
-        Agendapunt::create($request->all());
-        return view('cms.agenda.index');
+        $agendapunt = Agendapunt::create($request->all());
+        $agendapunt->Category()->attach($request->category);
+        return redirect('/cms/agenda');
     }
 
     /**
@@ -101,6 +97,7 @@ class AgendaCMSController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Agendapunt::destroy($id);
+        return redirect('/cms/agenda');
     }
 }

@@ -29,9 +29,18 @@
     <div class="card-body">
         <h5 class="card-title bold">{{$agendapunt->title}}</h5>
         <p class="card-text">{{$agendapunt->description}}</p>
-        <a href="#" class="btn btn-primary">Bewerken</a>
+        <a href="#" class="btn btn-primary mb-3 col-md-2">Bewerken</a>
+        <form action="{{route('agenda.destroy', $agendapunt->id)}}", method="POST">
+            @csrf
+            @method('delete')
+            <button type="submit" class="btn btn-danger mb-1 col-md-2">Verwijderen</button>
+        </form>
     </div>
     </div>
     @endforeach
+    @if($agendapunten != null)
+        {{ $agendapunten->links() }}
+    @endif
+
 </div>
 @endsection
