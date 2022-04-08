@@ -25,9 +25,10 @@ class AgendaCMSController extends Controller
             //  ->where('agendapunt_category.category_id', '=', $request->input("category"))
             //  ->select('agenda.*', 'category.title as category_title')
             //  ->get();
-            $agendapunten = Agendapunt::with(["Category"=>function($query) use($request) {
-                $query->where('id', '=', $request->input("category"));
-            }])->get();
+            $cats[] = $request->input("category");
+            $agendapunten = Agendapunt::whereHas('Category', function($q) use($cats) {
+                $q->whereIn('category_id', $cats);
+            })->get();
         }
         else {
             $agendapunten = Agendapunt::with('Category')->get();
