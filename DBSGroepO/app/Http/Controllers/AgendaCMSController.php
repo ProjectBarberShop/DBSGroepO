@@ -7,6 +7,8 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+use function PHPUnit\Framework\isNull;
+
 class AgendaCMSController extends Controller
 {
     /**
@@ -17,15 +19,18 @@ class AgendaCMSController extends Controller
     public function index(Request $request)
     {
         if($request->input("category") != "") {
-            $agendapunten = DB::table('agenda')
-             ->join('agendapunt_category', 'agenda.id', '=', 'agendapunt_category.agendapunt_id')
-             ->join('category', 'category.id', '=', 'agendapunt_category.category_id')
-             ->where('agendapunt_category.category_id', '=', $request->input("category"))
-             ->select('agenda.*', 'category.title as category_title')
-             ->get();
+            // $agendapunten = DB::table('agenda')
+            //  ->join('agendapunt_category', 'agenda.id', '=', 'agendapunt_category.agendapunt_id')
+            //  ->join('category', 'category.id', '=', 'agendapunt_category.category_id')
+            //  ->where('agendapunt_category.category_id', '=', $request->input("category"))
+            //  ->select('agenda.*', 'category.title as category_title')
+            //  ->get();
+            $agendapunten = Agendapunt::with(["Category"=>function($query) use($request) {
+                $query->where('id', '=', $request->input("category"));
+            }])->get();
         }
         else {
-            $agendapunten = Agendapunt::with('Categories')->get();
+            $agendapunten = Agendapunt::with('Category')->get();
         }
         $categories = Category::get();
         return view('cms.agenda.index', compact('agendapunten', 'categories'));
@@ -38,7 +43,7 @@ class AgendaCMSController extends Controller
      */
     public function create()
     {
-        //
+        return view('cms.agenda.create');
     }
 
     /**
@@ -49,7 +54,8 @@ class AgendaCMSController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Agendapunt::create($request->all());
+        return view('cms.agenda.index');
     }
 
     /**
