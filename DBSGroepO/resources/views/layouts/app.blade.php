@@ -282,12 +282,10 @@
            activeLink.classList.add('active');
        }
    }
-
+   
+   if (window.location.href.indexOf("login") > -1 || window.location.href.indexOf("register") > -1 ) {
+      document.getElementById('sidebar').style.display = 'none';
+    }
 </script>
 </body>
 </html>
-<script>
-if (window.location.href.indexOf("login") > -1 || window.location.href.indexOf("register") > -1 ) {
-      document.getElementById('sidebar').style.display = 'none';
-    }
-    </script>
