@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Newsletter;
+use App\Models\Image;
 use Illuminate\Http\Request;
 
 class NewsletterController extends Controller
@@ -14,8 +15,11 @@ class NewsletterController extends Controller
      */
     public function index()
     {
-        $newsletterdata = Newsletter::all();
-        return view('cms.nieuwsbrieven.index', compact('newsletterdata'));
+        $imagesdata = Image::all();
+        $newsletterdata = Newsletter::join('image', 'image.id', '=', 'newsletter.image_id')
+        ->join('newsletter as n', 'n.id', '=', 'newsletter.id')->orderBy('n.created_at', 'desc')->get();
+
+        return view('cms.nieuwsbrieven.index', compact(['newsletterdata', 'imagesdata']));
     }
 
     /**
@@ -37,18 +41,13 @@ class NewsletterController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'imagepath' => 'mimes:jpeg,bmp,png',
+            'imageId' => 'required',
             'title' => 'required',
             'message' => 'required',
         ]);
 
         $newsletterdata = new Newsletter;
-        if($request->hasFile('image')){
-            $image = $request->file('image');
-            $file = $image->getClientOriginalExtension();
-            $filepath = $image->move('/images', $file);
-            $newsletterdata->imagepath = $filepath;
-        };
+        $newsletterdata->image_id = $request->input('imageId');
         $newsletterdata->title = $request->input('title');
         $newsletterdata->message = $request->input('message');
         $newsletterdata->is_published = isset($request['ispublished']) ? true : false;
@@ -58,7 +57,10 @@ class NewsletterController extends Controller
     }
 
     public function getNews() {
-        $newsletterdata = Newsletter::where('is_published', true)->orderBy('created_at', 'desc')->get();
+        $newsletterdata = Newsletter::join('image', 'image.id', '=', 'newsletter.image_id')
+        ->join('newsletter as n', 'n.id', '=', 'newsletter.id')
+        ->where('n.is_published', true)->orderBy('n.created_at', 'desc')->get();
+        // $newsletterdata = Newsletter::where('is_published', true)->orderBy('created_at', 'desc')->get();
         return view('nieuws.index', compact('newsletterdata'));
     }
 
@@ -81,8 +83,11 @@ class NewsletterController extends Controller
      */
     public function edit($id)
     {
-        $newsletterdata = Newsletter::find($id);
-        return view('cms.nieuwsbrieven.edit', compact('newsletterdata'));
+        $newsletterdata = Newsletter::join('image', 'image.id', '=', 'newsletter.image_id')
+        ->join('newsletter as n', 'n.id', '=', 'newsletter.id')->find($id);
+        $imagesdata = Image::all();
+
+        return view('cms.nieuwsbrieven.edit', compact(['newsletterdata', 'imagesdata']));
     }
 
     /**
@@ -95,18 +100,13 @@ class NewsletterController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'imagepath' => 'mimes:jpeg,bmp,png',
+            'imageId' => 'required',
             'title' => 'required',
             'message' => 'required',
         ]);
 
         $newsletter = Newsletter::find($id);
-        if($request->hasFile('image')){
-            $image = $request->file('image');
-            $file = $image->getClientOriginalExtension();
-            $filepath = $image->move('/images', $file);
-            $newsletter->imagepath = $filepath;
-        };
+        $newsletter->image_id = $request->input('imageId');
         $newsletter->title = $request->input('title');
         $newsletter->message = $request->input('message');
         $newsletter->is_published = isset($request['ispublished']) ? true : false;

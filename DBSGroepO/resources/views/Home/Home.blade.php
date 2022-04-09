@@ -20,7 +20,6 @@
       @endif
     @endfor
     @foreach ($slider as $img)
-      
     @endforeach
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">

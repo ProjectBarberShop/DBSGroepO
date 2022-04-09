@@ -78,6 +78,9 @@
                             </div>
                         @endif
                     @endforeach
+
+                    <a href="{{ route('nieuws') }}" class="nav-item nav-link">Nieuws</a>
+
                 </div>
                 <div class="navbar-nav ms-auto">
                     @if (Route::has('login'))
@@ -106,7 +109,7 @@
         <div class="w-100">
         @if(!empty($newsletterdata))
         <div class="img-responsive d-flex align-items-center justify-content-center">
-            <img src="{{url($newsletterdata->imagepath)}}">
+            <img src="data:image/jpg;base64,{{ chunk_split(base64_encode($newsletterdata->photo)) }}" style="height: 400px;">
             <div class="position-absolute text-center w-100 d-flex justify-content-center">
                 <div class="position-absolute bg-yellow w-100 h-100 opacity-50"></div>
                 <div class="p-4 position-relative w-50">
@@ -162,7 +165,6 @@
                         </h6>
                         <p>Sponsors en contactpersonen</p>
                         @foreach($contactsdata as $c)
-                        @if(!empty($c))
                         <div class="card bg-secondary mb-2">
                             <div class="card-header">
                                 <h5 class="card-title">{{$c->firstname}} {{$c->preposition}} {{$c->lastname}}</h5>
@@ -172,12 +174,9 @@
                                 {{$c->phonenumber}} <br>
                             </div>
                         </div>
-                        @endif
                         @endforeach
                     </div>
                     <!-- Grid column -->
-
-
                     <hr class="w-100 clearfix d-md-none"/>
 
                     <!-- Grid column -->
