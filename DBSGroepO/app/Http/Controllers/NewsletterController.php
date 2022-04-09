@@ -60,7 +60,7 @@ class NewsletterController extends Controller
         $newsletterdata = Newsletter::join('image', 'image.id', '=', 'newsletter.image_id')
         ->join('newsletter as n', 'n.id', '=', 'newsletter.id')
         ->where('n.is_published', true)->orderBy('n.created_at', 'desc')->get();
-        // $newsletterdata = Newsletter::where('is_published', true)->orderBy('created_at', 'desc')->get();
+
         return view('nieuws.index', compact('newsletterdata'));
     }
 

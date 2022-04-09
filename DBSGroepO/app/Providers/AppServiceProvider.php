@@ -52,8 +52,6 @@ class AppServiceProvider extends ServiceProvider
                 $navbardata = NavbarItem::all();
             }
 
-
-
             $view->with(['contactsdata' => $contactsdata,
                          'footerdata' => $footerdata,
                          'navbardata' => $navbardata,
