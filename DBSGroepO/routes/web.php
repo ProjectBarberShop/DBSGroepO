@@ -35,6 +35,8 @@ Route::get('/agenda', [AgendaController::class , 'index'])->name('webpage_agenda
 Route::resource('/optredens', PerformanceController::class);
 Route::resource('/', HomeController::class)->only(['index']);
 Route::resource('/contact', ContactFormController::class);
+Route::get('/nieuws', [NewsletterController::class, 'getNews']);
+
 Auth::routes();
 
 Route::get('/{slug}' , [WebPageController::class , 'show']);
@@ -54,9 +56,6 @@ Route::group([
     Route::resource('profile', UserController::class)->only(['index']);
     Route::resource('youtube', YoutubeController::class)->except('update');
     Route::resource('nieuwsbrieven', NewsletterController::class);
-    Route::controller(NewsletterController::class)->group(function(){
-        Route::get('/nieuws', 'getNews')->name('nieuws');
-    });
     Route::resource('youtube', YoutubeController::class);
     Route::controller(YoutubeController::class)->group(function(){
         Route::put('youtube/{youtube}/{id}' , 'update')->name('youtube.update');

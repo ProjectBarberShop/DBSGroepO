@@ -52,7 +52,7 @@
           <div class="modal-dialog">
               <div class="modal-content bg-info">
                   <div class="modal-header">
-                      <h4 class="modal-title">Selecteer foto</h4>
+                      <h2 class="modal-title">Selecteer foto</h2>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                           <span aria-hidden="true" onclick="modalClose()" class="fs-2">×</span>
                       </button>
@@ -63,7 +63,7 @@
                         <img src="data:image/jpg;base64,{{ chunk_split(base64_encode($img->photo)) }}" style="height: 100px;" id="{{$img->id}}b">
                       </a>
                       @empty
-                      <p>Er zijn nog geen foto's beschikbaar. Ga naar: <a href="#">image page</a></p>
+                      <p class="fs-5">Er zijn nog geen foto's beschikbaar. Ga naar: <a href="{{ route('fotos.index') }}">fotos page</a></p>
                       @endforelse
                   </div>
               </div>

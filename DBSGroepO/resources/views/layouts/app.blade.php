@@ -79,7 +79,7 @@
                         @endif
                     @endforeach
 
-                    <a href="{{ route('nieuws') }}" class="nav-item nav-link">Nieuws</a>
+                    <a href="{{ url('nieuws') }}" class="nav-item nav-link">Nieuws</a>
 
                 </div>
                 <div class="navbar-nav ms-auto">
