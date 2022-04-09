@@ -31,7 +31,11 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         view()->composer('layouts.app', function($view) {
-            $newsletterdata = Newsletter::orderBy('created_at', 'desc')->where('is_published', true)->first();
+            $newsletterdata = Newsletter::join('image', 'image.id', '=', 'newsletter.image_id')
+            ->join('newsletter as n', 'n.id', '=', 'newsletter.id')
+            ->orderBy('n.created_at', 'desc')
+            ->where('n.is_published', true)->first();
+
             $contactsdata = Contact::where('is_published', true)->get();
             $footerdata = Footer::find(1);
             $navbardata = NavbarItem::all();

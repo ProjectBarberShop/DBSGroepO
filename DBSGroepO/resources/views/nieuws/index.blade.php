@@ -1,29 +1,21 @@
+@extends('layouts.app')
+
+@section('content')
+<div class="d-flex">
 @foreach ($newsletterdata as $n)
-@if(!empty($n))
 @if($loop->first)
-<div class="img-responsive d-flex align-items-center justify-content-center">
-    <img src="{{url($n->imagepath)}}">
-    <div class="position-absolute text-center w-100 d-flex justify-content-center">
-        <div class="position-absolute bg-yellow w-100 h-100 opacity-50"></div>
-        <div class="p-4 position-relative w-50">
-            <h1 class="m-0">{{$n->title}}</h1>
-            <p class="m-0 fs-4">
-                {{$n->message}}
-            </p>
-        </div>
+@continue
+@endif
+<div class="card w-50 m-2">
+    <img src="data:image/jpg;base64,{{ chunk_split(base64_encode($n->photo)) }}" style="height: 250px; object-fit: cover;">
+    <div class="card-header bg-danger text-yellow">
+        <h4 class="card-title">{{$n->title}}</h4>
+        <p class="d-inline mt-2">{{$n->created_at}}</p>
     </div>
-</div>
-@else
-<div class="card bg-secondary mb-2">
-    <img src="{{url($n->imagepath)}}">
-    <div class="card-header">
-        <h5 class="card-title bg-black">{{$n->title}}</h5>
-    </div>
-    <div class="card-body">
+    <div class="card-body bg-secondary text-white">
         {{$n->message}}
     </div>
 </div>
-
-@endif
-@endif
 @endforeach
+</div>
+@endsection

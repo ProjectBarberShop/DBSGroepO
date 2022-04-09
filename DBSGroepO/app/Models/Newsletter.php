@@ -13,7 +13,7 @@ class Newsletter extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'imagepath',
+        'image_id',
         'title',
         'message',
         'is_published'
@@ -21,5 +21,9 @@ class Newsletter extends Model
 
     public function newsletterpost() {
         return $this->belongsToMany(Webpages::class, 'newsletter_webpage');
+    }
+
+    public function image() {
+        return $this->belongsTo(image::class, 'image');
     }
 }

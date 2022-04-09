@@ -12,19 +12,19 @@
   </div>
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="{{asset('assets/images/TempFotos/Foto1.jpg')}}"" class="d-block w-100" style="height:300px; width;500px" alt="...">
+      <img src="{{asset('assets/images/TempFotos/Foto1.jpg')}}"" class="d-block w-100" style="height:300px; width:500px;" alt="...">
     </div>
     <div class="carousel-item">
-      <img src="{{asset('assets/images/TempFotos/Foto2.jpg')}}" class="d-block w-100"  style="height:300px; width;500px"alt="...">
+      <img src="{{asset('assets/images/TempFotos/Foto2.jpg')}}" class="d-block w-100"  style="height:300px; width:500px;"alt="...">
     </div>
     <div class="carousel-item">
-      <img src="{{asset('assets/images/TempFotos/Foto3.jpg')}}" class="d-block w-100"  style="height:300px; width;500px"alt="...">
+      <img src="{{asset('assets/images/TempFotos/Foto3.jpg')}}" class="d-block w-100"  style="height:300px; width:500px;"alt="...">
     </div>
     <div class="carousel-item">
-      <img src="{{asset('assets/images/TempFotos/Foto4.jpg')}}" class="d-block w-100"  style="height:300px; width;500px"alt="...">
+      <img src="{{asset('assets/images/TempFotos/Foto4.jpg')}}" class="d-block w-100"  style="height:300px; width:500px;"alt="...">
     </div>
     <div class="carousel-item">
-      <img src="{{asset('assets/images/TempFotos/Foto5.jpg')}}" class="d-block w-100"  style="height:300px; width;500px"alt="...">
+      <img src="{{asset('assets/images/TempFotos/Foto5.jpg')}}" class="d-block w-100"  style="height:300px; width:500px;"alt="...">
     </div>
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">

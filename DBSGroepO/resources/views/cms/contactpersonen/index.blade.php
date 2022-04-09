@@ -3,33 +3,34 @@
 @section('content')
 <div class="row">
 @foreach($contactsdata as $c)
-@if(!empty($c))
-<div class="col-md-3">
-<div class="card card-primary">
-      <div class="card-header">
-        <h3 class="card-title">{{$c->firstname}} {{$c->preposition}} {{$c->lastname}}</h3>
-      </div>
-      <div class="card-body">
-          {{$c->email}} <br>
-          {{$c->phonenumber}} <br>
-          @if($c->is_published)
-          Gepubliceerd op de website
-          @else
-          Niet gepubliceerd op de website
-          @endif<br>
-          <div class="d-flex flex-row justify-content-end mt-4">
-            <a href="{{ route('contactpersonen.edit', $c->id) }}" class="mr-2 btn btn-primary">Bijwerken</a>
-            <form id="{{str_replace(' ', '', $c->firstname).$c->id}}" action="{{ route('contactpersonen.destroy', $c->id) }}" method="POST">
-                <input type="hidden" name="{{$c->firstname}} {{$c->preposition}} {{$c->lastname}}">
-                @method('DELETE')
-                @csrf
-            </form>
-            <button type="submit" class="btn btn-primary" onclick="confirmSubmit({{$c}})">Verwijderen</button>
-          </div>
-      </div>
+<div class="card card-primary m-2 col-md-3 p-0">
+    <div class="card-header">
+        <h3 class="card-title w-100">{{$c->firstname}} {{$c->preposition}} {{$c->lastname}}</h3>
     </div>
-  </div>
-@endif
+    <div class="p-2">
+        {{$c->email}} <br>
+        {{$c->phonenumber}} <br>
+        @if($c->is_published)
+        Gepubliceerd op de website
+        @else
+        Niet gepubliceerd op de website
+        @endif<br>
+    </div>
+    <div class="card-body d-flex justify-content-end align-items-end p-2">
+        <form id="{{str_replace(' ', '', $c->firstname).$c->id}}" action="{{ route('contactpersonen.destroy', $c->id) }}" method="POST">
+            <input type="hidden" name="{{$c->firstname}} {{$c->preposition}} {{$c->lastname}}">
+            @method('DELETE')
+            @csrf
+        </form>
+        <div>
+            <a href="{{ route('contactpersonen.edit', $c->id) }}" class="mr-2 btn btn-primary">Bijwerken</a>
+        </div>
+        <div>
+            <button type="submit" class="btn btn-primary" onclick="confirmSubmit({{$c}})">Verwijderen</button>
+        </div>
+    </div>
+</div>
+
 @endforeach
 </div>
 <div class="row">
@@ -53,7 +54,7 @@
         <input type="tel" name="phonenumber" placeholder="Telefoonnummer">
         <label for="ispublished">Publiceren:</label>
         <input type="checkbox" name="ispublished" placeholder="Publiceren">
-        <button type="submit" class="btn btn-primary float-right mt-4">+</button>
+        <button type="submit" class="btn btn-primary float-right mt-4">Contactpersoon toevoegen</button>
       </form>
       </div>
     </div>
