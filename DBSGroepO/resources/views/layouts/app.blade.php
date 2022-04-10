@@ -79,8 +79,7 @@
                         @endif
                     @endforeach
 
-                    <a href="{{ route('nieuws') }}" class="nav-item nav-link">Nieuws</a>
-
+                    <a href="{{ url('nieuws') }}" class="nav-item nav-link">Nieuws</a>
                 </div>
                 <div class="navbar-nav ms-auto">
                     @if (Route::has('login'))
@@ -147,7 +146,7 @@
                         </div>
                 </div>
             </div>
-            </div>
+        </div>
     </section>
     </main>
     {{--start footer--}}
@@ -294,11 +293,9 @@
        }
    }
 
+   if (window.location.href.indexOf("login") > -1 || window.location.href.indexOf("register") > -1 ) {
+      document.getElementById('sidebar').style.display = 'none';
+    }
 </script>
 </body>
 </html>
-<script>
-if (window.location.href.indexOf("login") > -1 || window.location.href.indexOf("register") > -1 ) {
-      document.getElementById('sidebar').style.display = 'none';
-    }
-    </script>
