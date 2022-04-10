@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Agendapunt;
 use App\Models\Category;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -50,6 +51,12 @@ class AgendaCMSController extends Controller
      */
     public function store(Request $request)
     {
+        $validated = $request->validate([
+            'end' => [
+                'after_or_equal:start'
+            ]
+        ]);
+
         $agendapunt = Agendapunt::create($request->all());
         $agendapunt->Category()->attach($request->category);
         return redirect('/cms/agenda');
@@ -74,7 +81,16 @@ class AgendaCMSController extends Controller
      */
     public function edit($id)
     {
-        //
+        $agendapunt = Agendapunt::find($id);
+
+        $agendapunt->start = strtotime($agendapunt->start);
+        $agendapunt->start = date('Y-m-d\TH:i', $agendapunt->start);
+        $agendapunt->end = strtotime($agendapunt->end);
+        $agendapunt->end = date('Y-m-d\TH:i', $agendapunt->end);
+        
+        $categories = Category::all();
+
+        return view('cms.agenda.edit', compact('agendapunt', 'categories'));
     }
 
     /**
@@ -86,7 +102,8 @@ class AgendaCMSController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Agendapunt::find($id)->update($request->all());
+        return redirect('/cms/agenda');
     }
 
     /**

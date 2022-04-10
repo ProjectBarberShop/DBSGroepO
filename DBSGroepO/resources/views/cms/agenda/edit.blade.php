@@ -13,27 +13,28 @@
                 </ul>
             </div>
             @endif
-            <form action="{{route('agenda.store')}}" method="POST">
+            <form action="{{route('agenda.update', $agendapunt->id)}}" method="POST">
                 @csrf
+                @method('PUT')
                 <div class="form-group">
                     <label for="title">Titel</label>
-                    <input type="text" class="form-control" name="title" value="{{ old('title') }}" required>
+                    <input type="text" class="form-control" name="title" value="{{ old('title', $agendapunt->title) }}" required>
                 </div>
                 <div class="form-group">
                     <label for="description">Beschrijving</label>
-                    <input type="text" class="form-control" name="description" value="{{ old('description') }}" required>
+                    <input type="text" class="form-control" name="description" value="{{ old('description', $agendapunt->description) }}" required>
                 </div>
                 <div class="form-group">
                     <label for="start">Start</label>
-                    <input type="datetime-local" class="form-control" name="start" value="{{ old('start') }}" required>
+                    <input type="datetime-local" class="form-control" name="start" value="{{ old('start', $agendapunt->start) }}" required>
                 </div>
                 <div class="form-group">
                     <label for="end">Eind</label>
-                    <input type="datetime-local" class="form-control" name="end" value="{{ old('end') }}" required>
+                    <input type="datetime-local" class="form-control" name="end" value="{{ old('end', $agendapunt->end) }}" required>
                 </div>
                 <div class="form-group">
                     <label for="category">Categorie (optioneel)</label>
-                    <select name="category" class="form-select" aria-label="Categorie" value="{{ old('category') }}">
+                    <select name="category" class="form-select" aria-label="Categorie" value="{{ old('category, $agendapunt->category') }}">
                         <option selected></option>
                         @foreach($categories as $c)
                         <option value="{{$c->id}}">{{$c->title}}</option>
@@ -42,11 +43,11 @@
                 </div>
                 <div class="form-group">
                     <label for="location">Locatie (optioneel)</label>
-                    <input type="text" class="form-control" name="location" value="{{ old('location') }}">
+                    <input type="text" class="form-control" name="location" value="{{ old('location', $agendapunt->location) }}">
                 </div>
                 <div class="form-group">
                     <label for="locationURL">Google Maps URL (optioneel)</label>
-                    <input type="text" class="form-control" name="locationURL" value="{{ old('locationURL') }}">
+                    <input type="text" class="form-control" name="locationURL" value="{{ old('locationURL', $agendapunt->locationURL) }}">
                 </div>
                 <div class="row">
                     <a href="/cms/agenda" class="btn btn-outline-secondary col-md-1 ml-2 mr-2">Terug</a>

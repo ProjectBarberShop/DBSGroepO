@@ -8,6 +8,7 @@ use App\Models\NavbarItem;
 use Database\Seeders\FooterSeeder;
 use Database\Seeders\NavbarSeeder;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Pagination\Paginator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -51,5 +52,6 @@ class AppServiceProvider extends ServiceProvider
                          'footerdata' => $footerdata,
                          'navbardata' => $navbardata]);
         });
+        Paginator::useBootstrap();
     }
 }
