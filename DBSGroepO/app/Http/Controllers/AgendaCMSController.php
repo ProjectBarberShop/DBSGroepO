@@ -102,6 +102,12 @@ class AgendaCMSController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validated = $request->validate([
+            'end' => [
+                'after_or_equal:start'
+            ]
+        ]);
+        
         Agendapunt::find($id)->update($request->all());
         return redirect('/cms/agenda');
     }
