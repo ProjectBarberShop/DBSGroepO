@@ -109,7 +109,7 @@
         <div class="d-flex w-100">
             <div style="height: 600px;"></div>
             <div class="d-flex align-items-center justify-content-center flex-column bg-light w-100">
-                <img src="data:image/jpg;base64,{{ chunk_split(base64_encode($newsletterdata->photo)) }}" class="img-fluid position-absolute" style="height:600px;">
+                <img src="data:image/jpg;base64,{{ chunk_split(base64_encode($newsletterdata->image->photo)) }}" class="img-fluid position-absolute" style="height:600px;">
                 <div class="text-center position-relative w-50">
                     <h1>{{$newsletterdata->title}}</h1>
                     <p class="fs-4">
