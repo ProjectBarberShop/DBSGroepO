@@ -16,8 +16,7 @@ class NewsletterController extends Controller
     public function index()
     {
         $imagesdata = Image::all();
-        $newsletterdata = Newsletter::join('image', 'image.id', '=', 'newsletter.image_id')
-        ->join('newsletter as n', 'n.id', '=', 'newsletter.id')->orderBy('n.created_at', 'desc')->get();
+        $newsletterdata = Newsletter::with('image')->orderBy('created_at', 'desc')->get();
 
         return view('cms.nieuwsbrieven.index', compact(['newsletterdata', 'imagesdata']));
     }
@@ -83,9 +82,8 @@ class NewsletterController extends Controller
      */
     public function edit($id)
     {
-        $newsletterdata = Newsletter::join('image', 'image.id', '=', 'newsletter.image_id')
-        ->join('newsletter as n', 'n.id', '=', 'newsletter.id')->find($id);
         $imagesdata = Image::all();
+        $newsletterdata = Newsletter::with('image')->find($id);
 
         return view('cms.nieuwsbrieven.edit', compact(['newsletterdata', 'imagesdata']));
     }

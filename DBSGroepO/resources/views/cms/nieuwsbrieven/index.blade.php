@@ -4,7 +4,7 @@
 <div class="row">
 @foreach($newsletterdata as $n)
 <div class="card card-primary m-2 col-md-3 p-0">
-    <img src="data:image/jpg;base64,{{ chunk_split(base64_encode($n->photo)) }}" style="height: 250px; object-fit: cover;">
+    <img src="data:image/jpg;base64,{{ chunk_split(base64_encode($n->image->photo)) }}" style="height: 250px; object-fit: cover;">
     <div class="card-header">
       <h3 class="card-title w-100 mb-2">{{$n->title}}</h3>
       <p class="d-inline">{{$n->created_at}}</p>
@@ -63,7 +63,7 @@
                         <img src="data:image/jpg;base64,{{ chunk_split(base64_encode($img->photo)) }}" style="height: 100px;" id="{{$img->id}}b">
                       </a>
                       @empty
-                      <p class="fs-5">Er zijn nog geen foto's beschikbaar. Ga naar: <a href="{{ route('fotos.index') }}">fotos page</a></p>
+                      <p class="fs-5">Er zijn nog geen foto's beschikbaar. Ga naar: <a href="{{ route('fotos.index') }}">fotos pagina</a></p>
                       @endforelse
                   </div>
               </div>

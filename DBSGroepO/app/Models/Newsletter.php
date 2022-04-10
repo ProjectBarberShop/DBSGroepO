@@ -24,6 +24,6 @@ class Newsletter extends Model
     }
 
     public function image() {
-        return $this->belongsTo(image::class, 'image');
+        return $this->belongsTo(image::class);
     }
 }

@@ -18,6 +18,6 @@ class image extends Model
     ];
 
     public function newsletter() {
-        return $this->belongsToMany(newsletter::class, 'newsletter');
+        return $this->belongsToMany(newsletter::class);
     }
 }

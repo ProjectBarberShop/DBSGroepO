@@ -2,14 +2,12 @@
 
 namespace App\Providers;
 
-use App\Http\Controllers\NewsletterController;
 use App\Models\Contact;
 use App\Models\Footer;
 use App\Models\Newsletter;
 use App\Models\NavbarItem;
 use Database\Seeders\FooterSeeder;
 use Database\Seeders\NavbarSeeder;
-use App\Models\Newsletter;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider

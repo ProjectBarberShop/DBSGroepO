@@ -15,10 +15,9 @@ return new class extends Migration
     {
         Schema::create('newsletter', function (Blueprint $table) {
             $table->id();
-            // $table->binary('imagepath')->require;
             $table->foreignId('image_id')->references('id')->on('image');
             $table->string('title')->require;
-            $table->string('message')->require;
+            $table->mediumText('message')->require;
             $table->boolean('is_published')->default(0);
             $table->timestamps();
         });

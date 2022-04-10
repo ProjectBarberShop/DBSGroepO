@@ -5,7 +5,7 @@
     <div class="col-md-3">
         <div class="card card-primary p-2">
             <label for="image">Huidige foto:</label>
-            <img src="data:image/jpg;base64,{{ chunk_split(base64_encode($newsletterdata->photo)) }}" class="img-fluid m-2">
+            <img src="data:image/jpg;base64,{{ chunk_split(base64_encode($newsletterdata->image->photo)) }}" class="img-fluid m-2">
             <div class="d-flex flex-column">
                 <label for="image">Nieuwe foto:</label>
                 <div class="imagePosition"></div>

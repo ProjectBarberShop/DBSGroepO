@@ -78,7 +78,6 @@
                             </div>
                         @endif
                     @endforeach
-
                     <a href="{{ url('nieuws') }}" class="nav-item nav-link">Nieuws</a>
                 </div>
                 <div class="navbar-nav ms-auto">
@@ -107,13 +106,13 @@
     <main class="d-flex bd-highlight">
         <div class="w-100">
         @if(!empty($newsletterdata))
-        <div class="img-responsive d-flex align-items-center justify-content-center">
-            <img src="data:image/jpg;base64,{{ chunk_split(base64_encode($newsletterdata->photo)) }}" style="height: 400px;">
-            <div class="position-absolute text-center w-100 d-flex justify-content-center">
-                <div class="position-absolute bg-yellow w-100 h-100 opacity-50"></div>
-                <div class="p-4 position-relative w-50">
-                    <h1 class="m-0">{{$newsletterdata->title}}</h1>
-                    <p class="m-0 fs-4">
+        <div class="d-flex w-100">
+            <div style="height: 600px;"></div>
+            <div class="d-flex align-items-center justify-content-center flex-column bg-light w-100">
+                <img src="data:image/jpg;base64,{{ chunk_split(base64_encode($newsletterdata->photo)) }}" class="img-fluid position-absolute" style="height:600px;">
+                <div class="text-center position-relative w-50">
+                    <h1>{{$newsletterdata->title}}</h1>
+                    <p class="fs-4">
                         {{$newsletterdata->message}}
                     </p>
                 </div>
