@@ -55,10 +55,6 @@ Route::group([
     Route::resource('videos', FotoController::class)->only(['index']);
     Route::resource('profile', UserController::class)->only(['index']);
     Route::resource('nieuwsbrieven', NewsletterController::class);
-    Route::controller(NewsletterController::class)->group(function(){
-        Route::get('/nieuws', 'getNews')->name('nieuws');
-    });
-    Route::resource('nieuwsbrieven', NewsletterController::class);
     Route::resource('youtube', YoutubeController::class)->except('update');
     Route::controller(YoutubeController::class)->group(function(){
         Route::put('youtube/{youtube}/{id}' , 'update')->name('youtube.update');
