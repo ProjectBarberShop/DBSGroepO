@@ -18,6 +18,7 @@ use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\DropdownController;
 use App\Http\Controllers\AgendaCMSController;
 use App\Http\Controllers\PerformanceController;
+use App\Models\Contactrequest;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,7 +39,6 @@ Auth::routes();
 
 Route::get('/{slug}' , [WebPageController::class , 'show']);
 
-
 Route::group([
     'prefix' => 'cms'
 ], function() {
@@ -52,6 +52,10 @@ Route::group([
     Route::resource('contactpersonen', ContactsController::class);
     Route::resource('videos', FotoController::class)->only(['index']);
     Route::resource('profile', UserController::class)->only(['index']);
+    Route::controller(Contactrequest::class)->group(function(){
+        Route::get('contactverzoeken', [ContactFormController::class, 'getContactRequests']);
+        Route::delete('/contactverzoeken/{id}', [ContactFormController::class, 'destroy'])->name('contactverzoeken.destroy');
+    });
     Route::resource('youtube', YoutubeController::class)->except('update');
     Route::controller(YoutubeController::class)->group(function(){
         Route::put('youtube/{youtube}/{id}' , 'update')->name('youtube.update');
