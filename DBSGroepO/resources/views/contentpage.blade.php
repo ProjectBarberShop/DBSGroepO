@@ -4,7 +4,7 @@
 <div class="container">
         <div class="row">
             @foreach ($pagecontent as $pagecontent)
-                <p style="font-size: 40px">{!!$pagecontent->main_text!!}</p>
+                <p>{!!$pagecontent->main_text!!}</p>
                 @foreach($pagecontent->ColomContext as $p)
                     @if($pagecontent->ColomContext->count() > 1)
                     <div class="col-md-6">
