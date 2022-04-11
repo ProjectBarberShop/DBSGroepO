@@ -17,7 +17,7 @@
             @endif<br>
         </div>
         <div class="card-body d-flex justify-content-end align-items-end p-2">
-            <form id="{{str_replace(' ', '', $c->firstname).$c->id}}" action="{{ route('contactpersonen.destroy', $c->id) }}" method="POST">
+            <form action="{{ route('contactpersonen.destroy', $c->id) }}" method="POST" id="{{ $c->id }}">
                 <input type="hidden" name="{{$c->firstname}} {{$c->preposition}} {{$c->lastname}}">
                 @method('DELETE')
                 @csrf
@@ -26,7 +26,7 @@
                 <a href="{{ route('contactpersonen.edit', $c->id) }}" class="mr-2 btn btn-primary">Bijwerken</a>
             </div>
             <div>
-                <button type="submit" class="btn btn-primary" onclick="confirmSubmit({{$c}})">Verwijderen</button>
+                <button type="submit" class="btn btn-primary" onclick="confirmSubmit({{$c->id}})">Verwijderen</button>
             </div>
         </div>
     </div>
@@ -75,12 +75,10 @@
 @endsection
 
 <script>
-  function confirmSubmit(item) {
-      event.preventDefault();
-      let itemName = item.firstname.replace(/\s/g,'');
-      let formId = itemName + item.id;
-      if(confirm("Weet u zeker dat u " + document.querySelector("#" + formId + " input").name + " wilt verwijderen?")) {
-          document.querySelector("#" + formId).submit();
-      }
-  }
+function confirmSubmit(formId) {
+    let newFormId = document.getElementById(formId);
+    if(confirm("Weet u zeker dat u " + newFormId.querySelector("input").name + " wilt verwijderen?")) {
+        newFormId.submit();
+    }
+}
 </script>
