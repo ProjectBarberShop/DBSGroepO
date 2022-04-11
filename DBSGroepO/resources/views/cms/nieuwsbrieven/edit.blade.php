@@ -22,7 +22,7 @@
                         </div>
                         <div class="modal-body row">
                             @forelse($imagesdata as $img)
-                                <a onclick="cloneimage({{$img->id}}, 'imagePosition', true), modalClose()" class="col-3">
+                                <a onclick="cloneimage({{$img->id}}, 'imagePosition', true), modalClose()" class="col-4">
                                     <img src="data:image/jpg;base64,{{ chunk_split(base64_encode($img->photo)) }}" class="img-fluid" id="{{$img->id}}">
                                 </a>
                                 @empty
@@ -39,7 +39,7 @@
                 <label for="title">Titel:</label>
                 <input type="text" name="title" value="{{$newsletterdata->title}}">
                 <label for="message">Bericht:</label>
-                <textarea name="message">{{$newsletterdata->message}}</textarea>
+                <textarea name="message" rows="10">{{$newsletterdata->message}}</textarea>
                 <label for="ispublished">Publiceren:</label>
                 <input type="checkbox" name="ispublished" {{ $newsletterdata->is_published ? 'checked' : '' }}>
                 <button type="submit" class="btn btn-primary float-right mt-4">Nieuwsbrief bijwerken</button>

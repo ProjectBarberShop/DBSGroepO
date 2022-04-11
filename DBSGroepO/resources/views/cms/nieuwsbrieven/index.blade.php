@@ -62,7 +62,7 @@
                             </div>
                             <div class="modal-body row">
                                 @forelse($imagesdata as $img)
-                                    <a onclick="cloneimage({{$img->id}}, 'b', 'imagePosition', null, null, true), modalClose()" class="col-3">
+                                    <a onclick="cloneimage({{$img->id}}, 'b', 'imagePosition', null, null, true), modalClose()" class="col-4">
                                         <img src="data:image/jpg;base64,{{ chunk_split(base64_encode($img->photo)) }}" class="img-fluid" id="{{$img->id}}b">
                                     </a>
                                     @empty
@@ -84,7 +84,7 @@
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                     <label for="message">Bericht:</label>
-                    <textarea name="message" placeholder="Plaats hier uw bericht...">{{ old('message') }}</textarea>
+                    <textarea name="message" placeholder="Plaats hier uw bericht..." rows="10">{{ old('message') }}</textarea>
                     @error('message')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
