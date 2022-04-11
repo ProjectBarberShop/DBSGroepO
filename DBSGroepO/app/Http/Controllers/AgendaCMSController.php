@@ -51,7 +51,7 @@ class AgendaCMSController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
+        $request->validate([
             'end' => [
                 'after_or_equal:start'
             ]
@@ -102,12 +102,12 @@ class AgendaCMSController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validated = $request->validate([
+        $request->validate([
             'end' => [
                 'after_or_equal:start'
             ]
         ]);
-        
+
         Agendapunt::find($id)->update($request->all());
         return redirect('/cms/agenda');
     }
