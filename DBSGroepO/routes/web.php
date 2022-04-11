@@ -66,7 +66,7 @@ Route::group([
         Route::post('paginas/{pagina}/youtube' , 'storeMultiple')->name('youtube.storeMultiple');
     });
     Route::resource('paginas', WebPageController::class);
-    Route::resource('agenda', AgendaCMSController::class)->only(['index']);
+    Route::resource('agenda', AgendaCMSController::class);
     Route::controller(CardController::class)->group(function(){
         Route::get('paginas/{pagina}/card/create' , 'create')->name('card.create');
         Route::post('paginas/{pagina}/card' , 'store')->name('card.store');

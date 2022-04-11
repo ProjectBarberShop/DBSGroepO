@@ -74,9 +74,8 @@ class WebPageController extends Controller
      */
     public function show($slug)
     {
-        $pagecontent = Webpages::with('ColomContext')->where('slug' , $slug)->get();
-        $webpage = Webpages::all()->where('slug', $slug);
-        return view('contentpage' , compact('pagecontent' , 'webpage'));
+        $pagecontent = Webpages::with('ColomContext' , 'youtube')->where('slug' , $slug)->get();
+        return view('contentpage' , compact('pagecontent'));
     }
 
     /**

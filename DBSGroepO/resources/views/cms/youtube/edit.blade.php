@@ -12,7 +12,7 @@
     </div>
 @endif
 <section class="content">
-    @foreach($youtube->webPageYoutubeLink as $oldWebpage)
+    @foreach($youtube->webpage as $oldWebpage)
     <form action="{{ route('youtube.update' ,[$youtube->id ,  $oldWebpage] ) }}" method="POST">
         @csrf
         @method('PUT')

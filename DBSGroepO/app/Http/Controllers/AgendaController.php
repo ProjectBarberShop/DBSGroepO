@@ -18,12 +18,10 @@ class AgendaController extends Controller
     {
         if($request->ajax()) {
             if($request->category != '0') {
-                $data = DB::table('agenda')
-                ->join('agendapunt_category', 'agenda.id', '=', 'agendapunt_category.agendapunt_id')
-                ->join('category', 'category.id', '=', 'agendapunt_category.category_id')
-                ->where('agendapunt_category.category_id', '=', $request->category)
-                ->select('agenda.*')
-                ->get();
+                $cats[] = $request->category;
+                $data = Agendapunt::whereHas('Category', function($q) use($cats) {
+                    $q->whereIn('category_id', $cats);
+                })->get();
             }
             else {
                 $data = Agendapunt::whereDate('start', '>=', $request->start)
