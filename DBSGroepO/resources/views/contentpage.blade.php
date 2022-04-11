@@ -3,9 +3,8 @@
 @section('content')
 <div class="container">
         <div class="row">
-            {{-- <p>{!!$pagecontent->main_text!!}</p> --}}
             @foreach ($webpage as $w)
-                <p>{!!$w->main_text!!}</p>
+                <p style="font-size: 40px">{!!$w->main_text!!}</p>
             @endforeach
             @foreach ($pagecontent as $collomcontext)
                 @foreach($collomcontext->ColomContext as $p)
@@ -22,13 +21,29 @@
                     @endif
                 @endforeach
              @endforeach
-                {{-- @if($youtube_key != null)
-                    @component('components.youtube')
-                            @slot('youtube_key')
-                                {{$youtube_key}}
-                            @endslot
-                    @endcomponent
-                @endif --}}
+             @foreach ($pagecontent as $youtube)
+                    @foreach ($youtube->youtube as $y)
+                        @if($y != null)
+                            @if($y->count() > 1)
+                            <div class="col-md-6 ">
+                                @component('components.youtube')
+                                        @slot('youtube_key')
+                                            {{$y->youtube_video_key}}
+                                        @endslot
+                                @endcomponent
+                            </div>
+                            @else
+                            <div class="col-md-12">
+                                @component('components.youtube')
+                                    @slot('youtube_key')
+                                        {{$y->youtube_video_key}}
+                                    @endslot
+                                @endcomponent
+                            </div>
+                            @endif
+                         @endif
+                    @endforeach
+             @endforeach
             <div class="container px-4 py-5" id="custom-cards">
                 <h2 class="pb-2 border-bottom">Custom cards</h2>
                 <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
@@ -57,5 +72,4 @@
             </div>
         </div>
     </div>
-
 @endsection

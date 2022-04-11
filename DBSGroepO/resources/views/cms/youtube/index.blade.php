@@ -31,7 +31,9 @@
                 <div class="col-md-4 d-flex ">
                     <div class="card card-primary">
                         <div class="card-header">
-                            <p>Pagina titel : {{$v->slug}}</p>
+                            @foreach($v->Webpage as $y)
+                            <p>Pagina titel : {{$y->slug}}</p>
+                            @endforeach
                         </div>
                         <div class="card-body">
                             @component('components.youtube')
@@ -55,3 +57,4 @@
         </div>
 </section>
 @endsection
+
