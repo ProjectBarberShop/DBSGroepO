@@ -29,7 +29,7 @@ class AgendaSeeder extends Seeder
         ];
 
         $agenda = Agendapunt::create($sampledata);
-        $agenda->Categories()->attach($categories);
+        $agenda->Category()->attach($categories);
 
         $categories = Category::find(mt_rand(1, $categorylength));
         $sampledata = [
@@ -40,6 +40,6 @@ class AgendaSeeder extends Seeder
         ];
 
         $agenda = Agendapunt::create($sampledata);
-        $agenda->Categories()->attach($categories);
+        $agenda->Category()->attach($categories);
     }
 }
