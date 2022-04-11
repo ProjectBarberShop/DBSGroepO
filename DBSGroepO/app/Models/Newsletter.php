@@ -19,11 +19,11 @@ class Newsletter extends Model
         'is_published'
     ];
 
-    public function newsletterpost() {
+    public function newsletterposts() {
         return $this->belongsToMany(Webpages::class, 'newsletter_webpage');
     }
 
     public function image() {
-        return $this->belongsTo(image::class);
+        return $this->belongsTo(Image::class);
     }
 }

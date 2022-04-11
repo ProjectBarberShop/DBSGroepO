@@ -17,7 +17,7 @@ class image extends Model
         'useInSlider'
     ];
 
-    public function newsletter() {
-        return $this->belongsToMany(newsletter::class);
+    public function newsletters() {
+        return $this->belongsToMany(Newsletter::class);
     }
 }

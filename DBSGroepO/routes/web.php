@@ -59,7 +59,7 @@ Route::group([
         Route::get('/nieuws', 'getNews')->name('nieuws');
     });
     Route::resource('nieuwsbrieven', NewsletterController::class);
-    Route::resource('youtube', YoutubeController::class);
+    Route::resource('youtube', YoutubeController::class)->except('update');
     Route::controller(YoutubeController::class)->group(function(){
         Route::put('youtube/{youtube}/{id}' , 'update')->name('youtube.update');
         Route::get('paginas/{pagina}/youtube/create' , 'createMultiple')->name('youtube.createMultiple');
