@@ -6,9 +6,9 @@
             @foreach ($webpage as $w)
                 <p style="font-size: 40px">{!!$w->main_text!!}</p>
             @endforeach
-            @foreach ($pagecontent as $collomcontext)
-                @foreach($collomcontext->ColomContext as $p)
-                    @if($collomcontext->ColomContext->count() > 1)
+            @foreach ($pagecontent as $pagecontent)
+                @foreach($pagecontent->ColomContext as $p)
+                    @if($pagecontent->ColomContext->count() > 1)
                     <div class="col-md-6">
                         <h2>{{$p->colom_title_text}}</h2>
                         <p>{!!$p->colomn_text!!}</p>
@@ -20,30 +20,28 @@
                     </div>
                     @endif
                 @endforeach
-             @endforeach
-             @foreach ($pagecontent as $youtube)
-                    @foreach ($youtube->youtube as $y)
-                        @if($y != null)
-                            @if($y->count() > 1)
-                            <div class="col-md-6 ">
-                                @component('components.youtube')
-                                        @slot('youtube_key')
-                                            {{$y->youtube_video_key}}
-                                        @endslot
-                                @endcomponent
-                            </div>
-                            @else
-                            <div class="col-md-12">
-                                @component('components.youtube')
+                @foreach ($pagecontent->youtube as $y)
+                    @if($y != null)
+                        @if($y->count() > 1)
+                        <div class="col-md-6 ">
+                            @component('components.youtube')
                                     @slot('youtube_key')
                                         {{$y->youtube_video_key}}
                                     @endslot
-                                @endcomponent
-                            </div>
-                            @endif
-                         @endif
-                    @endforeach
-             @endforeach
+                            @endcomponent
+                        </div>
+                        @else
+                        <div class="col-md-12">
+                            @component('components.youtube')
+                                @slot('youtube_key')
+                                    {{$y->youtube_video_key}}
+                                @endslot
+                            @endcomponent
+                        </div>
+                        @endif
+                    @endif
+                @endforeach
+            @endforeach
             <div class="container px-4 py-5" id="custom-cards">
                 <h2 class="pb-2 border-bottom">Custom cards</h2>
                 <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
