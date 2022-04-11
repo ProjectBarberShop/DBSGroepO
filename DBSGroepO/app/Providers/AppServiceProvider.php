@@ -4,11 +4,12 @@ namespace App\Providers;
 
 use App\Models\Contact;
 use App\Models\Footer;
-use App\Models\Newsletter;
 use App\Models\NavbarItem;
 use Database\Seeders\FooterSeeder;
 use Database\Seeders\NavbarSeeder;
+use App\Models\Newsletter;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Pagination\Paginator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -33,7 +34,6 @@ class AppServiceProvider extends ServiceProvider
             $newsletterdata = Newsletter::with('image')
             ->orderBy('created_at', 'desc')
             ->where('is_published', true)->first();
-
             $contactsdata = Contact::where('is_published', true)->get();
             $footerdata = Footer::find(1);
             $navbardata = NavbarItem::all();
@@ -52,9 +52,10 @@ class AppServiceProvider extends ServiceProvider
 
             $view->with(['contactsdata' => $contactsdata,
                          'footerdata' => $footerdata,
-                         'newsletterdata' => $newsletterdata,
                          'navbardata' => $navbardata,
+                         'newsletterdata' => $newsletterdata,
                         ]);
         });
+        Paginator::useBootstrap();
     }
 }
