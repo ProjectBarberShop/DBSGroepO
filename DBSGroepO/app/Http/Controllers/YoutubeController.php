@@ -88,7 +88,7 @@ class YoutubeController extends Controller
      */
     public function edit($id)
     {
-        $youtube = Youtube::find($id);
+        $youtube = Youtube::with('Webpage')->find($id);
         $webpage = Webpages::all();
 
         return view('cms.youtube.edit' , ['youtube' => $youtube , 'webpage' => $webpage]);
