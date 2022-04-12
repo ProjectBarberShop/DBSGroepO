@@ -35,7 +35,7 @@ Route::get('/agenda', [AgendaController::class , 'index'])->name('webpage_agenda
 Route::resource('/optredens', PerformanceController::class);
 Route::resource('/', HomeController::class)->only(['index']);
 Route::resource('/contact', ContactFormController::class);
-Route::get('/nieuws', [NewsletterController::class, 'getNews']);
+Route::get('/nieuws', [NewsletterController::class, 'getNews'])->name('nieuws');
 
 Auth::routes();
 
