@@ -63,7 +63,6 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ">
-
                     @foreach($navbardata as $item)
                         @if($item->dropdownItems->count() < 1)
                             <a href="{{$item->link}}" id="{{$item->id}}" class="nav-item nav-link ">{{$item->name}}</a>
@@ -79,7 +78,7 @@
                             </div>
                         @endif
                     @endforeach
-
+                    <a href="{{ url('nieuws') }}" class="nav-item nav-link">Nieuws</a>
                 </div>
                 <div class="navbar-nav ms-auto">
                     @if (Route::has('login'))
@@ -106,6 +105,20 @@
 
     <main class="d-flex bd-highlight">
         <div class="w-100">
+        @if(!empty($newsletterdata))
+        <div class="d-flex w-100">
+            <div style="height: 600px;"></div>
+            <div class="d-flex align-items-center justify-content-center flex-column bg-light w-100">
+                <img src="data:image/jpg;base64,{{ chunk_split(base64_encode($newsletterdata->image->photo)) }}" class="img-fluid position-absolute" style="height:600px;">
+                <div class="text-center position-relative w-50">
+                    <h1>{{$newsletterdata->title}}</h1>
+                    <p class="fs-4">
+                        {{$newsletterdata->message}}
+                    </p>
+                </div>
+            </div>
+        </div>
+        @endif
         @yield('content')
         </div>
         <div id="sidebar" class="my-5 p-3 h-100 mx-auto position-sticky sticky-top w-25">
@@ -132,7 +145,7 @@
                         </div>
                 </div>
             </div>
-            </div>
+        </div>
     </section>
     </main>
     {{--start footer--}}
@@ -150,7 +163,6 @@
                         </h6>
                         <p>Sponsors en contactpersonen</p>
                         @foreach($contactsdata as $c)
-                        @if(!empty($c))
                         <div class="card bg-secondary mb-2">
                             <div class="card-header">
                                 <h5 class="card-title">{{$c->firstname}} {{$c->preposition}} {{$c->lastname}}</h5>
@@ -160,12 +172,9 @@
                                 {{$c->phonenumber}} <br>
                             </div>
                         </div>
-                        @endif
                         @endforeach
                     </div>
                     <!-- Grid column -->
-
-
                     <hr class="w-100 clearfix d-md-none"/>
 
                     <!-- Grid column -->
@@ -282,7 +291,7 @@
            activeLink.classList.add('active');
        }
    }
-   
+
    if (window.location.href.indexOf("login") > -1 || window.location.href.indexOf("register") > -1 ) {
       document.getElementById('sidebar').style.display = 'none';
     }
