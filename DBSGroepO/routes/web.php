@@ -19,7 +19,6 @@ use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\DropdownController;
 use App\Http\Controllers\AgendaCMSController;
 use App\Http\Controllers\PerformanceController;
-use App\Models\Contactrequest;
 
 /*
 |--------------------------------------------------------------------------

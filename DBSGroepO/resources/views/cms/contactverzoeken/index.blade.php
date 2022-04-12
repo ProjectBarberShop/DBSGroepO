@@ -26,8 +26,8 @@
                     <tr>
                         <td>{{$c->title}}</td>
                         <td>{{$c->firstname}} {{$c->preposition}} {{$c->lastname}}</td>
-                        <td>{{$c->email}}</td>
-                        <td>{{$c->phonenumber}}</td>
+                        <td><a href="mailto:{{$c->email}}">{{$c->email}}</a></td>
+                        <td><a href="tel:{{$c->phonenumber}}">{{$c->phonenumber}}</a></td>
                         <td>{{$c->message}}</td>
                         <td>
                             <form action="{{ route('contactverzoeken.destroy', $c->id) }}" method="POST" id="{{$c->id}}">
