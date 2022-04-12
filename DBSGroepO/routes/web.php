@@ -55,7 +55,7 @@ Route::group([
     Route::resource('contactpersonen', ContactsController::class);
     Route::resource('profile', UserController::class)->only(['index']);
     Route::controller(ContactFormController::class)->group(function(){
-        Route::get('contactverzoeken', 'getContactRequests');
+        Route::get('contactverzoeken', 'getContactRequests')->name('contactverzoeken');
         Route::delete('/contactverzoeken/{id}', 'destroy')->name('contactverzoeken.destroy');
     });
     Route::resource('nieuwsbrieven', NewsletterController::class);
