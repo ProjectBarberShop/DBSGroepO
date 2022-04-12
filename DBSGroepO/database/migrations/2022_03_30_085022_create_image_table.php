@@ -19,7 +19,7 @@ return new class extends Migration
             $table->boolean('useInSlider')->require;
             $table->timestamps();
         });
-        DB::statement("ALTER TABLE image ADD photo MEDIUMBLOB");
+        DB::statement("ALTER TABLE image ADD photo LONGBLOB ");
     }
 
     /**

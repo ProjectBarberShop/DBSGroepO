@@ -22,7 +22,7 @@ class imageController extends Controller
     {
         $request->validate([
             'title' => 'required',
-            'photo' => 'required',
+            'photo' => 'required|max:294|image',
         ]);
         
         $imagedata = new Image;

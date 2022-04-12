@@ -2,6 +2,7 @@
 
 @section('content')
 <section id="contentHome">
+  @if($slider->count() != 0)
 <div id="carouselExampleIndicators" class="carousel slide w-75 h-25 p-3 mx-auto" wrap="true" data-bs-ride="carousel">
   <div class="carousel-inner">
   @for ($i = 0; $i < $slider->count(); $i++)
@@ -19,8 +20,6 @@
       </div>
       @endif
     @endfor
-    @foreach ($slider as $img)
-    @endforeach
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
     <span class="carousel-control-prev-icon bg-danger rounded-circle" aria-hidden="true"></span>
@@ -31,6 +30,7 @@
     <span class="visually-hidden">Next</span>
   </button>
 </div>
+@endif
 
 <div class="container">
       <div class="response"></div>
@@ -64,7 +64,7 @@
   </div>
   <div class="container">
     <h4>Langs komen?</h4>
-    <p>Op <a href="https://www.google.com/maps/dir//Bilderdijkstraat+23,+5216+TA+%27s-Hertogenbosch/@51.6840306,5.3272158,17z/data=!4m9!4m8!1m0!1m5!1m1!1s0x47c6ef0401e43ce9:0xe1672863df7d1e8b!2m2!1d5.3294045!2d51.6840306!3e0">deze locatie</a> kunt u ons vinden.</p>
+    <p>Op <a href="https://www.google.com/maps/dir//Bilderdijkstraat+23,+5216+TA+%27s-Hertogenbosch/@51.6840306,5.3272158,17z/data=!4m9!4m8!1m0!1m5!1m1!1s0x47c6ef0401e43ce9:0xe1672863df7d1e8b!2m2!1d5.3294045!2d51.6840306!3e0" target="_blank">deze locatie</a> kunt u ons vinden.</p>
   </div>
 
 </section>

@@ -126,7 +126,7 @@
                 <div id="sidebarInfoLogin">
                     <div id="sidebarFacebook" class=" bg-yellow mb-3">
                         <h4 class="text-center"><b> Facebook </b></h4>
-                        <div class="fb-page w-100 " data-href="https://www.facebook.com/DuketownBarbershopSingers"
+                        <div class="fb-page w-100 mx-auto" data-href="https://www.facebook.com/DuketownBarbershopSingers"
                         data-tabs="timeline"  data-height="400" data-small-header="true"
                         data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
                         <blockquote cite="https://www.facebook.com/DuketownBarbershopSingers" class="fb-xfbml-parse-ignore">
