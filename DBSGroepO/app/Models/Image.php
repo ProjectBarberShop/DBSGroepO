@@ -16,4 +16,8 @@ class image extends Model
         'photo',
         'useInSlider'
     ];
+
+    public function newsletters() {
+        return $this->belongsToMany(Newsletter::class);
+    }
 }
