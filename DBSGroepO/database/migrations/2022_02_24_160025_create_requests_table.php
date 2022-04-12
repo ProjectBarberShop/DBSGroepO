@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('title')->require;
             $table->string('firstname')->require;
-            $table->string('preprosition')->nullable();
+            $table->string('preposition')->nullable();
             $table->string('lastname')->require;
             $table->string('email');
             $table->string('phonenumber');
