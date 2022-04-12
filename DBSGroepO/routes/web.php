@@ -35,7 +35,7 @@ Route::get('/agenda', [AgendaController::class , 'index'])->name('webpage_agenda
 Route::resource('/optredens', PerformanceController::class);
 Route::resource('/', HomeController::class)->only(['index']);
 Route::resource('/contact', ContactFormController::class);
-Route::get('/nieuws', [NewsletterController::class, 'getNews'])->name('nieuws');
+Route::get('/nieuws', [NewsletterController::class, 'getNews'])->name('nieuws.index');
 
 Auth::routes();
 
@@ -54,7 +54,7 @@ Route::group([
     Route::resource('contactpersonen', ContactsController::class);
     Route::resource('profile', UserController::class)->only(['index']);
     Route::controller(ContactFormController::class)->group(function(){
-        Route::get('contactverzoeken', 'getContactRequests')->name('contactverzoeken');
+        Route::get('contactverzoeken', 'getContactRequests')->name('contactverzoeken.index');
         Route::delete('/contactverzoeken/{id}', 'destroy')->name('contactverzoeken.destroy');
     });
     Route::resource('nieuwsbrieven', NewsletterController::class);
