@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
 <section id="contentHome">
 <div id="carouselExampleIndicators" class="carousel slide w-75 h-25 p-3 mx-auto" wrap="true" data-bs-ride="carousel">
   <div class="carousel-inner">
@@ -21,7 +20,6 @@
       @endif
     @endfor
     @foreach ($slider as $img)
-      
     @endforeach
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -33,6 +31,11 @@
     <span class="visually-hidden">Next</span>
   </button>
 </div>
+
+<div class="container">
+      <div class="response"></div>
+      <div id='calendar'></div>
+  </div>
 
   <div class="container">
     <div class="d-inline p-2">
@@ -66,9 +69,3 @@
 
 </section>
 @endsection
-
-
-
-
-
-
