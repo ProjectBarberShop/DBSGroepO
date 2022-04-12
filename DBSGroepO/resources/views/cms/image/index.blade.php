@@ -13,7 +13,7 @@
         <thead class="thead-dark">
         <tr>
             <th scope="col">Titel</th>
-            <th scope="col">Gebruiken in home?</th>
+            <th scope="col">Wordt in slider gebruikt?</th>
             <th scope="col">Foto preview</th>
             <th scope="col"></th>
         </tr>
