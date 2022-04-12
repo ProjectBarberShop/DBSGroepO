@@ -78,7 +78,6 @@
                             </div>
                         @endif
                     @endforeach
-                    <a href="{{ url('nieuws') }}" class="nav-item nav-link">Nieuws</a>
                 </div>
                 <div class="navbar-nav ms-auto">
                     @if (Route::has('login'))
