@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
 <section id="contentHome">
   @if($slider->count() != 0)
 <div id="carouselExampleIndicators" class="carousel slide w-75 h-25 p-3 mx-auto" wrap="true" data-bs-ride="carousel">
@@ -21,7 +20,6 @@
       </div>
       @endif
     @endfor
-    
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
     <span class="carousel-control-prev-icon bg-danger rounded-circle" aria-hidden="true"></span>
@@ -33,6 +31,11 @@
   </button>
 </div>
 @endif
+
+<div class="container">
+      <div class="response"></div>
+      <div id='calendar'></div>
+  </div>
 
   <div class="container">
     <div class="d-inline p-2">
@@ -66,9 +69,3 @@
 
 </section>
 @endsection
-
-
-
-
-
-

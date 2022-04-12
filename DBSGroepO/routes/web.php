@@ -15,6 +15,7 @@ use App\Http\Controllers\ContactFormController;
 use App\Http\Controllers\WebPageController;
 use App\Http\Controllers\YoutubeController;
 use App\Http\Controllers\ContactsController;
+use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\DropdownController;
 use App\Http\Controllers\AgendaCMSController;
 use App\Http\Controllers\PerformanceController;
@@ -34,10 +35,11 @@ Route::get('/agenda', [AgendaController::class , 'index'])->name('webpage_agenda
 Route::resource('/optredens', PerformanceController::class);
 Route::resource('/', HomeController::class)->only(['index']);
 Route::resource('/contact', ContactFormController::class);
+Route::get('/nieuws', [NewsletterController::class, 'getNews']);
+
 Auth::routes();
 
 Route::get('/{slug}' , [WebPageController::class , 'show']);
-
 
 Route::group([
     'prefix' => 'cms'
@@ -52,6 +54,7 @@ Route::group([
     Route::resource('contactpersonen', ContactsController::class);
     Route::resource('videos', FotoController::class)->only(['index']);
     Route::resource('profile', UserController::class)->only(['index']);
+    Route::resource('nieuwsbrieven', NewsletterController::class);
     Route::resource('youtube', YoutubeController::class)->except('update');
     Route::controller(YoutubeController::class)->group(function(){
         Route::put('youtube/{youtube}/{id}' , 'update')->name('youtube.update');
