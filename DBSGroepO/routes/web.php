@@ -52,7 +52,7 @@ Route::group([
     Route::resource('contactpersonen', ContactsController::class);
     Route::resource('videos', FotoController::class)->only(['index']);
     Route::resource('profile', UserController::class)->only(['index']);
-    Route::controller(Contactrequest::class)->group(function(){
+    Route::controller(ContactFormController::class)->group(function(){
         Route::get('contactverzoeken', [ContactFormController::class, 'getContactRequests']);
         Route::delete('/contactverzoeken/{id}', [ContactFormController::class, 'destroy'])->name('contactverzoeken.destroy');
     });
