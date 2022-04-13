@@ -93,7 +93,7 @@ class NavbarController extends Controller
             'link' => $request->input('link'),
         ]);
 
-        return redirect(route('navbar.edit', $id));
+        return redirect(route('navbar.index'));
     }
 
     /**

@@ -9,6 +9,6 @@
         <label for="link">Link:</label>
         <input type="text" name="link" value="{{$dropdowndata->link}}">
         <input type="hidden" name="navbarItemId" value="{{$dropdowndata->navbar_item_id}}">
-        <button type="submit" class="btn btn-primary float-right mt-4">+</button>
+        <button type="submit" class="btn btn-primary float-right mt-4">Bijwerken</button>
     </form>
 @endsection
