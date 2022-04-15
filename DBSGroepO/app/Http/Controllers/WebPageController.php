@@ -87,7 +87,8 @@ class WebPageController extends Controller
     public function edit($id)
     {
         $page = Webpages::find($id);
-        return view('cms.webpages.edit' , compact('page'));
+        $pagecontent = Webpages::with('ColomContext' , 'youtube')->where('id' , $id)->get();
+        return view('cms.webpages.edit' , compact('pagecontent'));
     }
 
     /**
@@ -103,13 +104,23 @@ class WebPageController extends Controller
             'body' => 'required',
             'title' => 'required'
         ]);
-        $webpage = Webpages::find($id);
-        $webpage->body = $request->input('body');
+         $webpage = Webpages::find($id);
+        $webpage->main_text = $request->input('body');
         $webpage->slug = Str::slug($request->input('title'));
         $webpage->save();
-        return redirect()->route('paginas.index')->with('success','Pagina succesvol bijgewerkt');
+        return redirect()->route('editColomText.edit' , $webpage);
+    }
+    
+    public function editColomText($webpage)
+    {
+        $pagecontent = Webpages::with('ColomContext')->where('id' , $webpage)->get();
+        return view('cms.webpages.edit_colomn_Text' , compact('pagecontent'));
     }
 
+    public function updateColomText(Request $request, $id)
+    {
+
+    }
     /**
      * Remove the specified resource from storage.
      *

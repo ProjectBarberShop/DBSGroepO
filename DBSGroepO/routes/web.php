@@ -64,7 +64,15 @@ Route::group([
         Route::get('paginas/{pagina}/youtube/create' , 'createMultiple')->name('youtube.createMultiple');
         Route::post('paginas/{pagina}/youtube' , 'storeMultiple')->name('youtube.storeMultiple');
     });
+
     Route::resource('paginas', WebPageController::class);
+    Route::controller(WebPageController::class)->group(function(){
+        Route::put('paginas/{pagina}/card' , 'updateColomText')->name('editColomText.update');
+        Route::get('paginas/{pagina}/card/update' , 'editColomText')->name('editColomText.edit');
+
+    });
+
+
     Route::resource('agenda', AgendaCMSController::class);
     Route::controller(CardController::class)->group(function(){
         Route::get('paginas/{pagina}/card/create' , 'create')->name('card.create');
