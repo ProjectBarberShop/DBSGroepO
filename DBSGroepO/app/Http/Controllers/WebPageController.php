@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\NavbarItem;
 use Illuminate\Http\Request;
 use App\Models\Webpages;
 use App\Models\colom_context as context_colomn;
@@ -62,6 +63,11 @@ class WebPageController extends Controller
             $webpagecontexttable->save();
         }
     }
+
+       $navItem = new NavbarItem();
+       $navItem->name = $request->input('slug');
+       $navItem->link = $webpage->slug;
+       $navItem->save();
 
        return redirect()->route('paginas.index')->with('success','Pagina succesvol toegevoegd');
     }
