@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DropdownItem;
 use App\Models\NavbarItem;
 use Illuminate\Http\Request;
 use App\Models\Webpages;
@@ -30,7 +31,8 @@ class WebPageController extends Controller
      */
     public function create()
     {
-        return view('cms.webpages.create');
+        $navitems = NavbarItem::all();
+        return view('cms.webpages.create', ['navItems' => $navitems]);
     }
 
     /**
@@ -63,11 +65,19 @@ class WebPageController extends Controller
             $webpagecontexttable->save();
         }
     }
-
-       $navItem = new NavbarItem();
-       $navItem->name = $request->input('slug');
-       $navItem->link = $webpage->slug;
-       $navItem->save();
+       if($request->input('navItem') == 0){
+           $navItem = new NavbarItem();
+           $navItem->name = $request->input('slug');
+           $navItem->link = $webpage->slug;
+           $navItem->save();
+       }
+       else{
+           $dropdownItem = new DropdownItem();
+           $dropdownItem->name = $request->input('slug');
+           $dropdownItem->link = $webpage->slug;
+           $dropdownItem->navbar_item_id = $request->input('navItem');
+           $dropdownItem->save();
+       }
 
        return redirect()->route('paginas.index')->with('success','Pagina succesvol toegevoegd');
     }
