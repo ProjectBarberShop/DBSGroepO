@@ -103,7 +103,9 @@ class WebPageController extends Controller
     public function edit($id)
     {
         $page = Webpages::find($id);
-        return view('cms.webpages.edit' , compact('page'));
+        $navitems = NavbarItem::all();
+        $selected = DropdownItem::where('link', $page->slug)->first()->navbar_item_id ?? 0;
+        return view('cms.webpages.edit' , compact('page', 'navitems', 'selected'));
     }
 
     /**
@@ -120,8 +122,13 @@ class WebPageController extends Controller
             'title' => 'required'
         ]);
         $webpage = Webpages::find($id);
-        $webpage->body = $request->input('body');
+        $webpage->main_text = $request->input('body');
         $webpage->slug = Str::slug($request->input('title'));
+
+        $navItem = DropdownItem::where('link', $webpage->getOriginal('slug'))->first() ?? NavbarItem::where('link', $webpage->getOriginal('slug'))->first();
+        $navItem->link = $webpage->slug;
+        $navItem->save();
+        $this->changeNavItem($navItem, $request->input('navItem'));
         $webpage->save();
         return redirect()->route('paginas.index')->with('success','Pagina succesvol bijgewerkt');
     }
@@ -134,8 +141,39 @@ class WebPageController extends Controller
      */
     public function destroy($id)
     {
-        Webpages::find($id)->delete();
-
+        $webpage =  Webpages::find($id);
+        $navItem = DropdownItem::where('link', $webpage->getOriginal('slug'))->first() ?? NavbarItem::where('link', $webpage->getOriginal('slug'))->first();
+        $navItem->delete();
+        $webpage->delete();
         return redirect()->route('paginas.index');
+    }
+
+    private function changeNavItem($item, $navItemId){
+        if($item->getTable() == "dropdownitems"){
+            if($item->navbar_item_id != $navItemId){
+                if($navItemId == 0){
+                    NavbarItem::create([
+                        'name' => $item->name,
+                        'link' => $item->link
+
+                    ]);
+                    $item->delete();
+                }
+                else{
+                    $item->navbar_item_id = $navItemId;
+                    $item->save();
+                }
+            }
+        }
+        else{
+            if($navItemId != 0){
+                DropdownItem::create([
+                    'name' => $item->name,
+                    'link' => $item->link,
+                    'navbar_item_id' => $navItemId
+                ]);
+                $item->delete();
+            }
+        }
     }
 }

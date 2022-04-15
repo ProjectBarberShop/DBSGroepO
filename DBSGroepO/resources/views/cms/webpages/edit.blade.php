@@ -14,7 +14,16 @@
                 <div class="card-body">
                     <textarea name="body" id="{{$page-> id}}">{{$page -> main_text}}</textarea>
                     </br>
-                    <input name="title" value="{{$page -> slug}}"/>
+                    <label for="title">Link pagina:</label>
+                    <input class="mt-4" type="text" name="title" value="{{$page -> slug}}">
+                    <label for="navItem">Als dropdown onder:</label>
+                    <select name="navItem" required>
+                        <option value="0">Geen</option>
+                        @foreach($navitems as $item)
+                            <option value="{{$item->id}}" {{$item->id == $selected ? 'selected' : '' }}>{{$item->name}}</option>
+                        @endforeach
+                    </select>
+
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                         <button type="submit" class="btn btn-primary">Submit</button>
