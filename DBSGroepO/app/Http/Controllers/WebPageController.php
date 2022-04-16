@@ -104,7 +104,7 @@ class WebPageController extends Controller
             'title' => 'required'
         ]);
         $webpage = Webpages::find($id);
-        $webpage->body = $request->input('body');
+        $webpage->main_text = $request->input('body');
         $webpage->slug = Str::slug($request->input('title'));
         $webpage->save();
         return redirect()->route('paginas.index')->with('success','Pagina succesvol bijgewerkt');
