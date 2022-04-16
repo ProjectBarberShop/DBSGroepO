@@ -69,7 +69,6 @@ Route::group([
     Route::controller(WebPageController::class)->group(function(){
         Route::put('paginas/{pagina}/card' , 'updateColomText')->name('editColomText.update');
         Route::get('paginas/{pagina}/card/update' , 'editColomText')->name('editColomText.edit');
-
     });
 
 
