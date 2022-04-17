@@ -31,7 +31,7 @@
                         <td>{{$c->firstname}} {{$c->preposition}} {{$c->lastname}}</td>
                         <td><a href="mailto:{{$c->email}}">{{$c->email}}</a></td>
                         <td><a href="tel:{{$c->phonenumber}}">{{$c->phonenumber}}</a></td>
-                        <td class="p-0 w-25"><textarea rows="5" cols="60" readonly>{{$c->message}}</textarea></td>
+                        <td class="p-0 w-25"><textarea rows="5" cols="60" class="resize-disable" readonly>{{$c->message}}</textarea></td>
                         <td>
                             <form action="{{ route('contactverzoeken.destroy', $c->id) }}" method="POST" id="{{$c->id}}">
                                 <input type="hidden" name="{{$c->firstname}} {{$c->preposition}} {{$c->lastname}}">

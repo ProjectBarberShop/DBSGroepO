@@ -68,12 +68,13 @@
                             </div>
                             <div class="form-group">
                                 <label class="form-label" for="message">Bericht:</label>
-                                <textarea name="message" id="contactmsg" rows="10" class="form-control">{{ old('message') }}</textarea>
+                                <textarea name="message" id="contactmsg" rows="10" class="form-control ">{{ old('message') }}</textarea>
                                 @error('message')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
-                        <button type="submint" class="btn btn-primary float-right">Verzenden</button>
+                                <button type="submit" class="btn btn-primary float-right">Verzenden</button>
+                                <p id="count" class="h5 m-0">Tekens over: 255</p>
                     </form>
                 </div>
             </div>
@@ -81,3 +82,28 @@
     </div>
 </div>
 @endsection
+
+<script defer>
+    let textarea = null;
+
+    setTimeout(() => {
+        textarea = document.getElementById('contactmsg');
+        textarea.addEventListener('keyup', textareaLengthCheck, false);
+        textarea.addEventListener('keydown', textareaLengthCheck, false);
+    }, 1000);
+
+    function textareaLengthCheck() {
+        let textAreaLength = textarea.value.length;
+        let charactersLeft = 255 - textAreaLength;
+        let count = document.getElementById('count');
+        if(charactersLeft < 0){
+            textarea.classList.add('is-invalid');
+            count.classList.add('text-danger');
+        }
+        else{
+            textarea.classList.remove('is-invalid');
+            count.classList.remove('text-danger');
+        }
+        count.innerHTML = "Tekens over: " + charactersLeft;
+    }
+</script>
