@@ -110,17 +110,7 @@ class WebPageController extends Controller
         $webpage->save();
         return redirect()->route('editColomText.edit' , $webpage);
     }
-    
-    public function editColomText($webpage)
-    {
-        $pagecontent = Webpages::with('ColomContext')->where('id' , $webpage)->get();
-        return view('cms.webpages.edit_colomn_Text' , compact('pagecontent'));
-    }
 
-    public function updateColomText(Request $request, $id)
-    {
-
-    }
     /**
      * Remove the specified resource from storage.
      *

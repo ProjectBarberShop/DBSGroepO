@@ -9,7 +9,6 @@
                 <h3 class="card-title">Pagina hoofdtekst</h3>
             </div>
             @foreach($pagecontent as $page)
-                    {{-- {{dump($page)}} --}}
                         <form action="{{route ('paginas.update' , $page->id)}}" method="post">
                         @csrf
                         @method('PUT')
