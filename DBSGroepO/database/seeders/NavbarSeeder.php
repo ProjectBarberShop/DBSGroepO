@@ -27,7 +27,7 @@ class NavbarSeeder extends Seeder
         ];
 
         $dropdownitems = [
-            ['id' => 1, 'navbar_item_id' => 2, 'name' => 'Dirigent', 'link' => '#'],
+            ['id' => 1, 'navbar_item_id' => 2, 'name' => 'Dirigent', 'link' => 'onze-dirigent'],
             ['id' => 2, 'navbar_item_id' => 2, 'name' => 'Wie zijn wij', 'link' => '#'],
             ['id' => 3, 'navbar_item_id' => 2, 'name' => 'Repetoire', 'link' => '#'],
             ['id' => 4, 'navbar_item_id' => 2, 'name' => 'Koorleden', 'link' => '#'],
