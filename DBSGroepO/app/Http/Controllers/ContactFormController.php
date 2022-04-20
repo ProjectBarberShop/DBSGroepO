@@ -20,7 +20,7 @@ class ContactFormController extends Controller
     }
 
     public function getContactRequests() {
-        $contactRequestdata = Contactrequest::paginate(10);
+        $contactRequestdata = Contactrequest::orderBy('created_at', 'desc')->paginate(10);
 
         return view('cms/contactverzoeken.index', compact('contactRequestdata'));
     }
