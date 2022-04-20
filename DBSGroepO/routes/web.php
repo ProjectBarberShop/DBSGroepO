@@ -54,12 +54,15 @@ Route::group([
     Route::resource('fotos', ImageController::class);
     Route::resource('contactpersonen', ContactsController::class);
     Route::resource('profile', UserController::class)->only(['index']);
+
     Route::controller(ContactFormController::class)->group(function(){
         Route::get('contactverzoeken', 'getContactRequests')->name('contactverzoeken.index');
         Route::delete('/contactverzoeken/{id}', 'destroy')->name('contactverzoeken.destroy');
     });
+
     Route::resource('nieuwsbrieven', NewsletterController::class);
     Route::resource('youtube', YoutubeController::class)->except('update');
+
     Route::controller(YoutubeController::class)->group(function() {
         Route::put('youtube/{youtube}/{id}', 'update')->name('youtube.update');
         Route::get('paginas/{pagina}/youtube/create', 'createMultiple')->name('youtube.createMultiple');
@@ -67,23 +70,19 @@ Route::group([
     });
 
     Route::resource('paginas', WebPageController::class);
-    // Route::controller(WebPageController::class)->group(function(){
-    //     Route::put('paginas/{pagina}/card' , 'updateColomText')->name('editColomText.update');
-    //     Route::get('paginas/{pagina}/card/update' , 'editColomText')->name('editColomText.edit');
-    // });
 
     Route::controller(ColumnTextController::class)->group(function() {
-        Route::put('paginas/{pagina}/card', 'update')->name('editColomText.update');
-        Route::get('paginas/{pagina}/card/update', 'edit')->name('editColomText.edit');
-        Route::delete('paginas/{collomtext}/card/{page}', 'destroy')->name('column.destroy');
+        Route::post('paginas/{pagina}/column', 'updateAndStore')->name('editColomText.updateAndInsert');
+        Route::get('paginas/{pagina}/column/update', 'edit')->name('editColomText.edit');
+        Route::delete('paginas/{collomtext}/column/{page}', 'destroy')->name('column.destroy');
     });
 
-    Route::resource('agenda', AgendaCMSController::class);
     Route::controller(CardController::class)->group(function() {
         Route::get('paginas/{pagina}/card/create', 'create')->name('card.create');
         Route::post('paginas/{pagina}/card', 'store')->name('card.store');
     });
-
+    
+    Route::resource('agenda', AgendaCMSController::class);
     Route::resource('footer', FooterController::class);
     Route::resource('navbar', NavbarController::class);
     Route::resource('dropdown', DropdownController::class);

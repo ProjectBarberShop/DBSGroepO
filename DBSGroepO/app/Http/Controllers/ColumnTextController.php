@@ -8,78 +8,38 @@ use App\Models\colom_context;
 
 class ColumnTextController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($webpage)
     {
         $pagecontent = Webpages::with('ColomContext')->where('id' , $webpage)->get();
         return view('cms.webpages.edit_colomn_text' , compact('pagecontent'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function updateAndStore(Request $request, $webpage)
     {
-        //
+        $request->validate([
+            'collomMainText.*.colom_title_text' => 'required',
+            'collomMainText.*.id' => 'required',
+            'collomMainText.*.colomn_text' => 'required',
+            'multiInput.*.colom_title_text' => 'required',
+            'multiInput.*.colomn_text' => 'required'
+        ]);
+        if($request->multiInput != null) {
+            foreach($request->multiInput as $key => $value) {
+                $colomContext = colom_context::create($value);
+                $colomContext->Webpages()->attach($webpage);
+            }
+        }
+        foreach($request->collomMainText as $key => $value) {
+                $colomContext = colom_context::find($key);
+                $colomContext->colom_title_text = $value['colom_title_text'];
+                $colomContext->colomn_text = $value['colomn_text'];
+                $colomContext->save();
+        }
+        dd("hoi");
+        // return redirect()->route('editYoutubeWebpage.edit' , $webpage);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id , $webpage)
     {
         colom_context::find($id)->delete();

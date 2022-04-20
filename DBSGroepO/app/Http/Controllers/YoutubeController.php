@@ -68,24 +68,6 @@ class YoutubeController extends Controller
         return redirect()->route('youtube.index')->with('success','Youtube video succesvol toegevoegd');
     }
 
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $youtube = Youtube::with('Webpage')->find($id);

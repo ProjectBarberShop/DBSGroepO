@@ -73,7 +73,7 @@
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
-                        <button type="submint" class="btn btn-primary float-right">Verzenden</button>
+                        <button type="submit" class="btn btn-primary float-right">Verzenden</button>
                     </form>
                 </div>
             </div>
