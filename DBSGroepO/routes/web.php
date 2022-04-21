@@ -67,6 +67,8 @@ Route::group([
         Route::put('youtube/{youtube}/{id}', 'update')->name('youtube.update');
         Route::get('paginas/{pagina}/youtube/create', 'createMultiple')->name('youtube.createMultiple');
         Route::post('paginas/{pagina}/youtube', 'storeMultiple')->name('youtube.storeMultiple');
+        route::put('paginas/{pagina}/youtube/edit' , 'editYoutube')->name('youtubeWebpage.editYoutube');
+        route::put('paginas/{pagina}/youtube/update' , 'updateYoutube')->name('youtubeWebpage.updateYoutube');
     });
 
     Route::resource('paginas', WebPageController::class);
@@ -81,7 +83,7 @@ Route::group([
         Route::get('paginas/{pagina}/card/create', 'create')->name('card.create');
         Route::post('paginas/{pagina}/card', 'store')->name('card.store');
     });
-    
+
     Route::resource('agenda', AgendaCMSController::class);
     Route::resource('footer', FooterController::class);
     Route::resource('navbar', NavbarController::class);
