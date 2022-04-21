@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DropdownItem;
+use App\Models\NavbarItem;
 use Illuminate\Http\Request;
 use App\Models\Webpages;
 use App\Models\colom_context as context_colomn;
@@ -29,7 +31,8 @@ class WebPageController extends Controller
      */
     public function create()
     {
-        return view('cms.webpages.create');
+        $navitems = NavbarItem::all();
+        return view('cms.webpages.create', ['navItems' => $navitems]);
     }
 
     /**
@@ -62,6 +65,19 @@ class WebPageController extends Controller
             $webpagecontexttable->save();
         }
     }
+       if($request->input('navItem') == 0){
+           $navItem = new NavbarItem();
+           $navItem->name = $request->input('slug');
+           $navItem->link = $webpage->slug;
+           $navItem->save();
+       }
+       else{
+           $dropdownItem = new DropdownItem();
+           $dropdownItem->name = $request->input('slug');
+           $dropdownItem->link = $webpage->slug;
+           $dropdownItem->navbar_item_id = $request->input('navItem');
+           $dropdownItem->save();
+       }
 
        return redirect()->route('paginas.index')->with('success','Pagina succesvol toegevoegd');
     }
@@ -87,8 +103,10 @@ class WebPageController extends Controller
     public function edit($id)
     {
         $page = Webpages::find($id);
-        $pagecontent = Webpages::with('ColomContext' , 'youtube')->where('id' , $id)->get();
-        return view('cms.webpages.edit' , compact('pagecontent'));
+
+        $navitems = NavbarItem::all();
+        $selected = DropdownItem::where('link', $page->slug)->first()->navbar_item_id ?? 0;
+        return view('cms.webpages.edit' , compact('page', 'navitems', 'selected'));
     }
 
     /**
@@ -104,9 +122,14 @@ class WebPageController extends Controller
             'body' => 'required',
             'title' => 'required'
         ]);
-         $webpage = Webpages::find($id);
+        $webpage = Webpages::find($id);
         $webpage->main_text = $request->input('body');
         $webpage->slug = Str::slug($request->input('title'));
+
+        $navItem = DropdownItem::where('link', $webpage->getOriginal('slug'))->first() ?? NavbarItem::where('link', $webpage->getOriginal('slug'))->first();
+        $navItem->link = $webpage->slug;
+        $navItem->save();
+        $this->changeNavItem($navItem, $request->input('navItem'));
         $webpage->save();
         return redirect()->route('editColomText.edit' , $webpage);
     }
@@ -119,8 +142,39 @@ class WebPageController extends Controller
      */
     public function destroy($id)
     {
-        Webpages::find($id)->delete();
-
+        $webpage =  Webpages::find($id);
+        $navItem = DropdownItem::where('link', $webpage->getOriginal('slug'))->first() ?? NavbarItem::where('link', $webpage->getOriginal('slug'))->first();
+        $navItem->delete();
+        $webpage->delete();
         return redirect()->route('paginas.index');
+    }
+
+    private function changeNavItem($item, $navItemId){
+        if($item->getTable() == "dropdownitems"){
+            if($item->navbar_item_id != $navItemId){
+                if($navItemId == 0){
+                    NavbarItem::create([
+                        'name' => $item->name,
+                        'link' => $item->link
+
+                    ]);
+                    $item->delete();
+                }
+                else{
+                    $item->navbar_item_id = $navItemId;
+                    $item->save();
+                }
+            }
+        }
+        else{
+            if($navItemId != 0){
+                DropdownItem::create([
+                    'name' => $item->name,
+                    'link' => $item->link,
+                    'navbar_item_id' => $navItemId
+                ]);
+                $item->delete();
+            }
+        }
     }
 }
