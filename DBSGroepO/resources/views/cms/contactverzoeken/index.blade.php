@@ -87,7 +87,7 @@ function sortTable() {
             shouldSwitch = false;
             x = rows[i].getElementsByTagName("TD")[0];
             y = rows[i + 1].getElementsByTagName("TD")[0];
-
+            console.log(x);
             if(y != undefined){
                 if(ascending){
                     if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
