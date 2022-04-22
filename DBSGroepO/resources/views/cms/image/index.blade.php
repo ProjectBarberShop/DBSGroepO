@@ -7,12 +7,6 @@
           @method('GET')
           @csrf
           <input type="text" name="search" id="search" class="form-control">
-          <select name="filter" id="filter" class="form-control">
-          <option value="">Geen filter?</option>
-          @foreach ($categories as $img)
-            <option value="{{$img->category}}">{{$img->category}}</option>
-          @endforeach
-        </select>
           <input type="submit" value="Zoeken" class="btn btn-primary ">
     </form>
     <table class="table">
@@ -21,7 +15,6 @@
             <th scope="col">Titel</th>
             <th scope="col">Wordt in slider gebruikt?</th>
             <th scope="col">Foto preview</th>
-            <th scope="col">category</th>
             <th scope="col"></th>
         </tr>
         </thead>
@@ -39,8 +32,7 @@
                     @endif
                 </form></td>
                 <td><img src="data:image/jpg;base64,{{ chunk_split(base64_encode($img->photo)) }}" class="w-25 h-25 "></td>
-                <td>{{$img->category}}</td>    
-                <td> 
+            <td> 
                 <form action="{{ route('fotos.destroy', $img->id) }}" method="POST">
                 <input type="hidden" id="{{$img->title}}" name="{{$img->title}}">
                     @method('DELETE')
@@ -63,8 +55,6 @@
                 <label for="photo">foto:</label>
                 <img id="preview" src="#" alt="afbeelding"/>
                 <input type="file" name="photo" id="file" accept="image/*" onchange="getImgData()">
-                <label for="category">Categorie:</label>
-                <input list="category" name="category" id="category" value="Geen categorie">
                 <button type="submit" class="btn btn-primary float-right mt-4">+</button>
             </form>
             @if ($errors->any())

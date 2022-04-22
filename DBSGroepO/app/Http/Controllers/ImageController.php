@@ -10,17 +10,12 @@ class imageController extends Controller
 
     public function index(Request $request)
     {
-        $categories = Image::select('category')->distinct()->get();
         $images = Image::query();
         
         if($request->filled('search')){
             $images->where('title', 'like', '%' . $request->search . '%')->get();
-        }  
-        if($request->filled('filter')){
-            $images->where('category', '=', $request->filter)->get();
         }   
-        //dd($categories);
-        return view('cms.image.index', ['images'=>$images->get(), 'categories'=> $categories]);
+        return view('cms.image.index', ['images'=>$images->get()]);
     }
 
     public function store(Request $request)
@@ -28,7 +23,6 @@ class imageController extends Controller
         $request->validate([
             'title' => 'required',
             'photo' => 'required|max:294|image',
-            'category' => 'required',
         ]);
         
         $imagedata = new Image;
@@ -36,7 +30,6 @@ class imageController extends Controller
         $img = $request->file('photo');
         $contentsImg = $img->openFile()->fread($img->getSize());
         $imagedata->photo = $contentsImg;
-        $imagedata->category = $request->input('category');
         $imagedata->useInSlider = false;
         $imagedata->save();
 
