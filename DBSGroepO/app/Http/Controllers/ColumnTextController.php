@@ -36,8 +36,7 @@ class ColumnTextController extends Controller
                 $colomContext->colomn_text = $value['colomn_text'];
                 $colomContext->save();
         }
-        dd("hoi");
-        // return redirect()->route('editYoutubeWebpage.edit' , $webpage);
+        return redirect()->route('youtubeWebpage.editYoutube' , $webpage);
     }
 
     public function destroy($id , $webpage)

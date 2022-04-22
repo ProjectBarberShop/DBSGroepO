@@ -6,7 +6,7 @@
         <div class="pull-right md-4">
             <a class="btn btn-danger" href="{{ route('paginas.index') }}"> Back</a>
             <button type="submit" form="submition-form" formaction="{{ route('editColomText.updateAndInsert', $page->id) }}" class="btn btn-primary">Update</button>
-            <button type="button" name="add" id="addRemoveText" class=" btn ion-android-add btn-success">nieuwe text</button>
+            <button type="button" name="add" id="addRemoveText" class=" btn ion-android-add btn-success"> nieuwe text</button>
         </div>
         <div class="row mt-4">
             <form id="submition-form" method="post">

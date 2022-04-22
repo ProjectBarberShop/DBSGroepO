@@ -67,8 +67,8 @@ Route::group([
         Route::put('youtube/{youtube}/{id}', 'update')->name('youtube.update');
         Route::get('paginas/{pagina}/youtube/create', 'createMultiple')->name('youtube.createMultiple');
         Route::post('paginas/{pagina}/youtube', 'storeMultiple')->name('youtube.storeMultiple');
-        route::put('paginas/{pagina}/youtube/edit' , 'editYoutube')->name('youtubeWebpage.editYoutube');
-        route::put('paginas/{pagina}/youtube/update' , 'updateYoutube')->name('youtubeWebpage.updateYoutube');
+        route::get('paginas/{pagina}/youtube/edit' , 'editYoutube')->name('youtubeWebpage.editYoutube');
+        route::post('paginas/{pagina}/youtube/update' , 'updateAndInsert')->name('youtubeWebpage.updateYoutube');
     });
 
     Route::resource('paginas', WebPageController::class);
