@@ -9,6 +9,7 @@ use App\Models\Webpages;
 use App\Models\colom_context as context_colomn;
 use App\Models\colom_context_webpages;
 use Illuminate\Support\Str;
+use function PHPUnit\Framework\isEmpty;
 
 class WebPageController extends Controller
 {
@@ -91,6 +92,7 @@ class WebPageController extends Controller
     public function show($slug)
     {
         $pagecontent = Webpages::with('ColomContext' , 'youtube')->where('slug' , $slug)->get();
+        if($pagecontent->isEmpty()) abort(404);
         return view('contentpage' , compact('pagecontent'));
     }
 
