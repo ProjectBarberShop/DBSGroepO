@@ -6,7 +6,7 @@
         <div class="pull-right md-4">
             <a class="btn btn-danger" href="{{ route('paginas.index') }}"> Back</a>
             <button type="submit" form="submition-form" formaction="{{ route('editColomText.updateAndInsert', $page->id) }}" class="btn btn-primary">Update</button>
-            <button type="button" value="Update" name="add" id="addRemoveText" class=" btn ion-android-add btn-success">nieuwe text</button>
+            <button type="button" name="add" id="addRemoveText" class=" btn ion-android-add btn-success">nieuwe text</button>
         </div>
         <div class="row mt-4">
             <form id="submition-form" method="post">
@@ -24,7 +24,6 @@
                                     <input class="md-4" name="collomMainText[{{ $collom->id }}][colom_title_text]" id="{{ $collom->id }}" value="{{ $collom->colom_title_text }}">
                                     <label for="collomMainText[{{ $collom->id }}][colomn_text]">Collom hoofdtekst</label>
                                     <textarea class="md-4" name="collomMainText[{{ $collom->id }}][colomn_text]" id="{{ $collom->id }}">{{ $collom->colomn_text }}</textarea>
-                                    <button type="submit" value="Delete" name="delete" {{ route('column.destroy', [$collom->id , $page->id]) }} class="btn btn-danger">Delete</button>
                                 </div>
                             </div>
                         </div>
