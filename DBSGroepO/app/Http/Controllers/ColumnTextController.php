@@ -28,13 +28,16 @@ class ColumnTextController extends Controller
             foreach($request->multiInput as $key => $value) {
                 $colomContext = colom_context::create($value);
                 $colomContext->Webpages()->attach($webpage);
+                $colomContext->save();
             }
         }
-        foreach($request->collomMainText as $key => $value) {
-                $colomContext = colom_context::find($key);
-                $colomContext->colom_title_text = $value['colom_title_text'];
-                $colomContext->colomn_text = $value['colomn_text'];
-                $colomContext->save();
+        if($request->collomMainText != null) {
+            foreach($request->collomMainText as $key => $value) {
+                    $colomContext = colom_context::find($key);
+                    $colomContext->colom_title_text = $value['colom_title_text'];
+                    $colomContext->colomn_text = $value['colomn_text'];
+                    $colomContext->save();
+            }
         }
         return redirect()->route('youtubeWebpage.editYoutube' , $webpage);
     }

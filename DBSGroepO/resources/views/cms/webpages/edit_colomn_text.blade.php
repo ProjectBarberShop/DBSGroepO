@@ -28,9 +28,9 @@
                             </div>
                         </div>
                     @endforeach
+                    <div class="row justify-content-center" id="multiForm">
+                    </div>
                 </form>
-                <div class="row justify-content-center" id="multiForm">
-                </div>
         </div>
         @endforeach
     </section>

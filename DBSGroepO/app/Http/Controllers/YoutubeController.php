@@ -112,12 +112,15 @@ class YoutubeController extends Controller
             foreach($request->multiInput as $key => $value) {
                 $youtube = Youtube::create($value);
                 $youtube->Webpage()->attach($webpage);
+                $youtube->save();
             }
         }
-        foreach($request->oldInput as $key => $value) {
-                $youtube = Youtube::find($key);
-                $youtube->youtube_video_key = $value['youtube_video_key'];
-                $youtube->save();
+        if($request->multiInput != null) {
+            foreach($request->oldInput as $key => $value) {
+                    $youtube = Youtube::find($key);
+                    $youtube->youtube_video_key = $value['youtube_video_key'];
+                    $youtube->save();
+            }
         }
         return redirect()->route('paginas.index')->with('success','Alles is succesvol bijgewerkt indien er dingen verwijdert moeten worden kan dat via de show');
     }

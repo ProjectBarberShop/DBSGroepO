@@ -28,18 +28,18 @@ class UpdateWebpageTest extends DuskTestCase
                         $browser->attribute('#paginas' , 'href')
             );
             $browser->assertPathIs('/cms/paginas');
-            $browser->press('#update2');
-            $browser->assertPathIs('/cms/paginas/2/edit');
+            $browser->press('#update1');
+            $browser->assertPathIs('/cms/paginas/1/edit');
             $browser->waitFor('#body_ifr');
             $browser->driver->executeScript('tinyMCE.get(\'body\').setContent(\'<p>Test body</p>\')');
-            $browser->type('title', 'testlink2');
+            $browser->type('title', 'testlink1');
             $browser->select('navItem' , '0');
             $browser->press('Submit');
-            $browser->assertPathIs('/cms/paginas/2/column/update');
+            $browser->assertPathIs('/cms/paginas/1/column/update');
             $browser->waitFor('#textarea1_ifr');
             $browser->driver->executeScript('tinyMCE.get(\'textarea1\').setContent(\'<p>Test column test</p>\')');
             $browser->type('collomMainText[1][colom_title_text]', 'testen');
-            $browser->type('collomMainText[3][colom_title_text]', 'testen2');
+            $browser->type('collomMainText[2][colom_title_text]', 'testen2');
             $browser->press('add');
             $browser->pause(2000);
             $browser->press('#delete1');
@@ -47,7 +47,7 @@ class UpdateWebpageTest extends DuskTestCase
             $browser->type('multiInput[2][colom_title_text]', 'hoi');
             $browser->driver->executeScript('tinyMCE.get(\'columtext2\').setContent(\'<p>Test column test 2000</p>\')');
             $browser->press('Update');
-            $browser->assertPathIs('/cms/paginas/2/youtube/edit');
+            $browser->assertPathIs('/cms/paginas/1/youtube/edit');
             $browser->type('oldInput[1][youtube_video_key]', 'lSxh-Uk7Ays');
             $browser->press('Update');
             $browser->assertPathIs('/cms/paginas');
