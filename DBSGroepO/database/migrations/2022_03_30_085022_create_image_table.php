@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('image', function (Blueprint $table) {
             $table->id()->onDelete('cascade');
             $table->string('title')->require;
+            $table->string('category')->require;
             $table->boolean('useInSlider')->require;
             $table->timestamps();
         });
