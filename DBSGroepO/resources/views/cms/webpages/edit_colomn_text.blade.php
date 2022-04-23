@@ -23,7 +23,7 @@
                                     <label for="collomMainText[{{ $collom->id }}][colom_title_text]">Collom titeltekst</label>
                                     <input class="md-4" name="collomMainText[{{ $collom->id }}][colom_title_text]" id="{{ $collom->id }}" value="{{ $collom->colom_title_text }}">
                                     <label for="collomMainText[{{ $collom->id }}][colomn_text]">Collom hoofdtekst</label>
-                                    <textarea class="md-4" name="collomMainText[{{ $collom->id }}][colomn_text]" id="{{ $collom->id }}">{{ $collom->colomn_text }}</textarea>
+                                    <textarea class="md-4" name="collomMainText[{{ $collom->id }}][colomn_text]" id="textarea{{ $collom->id }}">{{ $collom->colomn_text }}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -40,10 +40,11 @@
             ++i;
             let divform =
                 '<div class="col-6 remove-me" id="multiForm"><div class="card"><div class="card-header"><h3 class="card-title">Kolom teksten</h3></div><div class="card-body"><div class="remove-me"><input class="mb-4" name="multiInput[' +
-                i + '][colom_title_text]" placeholder="collom title"><textarea class="mb-2" name="multiInput[' + i +
-                '][colomn_text]" placeholder="main text"></textarea><button type="button" class="remove-item btn btn-danger mt-4">Delete</button></div></div>'
+                i + '][colom_title_text]" placeholder="collom title"><textarea id="columtext'+i+'" class="mb-2" name="multiInput[' + i +
+                '][colomn_text]" placeholder="main text"></textarea><button type="button" id="delete'+i+'" class="remove-item btn btn-danger mt-4">Delete</button></div></div>'
             $("#multiForm").append('' + divform + '');
             tinymce.init({
+                body_id: 'columtext'+i+'',
                 selector: 'textarea',
                 toolbar: 'a11ycheck addcomment showcomments casechange checklist code export formatpainter pageembed permanentpen table',
                 toolbar_mode: 'floating',

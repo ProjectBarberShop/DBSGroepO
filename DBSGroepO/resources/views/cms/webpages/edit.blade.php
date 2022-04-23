@@ -12,7 +12,7 @@
             @csrf
             @method('PUT')
                 <div class="card-body">
-                    <textarea name="body" id="{{$page-> id}}">{{$page -> main_text}}</textarea>
+                    <textarea name="body" id="body">{{$page -> main_text}}</textarea>
                     </br>
                     <label for="title">Link pagina:</label>
                     <input class="mt-4" type="text" name="title" value="{{$page -> slug}}">
@@ -39,12 +39,13 @@
 
 <script>
       tinymce.init({
-      selector: 'textarea',
-      plugins: 'autolink lists media table ',
-      toolbar: 'a11ycheck addcomment showcomments casechange checklist code export formatpainter pageembed permanentpen table',
-      toolbar_mode: 'floating',
-      tinycomments_mode: 'embedded',
-      tinycomments_author: 'Author name',
+        body_id : "body",
+        selector: 'textarea',
+        plugins: 'autolink lists media table ',
+        toolbar: 'a11ycheck addcomment showcomments casechange checklist code export formatpainter pageembed permanentpen table',
+        toolbar_mode: 'floating',
+        tinycomments_mode: 'embedded',
+        tinycomments_author: 'Author name',
 });
 </script>
 @endsection
