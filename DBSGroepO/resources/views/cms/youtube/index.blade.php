@@ -25,6 +25,7 @@
                 </div>
             @endif
         </div>
+    </div>
     <br>
         <div class="row">
             @foreach($webpageTitles as $v)

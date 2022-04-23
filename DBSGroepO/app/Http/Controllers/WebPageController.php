@@ -105,6 +105,7 @@ class WebPageController extends Controller
     public function edit($id)
     {
         $page = Webpages::find($id);
+
         $navitems = NavbarItem::all();
         $selected = DropdownItem::where('link', $page->slug)->first()->navbar_item_id ?? 0;
         return view('cms.webpages.edit' , compact('page', 'navitems', 'selected'));
@@ -132,7 +133,7 @@ class WebPageController extends Controller
         $navItem->save();
         $this->changeNavItem($navItem, $request->input('navItem'));
         $webpage->save();
-        return redirect()->route('paginas.index')->with('success','Pagina succesvol bijgewerkt');
+        return redirect()->route('editColomText.edit' , $webpage);
     }
 
     /**
