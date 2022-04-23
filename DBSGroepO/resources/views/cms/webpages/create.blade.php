@@ -20,6 +20,13 @@
         </div>
        <label for="slug">Link pagina:</label>
        <input class="mt-4" type="text" name="slug" placeholder="url-link">
+        <label for="navItem">Als dropdown onder:</label>
+        <select name="navItem" required>
+            <option value="0">Geen</option>
+            @foreach($navItems as $item)
+                <option value="{{$item->id}}">{{$item->name}}</option>
+            @endforeach
+        </select>
        <div class="row justify-content-center" id="multiForm">
           <div class="col-12" >
              <div class="card">
@@ -51,6 +58,7 @@ $("#addRemoveText").click(function () {
     $("#multiForm").append(''+test+'');
         tinymce.init({
             selector: 'textarea',
+            language: 'nl',
             toolbar: 'a11ycheck addcomment showcomments casechange checklist code export formatpainter pageembed permanentpen table',
             toolbar_mode: 'floating',
             tinycomments_mode: 'embedded',
@@ -63,6 +71,7 @@ $(document).on('click', '.remove-item', function () {
 
 tinymce.init({
       selector: 'textarea',
+      language: 'nl',
       plugins: 'autolink lists media table ',
       toolbar: 'a11ycheck addcomment showcomments casechange checklist code export formatpainter pageembed permanentpen table',
       toolbar_mode: 'floating',

@@ -68,24 +68,6 @@ class YoutubeController extends Controller
         return redirect()->route('youtube.index')->with('success','Youtube video succesvol toegevoegd');
     }
 
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $youtube = Youtube::with('Webpage')->find($id);
@@ -113,6 +95,34 @@ class YoutubeController extends Controller
         $youtube->Webpage()->wherePivot('webpages_id' , $webpage)->wherePivot('youtube_id' , $id)->updateExistingPivot($webpage, ['webpages_id' => $request->input('webpageID')]);
 
         return redirect()->route('youtube.index')->with('success','Youtube video succesvol bijgewerkt');
+    }
+
+    public function editYoutube($webpage) {
+        $pagecontent = Webpages::with('youtube')->where('id' , $webpage)->get();
+        return view('cms.webpages.edit_youtube' , compact('pagecontent'));
+    }
+
+    public function updateAndInsert(Request $request , $webpage) {
+        $request->validate([
+            'multiInput.*.youtube_video_key' => 'required',
+            'oldInput.*.youtube_video_key' => 'required',
+        ]);
+
+        if($request->multiInput != null) {
+            foreach($request->multiInput as $key => $value) {
+                $youtube = Youtube::create($value);
+                $youtube->Webpage()->attach($webpage);
+                $youtube->save();
+            }
+        }
+        if($request->multiInput != null) {
+            foreach($request->oldInput as $key => $value) {
+                    $youtube = Youtube::find($key);
+                    $youtube->youtube_video_key = $value['youtube_video_key'];
+                    $youtube->save();
+            }
+        }
+        return redirect()->route('paginas.index')->with('success','Alles is succesvol bijgewerkt indien er dingen verwijdert moeten worden kan dat via de show');
     }
 
     /**

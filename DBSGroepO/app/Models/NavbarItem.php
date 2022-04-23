@@ -10,6 +10,10 @@ class NavbarItem extends Model
     use HasFactory;
 
     protected $table = 'navbaritems';
+    protected $fillable = [
+        'name',
+        'link',
+    ];
 
     public function dropdownItems(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
