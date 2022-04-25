@@ -11,6 +11,10 @@ class Category extends Model
     protected $table = 'category';
     protected $primaryKey = 'id';
 
+    protected $fillable =  [
+        'title'
+    ];
+
     public function Agenda() {
         return $this->belongsToMany(Agendapunt::class);
     }
