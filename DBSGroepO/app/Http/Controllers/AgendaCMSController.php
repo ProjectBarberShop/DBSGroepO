@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Agendapunt;
 use App\Models\Category;
+use Database\Seeders\AgendaSeeder;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -108,7 +109,9 @@ class AgendaCMSController extends Controller
             ]
         ]);
 
-        Agendapunt::find($id)->update($request->all());
+        $agenda = Agendapunt::find($id);
+        $agenda->update($request->all());
+        $agenda->Category()->attach($request->category);
         return redirect('/cms/agenda');
     }
 
