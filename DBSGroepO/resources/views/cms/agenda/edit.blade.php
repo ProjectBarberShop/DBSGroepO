@@ -35,15 +35,9 @@
                 <div class="form-group">
                     <label for="category">Categorie (optioneel)</label>
                     <select name="category" class="form-select" aria-label="Categorie" value="{{ old('category, $agendapunt->category') }}">
-                        <option></option>
+                        <option selected></option>
                         @foreach($categories as $c)
-                            @foreach($agendapunt->category as $agendac)
-                                @if($c->id == $agendac->id)
-                                <option value="{{$c->id}}" selected>{{$c->title}}</option>
-                                @else
-                                <option value="{{$c->id}}">{{$c->title}}</option>
-                                @endif
-                            @endforeach
+                            <option value="{{$c->id}}">{{$c->title}}</option>
                         @endforeach
                     </select>
                 </div>
