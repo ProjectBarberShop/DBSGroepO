@@ -91,7 +91,7 @@
                             @else
                                 <ul class="navbar-nav">
                                     <li class="nav-item active">
-                                        <a href="{{ route('login') }}" class=" nav-link  ">Log in</a>
+                                        <a href="{{ route('login') }}" id="login" class=" nav-link  ">Log in</a>
                                     </li>
                                 </ul>
                             @endauth

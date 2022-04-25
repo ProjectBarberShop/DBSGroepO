@@ -9,6 +9,7 @@ use App\Models\Webpages;
 use App\Models\colom_context as context_colomn;
 use App\Models\colom_context_webpages;
 use Illuminate\Support\Str;
+use function PHPUnit\Framework\isEmpty;
 
 class WebPageController extends Controller
 {
@@ -91,6 +92,7 @@ class WebPageController extends Controller
     public function show($slug)
     {
         $pagecontent = Webpages::with('ColomContext' , 'youtube')->where('slug' , $slug)->get();
+        if($pagecontent->isEmpty()) abort(404);
         return view('contentpage' , compact('pagecontent'));
     }
 
@@ -103,6 +105,7 @@ class WebPageController extends Controller
     public function edit($id)
     {
         $page = Webpages::find($id);
+
         $navitems = NavbarItem::all();
         $selected = DropdownItem::where('link', $page->slug)->first()->navbar_item_id ?? 0;
         return view('cms.webpages.edit' , compact('page', 'navitems', 'selected'));
@@ -130,7 +133,7 @@ class WebPageController extends Controller
         $navItem->save();
         $this->changeNavItem($navItem, $request->input('navItem'));
         $webpage->save();
-        return redirect()->route('paginas.index')->with('success','Pagina succesvol bijgewerkt');
+        return redirect()->route('editColomText.edit' , $webpage);
     }
 
     /**
