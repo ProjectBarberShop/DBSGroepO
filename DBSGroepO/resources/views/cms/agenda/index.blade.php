@@ -7,16 +7,18 @@
             Categorieën beheren
         </button>
         <div class="dropdown-menu p-4" aria-labelledby="dLabel">
+            <div class="pre-scrollable container">
             @foreach($categories as $c)
                 <div class="row mb-1">
                     <p class="col-md-6">{{$c->title}}</p>
-                    <form class="col-md-2 offset-md-4 p-1" action="{{route('category.destroy', $c->id)}}", method="POST">
+                    <form class="col-md-2 offset-md-3 p-1" action="{{route('category.destroy', $c->id)}}", method="POST">
                     @csrf
                     @method('delete')
                     <button class="btn" type="submit"><i class="far fa-trash-alt"></i></button>
                     </form>
                 </div>
             @endforeach
+            </div>
             <form action="{{route('category.store')}}" method="POST">
             @csrf
             <div class="form-group">
