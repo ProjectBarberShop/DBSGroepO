@@ -18,7 +18,6 @@ use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\DropdownController;
 use App\Http\Controllers\AgendaCMSController;
 use App\Http\Controllers\ColumnTextController;
-use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\ContactFormController;
 use App\Http\Controllers\PerformanceController;
 
