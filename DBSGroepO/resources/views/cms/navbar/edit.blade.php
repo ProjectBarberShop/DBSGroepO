@@ -8,7 +8,7 @@
         <input type="text" name="name" value="{{$navdata->name}}">
         <label for="link">Link:</label>
         <input type="text" name="link" value="{{$navdata->link}}">
-        <button type="submit" class="btn btn-primary float-right mt-4">+</button>
+        <button type="submit" class="btn btn-primary float-right mt-4">Bijwerken</button>
     </form>
 
 

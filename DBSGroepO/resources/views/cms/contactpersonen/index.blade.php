@@ -8,8 +8,8 @@
             <h3 class="card-title w-100">{{$c->firstname}} {{$c->preposition}} {{$c->lastname}}</h3>
         </div>
         <div class="p-2">
-            {{$c->email}} <br>
-            {{$c->phonenumber}} <br>
+        <a href="mailto:{{$c->email}}">{{$c->email}}</a><br>
+        <a href="tel:{{$c->phonenumber}}">{{$c->phonenumber}}</a><br>
             @if($c->is_published)
                 Gepubliceerd op de website
             @else

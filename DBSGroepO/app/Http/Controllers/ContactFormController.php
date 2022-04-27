@@ -18,4 +18,16 @@ class ContactFormController extends Controller
 
         return back()->with('success','Verzoek succesvol ingediend');
     }
+
+    public function getContactRequests() {
+        $contactRequestdata = Contactrequest::orderBy('created_at', 'desc')->paginate(10);
+
+        return view('cms/contactverzoeken.index', compact('contactRequestdata'));
+    }
+
+    public function destroy($id)
+    {
+        Contactrequest::find($id)->delete();
+        return redirect('cms/contactverzoeken');
+    }
 }

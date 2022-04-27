@@ -9,7 +9,7 @@ class Contactrequest extends Model
 
     public $fillable = [
         'firstname',
-        'preprosition',
+        'preposition',
         'lastname',
         'email',
         'phonenumber',

@@ -11,10 +11,11 @@
                 <div class="imagePosition"></div>
             </div>
             <button type="button" class="btn btn-default" onclick="modalShow()">Selecteer foto</button>
-            <div class="modal justify-content-center align-items-center" id="modal-info" aria-modal="true" role="dialog">
-                    <div class="modal-content bg-info w-75">
+            <div class="modal fade show" id="modal-info" aria-modal="true" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content bg-info">
                         <div class="modal-header">
-                            <h2 class="modal-title">Selecteer foto</h2>
+                            <h4 class="modal-title">Selecteer foto</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true" onclick="modalClose()" class="fs-2">×</span>
                             </button>
@@ -32,6 +33,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
             <form action="{{route ('nieuwsbrieven.update' , $newsletterdata->id)}}" method="POST" class="d-flex flex-column">
                 @method('PUT')
                 @csrf

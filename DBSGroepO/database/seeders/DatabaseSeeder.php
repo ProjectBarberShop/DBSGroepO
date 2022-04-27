@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             Footerseeder::class,
             NavbarSeeder::class,
             UserSeeder::class,
+            WebpageSeeder::class,
         ]);
     }
 }

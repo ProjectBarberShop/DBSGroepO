@@ -22,6 +22,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
 
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+  <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
   <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js" defer></script>
 </head>
@@ -121,6 +122,12 @@
               <i class="nav-icon far ion ion-person"></i>
               <p>Contactpersonen</p>
             </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{url('cms/contactverzoeken')}}" class="nav-link">
+              <i class="nav-icon far ion-at"></i>
+              <p>Contactverzoeken</p>
+              </a>
           </li>
           <li class="nav-item">
             <a href="{{url('cms/nieuwsbrieven')}}" class="nav-link">

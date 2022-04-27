@@ -92,7 +92,7 @@
                             @else
                                 <ul class="navbar-nav">
                                     <li class="nav-item active">
-                                        <a href="{{ route('login') }}" class=" nav-link  ">Log in</a>
+                                        <a href="{{ route('login') }}" id="login" class=" nav-link  ">Log in</a>
                                     </li>
                                 </ul>
                             @endauth
@@ -105,6 +105,20 @@
 
     <main class="d-flex bd-highlight">
         <div class="w-100">
+        @if(!empty($newsletterdata))
+        <div class="d-flex w-100">
+            <div style="height: 600px;"></div>
+            <div class="d-flex align-items-center justify-content-center flex-column bg-light w-100">
+                <img src="data:image/jpg;base64,{{ chunk_split(base64_encode($newsletterdata->image->photo)) }}" class="img-fluid position-absolute" style="height:600px;">
+                <div class="text-center position-relative w-50">
+                    <h1>{{$newsletterdata->title}}</h1>
+                    <p class="fs-4">
+                        {{$newsletterdata->message}}
+                    </p>
+                </div>
+            </div>
+        </div>
+        @endif
         @yield('content')
         </div>
         <div id="sidebar" class="my-5 p-3 h-100 mx-auto position-sticky sticky-top w-25">
@@ -113,7 +127,7 @@
                 <div id="sidebarInfoLogin">
                     <div id="sidebarFacebook" class=" bg-yellow mb-3">
                         <h4 class="text-center"><b> Facebook </b></h4>
-                        <div class="fb-page w-100 " data-href="https://www.facebook.com/DuketownBarbershopSingers"
+                        <div class="fb-page w-100 mx-auto" data-href="https://www.facebook.com/DuketownBarbershopSingers"
                         data-tabs="timeline"  data-height="400" data-small-header="true"
                         data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
                         <blockquote cite="https://www.facebook.com/DuketownBarbershopSingers" class="fb-xfbml-parse-ignore">

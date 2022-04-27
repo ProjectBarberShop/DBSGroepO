@@ -76,17 +76,16 @@
         </div>
         <hr>
         <div class="d-block p-2">
-            <h3 class="text-left">Lid worden</h3>
-            <p class="text-left">
-                na een introductieperiode van maximaal 3 maanden wordt het aspirant lid beoordeeld. Hij zingt in een kwartet zijn partij de songs Heart of my Heart en My Wild Irish Rose. Bij succesvol afzingen treedt hij toe tot het koor. De contributie bedraagt, inclusief de door DBS verstrekte kleding, maandelijks euro; 20,--.
-                Kom luisteren tijdens de repetitie. We repeteren op dinsdagavond van 19:00 tot 22:15 uur in de Rietlandenschool, Pieter Langendijksingel 1, 5216 JZ s-Hertogenbosch. Ingang Koorleden door de gele deuren: Bilderdijkstraat, tegenover Bilderdijkstraat 23).<br>
-            </p>
-        </div>
-    </div>
-    <div class="container">
-        <h4>Langs komen?</h4>
-        <p>Op <a href="https://www.google.com/maps/dir//Bilderdijkstraat+23,+5216+TA+%27s-Hertogenbosch/@51.6840306,5.3272158,17z/data=!4m9!4m8!1m0!1m5!1m1!1s0x47c6ef0401e43ce9:0xe1672863df7d1e8b!2m2!1d5.3294045!2d51.6840306!3e0">deze locatie</a> kunt u ons vinden.</p>
-    </div>
-
+        <h3 class="text-left">Lid worden</h3>
+        <p class="text-left">
+        na een introductieperiode van maximaal 3 maanden wordt het aspirant lid beoordeeld. Hij zingt in een kwartet zijn partij de songs Heart of my Heart en My Wild Irish Rose. Bij succesvol afzingen treedt hij toe tot het koor. De contributie bedraagt, inclusief de door DBS verstrekte kleding, maandelijks euro; 20,--.
+        Kom luisteren tijdens de repetitie. We repeteren op dinsdagavond van 19:00 tot 22:15 uur in de Rietlandenschool, Pieter Langendijksingel 1, 5216 JZ s-Hertogenbosch. Ingang Koorleden door de gele deuren: Bilderdijkstraat, tegenover Bilderdijkstraat 23).<br>
+      </p>
+      </div>
+  </div>
+  <div class="container">
+    <h4>Langs komen?</h4>
+    <p>Op <a href="https://www.google.com/maps/dir//Bilderdijkstraat+23,+5216+TA+%27s-Hertogenbosch/@51.6840306,5.3272158,17z/data=!4m9!4m8!1m0!1m5!1m1!1s0x47c6ef0401e43ce9:0xe1672863df7d1e8b!2m2!1d5.3294045!2d51.6840306!3e0" target="_blank">deze locatie</a> kunt u ons vinden.</p>
+  </div>
 </section>
 @endsection

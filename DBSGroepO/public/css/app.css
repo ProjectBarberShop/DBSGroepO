@@ -60,6 +60,9 @@
   --bs-body-bg: #f8fafc;
 }
 
+.resize-disable{
+    resize: none;
+}
 
 .bg-yellow {
     background-color: yellow;
