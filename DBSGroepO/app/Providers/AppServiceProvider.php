@@ -31,9 +31,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         view()->composer('layouts.app', function($view) {
-            $newsletterdata = Newsletter::with('image')
-            ->orderBy('created_at', 'desc')
-            ->where('is_published', true)->first();
             $contactsdata = Contact::where('is_published', true)->get();
             $footerdata = Footer::find(1);
             $navbardata = NavbarItem::all();
@@ -53,7 +50,6 @@ class AppServiceProvider extends ServiceProvider
             $view->with(['contactsdata' => $contactsdata,
                          'footerdata' => $footerdata,
                          'navbardata' => $navbardata,
-                         'newsletterdata' => $newsletterdata,
                         ]);
         });
         Paginator::useBootstrap();

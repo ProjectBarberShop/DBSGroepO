@@ -51,24 +51,24 @@
                     <div class="imagePosition p-2"></div>
                 </div>
                 <button type="button" class="btn btn-default" onclick="modalShow()">Selecteer foto</button>
-                <div class="modal fade show" id="modal-info" aria-modal="true" role="dialog">
-                    <div class="modal-dialog">
-                        <div class="modal-content bg-info">
-                            <div class="modal-header">
-                                <h2 class="modal-title">Selecteer foto</h2>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true" onclick="modalClose()" class="fs-2">×</span>
-                                </button>
-                            </div>
-                            <div class="modal-body row">
-                                @forelse($imagesdata as $img)
-                                    <a onclick="cloneimage({{$img->id}}, 'b', 'imagePosition', null, null, true), modalClose()" class="col-4">
+                <div class="modal justify-content-center align-items-center" id="modal-info" aria-modal="true" role="dialog">
+                    <div class="modal-content bg-info w-75">
+                        <div class="modal-header">
+                            <h2 class="modal-title">Selecteer foto</h2>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true" onclick="modalClose()" class="fs-2">×</span>
+                            </button>
+                        </div>
+                        <div class="row w-100 m-0 pr-2 overflow-auto" style="height: 80vh;">
+                            @forelse($imagesdata as $img)
+                                <div class="d-flex justify-content-center align-items-center col-4 p-0">
+                                    <a onclick="cloneimage({{$img->id}}, 'b', 'imagePosition', null, null, true), modalClose()" class="ml-2 mt-2">
                                         <img src="data:image/jpg;base64,{{ chunk_split(base64_encode($img->photo)) }}" class="img-fluid" id="{{$img->id}}b">
                                     </a>
-                                    @empty
-                                    <p class="fs-5">Er zijn nog geen foto's beschikbaar. Ga naar: <a href="{{ route('fotos.index') }}">fotos pagina</a></p>
-                                @endforelse
-                            </div>
+                                </div>
+                            @empty
+                                <p class="fs-5">Er zijn nog geen foto's beschikbaar. Ga naar: <a href="{{ route('fotos.index') }}">fotos pagina</a></p>
+                            @endforelse
                         </div>
                     </div>
                 </div>
@@ -107,7 +107,7 @@ function confirmSubmit(formId, uniqueId) {
 }
 
 function modalShow() {
-    document.getElementById("modal-info").style.display = "block";
+    document.getElementById("modal-info").style.display = "flex";
 }
 
 function modalClose() {
