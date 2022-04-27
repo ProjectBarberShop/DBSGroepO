@@ -11,7 +11,13 @@ class ImagesSystemTest extends DuskTestCase
     {
 
         $this->browse(function (Browser $browser) {
-            $browser->visit('/cms/home');
+            $browser->visit('/');
+            $browser->press('#login');
+            $browser->assertPathIs('/login');
+            $browser->type('email', 'admin@gmail.com');
+            $browser->type('password', 'Admin123');
+            $browser->press('Login');
+            $browser->assertPathIs('/cms/home');
             $browser->clickLink('More info');
             $browser->visit('/cms/fotos');
             $browser->attach('absolutePathToFile', 'photo');
@@ -27,12 +33,19 @@ class ImagesSystemTest extends DuskTestCase
     {
 
         $this->browse(function (Browser $browser) {
+            $browser->visit('/');
+            $browser->press('#login');
+            $browser->assertPathIs('/login');
+            $browser->type('email', 'admin@gmail.com');
+            $browser->type('password', 'Admin123');
+            $browser->press('Login');
+            $browser->assertPathIs('/cms/home');
             $browser->visit('/cms/fotos');
             $browser->select('Dier', 'filter');
             $browser->press('Zoeken');
             $browser->assertPathIs('/cms/fotos');
-            $browser-assertSee('Duif');
-            $browser-assertDontSee('Koor');
+            $browser->assertSee('Duif');
+            $browser->assertDontSee('Koor');
         });
 
     }
@@ -40,11 +53,18 @@ class ImagesSystemTest extends DuskTestCase
     {
 
         $this->browse(function (Browser $browser) {
+            $browser->visit('/');
+            $browser->press('#login');
+            $browser->assertPathIs('/login');
+            $browser->type('email', 'admin@gmail.com');
+            $browser->type('password', 'Admin123');
+            $browser->press('Login');
+            $browser->assertPathIs('/cms/home');
             $browser->visit('/cms/fotos');
             $browser->type('search', 'Duif');
             $browser->press('Zoeken');
             $browser->assertPathIs('/cms/fotos');
-	        $browser-assertSee('Duif');
+	        $browser->assertSee('Duif');
         });
 
     }
@@ -52,10 +72,17 @@ class ImagesSystemTest extends DuskTestCase
     {
 
         $this->browse(function (Browser $browser) {
+            $browser->visit('/');
+            $browser->press('#login');
+            $browser->assertPathIs('/login');
+            $browser->type('email', 'admin@gmail.com');
+            $browser->type('password', 'Admin123');
+            $browser->press('Login');
+            $browser->assertPathIs('/cms/home');
             $browser->visit('/cms/fotos');
             $browser->press('');
             $browser->assertPathIs('/cms/fotos');
-	        $browser-assertDontSee('Duif');
+	        $browser->assertDontSee('Duif');
         });
 
     }
