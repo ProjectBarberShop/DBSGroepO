@@ -23,7 +23,7 @@
             @csrf
             <div class="form-group">
                 <label for="category">Categorie toevoegen</label>
-                <input type="text" class="form-control" id="category" name="title">
+                <input type="text" class="form-control" id="category" name="title" required>
             </div>
             <button type="submit" class="btn btn-success">Submit</button>
             </form>
