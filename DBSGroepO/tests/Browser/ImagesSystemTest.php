@@ -31,8 +31,8 @@ class ImagesSystemTest extends DuskTestCase
             $browser->select('Dier', 'filter');
             $browser->press('Zoeken');
             $browser->assertPathIs('/cms/fotos');
-	    $browser-assertSee('Duif');
-	    $browser-assertDontSee('Koor');
+            $browser-assertSee('Duif');
+            $browser-assertDontSee('Koor');
         });
 
     }
@@ -44,7 +44,7 @@ class ImagesSystemTest extends DuskTestCase
             $browser->type('search', 'Duif');
             $browser->press('Zoeken');
             $browser->assertPathIs('/cms/fotos');
-	    $browser-assertSee('Duif');
+	        $browser-assertSee('Duif');
         });
 
     }
@@ -55,7 +55,7 @@ class ImagesSystemTest extends DuskTestCase
             $browser->visit('/cms/fotos');
             $browser->press('');
             $browser->assertPathIs('/cms/fotos');
-	    $browser-assertDontSee('Duif');
+	        $browser-assertDontSee('Duif');
         });
 
     }

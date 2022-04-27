@@ -13,7 +13,7 @@
                 <img id="preview" src="#" alt="afbeelding" class="w-50 h-50"/>
                 <input type="file" name="photo" id="file" accept="image/*" onchange="getImgData()">
                 <label for="category">Categorie:</label>
-                <input list="category" name="category" id="category" value="-">
+                <input name="category" id="category" value="-">
                 <button type="submit" class="btn btn-primary float-right mt-4">+</button>
             </form>
             @if ($errors->any())
@@ -66,6 +66,7 @@
                 <td><img src="data:image/jpg;base64,{{ chunk_split(base64_encode($img->photo)) }}" class="w-25 h-25 "></td>
                 <td>{{$img->category}}</td>     
             <td>  
+            <a href="{{ route('fotos.show', $img->id) }}" class="mr-2 btn btn-primary">Details</a>
                 <form action="{{ route('fotos.destroy', $img->id) }}" method="POST">
                 <input type="hidden" id="{{$img->title}}" name="{{$img->title}}">
                     @method('DELETE')
@@ -88,7 +89,9 @@
         @foreach($images as $img)
         <tr>
             <td><img src="data:image/jpg;base64,{{ chunk_split(base64_encode($img->photo)) }}" class="w-50 h-50 "></td>    
-            <td><form action="{{ route('fotos.destroy', $img->id) }}" method="POST">
+            <td>
+                <a href="{{ route('fotos.show', $img->id) }}" class="mr-2 btn btn-primary">Details</a>
+                <form action="{{ route('fotos.destroy', $img->id) }}" method="POST">
                 <input type="hidden" id="{{$img->title}}" name="{{$img->title}}">
                     @method('DELETE')
                     @csrf
