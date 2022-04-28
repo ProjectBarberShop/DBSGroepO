@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\CardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
+
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\FooterController;
@@ -20,6 +21,10 @@ use App\Http\Controllers\ColumnTextController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\ContactFormController;
 use App\Http\Controllers\PerformanceController;
+
+use App\Http\Controllers\ContactController;
+use App\Http\Requests\ContactFormRequest;
+
 
 /*
 |--------------------------------------------------------------------------
