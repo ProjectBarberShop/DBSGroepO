@@ -56,6 +56,12 @@ Route::group([
         return Redirect("/login");
     });
     Route::group(['middleware' => ['auth']], function() {
+
+        Route::controller(ImageController::class)->group(function(){
+            Route::get('paginas/{pagina}/afbeelding/create', 'createMultiple')->name('Afbeelding.createMultiple');
+            Route::post('paginas/{pagina}/afbeelding', 'storeMultiple')->name('Afbeelding.storeMultiple');
+        });
+
     Route::resource('fotos', ImageController::class);
     Route::resource('contactpersonen', ContactsController::class);
     Route::resource('profile', UserController::class)->only(['index']);

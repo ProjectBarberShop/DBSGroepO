@@ -32,6 +32,7 @@
                            <th>Toegevoegd op</th>
                            <th>Card toevoegen</th>
                            <th>Youtube video toevoegen</th>
+                           <th>Afbeeldingen toevoegen</th>
                            <th>Bijwerken</th>
                            <th>Verwijderen</th>
                         </tr>
@@ -44,6 +45,7 @@
                            <td>{{$w->created_at}}</td>
                             <td><a class="btn btn-primary" href="{{ route('card.create' , $w->id) }}"> Nieuwe cards maken</a></td>
                             <td><a class="btn btn-primary" href="{{ route('youtube.createMultiple' , $w->id) }}"> Youtube video toevoegen</a></td>
+                            <td><a class="btn btn-primary" href="{{ route('Afbeelding.createMultiple' , $w->id) }}"> Afbeeldingen toevoegen</a></td>
                             <td><a class="btn btn-success" id="update{{$w->id}}" href="{{ route('paginas.edit',$w->id) }}">Bijwerken</a></td>
                             <td>
                                 <form action="{{ route('paginas.destroy', $w->id) }}" method="POST">
