@@ -37,9 +37,12 @@ class AgendaCMS extends Page
     {
         return [
             '@createbutton' => '#createbutton',
-            '@catdropdown' => '#catdropdown',
-            '@catsubmit' => '#catsubmit',
-            '@agendaitem' => '.agendaitem'
+            '@createsubmit' => '#createsubmit',
+            '@cattitle' => '#cattitle',
+            '@categories' => '#dLabel',
+            '@catcreatebutton' => '#cataddbutton',
+            '@catdeletebutton' => '#catdeletebutton',
+            '@agendaeditbutton' => '#editbutton'
         ];
     }
 }

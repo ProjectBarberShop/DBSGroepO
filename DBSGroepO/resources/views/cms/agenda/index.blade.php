@@ -10,11 +10,11 @@
             <div class="pre-scrollable container">
             @foreach($categories as $c)
                 <div class="row mb-1">
-                    <p class="col-md-6">{{$c->title}}</p>
+                    <p id="cattitle" class="col-md-6">{{$c->title}}</p>
                     <form class="col-md-2 offset-md-3 p-1" action="{{route('category.destroy', $c->id)}}", method="POST">
                     @csrf
                     @method('delete')
-                    <button class="btn" type="submit"><i class="far fa-trash-alt"></i></button>
+                    <button class="btn" id="catdeletebutton" type="submit"><i class="far fa-trash-alt"></i></button>
                     </form>
                 </div>
             @endforeach
@@ -25,7 +25,7 @@
                 <label for="category">Categorie toevoegen</label>
                 <input type="text" class="form-control" id="category" name="title" required>
             </div>
-            <button type="submit" class="btn btn-success">Submit</button>
+            <button id="cataddbutton" type="submit" class="btn btn-success">Submit</button>
             </form>
         </div>
     </div>
@@ -35,19 +35,19 @@
                 <a class="btn btn-success" id="createbutton" href="{{route('agenda.create')}}">Nieuw agendapunt maken</a>
             </div>
             <div class="offset-md-5 col-md-3">
-                <select id="catdropdown" name="category" class="form-select" aria-label="Categorie">
+                <select name="category" class="form-select" aria-label="Categorie">
                 <option selected></option>
                 @foreach($categories as $c)
                 <option value="{{$c->id}}">{{$c->title}}</option>
                 @endforeach
                 </select>
             </div>
-            <button id="catsubmit" type="submit" class="btn btn-success mb-3 col-md-1">Submit</button>
+            <button type="submit" class="btn btn-success mb-3 col-md-1">Submit</button>
         </div>
     </form>
     @foreach($agendapunten as $agendapunt)
 
-    <div class="card agendaitem">
+    <div class="card" dusk="agenda">
     <div class="card-header">
         <div class="row">
             <div class="col-md-2">
@@ -56,7 +56,7 @@
                 @endforeach
             </div>
             <div class="col-md-1 offset-md-8">
-                <a href="{{route('agenda.edit', ['agenda' => $agendapunt->id])}}" class="btn btn-primary"><i class="far fa-edit" aria-hidden="true"></i></a>
+                <a href="{{route('agenda.edit', ['agenda' => $agendapunt->id])}}" id="editbutton" class="btn btn-primary"><i class="far fa-edit" aria-hidden="true"></i></a>
             </div>
             <div class="col-md-1">
                 <form action="{{route('agenda.destroy', $agendapunt->id)}}", method="POST">
