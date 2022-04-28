@@ -21,7 +21,7 @@ class ContactsController extends Controller
             'email' => 'required',
             'phonenumber' => 'required',
         ]);
-        
+
         $contactsdata = new Contact;
         $contactsdata->firstname = $request->input('firstname');
         $contactsdata->preposition = $request->input('preposition');
@@ -35,7 +35,7 @@ class ContactsController extends Controller
     }
 
     public function edit($id)
-    {        
+    {
         $contactdata = Contact::find($id);
         return view('cms.contactpersonen.edit', compact('contactdata'));
     }

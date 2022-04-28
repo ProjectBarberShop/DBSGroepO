@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Image;
 
 class HomeController extends Controller
 {
@@ -13,6 +14,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('Home.Home');
+        $sliderImages = Image::where('useInSlider', '=', true)->get();
+        return view('Home.Home', ['slider' => $sliderImages]);
     }
 }

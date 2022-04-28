@@ -13,9 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('webpages', function (Blueprint $table) {
+        Schema::create('webpage', function (Blueprint $table) {
             $table->id();
-            $table->longtext('body');
+            $table->integer('template_id');
+            $table->longtext('main_text');
             $table->string('slug');
             $table->timestamps();
         });

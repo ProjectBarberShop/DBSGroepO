@@ -13,7 +13,7 @@
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <!-- Datatables bootstrap -->
   <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css" />
   <!-- Ionicons -->
@@ -21,6 +21,10 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/overlayscrollbars/1.5.2/css/OverlayScrollbars.min.css" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
 
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+  <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js" defer></script>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -49,7 +53,7 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="{{url('cms/home')}}" class="brand-link">
+    <a href="{{url('/')}}" class="brand-link">
       <img src="{{asset('assets/images/barbershop.jpg')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">Barbershop</span>
     </a>
@@ -82,41 +86,23 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{url('cms/fotos')}}" class="nav-link">
               <i class="nav-icon fas fa fa-image"></i>
               <p>
                 Foto's
-                <i class="fas fa-angle-left right"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="" class="nav-link">
-                  <i class="far fa-folder nav-icon"></i>
-                  <p>General</p>
-                </a>
-              </li>
-            </ul>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{url('cms/paginas')}}" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
               <p>
                 Pagina's
-                <i class="fas fa-angle-left right"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="pages/forms/general.html" class="nav-link">
-                  <i class="far fa fa-file nav-icon"></i>
-                  <p>Contact page test</p>
-                </a>
-              </li>
-            </ul>
           </li>
           <li class="nav-item">
-            <a href="{{url('cms/home')}}" class="nav-link">
+            <a href="{{url('cms/youtube')}}" class="nav-link">
               <i class="nav-icon far ion ion-ios-videocam"></i>
               <p>
                 Video's
@@ -124,9 +110,29 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="{{url('cms/agenda')}}" class="nav-link">
+              <i class="nav-icon far ion ion-ios-calendar"></i>
+              <p>
+                Agenda
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="{{url('cms/contactpersonen')}}" class="nav-link">
-              <i class="nav-icon far ion ion-person" md="md-person"></i>
+              <i class="nav-icon far ion ion-person"></i>
               <p>Contactpersonen</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{url('cms/contactverzoeken')}}" class="nav-link">
+              <i class="nav-icon far ion-at"></i>
+              <p>Contactverzoeken</p>
+              </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{url('cms/nieuwsbrieven')}}" class="nav-link">
+              <i class="nav-icon far ion-ios-paper"></i>
+              <p>Nieuwsbrieven</p>
             </a>
           </li>
           <li class="nav-header">Example multi lvl</li>
@@ -222,13 +228,6 @@
         </div>
     </section>
 
-  <footer class="main-footer">
-    <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
-    All rights reserved.
-    <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> 3.2.0
-    </div>
-  </footer>
 
 </div>
 <!-- ./wrapper -->

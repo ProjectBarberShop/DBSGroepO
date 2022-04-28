@@ -60,6 +60,9 @@
   --bs-body-bg: #f8fafc;
 }
 
+.resize-disable{
+    resize: none;
+}
 
 .bg-yellow {
     background-color: yellow;
@@ -67,6 +70,12 @@
 
 .text-yellow{
     color:yellow;
+}
+
+@media only screen and (max-width: 470px) {
+    .h3.slogan {
+        font-size: 1rem;
+    }
 }
 
 *,
@@ -4532,7 +4541,7 @@ a.nav-link {
 }
 .navbar-dark .navbar-nav .show > .nav-link,
 .navbar-dark .navbar-nav .nav-link.active {
-  color: yellow;
+  color: white;
 }
 .navbar-dark .navbar-toggler {
   color: rgba(255, 255, 255, 0.55);
@@ -7021,7 +7030,7 @@ a.nav-link {
 }
 
 .h-11 {
-    height: 11rem;
+    max-height: 11rem;
 }
 
 .h-25 {

@@ -8,17 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class Agendapunt extends Model
 {
     use HasFactory;
-    protected $table = 'Agenda';
-    protected $primaryKey = 'Id';
+    protected $table = 'agenda';
+    protected $primaryKey = 'id';
 
     protected $fillable =  [
         'title',
         'description',
         'start',
-        'end'
+        'end',
+        'location',
+        'locationURL'
     ];
 
-    public function Categories() {
-        return $this->belongsToMany(Category::class, 'agenda_category');
+    public function Category() {
+        return $this->belongsToMany(Category::class);
     }
 }

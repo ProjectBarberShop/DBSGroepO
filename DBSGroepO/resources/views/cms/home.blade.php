@@ -26,7 +26,7 @@
       <div class="icon">
          <i class="ion ion-compose"></i>
       </div>
-      <a href="{{url('cms/paginas')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+      <a href="{{url('cms/paginas')}}" id="paginas" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
    </div>
 </div>
 <!-- ./col -->
@@ -35,12 +35,12 @@
    <div class="small-box bg-warning">
       <div class="inner">
          <h3></h3>
-         <p>{{__("Contact")}}</p>
+         <p>{{__("Contactpersonen")}}</p>
       </div>
       <div class="icon">
          <i class="ion ion-person-add"></i>
       </div>
-      <a href="{{url('cms/contact')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+      <a href="{{url('cms/contactpersonen')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
    </div>
 </div>
 <!-- ./col -->
@@ -54,7 +54,21 @@
       <div class="icon">
          <i class="ion ion-ios-videocam"></i>
       </div>
-      <a href="{{url('cms/videos')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+      <a href="{{url('cms/youtube')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+   </div>
+</div>
+<!-- ./col -->
+<div class="col-lg-3 col-6">
+   <!-- small box -->
+   <div class="small-box bg-success">
+      <div class="inner">
+         <h3></h3>
+         <p>{{__("Agenda")}}</p>
+      </div>
+      <div class="icon">
+         <i class="ion ion-calendar"></i>
+      </div>
+      <a href="{{url('cms/agenda')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
    </div>
 </div>
 <!-- ./col -->
@@ -63,13 +77,55 @@
    <div class="small-box bg-secondary">
       <div class="inner">
          <h3></h3>
-         <p>{{__("Contactpersonen")}}</p>
+         <p>{{__("Nieuwsbrieven")}}</p>
       </div>
       <div class="icon">
-         <i class="ion ion-person"></i>
+         <i class="ion ion-ios-paper"></i>
       </div>
-      <a href="{{url('cms/contactpersonen')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+      <a href="{{url('cms/nieuwsbrieven')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
    </div>
+</div>
+<!-- ./col -->
+<div class="col-lg-3 col-6">
+    <!-- small box -->
+    <div class="small-box bg-secondary">
+        <div class="inner">
+            <h3></h3>
+            <p>{{__("Footer")}}</p>
+        </div>
+        <div class="icon">
+            <i class="ion ion-compose"></i>
+        </div>
+        <a href="{{url('cms/footer')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+    </div>
+</div>
+<!-- ./col -->
+<div class="col-lg-3 col-6">
+    <!-- small box -->
+    <div class="small-box bg-secondary">
+        <div class="inner">
+            <h3></h3>
+            <p>{{__("Contactverzoeken")}}</p>
+        </div>
+        <div class="icon">
+            <i class="ion ion-at"></i>
+        </div>
+        <a href="{{url('cms/contactverzoeken')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+    </div>
+</div>
+<!-- ./col -->
+<div class="col-lg-3 col-6">
+    <!-- small box -->
+    <div class="small-box bg-secondary">
+        <div class="inner">
+            <h3></h3>
+            <p>{{__("Navigatiebar")}}</p>
+        </div>
+        <div class="icon">
+            <i class="ion ion-compose"></i>
+        </div>
+        <a href="{{url('cms/navbar')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+    </div>
 </div>
 
 <div class="container">
@@ -90,4 +146,5 @@
         </div>
     </div>
 </div>
+
 @endsection

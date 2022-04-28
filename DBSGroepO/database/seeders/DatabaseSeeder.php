@@ -17,6 +17,10 @@ class DatabaseSeeder extends Seeder
         $this->call([
             CatagorySeeder::class,
             AgendaSeeder::class,
+            Footerseeder::class,
+            NavbarSeeder::class,
+            UserSeeder::class,
+            WebpageSeeder::class,
         ]);
     }
 }

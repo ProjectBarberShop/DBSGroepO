@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Footer;
+use Database\Seeders\FooterSeeder;
 use Illuminate\Http\Request;
 
-class FotoController extends Controller
+class FooterController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +15,9 @@ class FotoController extends Controller
      */
     public function index()
     {
-        return view('cms.fotos.index');
+        $footerdata = Footer::all()->first();
+
+        return view('cms.footer.index', compact('footerdata'));
     }
 
     /**
@@ -56,7 +60,8 @@ class FotoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $footerdata = Footer::find($id);
+        return view('cms.footer.edit', compact('footerdata'));
     }
 
     /**
@@ -68,7 +73,27 @@ class FotoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $request->validate([
+            'address' => 'required',
+            'email' => 'required',
+            'phonenumber' => 'required',
+            'secretaryemail' => 'required',
+            'kvk' => 'required',
+            'facebookurl' => 'required',
+        ]);
+
+        Footer::where('id', $id)->update([
+            'address' => $request->input('address'),
+            'email' => $request->input('email'),
+            'phonenumber' => $request->input('phonenumber'),
+            'secretaryemail' => $request->input('secretaryemail'),
+            'kvk' => $request->input('kvk'),
+            'facebookurl' => $request->input('facebookurl')
+
+        ]);
+
+        return redirect('cms/footer');
     }
 
     /**

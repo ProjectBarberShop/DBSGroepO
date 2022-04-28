@@ -8,11 +8,31 @@ use Illuminate\Database\Eloquent\Model;
 class Webpages extends Model
 {
     use HasFactory;
-    protected $table= 'webpages';
+    protected $table= 'webpage';
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'body',
+        'main_text',
+        'template_id',
         'slug'
     ];
+
+    public function ColomContext() {
+        return $this->belongsToMany(colom_context::class);
+    }
+
+    public function cardImage() {
+        return $this->belongsToMany(card_images::class, 'card_webpage');
+    }
+    public function Image() {
+        return $this->belongsToMany(Image::class);
+    }
+
+    public function youtube() {
+        return $this->belongsToMany(Youtube::class);
+    }
+
+    public function newsletter() {
+        return $this->belongsToMany(Newsletter::class, 'newsletter_webpage');
+    }
 }

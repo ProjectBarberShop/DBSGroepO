@@ -26,7 +26,7 @@ class ContactFormRequest extends FormRequest
         return [
             'firstname' => 'required|string|max:255',
             'preposition' => 'max:255',
-            'surname' => 'required|string|max:255',
+            'lastname' => 'required|string|max:255',
             'email' => 'required|string|email|max:255',
             'title' => 'required|string|max:255',
             'phonenumber' => 'required|min:10|regex:/^([0-9\s\-\+\(\)]*)$/',
@@ -48,8 +48,8 @@ class ContactFormRequest extends FormRequest
             'firstname.required' => 'voornaam mag niet leeg zijn',
             'firstname.max:255' => 'voornaam is te lang',
 
-            'surname.required' => 'achternaam mag niet leeg zijn',
-            'surname.max:255' => 'achternaam is te lang',
+            'lastname.required' => 'achternaam mag niet leeg zijn',
+            'lastname.max:255' => 'achternaam is te lang',
 
             'preposition.required' => 'tussenvoegsel mag niet leeg zijn',
             'preposition.max:255' => 'tussenvoegsel is te lang',
@@ -63,5 +63,5 @@ class ContactFormRequest extends FormRequest
             'phonenumber.regex:/^([0-9\s\-\+\(\)]*)$/' => 'telefoonnummer voldoet niet aan het juiste formaat'
         ];
     }
-    
+
 }
