@@ -115,14 +115,14 @@ class YoutubeController extends Controller
                 $youtube->save();
             }
         }
-        if($request->multiInput != null) {
+        if($request->oldInput != null) {
             foreach($request->oldInput as $key => $value) {
                     $youtube = Youtube::find($key);
                     $youtube->youtube_video_key = $value['youtube_video_key'];
                     $youtube->save();
             }
         }
-        return redirect()->route('paginas.index')->with('success','Alles is succesvol bijgewerkt indien er dingen verwijdert moeten worden kan dat via de show');
+        return redirect()->route('imageWebpage.editYoutube' , $webpage);
     }
 
     /**

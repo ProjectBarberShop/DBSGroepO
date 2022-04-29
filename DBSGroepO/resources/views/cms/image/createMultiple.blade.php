@@ -33,7 +33,7 @@
                     <datalist id="images" class="w-100">
                         @foreach($afbeeldingen as $img)
                             <option value="{{$img->id}}">{{$img->title}}</option>
-                        @endforeach 
+                        @endforeach
                     </datalist>
                 </td>
                 <td><input type="button" name="add" value="Add" id="addRemoveIp" class="btn btn-outline-dark" required></td>
@@ -53,8 +53,8 @@
                 '<input list="images" name="multiInput[0][image_id]" id="afbeeldingen" class="form-control">'+
                     '<datalist id="images" class="w-100">'+
                         '@foreach($afbeeldingen as $img)'+
-                            '<option value="{{$img->title}}">{{$img->id}}</option>'+
-                        '@endforeach'+ 
+                            '<option value="{{$img->id}}">{{$img->title}}</option>'+
+                        '@endforeach'+
                     '</datalist>'+
                 '</td><td><button type="button" class="remove-item btn btn-danger">Delete</button>'+
         '</td></tr>');
