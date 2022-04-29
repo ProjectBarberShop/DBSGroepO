@@ -17,6 +17,7 @@ use App\Http\Controllers\YoutubeController;
 use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\DropdownController;
 use App\Http\Controllers\AgendaCMSController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ColumnTextController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\ContactFormController;
@@ -83,6 +84,8 @@ Route::group([
     });
 
     Route::resource('paginas', WebPageController::class);
+    Route::resource('agenda', AgendaCMSController::class);
+    Route::resource('category', CategoryController::class);
 
     Route::controller(ColumnTextController::class)->group(function() {
         Route::post('paginas/{pagina}/column', 'updateAndStore')->name('editColomText.updateAndInsert');

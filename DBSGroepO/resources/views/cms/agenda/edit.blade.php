@@ -26,18 +26,18 @@
                 </div>
                 <div class="form-group">
                     <label for="start">Start</label>
-                    <input type="datetime-local" class="form-control" name="start" value="{{ old('start', $agendapunt->start) }}" required>
+                    <input id="start" type="datetime-local" class="form-control" name="start" value="{{ old('start', $agendapunt->start) }}" required>
                 </div>
                 <div class="form-group">
                     <label for="end">Eind</label>
-                    <input type="datetime-local" class="form-control" name="end" value="{{ old('end', $agendapunt->end) }}" required>
+                    <input id="end" type="datetime-local" class="form-control" name="end" value="{{ old('end', $agendapunt->end) }}" required>
                 </div>
                 <div class="form-group">
                     <label for="category">Categorie (optioneel)</label>
                     <select name="category" class="form-select" aria-label="Categorie" value="{{ old('category, $agendapunt->category') }}">
                         <option selected></option>
                         @foreach($categories as $c)
-                        <option value="{{$c->id}}">{{$c->title}}</option>
+                            <option value="{{$c->id}}">{{$c->title}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -51,7 +51,7 @@
                 </div>
                 <div class="row">
                     <a href="/cms/agenda" class="btn btn-outline-secondary col-md-1 ml-2 mr-2">Terug</a>
-                    <button type="submit" class="btn btn-primary col-md-1">Submit</button>
+                    <button id="createsubmit" type="submit" class="btn btn-primary col-md-1">Submit</button>
                 </div>
             </form>
         </div>
