@@ -98,20 +98,19 @@ class imageController extends Controller
             'multiInput.*.image_id' => 'required',
             'oldInput.*.image_id' => 'required',
         ]);
+        $webpage = Webpages::find($webpage);
 
         if($request->multiInput != null) {
             foreach($request->multiInput as $key => $value) {
-                $image = Webpages::find($webpage);
-                $image->Image()->attach($value);
-                $image->save();
+                $webpage->Image()->attach($value);
+                $webpage->save();
             }
         }
+
         if($request->oldInput != null) {
             foreach($request->oldInput as $key => $value) {
-                    $image = Image::find($key);
-                    // $image->Webpages()->attach($webpage);
-                    $image->Webpages()->wherePivot('webpages_id' , $webpage)->wherePivot('image_id' , $image->id)->updateExistingPivot($image->id, ['image_id' => $key]);
-                    $image->save();
+                $webpage->Image()->update(['image_id' => $value['image_id']]);
+                $webpage->save();
             }
         }
 
