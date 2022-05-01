@@ -100,19 +100,17 @@ class imageController extends Controller
         ]);
         $webpage = Webpages::find($webpage);
 
-        if($request->multiInput != null) {
-            foreach($request->multiInput as $key => $value) {
-                $webpage->Image()->attach($value);
-                $webpage->save();
-            }
-        }
-
         if($request->oldInput != null) {
             foreach($request->oldInput as $key => $value) {
                 $webpage->Image()->update(['image_id' => $value['image_id']]);
-                $webpage->save();
             }
         }
+        if($request->multiInput != null) {
+            foreach($request->multiInput as $key => $value) {
+                $webpage->Image()->attach($key);
+            }
+        }
+
 
         return redirect()->route('paginas.index')->with('success','Alles is succesvol bijgewerkt indien er dingen verwijdert moeten worden kan dat via de show');
     }

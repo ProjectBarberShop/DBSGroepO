@@ -50,7 +50,7 @@
     $("#addRemoveIp").click(function () {
         ++i;
         $("#multiForm").append('<tr><td>'+
-                '<input list="images" name="multiInput[0][image_id]" id="afbeeldingen" class="form-control">'+
+                '<input list="images" name="multiInput['+i+'][image_id]" id="afbeeldingen" class="form-control">'+
                     '<datalist id="images" class="w-100">'+
                         '@foreach($afbeeldingen as $img)'+
                             '<option value="{{$img->id}}">{{$img->title}}</option>'+

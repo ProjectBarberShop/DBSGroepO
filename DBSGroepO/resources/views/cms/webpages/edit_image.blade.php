@@ -21,11 +21,10 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($pagecontent as $page)
                                     @foreach($page->Image as $img)
                                         <tr>
                                             <td>
-                                                <select id="images" name="oldInput[{{ $img->id }}][image_id]" class="w-100">
+                                                <select id="images" name="oldInput[{{++$img->id }}][image_id]" class="w-100">
                                                     @foreach($afbeeldingen as $af)
                                                         <option value="{{$af->id}}"  {{$af->id == $img->id ? 'selected' : ''}}>{{$af->title}}</option>
                                                     @endforeach
@@ -33,7 +32,6 @@
                                             </td>
                                         </tr>
                                     @endforeach
-                                @endforeach
                             </tbody>
                             <tfoot>
                                 <tr>
@@ -42,13 +40,13 @@
                                 </tr>
                             </tfoot>
                         </table>
-                        <div class="card-body">
-                            @foreach ($page->Image as $y)
-
-                            @endforeach
-                        </div>
                     </form>
                 @endforeach
+                <div class="card-body">
+                    @foreach ($page->Image as $img)
+                    <img src="data:image/jpg;base64,{{ chunk_split(base64_encode($img->photo)) }}" class="w-25 h-25 ">
+                    @endforeach
+                </div>
             </div>
         </div>
     </section>
