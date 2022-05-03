@@ -85,6 +85,8 @@ class WebPageController extends Controller
 
     public function duplicatePage($pageId) {
         $webpage = Webpages::with('ColomContext' , 'Image' , 'youtube' , 'newsletter')->find($pageId);
+        $navigation = NavbarItem::where('link' , $webpage->slug)->get();
+
         $allWebpages = Webpages::all();
         $newWebpage = $webpage->replicate();
         foreach($allWebpages as $page) {
@@ -92,12 +94,47 @@ class WebPageController extends Controller
                 return redirect()->route('paginas.index')->with('warning','sorry deze pagina is al gekopieerd');
             }
         }
-        
         $newWebpage->slug = $webpage->slug .''. "-kopie";
         $newWebpage->save();
+        $this->duplicateRelations($webpage , $newWebpage);
+        $this->duplicateNavigation($navigation , $webpage);
 
         return redirect()->route('paginas.index')->with('success','Pagina succesvol gekopieerd');
 
+    }
+
+    public function duplicateRelations($webpage , $newWebpage) {
+        foreach($webpage->ColomContext as $context) {
+            $newWebpage->ColomContext()->attach($context);
+        }
+        foreach($webpage->Image as $image) {
+            $newWebpage->Image()->attach($image);
+        }
+        foreach($webpage->youtube as $youtube) {
+            $newWebpage->youtube()->attach($youtube);
+        }
+        foreach($webpage->newsletter as $newsletter) {
+            $newWebpage->newsletter()->attach($newsletter);
+        }
+    }
+
+    public function duplicateNavigation($navigation , $webpage) {
+        if($navigation->count() !== 0) {
+            foreach($navigation as $item) {
+                $findNavigation = NavbarItem::find($item->id);
+                $newNavigation = $findNavigation->replicate();
+                $newNavigation->link = $webpage->slug .''. "-kopie";
+                $newNavigation->save();
+            }
+        } else {
+            $dropdownItem = DropdownItem::where('link' , $webpage->slug)->get();
+            foreach($dropdownItem as $item) {
+                $findDropdownItem = DropdownItem::find($item->id);
+                $newDropdownItem = $findDropdownItem->replicate();
+                $newDropdownItem->link = $webpage->slug .''. "-kopie";
+                $newDropdownItem->save();
+            }
+        }
     }
     /**
      * Display the specified resource.
