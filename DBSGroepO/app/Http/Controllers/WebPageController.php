@@ -9,7 +9,6 @@ use App\Models\Webpages;
 use App\Models\colom_context as context_colomn;
 use App\Models\colom_context_webpages;
 use Illuminate\Support\Str;
-use function PHPUnit\Framework\isEmpty;
 
 class WebPageController extends Controller
 {
@@ -83,6 +82,23 @@ class WebPageController extends Controller
        return redirect()->route('paginas.index')->with('success','Pagina succesvol toegevoegd');
     }
 
+
+    public function duplicatePage($pageId) {
+        $webpage = Webpages::with('ColomContext' , 'Image' , 'youtube' , 'newsletter')->find($pageId);
+        $allWebpages = Webpages::all();
+        $newWebpage = $webpage->replicate();
+        foreach($allWebpages as $page) {
+            if($page->slug === $webpage->slug.''."-kopie") {
+                return redirect()->route('paginas.index')->with('warning','sorry deze pagina is al gekopieerd');
+            }
+        }
+        
+        $newWebpage->slug = $webpage->slug .''. "-kopie";
+        $newWebpage->save();
+
+        return redirect()->route('paginas.index')->with('success','Pagina succesvol gekopieerd');
+
+    }
     /**
      * Display the specified resource.
      *
