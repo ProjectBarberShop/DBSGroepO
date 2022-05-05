@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Image;
+use App\Models\webpages;
 
 class imageController extends Controller
 {
@@ -20,9 +21,6 @@ class imageController extends Controller
             $images->where('category', '=', $request->filter)->get();
         }   
         return view('cms.image.index', ['images'=>$images->get(), 'categories'=> $categories]);
-    }
-    public function create(){
-        return view('cms.image.create');
     }
 
     public function store(Request $request)
@@ -41,7 +39,8 @@ class imageController extends Controller
         $imagedata->useInSlider = false;
         $imagedata->category = $request->input('category');
         $imagedata->save();
-
+        if($request->filled('webpage')){$imagedata->webpages()->attach($request->webpage);}
+        
         return redirect(route('fotos.index'));
     }
 
@@ -57,9 +56,32 @@ class imageController extends Controller
         return redirect(route('fotos.index'));
     }
 
+    public function show($id)
+    {
+        $image = Image::find($id);
+        return view('cms.image.Details', compact('image'));
+    }
+
     public function destroy($id)
     {
         Image::find($id)->delete();
         return redirect(route('fotos.index'));
+    }
+
+    public function createMultiple(Webpages $pagina)
+    {
+        $images = Image::all();
+        return view('cms.image.createMultiple' , ['pageID' => $pagina->id, 'afbeeldingen'=> $images]);
+    }
+    public function storeMultiple(Request $request , $pageID)
+    {
+        $request->validate([
+            'multiInput.*.image_id' => 'required',
+        ]);
+        foreach($request->multiInput as $key => $value) {
+            $page = Webpages::find($pageID);
+            $page->Image()->attach($value);
+        }
+        return redirect(route('paginas.index'))->with('success','afbeelding succesvol toegevoegd');
     }
 }

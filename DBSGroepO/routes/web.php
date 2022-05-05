@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\CardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
+
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\FooterController;
@@ -17,9 +18,14 @@ use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\DropdownController;
 use App\Http\Controllers\AgendaCMSController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ColumnTextController;
 use App\Http\Controllers\ContactFormController;
 use App\Http\Controllers\PerformanceController;
+
+use App\Http\Controllers\ContactController;
+use App\Http\Requests\ContactFormRequest;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -51,6 +57,12 @@ Route::group([
         return Redirect("/login");
     });
     Route::group(['middleware' => ['auth']], function() {
+
+        Route::controller(ImageController::class)->group(function(){
+            Route::get('paginas/{pagina}/afbeelding/create', 'createMultiple')->name('Afbeelding.createMultiple');
+            Route::post('paginas/{pagina}/afbeelding', 'storeMultiple')->name('Afbeelding.storeMultiple');
+        });
+
     Route::resource('fotos', ImageController::class);
     Route::resource('contactpersonen', ContactsController::class);
     Route::resource('profile', UserController::class)->only(['index']);
@@ -72,6 +84,8 @@ Route::group([
     });
 
     Route::resource('paginas', WebPageController::class);
+    Route::resource('agenda', AgendaCMSController::class);
+    Route::resource('category', CategoryController::class);
 
     Route::controller(ColumnTextController::class)->group(function() {
         Route::post('paginas/{pagina}/column', 'updateAndStore')->name('editColomText.updateAndInsert');

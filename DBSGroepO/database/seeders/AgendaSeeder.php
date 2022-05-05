@@ -19,27 +19,11 @@ class AgendaSeeder extends Seeder
      */
     public function run()
     {
-        $categorylength = Category::all()->count();
-        $categories = Category::find(mt_rand(1, $categorylength));
-        $sampledata = [
-            'title'=>str::random(10),
-            'description'=>str::random(100),
-            'start'=>Carbon::now()->subMinutes(rand(1, 55)),
-            'end'=>Carbon::now()->minutes(rand(1, 55)),
-        ];
-
-        $agenda = Agendapunt::create($sampledata);
-        $agenda->Category()->attach($categories);
-
-        $categories = Category::find(mt_rand(1, $categorylength));
-        $sampledata = [
-            'title'=>str::random(10),
-            'description'=>str::random(100),
-            'start'=>Carbon::now()->subMinutes(rand(1, 55)),
-            'end'=>Carbon::now()->minutes(rand(1, 55)),
-        ];
-
-        $agenda = Agendapunt::create($sampledata);
-        $agenda->Category()->attach($categories);
+        Agendapunt::factory(100)->create();
+        
+        $categories = Category::all();
+        Agendapunt::all()->each(function ($agendapunt) use ($categories) { 
+            $agendapunt->Category()->attach($categories->get(mt_rand(0, $categories->count())));
+        });
     }
 }

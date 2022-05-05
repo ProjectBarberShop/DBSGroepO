@@ -24,6 +24,9 @@ class Webpages extends Model
     public function cardImage() {
         return $this->belongsToMany(card_images::class, 'card_webpage');
     }
+    public function Image() {
+        return $this->belongsToMany(Image::class);
+    }
 
     public function youtube() {
         return $this->belongsToMany(Youtube::class);

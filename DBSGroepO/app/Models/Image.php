@@ -20,4 +20,7 @@ class image extends Model
     public function newsletters() {
         return $this->belongsToMany(Newsletter::class);
     }
+    public function Webpages() {
+        return $this->belongsToMany(Webpages::class);
+    }
 }
