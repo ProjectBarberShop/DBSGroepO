@@ -6,6 +6,10 @@
         <div class="alert alert-success">
             <p>{{ $message }}</p>
         </div>
+        @elseif($message = Session::Get('warning'))
+        <div class="alert alert-warning">
+            <p>{{ $message }}</p>
+        </div>
     @endif
 <section class="content">
    <div class="container-fluid">
@@ -34,6 +38,7 @@
                            <th>Youtube video toevoegen</th>
                            <th>Afbeeldingen toevoegen</th>
                            <th>Bijwerken</th>
+                           <th>Kopieren</th>
                            <th>Verwijderen</th>
                         </tr>
                      </thead>
@@ -47,6 +52,14 @@
                             <td><a class="btn btn-primary" href="{{ route('youtube.createMultiple' , $w->id) }}"> Youtube video toevoegen</a></td>
                             <td><a class="btn btn-primary" href="{{ route('Afbeelding.createMultiple' , $w->id) }}"> Afbeeldingen toevoegen</a></td>
                             <td><a class="btn btn-success" id="update{{$w->id}}" href="{{ route('paginas.edit',$w->id) }}">Bijwerken</a></td>
+
+                            <td>
+                                <form action="{{ route('paginas.duplicate', $w->id) }}" method="POST">
+                                    @method('POST')
+                                    @csrf
+                                    <button type="submit" class="btn btn-success">Kopieren</button>
+                                </form>
+                            </td>
                             <td>
                                 <form action="{{ route('paginas.destroy', $w->id) }}" method="POST">
                                     @method('DELETE')
@@ -66,6 +79,7 @@
                            <th>Card toevoegen</th>
                            <th>Youtube video toevoegen</th>
                            <th>Bijwerken</th>
+                           <th>Kopieren</th>
                            <th>Verwijderen</th>
                         </tr>
                      </tfoot>
