@@ -61,6 +61,8 @@ Route::group([
         Route::controller(ImageController::class)->group(function(){
             Route::get('paginas/{pagina}/afbeelding/create', 'createMultiple')->name('Afbeelding.createMultiple');
             Route::post('paginas/{pagina}/afbeelding', 'storeMultiple')->name('Afbeelding.storeMultiple');
+            Route::get('paginas/{pagina}/afbeelding/edit' , 'editImage')->name('imageWebpage.editYoutube');
+            Route::post('paginas/{pagina}/afbeelding/update' , 'updateImage')->name('imageWebpage.updateYoutube');
         });
 
     Route::resource('fotos', ImageController::class);
@@ -79,11 +81,15 @@ Route::group([
         Route::put('youtube/{youtube}/{id}', 'update')->name('youtube.update');
         Route::get('paginas/{pagina}/youtube/create', 'createMultiple')->name('youtube.createMultiple');
         Route::post('paginas/{pagina}/youtube', 'storeMultiple')->name('youtube.storeMultiple');
-        route::get('paginas/{pagina}/youtube/edit' , 'editYoutube')->name('youtubeWebpage.editYoutube');
-        route::post('paginas/{pagina}/youtube/update' , 'updateAndInsert')->name('youtubeWebpage.updateYoutube');
+        Route::get('paginas/{pagina}/youtube/edit' , 'editYoutube')->name('youtubeWebpage.editYoutube');
+        Route::post('paginas/{pagina}/youtube/update' , 'updateAndInsert')->name('youtubeWebpage.updateYoutube');
     });
 
     Route::resource('paginas', WebPageController::class);
+    Route::controller(WebpageController::class)->group(function() {
+        Route::post('paginas/{pagina}/duplicate' , 'duplicatePage')->name('paginas.duplicate');
+    });
+
     Route::resource('agenda', AgendaCMSController::class);
     Route::resource('category', CategoryController::class);
 
