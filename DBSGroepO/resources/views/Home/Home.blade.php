@@ -4,44 +4,21 @@
 <section id="contentHome">
     <div id="carouselExampleIndicators" class="carousel slide w-75 h-25 p-3 mx-auto" wrap="true" data-bs-ride="carousel">
         <div class="carousel-inner">
-            @if(!empty($newsletterdata))
-                @for ($i = -1; $i < $slider->count(); $i++)
-                    @if($i == -1)
-                        <div class="carousel-item active">
-                            <div class="d-flex w-100">
-                                <div class="d-flex align-items-center justify-content-center bg-light w-100">
-                                    <img src="data:image/jpg;base64,{{ chunk_split(base64_encode($newsletterdata->image->photo)) }}" class="img-fluid w-25 m-4">
-                                    <div class="text-center">
-                                        <h1>{{$newsletterdata->title}}</h1>
-                                        <p class="fs-4">
-                                            {{$newsletterdata->message}}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    @else
-                        <div class="carousel-item">
-                            <img src="data:image/jpg;base64,{{ chunk_split(base64_encode($slider[$i]->photo)) }}" style="float: left;
-                        height: 350px; object-fit: scale-down;" class="d-block w-100" alt="...">
-                        </div>
-                    @endif
-                @endfor
-            @else
-                @for ($i = 0; $i < $slider->count(); $i++)
-                    @if($i == 0)
-                        <div class="carousel-item active">
-                            <img src="data:image/jpg;base64,{{ chunk_split(base64_encode($slider[$i]->photo)) }}" style="float: left;
-                        height: 350px; object-fit: scale-down;" class="d-block w-100" alt="...">
-                        </div>
-                    @else
-                        <div class="carousel-item">
-                            <img src="data:image/jpg;base64,{{ chunk_split(base64_encode($slider[$i]->photo)) }}" style="float: left;
-                        height: 350px; object-fit: scale-down;" class="d-block w-100" alt="...">
-                        </div>
-                    @endif
-                @endfor
-            @endif
+            @for ($i = 0; $i < $slider->count(); $i++)
+                @if($i == 0)
+                    <div class="carousel-item active">
+                        <img src="data:image/jpg;base64,{{ chunk_split(base64_encode($slider[$i]->photo)) }}" style="float: left;
+                    height: 350px;
+                    object-fit: scale-down;"class="d-block w-100" alt="...">
+                    </div>
+                @else
+                    <div class="carousel-item">
+                        <img src="data:image/jpg;base64,{{ chunk_split(base64_encode($slider[$i]->photo)) }}" style="float: left;
+                    height: 350px;
+                    object-fit: scale-down;" class="d-block w-100" alt="...">
+                    </div>
+                @endif
+            @endfor
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
             <span class="carousel-control-prev-icon bg-danger rounded-circle" aria-hidden="true"></span>

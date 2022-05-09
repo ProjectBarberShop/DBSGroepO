@@ -16,10 +16,7 @@ class HomeController extends Controller
     public function index()
     {
         $sliderImages = Image::where('useInSlider', '=', true)->get();
-        $newsletterdata = Newsletter::with('image')
-        ->orderBy('created_at', 'desc')
-        ->where('is_published', true)->first();
 
-        return view('Home.Home', ['slider' => $sliderImages], ['newsletterdata' => $newsletterdata]);
+        return view('Home.Home', ['slider' => $sliderImages]);
     }
 }

@@ -129,6 +129,30 @@
                             @endforeach
                         </div>
                 </div>
+                @if(!empty($newsletterdata))
+                    <div class="d-flex mt-3">
+                        <div class="d-flex align-items-center justify-content-center flex-column bg-light w-100">
+                            <img src="data:image/jpg;base64,{{ chunk_split(base64_encode($newsletterdata->image->photo)) }}" class="img-fluid">
+                            <div class="text-center position-relative w-75">
+                                <h3>{{$newsletterdata->title}}</h3>
+                                <p class="fs-6 m-0">{{Str::limit($newsletterdata->message, 20)}}</p>
+                                <a class="text-primary cursor-pointer" onclick="modalShow()">Lees meer</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal justify-content-center align-items-center" id="modal-info" aria-modal="true" role="dialog">
+                        <div class="modal-content bg-light w-75">
+                            <div class="modal-header">
+                                <h2 class="modal-title">{{$newsletterdata->title}}</h2>
+                                <button class="close fs-2" onclick="modalClose()">x</button>
+                            </div>
+                            <div class="row m-0 p-2 overflow-auto" style="height: 50vh;">
+                                <p class="p-0 m-0 fs-5">{{$newsletterdata->message}}</p>
+                            </div>
+                        </div>
+                    </div>
+                @endif
             </div>
         </div>
     </section>
@@ -259,26 +283,34 @@
 </div>
 
 <script>
-   let links =  document.querySelectorAll(".navbar-nav a");
-   links.forEach(link => {
-       link.addEventListener('click', () => {
-           links.forEach(l => l.classList.remove('active'));
-           sessionStorage.clear();
-           sessionStorage.setItem('activeLink', link.id);
-           document.getElementById(link.id).classList.add('active');
-       });
-   });
+    let links =  document.querySelectorAll(".navbar-nav a");
+    links.forEach(link => {
+        link.addEventListener('click', () => {
+            links.forEach(l => l.classList.remove('active'));
+            sessionStorage.clear();
+            sessionStorage.setItem('activeLink', link.id);
+            document.getElementById(link.id).classList.add('active');
+        });
+    });
 
-   window.onload = () => {
-       links.forEach(l => l.classList.remove('active'));
-       if(sessionStorage.getItem('activeLink') != null) {
-           let activeLink = document.getElementById(sessionStorage.getItem('activeLink'));
-           activeLink.classList.add('active');
-       }
-   }
+    window.onload = () => {
+        links.forEach(l => l.classList.remove('active'));
+        if(sessionStorage.getItem('activeLink') != null) {
+            let activeLink = document.getElementById(sessionStorage.getItem('activeLink'));
+            activeLink.classList.add('active');
+        }
+    }
 
-   if (window.location.href.indexOf("login") > -1 || window.location.href.indexOf("register") > -1 ) {
-      document.getElementById('sidebar').style.display = 'none';
+    if (window.location.href.indexOf("login") > -1 || window.location.href.indexOf("register") > -1 ) {
+        document.getElementById('sidebar').style.display = 'none';
+    }
+
+    function modalShow() {
+        document.getElementById("modal-info").style.display = "flex";
+    }
+
+    function modalClose() {
+        document.getElementById("modal-info").style.display = "none";
     }
 </script>
 </body>
