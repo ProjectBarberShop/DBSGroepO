@@ -4,11 +4,8 @@
 <div class="d-flex">
 @if(empty($newsletterdata->count()))
     <h2 class="p-4">Er is nog geen nieuws beschikbaar</h2>
-@endif
+@else
 @foreach ($newsletterdata as $n)
-    @if($loop->first)
-    @continue
-    @endif
     <div class="card w-50 m-2">
         <img src="data:image/jpg;base64,{{ chunk_split(base64_encode($n->image->photo)) }}" style="height: 250px; object-fit: cover;">
         <div class="card-header bg-danger text-yellow">
@@ -20,5 +17,6 @@
         </div>
     </div>
 @endforeach
+@endif
 </div>
 @endsection
