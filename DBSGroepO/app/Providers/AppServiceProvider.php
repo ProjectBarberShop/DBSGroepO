@@ -50,10 +50,10 @@ class AppServiceProvider extends ServiceProvider
                 $navbardata = NavbarItem::all();
             }
 
-            $view->with(['contactsdata' => $contactsdata,
+            $view->with(['newsletterdata' => $newsletterdata,
+                         'contactsdata' => $contactsdata,
                          'footerdata' => $footerdata,
                          'navbardata' => $navbardata,
-                         'newsletterdata' => $newsletterdata,
                         ]);
         });
         Paginator::useBootstrap();

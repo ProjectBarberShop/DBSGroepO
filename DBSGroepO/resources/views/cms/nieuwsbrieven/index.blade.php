@@ -27,7 +27,7 @@
                     <a href="{{ route('nieuwsbrieven.edit', $n->id) }}" class="mr-2 btn btn-primary">Bijwerken</a>
                 </div>
                 <div>
-                    <button class="btn btn-primary" onclick="confirmSubmit({{$n->id}}, 'a')">Verwijderen</button>
+                    <button class="btn btn-primary" onclick="confirmSubmit({{$n->id}}, 'a')" id="remove">Verwijderen</button>
                 </div>
             </div>
         </div>
@@ -50,25 +50,23 @@
                     @endforeach
                     <div class="imagePosition p-2"></div>
                 </div>
-                <button type="button" class="btn btn-default" onclick="modalShow()">Selecteer foto</button>
-                <div class="modal fade show" id="modal-info" aria-modal="true" role="dialog">
-                    <div class="modal-dialog">
-                        <div class="modal-content bg-info">
-                            <div class="modal-header">
-                                <h2 class="modal-title">Selecteer foto</h2>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true" onclick="modalClose()" class="fs-2">×</span>
-                                </button>
-                            </div>
-                            <div class="modal-body row">
-                                @forelse($imagesdata as $img)
-                                    <a onclick="cloneimage({{$img->id}}, 'b', 'imagePosition', null, null, true), modalClose()" class="col-4">
+                <button class="btn btn-secondary" onclick="modalShow()">Selecteer foto</button>
+                <div class="modal justify-content-center align-items-center" id="modal-info" aria-modal="true" role="dialog">
+                    <div class="modal-content bg-info w-75">
+                        <div class="modal-header">
+                            <h2 class="modal-title">Selecteer foto</h2>
+                            <button class="close fs-2" onclick="modalClose()">×</button>
+                        </div>
+                        <div class="row m-0 pr-2 overflow-auto" style="height: 80vh;">
+                            @forelse($imagesdata as $img)
+                                <div class="d-flex justify-content-center align-items-center col-4 p-0">
+                                    <a onclick="cloneimage({{$img->id}}, 'b', 'imagePosition', null, null, true), modalClose()" class="ml-2 mt-2">
                                         <img src="data:image/jpg;base64,{{ chunk_split(base64_encode($img->photo)) }}" class="img-fluid" id="{{$img->id}}b">
                                     </a>
-                                    @empty
-                                    <p class="fs-5">Er zijn nog geen foto's beschikbaar. Ga naar: <a href="{{ route('fotos.index') }}">fotos pagina</a></p>
-                                @endforelse
-                            </div>
+                                </div>
+                            @empty
+                                <p class="fs-5">Er zijn nog geen foto's beschikbaar. Ga naar: <a href="{{ route('fotos.index') }}">foto's pagina</a></p>
+                            @endforelse
                         </div>
                     </div>
                 </div>
@@ -90,7 +88,7 @@
                     @enderror
                     <label for="ispublished">Publiceren:</label>
                     <input type="checkbox" name="ispublished" placeholder="Publiceren">
-                    <button type="submit" class="btn btn-primary float-right mt-4">Nieuwsbrief toevoegen</button>
+                    <input type="submit" class="btn btn-primary float-right mt-4" value="Nieuwsbrief toevoegen" id="addNews">
                 </form>
             </div>
         </div>
@@ -107,7 +105,7 @@ function confirmSubmit(formId, uniqueId) {
 }
 
 function modalShow() {
-    document.getElementById("modal-info").style.display = "block";
+    document.getElementById("modal-info").style.display = "flex";
 }
 
 function modalClose() {
