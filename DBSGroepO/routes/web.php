@@ -88,6 +88,7 @@ Route::group([
     Route::resource('paginas', WebPageController::class);
     Route::controller(WebpageController::class)->group(function() {
         Route::post('paginas/{pagina}/duplicate' , 'duplicatePage')->name('paginas.duplicate');
+        Route::put('paginas/{pagina}/update', 'updateTemplate')->name('paginas.updateTemplate');
     });
 
     Route::resource('agenda', AgendaCMSController::class);

@@ -118,7 +118,11 @@
             </div>
         </div>
         @endif
-        @yield('content')
+        @if(isset($pagecontent) && !empty($pagecontent->template_id))
+                @include('templates.template' . $pagecontent->template_id, $pagecontent)
+            @else
+                @yield('content')
+        @endif
         </div>
         <div id="sidebar" class="my-5 p-3 h-100 mx-auto position-sticky sticky-top w-25">
         <section class="flex-shrink-1 bg-danger card h-100 mx-auto d-none d-sm-block">
