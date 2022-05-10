@@ -104,7 +104,7 @@
 
     <main class="d-flex bd-highlight">
         <div class="w-100">
-        @if(isset($pagecontent) && !empty($pagecontent->template_id))
+        @if(isset($pagecontent) && !empty($pagecontent->template_id) && View::exists('templates.template' . $pagecontent->template_id))
                 @include('templates.template' . $pagecontent->template_id, $pagecontent)
             @else
                 @yield('content')

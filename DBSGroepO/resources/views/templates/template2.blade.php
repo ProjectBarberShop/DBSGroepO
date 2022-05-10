@@ -1,8 +1,7 @@
 <div class="container">
     <div class="row">
         <div>{!!$pagecontent->main_text!!}</div>
-            <div class="bg-secondary row p-2 mb-5">
-                @foreach($pagecontent->ColomContext as $p)
+                @foreach($pagecontent->ColomContext->slice(($pagecontent->ColomContext->count() / 2), $pagecontent->ColomContext->count()) as $p)
                     @if($pagecontent->ColomContext->count() > 1)
                         <div class="col-md-6 d-flex flex-column align-items-center">
                             <h2>{{$p->colom_title_text}}</h2>
@@ -15,7 +14,6 @@
                         </div>
                     @endif
                 @endforeach
-            </div>
             @foreach ($pagecontent->youtube as $y)
                 @if($y != null)
                     @if($y->count() > 1)
@@ -35,6 +33,19 @@
                         @endcomponent
                     </div>
                     @endif
+                @endif
+            @endforeach
+            @foreach($pagecontent->ColomContext->slice(0, ($pagecontent->ColomContext->count() / 2)) as $p)
+                @if($pagecontent->ColomContext->count() > 1)
+                    <div class="col-md-6 d-flex flex-column align-items-center">
+                        <h2>{{$p->colom_title_text}}</h2>
+                        <p>{!!$p->colomn_text!!}</p>
+                    </div>
+                    @else
+                    <div class="col-md-12 d-flex flex-column align-items-center">
+                        <h2>{{$p->colom_title_text}}</h2>
+                        <p>{!!$p->colomn_text!!}</p>
+                    </div>
                 @endif
             @endforeach
         <div class="container px-4 py-5" id="custom-cards">

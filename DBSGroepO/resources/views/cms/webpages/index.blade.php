@@ -53,28 +53,45 @@
                             <td><a class="btn btn-primary" href="{{ route('youtube.createMultiple' , $w->id) }}"> Youtube video toevoegen</a></td>
                             <td><a class="btn btn-primary" href="{{ route('Afbeelding.createMultiple' , $w->id) }}"> Afbeeldingen toevoegen</a></td>
                             <td>
-                                <img src="{{asset('assets/images/Templates/template').$w->template_id.'.jpg'}}" alt="template1" class="img-fluid" width="100">
-                                <div class="imagePosition p-2"></div>
+                                <div class="d-flex flex-column align-items-center">
+                                    <label for="image">Huidige template:</label>
+                                    @if(!empty($w->template_id))
+                                        <img src="{{asset('assets/images/Templates/template').$w->template_id.'.jpg'}}" alt="template1" class="img-fluid" width="100">
+                                    @endif
+                                    <label for="image">Nieuwe template:</label>
+                                    <div class="imagePosition{{$w->id}}"></div>
 
-                                <button type="button" class="btn btn-default" onclick="modalShow()">Selecteer foto</button>
-                                <div class="modal fade show" id="modal-info" aria-modal="true" role="dialog">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content bg-info">
+                                    <button class="btn btn-secondary mt-2" onclick="modalShow('{{$w->id}}')">Selecteer foto</button>
+                                    <div class="modal justify-content-center align-items-center" id="modal-info{{$w->id}}" aria-modal="true" role="dialog">
+                                        <div class="modal-content bg-info w-75">
                                             <div class="modal-header">
                                                 <h2 class="modal-title">Selecteer foto</h2>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true" onclick="modalClose()" class="fs-2">×</span>
-                                                </button>
+                                                <button class="close fs-2" onclick="modalClose('{{$w->id}}')">×</button>
                                             </div>
-                                            <div class="modal-body row">
+                                            <div class="row m-0 pr-2 overflow-auto" style="height: 80vh;">
                                                 @for($t = 1; $t <= $templates; $t++)
-                                                    <a onclick="cloneimage({{$t}}, 'a', 'imagePosition', null, null, true), modalClose()" class="col-4 mt-4">
-                                                        <img src="{{asset('assets/images/Templates/template').$t.'.jpg'}}" class="img-fluid" id="{{$t}}a">
-                                                    </a>
+                                                    <div class="d-flex justify-content-center align-items-center col-4 p-0">
+                                                        <a onclick="cloneimage('template{{$w->id}}', '{{$t}}', 'template', 'imagePosition{{$w->id}}', 100, null, true), modalClose('{{$w->id}}')" class="ml-2 mt-2">
+                                                            <img src="{{asset('assets/images/Templates/template').$t.'.jpg'}}" alt="template{{$t}}" class="img-fluid" id="{{$t}}template">
+                                                        </a>
+                                                    </div>
                                                 @endfor
                                             </div>
                                         </div>
                                     </div>
+
+                                    <form action="{{ route('paginas.removeTemplate', $w->id) }}" method="post" id="{{$w->id}}a">
+                                        @method('DELETE')
+                                        @csrf
+                                    </form>
+                                    <button class="btn btn-primary mt-4" onclick="confirmSubmit('{{$w->id}}', 'a')" id="remove">Template verwijderen</button>
+
+                                    <form action="{{ route('paginas.updateTemplate', $w->id) }}" method="POST" class="d-flex flex-column" enctype="multipart/form-data">
+                                        @method('PUT')
+                                        @csrf
+                                        <input type="hidden" name="imageId" id="template{{$w->id}}">
+                                        <input type="submit" class="btn btn-primary float-right mt-2" value="Template bijwerken" id="changeTemplate">
+                                    </form>
                                 </div>
                             </td>
                             <td><a class="btn btn-success" id="update{{$w->id}}" href="{{ route('paginas.edit',$w->id) }}">Bijwerken</a></td>
@@ -122,15 +139,22 @@
     $('#table_id').DataTable();
     } );
 
-    function modalShow() {
-        document.getElementById("modal-info").style.display = "block";
+    function confirmSubmit(formId, uniqueId) {
+        let newFormId = document.getElementById(formId + uniqueId);
+        if(confirm("Weet u zeker dat u de template wilt verwijderen?")) {
+            newFormId.submit();
+        }
     }
 
-    function modalClose() {
-        document.getElementById("modal-info").style.display = "none";
+    function modalShow(modalId) {
+        document.getElementById("modal-info" + modalId).style.display = "flex";
     }
 
-    function cloneimage(imageId, uniqueId, classname, imgWidth, imgHeight, overwrite) {
+    function modalClose(modalId) {
+        document.getElementById("modal-info" + modalId).style.display = "none";
+    }
+
+    function cloneimage(formId, imageId, uniqueId, classname, imgWidth, imgHeight, overwrite) {
         if(overwrite == true) {
             const allImages = document.querySelectorAll('.' + classname + ' > .img');
             for(i = 0; i < allImages.length; i++) {
@@ -148,7 +172,7 @@
             imageClasses[i].append(newImage);
         }
 
-        let imageInputField = document.getElementById("imageField");
+        let imageInputField = document.getElementById(formId);
         imageInputField.setAttribute('value', imageId);
     }
 </script>

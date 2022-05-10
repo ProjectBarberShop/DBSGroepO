@@ -20,8 +20,8 @@
                         <div class="row m-0 pr-2 overflow-auto" style="height: 80vh;">
                             @forelse($imagesdata as $img)
                                 <div class="d-flex justify-content-center align-items-center col-4 p-0">
-                                    <a onclick="cloneimage({{$img->id}}, 'b', 'imagePosition', null, null, true), modalClose()" class="ml-2 mt-2">
-                                        <img src="data:image/jpg;base64,{{ chunk_split(base64_encode($img->photo)) }}" class="img-fluid" id="{{$img->id}}b">
+                                    <a onclick="cloneimage({{$img->id}}, 'a', 'imagePosition', null, null, true), modalClose()" class="ml-2 mt-2">
+                                        <img src="data:image/jpg;base64,{{ chunk_split(base64_encode($img->photo)) }}" class="img-fluid" id="{{$img->id}}a">
                                     </a>
                                 </div>
                             @empty
