@@ -5,7 +5,7 @@ namespace Tests\Browser\Pages;
 use Laravel\Dusk\Browser;
 use Laravel\Dusk\Page;
 
-class HomePage extends Page
+class NewsletterPostCMS extends Page
 {
     /**
      * Get the URL for the page.
@@ -14,18 +14,18 @@ class HomePage extends Page
      */
     public function url()
     {
-        return '/';
+        return '/cms/nieuwsbrieven';
     }
 
     /**
      * Assert that the browser is on the page.
      *
-     * @param  \Laravel\Dusk\Browser  $browser
+     * @param  Browser  $browser
      * @return void
      */
     public function assert(Browser $browser)
     {
-        //
+        $browser->assertPathIs($this->url());
     }
 
     /**
@@ -36,7 +36,10 @@ class HomePage extends Page
     public function elements()
     {
         return [
-            '@element' => '#selector',
+            '@selectedImage' => '.modal-content a:nth-child(1)',
+            '@addNews' => '#addNews',
+            '@editNews' => '#editNews',
+            '@removeNews' => '.row:nth-child(1) .card:nth-child(1) #remove',
         ];
     }
 }

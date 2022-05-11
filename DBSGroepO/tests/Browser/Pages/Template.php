@@ -5,7 +5,7 @@ namespace Tests\Browser\Pages;
 use Laravel\Dusk\Browser;
 use Laravel\Dusk\Page;
 
-class HomePage extends Page
+class Template extends Page
 {
     /**
      * Get the URL for the page.
@@ -14,18 +14,18 @@ class HomePage extends Page
      */
     public function url()
     {
-        return '/';
+        return '/cms/paginas';
     }
 
     /**
      * Assert that the browser is on the page.
      *
-     * @param  \Laravel\Dusk\Browser  $browser
+     * @param  Browser  $browser
      * @return void
      */
     public function assert(Browser $browser)
     {
-        //
+        $browser->assertPathIs($this->url());
     }
 
     /**
@@ -36,7 +36,8 @@ class HomePage extends Page
     public function elements()
     {
         return [
-            '@element' => '#selector',
+            '@selectedTemplate' => '.odd:nth-child(1) .modal-content1 a:nth-child(2)',
+            '@removeTemplate' => '#table_id .odd:nth-child(1) #remove',
         ];
     }
 }

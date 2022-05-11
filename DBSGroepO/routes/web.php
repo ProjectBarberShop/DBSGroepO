@@ -15,10 +15,11 @@ use App\Http\Controllers\NavbarController;
 use App\Http\Controllers\WebPageController;
 use App\Http\Controllers\YoutubeController;
 use App\Http\Controllers\ContactsController;
+use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\DropdownController;
 use App\Http\Controllers\AgendaCMSController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ColumnTextController;
-use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\ContactFormController;
 use App\Http\Controllers\PerformanceController;
 
@@ -60,6 +61,8 @@ Route::group([
         Route::controller(ImageController::class)->group(function(){
             Route::get('paginas/{pagina}/afbeelding/create', 'createMultiple')->name('Afbeelding.createMultiple');
             Route::post('paginas/{pagina}/afbeelding', 'storeMultiple')->name('Afbeelding.storeMultiple');
+            Route::get('paginas/{pagina}/afbeelding/edit' , 'editImage')->name('imageWebpage.editYoutube');
+            Route::post('paginas/{pagina}/afbeelding/update' , 'updateImage')->name('imageWebpage.updateYoutube');
         });
 
     Route::resource('fotos', ImageController::class);
@@ -78,11 +81,19 @@ Route::group([
         Route::put('youtube/{youtube}/{id}', 'update')->name('youtube.update');
         Route::get('paginas/{pagina}/youtube/create', 'createMultiple')->name('youtube.createMultiple');
         Route::post('paginas/{pagina}/youtube', 'storeMultiple')->name('youtube.storeMultiple');
-        route::get('paginas/{pagina}/youtube/edit' , 'editYoutube')->name('youtubeWebpage.editYoutube');
-        route::post('paginas/{pagina}/youtube/update' , 'updateAndInsert')->name('youtubeWebpage.updateYoutube');
+        Route::get('paginas/{pagina}/youtube/edit' , 'editYoutube')->name('youtubeWebpage.editYoutube');
+        Route::post('paginas/{pagina}/youtube/update' , 'updateAndInsert')->name('youtubeWebpage.updateYoutube');
     });
 
     Route::resource('paginas', WebPageController::class);
+    Route::controller(WebpageController::class)->group(function() {
+        Route::post('paginas/{pagina}/duplicate' , 'duplicatePage')->name('paginas.duplicate');
+        Route::put('paginas/update/{id}', 'updateTemplate')->name('paginas.updateTemplate');
+        Route::delete('paginas/removeTemplate/{id}', 'removeTemplate')->name('paginas.removeTemplate');
+    });
+
+    Route::resource('agenda', AgendaCMSController::class);
+    Route::resource('category', CategoryController::class);
 
     Route::controller(ColumnTextController::class)->group(function() {
         Route::post('paginas/{pagina}/column', 'updateAndStore')->name('editColomText.updateAndInsert');

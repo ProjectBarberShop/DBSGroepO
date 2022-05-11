@@ -4,21 +4,20 @@
 <div class="d-flex">
 @if(empty($newsletterdata->count()))
     <h2 class="p-4">Er is nog geen nieuws beschikbaar</h2>
-@endif
+@else
 @foreach ($newsletterdata as $n)
-    @if($loop->first)
-    @continue
-    @endif
     <div class="card w-50 m-2">
         <img src="data:image/jpg;base64,{{ chunk_split(base64_encode($n->image->photo)) }}" style="height: 250px; object-fit: cover;">
-        <div class="card-header bg-danger text-yellow">
+        <div class="card-header bg-danger text-black">
             <h4 class="card-title">{{$n->title}}</h4>
             <p class="d-inline mt-2">{{$n->created_at}}</p>
         </div>
         <div class="card-body bg-secondary text-white">
-            {{$n->message}}
+            <p class="fs-4 m-0">{{Str::limit($n->message, 20)}}</p>
+            <a class="text-primary cursor-pointer fs-4" onclick="modalShow()" alt="lees meer">Lees meer</a>
         </div>
     </div>
 @endforeach
+@endif
 </div>
 @endsection

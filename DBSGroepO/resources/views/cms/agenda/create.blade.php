@@ -25,11 +25,11 @@
                 </div>
                 <div class="form-group">
                     <label for="start">Start</label>
-                    <input type="datetime-local" class="form-control" name="start" value="{{ old('start') }}" required>
+                    <input id="start" type="datetime-local" class="form-control" name="start" value="{{ old('start') }}" required>
                 </div>
                 <div class="form-group">
                     <label for="end">Eind</label>
-                    <input type="datetime-local" class="form-control" name="end" value="{{ old('end') }}" required>
+                    <input id="end" type="datetime-local" class="form-control" name="end" value="{{ old('end') }}" required>
                 </div>
                 <div class="form-group">
                     <label for="category">Categorie (optioneel)</label>
@@ -50,7 +50,7 @@
                 </div>
                 <div class="row">
                     <a href="/cms/agenda" class="btn btn-outline-secondary col-md-1 ml-2 mr-2">Terug</a>
-                    <button type="submit" class="btn btn-primary col-md-1">Submit</button>
+                    <button id="createsubmit" type="submit" class="btn btn-primary col-md-1">Submit</button>
                 </div>
             </form>
         </div>
