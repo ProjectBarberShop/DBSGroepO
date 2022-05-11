@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Webpages;
 use App\Models\colom_context as context_colomn;
 use App\Models\colom_context_webpages;
+use App\Models\Template;
 use Illuminate\Support\Str;
 
 class WebPageController extends Controller
@@ -20,8 +21,9 @@ class WebPageController extends Controller
     public function index()
     {
         $data = Webpages::all();
+        $templates = count(glob("assets/images/Templates/*.jpg"));
 
-        return view('cms.webpages.index' ,['webpages' => $data]);
+        return view('cms.webpages.index' ,['webpages' => $data, 'templates' => $templates]);
     }
 
     /**
@@ -187,6 +189,28 @@ class WebPageController extends Controller
         $this->changeNavItem($navItem, $request->input('navItem'));
         $webpage->save();
         return redirect()->route('editColomText.edit' , $webpage);
+    }
+
+    public function updateTemplate(Request $request, $id) {
+        $request->validate([
+            'imageId' => 'required',
+        ]);
+        $webpage = Webpages::find($id);
+        $webpage->template_id = $request->input('imageId');
+        $webpage->save();
+
+        return redirect()->route('paginas.index')->with('success','Pagina succesvol bijgewerkt');
+    }
+
+    public function removeTemplate($id)
+    {
+        $webpage = Webpages::find($id);
+        if(!empty($webpage->template_id)) {
+            $webpage->template_id = 0;
+        }
+        $webpage->save();
+
+        return redirect(route('paginas.index'));
     }
 
     /**
