@@ -68,9 +68,11 @@
                                                 <h2 class="modal-title">Selecteer foto</h2>
                                                 <button class="close fs-2" onclick="modalClose('{{$w->id}}')">×</button>
                                             </div>
+
                                             <div class="row m-0 pr-2 overflow-auto" style="height: 80vh;">
                                                 @for($t = 1; $t <= $templates; $t++)
-                                                    <div class="d-flex justify-content-center align-items-center col-4 p-0">
+                                                    <div class="d-flex flex-column justify-content-center align-items-center col-4 p-0">
+                                                        <p class="fs-5">Template {{$t}}</p>
                                                         <a onclick="cloneimage('template{{$w->id}}', '{{$t}}', 'template', 'imagePosition{{$w->id}}', 100, null, true), modalClose('{{$w->id}}')" class="ml-2 mt-2">
                                                             <img src="{{asset('assets/images/Templates/template').$t.'.jpg'}}" alt="template{{$t}}" class="img-fluid" id="{{$t}}template">
                                                         </a>

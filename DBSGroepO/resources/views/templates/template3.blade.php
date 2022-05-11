@@ -1,8 +1,10 @@
 <div class="container">
     <div class="row">
+        <div>{!!$pagecontent->main_text!!}</div>
+        <div class="row">
             @foreach($pagecontent->ColomContext as $p)
                 @if($pagecontent->ColomContext->count() > 1)
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <h2>{{$p->colom_title_text}}</h2>
                     <p>{!!$p->colomn_text!!}</p>
                 </div>
@@ -13,10 +15,12 @@
                 </div>
                 @endif
             @endforeach
+        </div>
+        <div class="row">
             @foreach ($pagecontent->youtube as $y)
                 @if($y != null)
                     @if($y->count() > 1)
-                    <div class="col-md-6 ">
+                    <div class="col-md-4 d-flex justify-content-center my-2">
                         @component('components.youtube')
                                 @slot('youtube_key')
                                     {{$y->youtube_video_key}}
@@ -24,7 +28,7 @@
                         @endcomponent
                     </div>
                     @else
-                    <div class="col-md-12">
+                    <div class="col-md-12 d-flex justify-content-center my-2">
                         @component('components.youtube')
                             @slot('youtube_key')
                                 {{$y->youtube_video_key}}
@@ -34,6 +38,7 @@
                     @endif
                 @endif
             @endforeach
+        </div>
         <div class="container px-4 py-5" id="custom-cards">
             <h2 class="pb-2 border-bottom">Custom cards</h2>
             <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
