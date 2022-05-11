@@ -36,6 +36,7 @@ class Template extends Page
     public function elements()
     {
         return [
+            '@selectedTemplate' => '.odd:nth-child(1) .modal-content1 a:nth-child(2)',
             '@removeTemplate' => '#table_id .odd:nth-child(1) #remove',
         ];
     }

@@ -63,7 +63,7 @@
 
                                     <button class="btn btn-secondary mt-2" onclick="modalShow('{{$w->id}}')">Selecteer template</button>
                                     <div class="modal justify-content-center align-items-center" id="modal-info{{$w->id}}" aria-modal="true" role="dialog">
-                                        <div class="modal-content bg-info w-75">
+                                        <div class="modal-content{{$w->id}} bg-info w-75">
                                             <div class="modal-header">
                                                 <h2 class="modal-title">Selecteer template</h2>
                                                 <button class="close fs-2" onclick="modalClose('{{$w->id}}')">×</button>
