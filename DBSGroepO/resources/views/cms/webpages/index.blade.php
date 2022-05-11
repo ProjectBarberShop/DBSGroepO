@@ -61,7 +61,7 @@
                                     <label for="image">Nieuwe template:</label>
                                     <div class="imagePosition{{$w->id}}"></div>
 
-                                    <button class="btn btn-secondary mt-2" onclick="modalShow('{{$w->id}}')">Selecteer foto</button>
+                                    <button class="btn btn-secondary mt-2" onclick="modalShow('{{$w->id}}')">Selecteer template</button>
                                     <div class="modal justify-content-center align-items-center" id="modal-info{{$w->id}}" aria-modal="true" role="dialog">
                                         <div class="modal-content bg-info w-75">
                                             <div class="modal-header">
