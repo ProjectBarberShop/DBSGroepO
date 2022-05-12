@@ -112,7 +112,6 @@ class AgendaCMSController extends Controller
         $agenda = Agendapunt::find($id);
         $agenda->update($request->all());
         $agenda->Category()->detach();
-        //$agenda->Category()->wherePivot('agendapunt_id', $id)->wherePivot('category_id', $request->category)->updateExistingPivot($id, ['category_id'=>$request->category]);
         $agenda->Category()->attach($request->category);
         return redirect('/cms/agenda');
     }
