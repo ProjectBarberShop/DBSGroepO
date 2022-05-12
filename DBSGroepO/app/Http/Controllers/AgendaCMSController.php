@@ -111,6 +111,7 @@ class AgendaCMSController extends Controller
 
         $agenda = Agendapunt::find($id);
         $agenda->update($request->all());
+        $agenda->Category()->detach();
         $agenda->Category()->attach($request->category);
         return redirect('/cms/agenda');
     }

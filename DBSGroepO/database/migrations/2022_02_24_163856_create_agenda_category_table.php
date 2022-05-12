@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('agendapunt_category', function (Blueprint $table) {
-            $table->foreignId('agendapunt_id')->references('id')->on('agenda')->cascadeOnDelete();
-            $table->foreignId('category_id')->references('id')->on('category')->cascadeOnDelete();
+            $table->foreignId('agendapunt_id')->references('id')->on('agenda');
+            $table->foreignId('category_id')->references('id')->on('category');
             $table->timestamps();
         });
     }
