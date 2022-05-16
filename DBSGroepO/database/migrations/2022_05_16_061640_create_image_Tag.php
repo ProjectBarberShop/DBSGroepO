@@ -13,14 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('image', function (Blueprint $table) {
-            $table->id()->onDelete('cascade');
-            $table->string('title')->require;
-            $table->string('tag')->require;
-            $table->boolean('useInSlider')->require;
+        Schema::create('imageTag', function (Blueprint $table) {
+            $table->id();
+            $table->string('tag');
             $table->timestamps();
         });
-        DB::statement("ALTER TABLE image ADD photo LONGBLOB ");
     }
 
     /**
@@ -30,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('image');
+        Schema::dropIfExists('imageTag');
     }
 };

@@ -12,8 +12,13 @@
                 <label for="photo">foto:</label>
                 <img id="preview" src="#" alt="afbeelding" class="w-50 h-50"/>
                 <input type="file" name="photo" id="file" accept="image/*" onchange="getImgData()">
-                <label for="category">Categorie:</label>
-                <input name="category" id="category" value="-">
+                <label for="tag">Categorie:</label>
+                <input name="tag" list="tags" id="tag" value="-">
+                <datalist id="tags" class="w-100">
+                        @foreach($labels as $l)
+                            <option value="{{$l->tag}}">{{$l->tag}}</option>
+                        @endforeach
+                    </datalist>
                 <button type="submit" class="btn btn-primary float-right mt-4">+</button>
             </form>
             @if ($errors->any())
@@ -34,8 +39,8 @@
           <input type="text" name="search" id="search" class="form-control" placeholder="Zoeken">
           <select name="filter" id="filter" class="form-control">
           <option value="">Geen filter</option>
-          @foreach ($categories as $img)
-            <option value="{{$img->category}}">{{$img->category}}</option>
+          @foreach ($labels as $l)
+            <option value="{{$l->tag}}">{{$l->tag}}</option>
           @endforeach
         </select>
           <input type="submit" value="Zoeken" class="btn btn-primary ">
@@ -64,7 +69,7 @@
                     @endif
                 </form></td>
                 <td><img src="data:image/jpg;base64,{{ chunk_split(base64_encode($img->photo)) }}" class="w-25 h-25 "></td>
-                <td>{{$img->category}}</td>     
+                <td>{{$img->tag}}</td>     
             <td>  
             <a href="{{ route('fotos.show', $img->id) }}" class="mr-2 btn btn-primary">Details</a>
                 <form action="{{ route('fotos.destroy', $img->id) }}" method="POST">
