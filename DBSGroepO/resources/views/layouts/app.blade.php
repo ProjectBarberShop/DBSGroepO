@@ -51,7 +51,7 @@
 <div id="app">
     {{--start header--}}
     <div class="container-fluid bg-yellow pb-3 text-center">
-        <img src="{{secure_asset('assets/images/skyline-met-naam.jpg')}}" alt="Banner" class="img-fluid w-100 h-auto h-11">
+        <img src="{{secure_asset('assets/images/skyline-met-naam.jpg')}}" alt="Banner" class="img-fluid w-100 h-auto h-11 img-fluid">
         <p class="text-center h3 slogan "><strong>Met overtuiging plezierig zingen</strong></p>
     </div>
     <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
