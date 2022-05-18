@@ -9,7 +9,7 @@
     <title>Barbershop</title>
 
     <!-- Scripts -->
-    <script type="text/javascript" src="{{ asset('js/app.js') }}" defer></script>
+    <script type="text/javascript" src="{{ secure_asset('js/app.js') }}" defer></script>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
             integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -24,7 +24,7 @@
     <!-- scripts login -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
 
     <!-- scripts agenda -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
@@ -41,9 +41,8 @@
           integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/loginscreen.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/contact.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('css/contact.css') }}" rel="stylesheet">
 
     <div id="fb-root"></div>
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/nl_NL/sdk.js#xfbml=1&version=v13.0" nonce="BRVg9Kka"></script>
@@ -52,7 +51,7 @@
 <div id="app">
     {{--start header--}}
     <div class="container-fluid bg-yellow pb-3 text-center">
-        <img src="{{asset('assets/images/skyline-met-naam.jpg')}}" alt="Banner" class="img-fluid w-100 h-auto h-11">
+        <img src="{{secure_asset('assets/images/skyline-met-naam.jpg')}}" alt="Banner" class="img-fluid w-100 h-auto h-11 img-fluid">
         <p class="text-center h3 slogan "><strong>Met overtuiging plezierig zingen</strong></p>
     </div>
     <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
