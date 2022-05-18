@@ -36,7 +36,7 @@
                                 @csrf
                                 @method('PUT')
                                  <td>
-                                     <input type="text" name="title" value="{{$c->title}}" class="form-control" required/>
+                                     <input type="text" name="title" id="title{{$c->id}}" value="{{$c->title}}" class="form-control" required/>
                                 </td>
 
                             </form>
@@ -48,7 +48,7 @@
                                 <form action="{{ route('categorie.destroy', $c->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">Verwijderen</button>
+                                    <button type="submit" id="delete{{$c->id}}" class="btn btn-danger">Verwijderen</button>
                                 </form>
                             </td>
                           </div>
@@ -87,7 +87,7 @@
                         </thead>
                         <tbody>
                         <tr>
-                            <td><input type="text" name="title" class="form-control" required/></td>
+                            <td><input type="text" name="title" id="addCategorie" class="form-control" required/></td>
                         </tr>
                         </tbody>
                         <tfoot>
