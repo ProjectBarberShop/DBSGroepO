@@ -6,7 +6,6 @@ use App\Models\LearnToSingCat;
 use App\Models\User;
 use Tests\DuskTestCase;
 use Laravel\Dusk\Browser;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class LearnToSingCategorieTest extends DuskTestCase
 {
