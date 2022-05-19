@@ -19,7 +19,7 @@ class imageController extends Controller
             $images->where('title', 'like', '%' . $request->search . '%')->get();
         }
         if($request->filled('filter')){
-            $images->where('tag', '=', $request->filter)->get();
+            $images->where('tagName', '=', $request->filter)->get();
         }
         return view('cms.image.index', ['images'=>$images->get(), 'labels'=> $labels]);
     }
@@ -32,22 +32,24 @@ class imageController extends Controller
             'tag' => 'required',
         ]);
 
-        $imagedata = new Image;
-        $imagedata->title = $request->input('title');
-        $img = $request->file('photo');
-        $contentsImg = $img->openFile()->fread($img->getSize());
-        $imagedata->photo = $contentsImg;
-        $imagedata->useInSlider = false;
-        $imagedata->tag = $request->input('tag');
-        $imagedata->save();
-        if($request->filled('webpage')){$imagedata->webpages()->attach($request->webpage);}
-
-        if(Tag::where('tag', $request->input('tag'))->count() === 0){
+        try{
             $tag = new Tag;
-            $tag->tag = $request->input('tag');
-            $tag->save();
-        }
+            if(Tag::where('tag', $request->input('tag'))->count() === 0){
+                $tag->tag = $request->input('tag');
+                $tag->save();
+            }
+            $imagedata = new Image;
+            $imagedata->title = $request->input('title');
+            $img = $request->file('photo');
+            $contentsImg = $img->openFile()->fread($img->getSize());
+            $imagedata->photo = $contentsImg;
+            $imagedata->useInSlider = false;
+            $imagedata->tagName = $tag->tag;
+            $imagedata->save();
+            if($request->filled('webpage')){$imagedata->webpages()->attach($request->webpage);}
+        } catch (Throwable $e) {
 
+        }
         return redirect(route('fotos.index'));
     }
 

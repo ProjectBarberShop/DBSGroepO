@@ -5,7 +5,7 @@
 <div id="previewer" class="card">
         <label class="card-title">
         <div class="card-body">
-            <form action="{{ route('fotos.store') }}" method="POST" class="d-flex flex-column w-100" enctype="multipart/form-data">
+            <form action="{{ route('fotos.store') }}" method="POST" class="d-flex flex-column w-100" enctype="multipart/form-data" autocomplete="off"> 
                 @csrf  
                 <label for="title">titel:</label>  
                 <input type="text" name="title" placeholder="title">
@@ -13,7 +13,7 @@
                 <img id="preview" src="#" alt="afbeelding" class="w-50 h-50"/>
                 <input type="file" name="photo" id="file" accept="image/*" onchange="getImgData()">
                 <label for="tag">Categorie:</label>
-                <input name="tag" list="tags" id="tag" value="-">
+                <input name="tag" list="tags" id="tag" value="-" >
                 <datalist id="tags" class="w-100">
                         @foreach($labels as $l)
                             <option value="{{$l->tag}}">{{$l->tag}}</option>
@@ -69,7 +69,7 @@
                     @endif
                 </form></td>
                 <td><img src="data:image/jpg;base64,{{ chunk_split(base64_encode($img->photo)) }}" class="w-25 h-25 "></td>
-                <td>{{$img->tag}}</td>     
+                <td>{{$img->tagName}}</td>     
             <td>  
             <a href="{{ route('fotos.show', $img->id) }}" class="mr-2 btn btn-primary">Details</a>
                 <form action="{{ route('fotos.destroy', $img->id) }}" method="POST">
