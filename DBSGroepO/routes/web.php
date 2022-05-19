@@ -14,17 +14,16 @@ use App\Http\Controllers\FooterController;
 use App\Http\Controllers\NavbarController;
 use App\Http\Controllers\WebPageController;
 use App\Http\Controllers\YoutubeController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContactsController;
-use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\DropdownController;
 use App\Http\Controllers\AgendaCMSController;
-use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ColumnTextController;
+use App\Http\Controllers\LearnToSingCategorie;
+
+use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\ContactFormController;
 use App\Http\Controllers\PerformanceController;
-
-use App\Http\Controllers\ContactController;
-use App\Http\Requests\ContactFormRequest;
 
 
 /*
@@ -67,6 +66,8 @@ Route::group([
 
     Route::resource('fotos', ImageController::class);
     Route::resource('contactpersonen', ContactsController::class);
+    Route::resource('learntosing/categorie', LearnToSingCategorie::class);
+
     Route::resource('profile', UserController::class)->only(['index']);
 
     Route::controller(ContactFormController::class)->group(function(){
