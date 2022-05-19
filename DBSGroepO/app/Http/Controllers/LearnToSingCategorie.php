@@ -34,7 +34,7 @@ class LearnToSingCategorie extends Controller
         ]);
         $cat = LearnToSingCat::find($id);
         $cat->update($request->all());
-        return redirect()->route('categorie.index')->with('success', 'Learn to sing categorie sucesvol bijgewerkt');
+        return redirect()->route('categorie.index')->with('success', 'Learn to sing categorie succesvol bijgewerkt');
     }
 
     public function destroy($id)

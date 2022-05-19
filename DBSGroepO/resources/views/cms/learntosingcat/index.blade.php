@@ -23,7 +23,7 @@
                   <table id="table_id" class="table table-bordered table-hover">
                      <thead>
                         <tr>
-                           <th>Title</th>
+                           <th>Titel</th>
                            <th>Aangemaakt op</th>
                            <th>Bijwerken</th>
                            <th>Verwijderen</th>
@@ -57,7 +57,7 @@
                      </tbody>
                      <tfoot>
                         <tr>
-                            <th>Title</th>
+                            <th>Titel</th>
                             <th>Aangemaakt op</th>
                             <th>Bijwerken</th>
                             <th>Verwijderen</th>
@@ -82,7 +82,7 @@
                     <table class="table" id="multiForm">
                         <thead>
                             <tr>
-                                <th>Title</th>
+                                <th>Titel</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -92,7 +92,7 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th>Title</th>
+                                <th>Titel</th>
                             </tr>
                         </tfoot>
                     </table>
