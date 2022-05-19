@@ -23,8 +23,8 @@
 </div>
 <script>
    $(document).ready(function () {
-      
-   var SITEURL = "{{ url('/') }}";  
+
+   var SITEURL = "{{ url('https://2122-prj78-o.azurewebsites.net') }}";
    $.ajaxSetup({
          headers: {
          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -59,7 +59,7 @@
    function refreshCalendar() {
       $('#calendar').fullCalendar("refetchEvents");
    }
-      
+
 </script>
 
 

@@ -20,7 +20,7 @@ class NavbarSeeder extends Seeder
             ['id' => 2, 'name' => 'Even voorstellen', 'link' => '#'],
             ['id' => 3, 'name' => 'Optredens', 'link' => '#'],
             ['id' => 4, 'name' => 'Introductiecursus', 'link' => '#'],
-            ['id' => 5, 'name' => 'Agenda', 'link' => 'agenda'],
+            ['id' => 5, 'name' => 'Agenda', 'link' => '#'],
             ['id' => 6, 'name' => 'Informatie', 'link' => '#'],
             ['id' => 7, 'name' => 'Nieuws', 'link' => 'nieuws'],
             ['id' => 8, 'name' => 'Contact', 'link' => 'contact'],
