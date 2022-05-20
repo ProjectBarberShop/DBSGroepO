@@ -23,4 +23,5 @@ class image extends Model
     public function Webpages() {
         return $this->belongsToMany(Webpages::class);
     }
+    
 }

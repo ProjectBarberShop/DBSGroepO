@@ -44,7 +44,7 @@ class imageController extends Controller
             $contentsImg = $img->openFile()->fread($img->getSize());
             $imagedata->photo = $contentsImg;
             $imagedata->useInSlider = false;
-            $imagedata->tagName = $tag->tag;
+            $imagedata->tagName = $request->input('tag');
             $imagedata->save();
             if($request->filled('webpage')){$imagedata->webpages()->attach($request->webpage);}
         } catch (Throwable $e) {

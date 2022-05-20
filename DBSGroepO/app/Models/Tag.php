@@ -16,4 +16,9 @@ class Tag extends Model
         'image_id',
         'title'
     ];
+
+    public function Images()
+    {
+        return $this->hasMany(Image::class);
+    }
 }
