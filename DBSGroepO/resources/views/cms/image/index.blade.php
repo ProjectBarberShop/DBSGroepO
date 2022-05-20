@@ -13,7 +13,7 @@
                 <img id="preview" src="#" alt="afbeelding" class="w-50 h-50"/>
                 <input type="file" name="photo" id="file" accept="image/*" onchange="getImgData()">
                 <label for="tag">Categorie:</label>
-                <input name="tag" list="tags" id="tag" value="-" >
+                <input name="tag" list="tags" id="tag">
                 <datalist id="tags" class="w-100">
                         @foreach($labels as $l)
                             <option value="{{$l->tag}}">{{$l->tag}}</option>
