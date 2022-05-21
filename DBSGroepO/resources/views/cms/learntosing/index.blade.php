@@ -22,7 +22,7 @@
                 <div class="card-body">
                     <p class="mb-1">Titel: {{$course->title}}</p> <br>
                     <p class="mb-1">Beschrijving: {{$course->description}}</p> <br>
-                    {{-- <p class="mb-1">Categorie: {{$course->category->title}}</p> <br>  --}}
+                    <p class="mb-1">Categorie: {{$course->category->title}}</p> <br> 
                     <p class="mb-1">Datum: {{$course->date}}</p> <br> 
                     <p class="mb-1">Locatie: {{$course->location}}</p> <br> 
                     <p class="mb-1">Begeleider: {{$course->mentor}}</p> <br> 

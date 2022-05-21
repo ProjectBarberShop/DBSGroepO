@@ -12,8 +12,10 @@ class LearnToSing extends Model
 
     protected $guarded = [];
 
+    protected $with = ['category'];
+
     public function category(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
-        return $this->hasOne(LearnToSingCat::class);
+        return $this->hasOne(LearnToSingCat::class, 'id');
     }
 }
