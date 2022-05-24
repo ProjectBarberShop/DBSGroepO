@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('content')
 
-
 <div class="container">
    <div class="jumbotron">
       <div class="container text-center">
@@ -21,10 +20,28 @@
    <div id='calendar'></div>
    <div class="mb-3"></div>
 </div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p id="date"></p>
+        <p id="description"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 <script>
    $(document).ready(function () {
 
-   var SITEURL = "{{ url('https://2122-prj78-o.azurewebsites.net') }}";
+   var SITEURL = "{{ url('http://127.0.0.1:8000') }}";
    $.ajaxSetup({
          headers: {
          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -40,10 +57,16 @@
                               },
                            }
                         ],
+                        eventClick: function(calEvent, jsEvent, view) {
+                           var myModal = new bootstrap.Modal(document.getElementById('exampleModal'))
+                           document.getElementById("exampleModalLabel").innerHTML = calEvent.title
+                           document.getElementById("date").innerHTML = calEvent.start + calEvent.end
+                           document.getElementById("description").innerHTML = calEvent.description
+                           myModal.show()
+                        },
                         height: 500,
                         editable: false,
                         displayEventTime: true,
-                        editable: false,
                         eventRender: function (event, element, view) {
                            if (event.allDay === 'true') {
                                     event.allDay = true;
@@ -51,7 +74,7 @@
                                     event.allDay = false;
                            }
                         },
-                        selectable: false,
+                        selectable: true,
                         selectHelper: true,
                      });
 
