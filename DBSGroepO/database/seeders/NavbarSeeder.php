@@ -16,14 +16,14 @@ class NavbarSeeder extends Seeder
     public function run()
     {
         $navbaritems = [
-            ['id' => 1, 'name' => 'Home', 'link' => '/'],
-            ['id' => 2, 'name' => 'Even voorstellen', 'link' => '#'],
-            ['id' => 3, 'name' => 'Optredens', 'link' => '#'],
-            ['id' => 4, 'name' => 'Introductiecursus', 'link' => '#'],
-            ['id' => 5, 'name' => 'Agenda', 'link' => '#'],
-            ['id' => 6, 'name' => 'Informatie', 'link' => '#'],
-            ['id' => 7, 'name' => 'Nieuws', 'link' => 'nieuws'],
-            ['id' => 8, 'name' => 'Contact', 'link' => 'contact'],
+            ['id' => 1, 'name' => 'Home', 'link' => '/' , 'number' => 1],
+            ['id' => 2, 'name' => 'Even voorstellen', 'link' => '#', 'number' => 2],
+            ['id' => 3, 'name' => 'Optredens', 'link' => '#', 'number' => 3],
+            ['id' => 4, 'name' => 'Introductiecursus', 'link' => '#', 'number' => 4],
+            ['id' => 5, 'name' => 'Agenda', 'link' => '#', 'number' => 5],
+            ['id' => 6, 'name' => 'Informatie', 'link' => '#', 'number' => 6],
+            ['id' => 7, 'name' => 'Nieuws', 'link' => 'nieuws', 'number' => 7],
+            ['id' => 8, 'name' => 'Contact', 'link' => 'contact', 'number' => 8],
         ];
 
         $dropdownitems = [

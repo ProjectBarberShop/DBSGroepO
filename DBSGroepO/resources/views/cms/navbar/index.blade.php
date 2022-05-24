@@ -6,7 +6,7 @@
             <div class="col-md-3">
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Navigatie balk item</h3>
+                        <h3 class="card-title">Navigatie balk item {{$item->number}}</h3>
                     </div>
                     <div class="card-body">
                         <p class="mb-1">Naam: {{$item->name}}</p> <br>
