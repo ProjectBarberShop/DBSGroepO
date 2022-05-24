@@ -31,6 +31,8 @@
       <div class="modal-body">
         <p id="date"></p>
         <p id="description"></p>
+        <p id="location"></p>
+        <a target="_blank" id="location_URL"></a>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -58,11 +60,23 @@
                            }
                         ],
                         eventClick: function(calEvent, jsEvent, view) {
-                           var myModal = new bootstrap.Modal(document.getElementById('exampleModal'))
-                           document.getElementById("exampleModalLabel").innerHTML = calEvent.title
-                           document.getElementById("date").innerHTML = calEvent.start + calEvent.end
-                           document.getElementById("description").innerHTML = calEvent.description
-                           myModal.show()
+                           var myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
+                           var start = String(calEvent.start);
+                           var end = String(calEvent.end);
+
+                           document.getElementById("exampleModalLabel").innerHTML = calEvent.title;
+                           document.getElementById("date").innerHTML = start.substring(0, start.length - 8) + " - " + end.substring(0, end.length - 8);
+                           document.getElementById("description").innerHTML = calEvent.description;
+                           if(calEvent.location != null) {
+                              document.getElementById("location").innerHTML = calEvent.location;
+                           } else {
+                              document.getElementById("location").innerHTML = "Geen locatie opgegeven"
+                           }
+                           if(calEvent.locationURL != null) {
+                              document.getElementById("location_URL").innerHTML = "Locatie";
+                              document.getElementById("location_URL").href = calEvent.locationURL;
+                           }
+                           myModal.show();
                         },
                         height: 500,
                         editable: false,

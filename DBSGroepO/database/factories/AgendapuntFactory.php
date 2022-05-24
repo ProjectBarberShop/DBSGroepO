@@ -19,7 +19,7 @@ class AgendapuntFactory extends Factory
      */
     public function definition()
     {
-        $start = $this->faker->dateTimeBetween('next Monday', 'next Monday +7 days');
+        $start = $this->faker->dateTimeBetween('next Monday', 'next Monday +62 days');
         $end = $this->faker->dateTimeBetween($start, $start->format('Y-m-d H:i:s').' +2 days');
 
         return [
