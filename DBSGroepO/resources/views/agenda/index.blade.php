@@ -29,7 +29,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <p id="date"></p>
+        <p class="fw-bold" id="date"></p>
         <p id="description"></p>
         <p id="location"></p>
         <a target="_blank" id="location_URL"></a>
