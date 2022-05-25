@@ -6,7 +6,6 @@ use App\Models\NavbarItem;
 use App\Models\User;
 use Tests\DuskTestCase;
 use Laravel\Dusk\Browser;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class NavbarNumberTest extends DuskTestCase
 {
