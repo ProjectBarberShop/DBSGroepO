@@ -14,7 +14,7 @@
                                     @method('POST')
                                     @csrf
                                     <input type="hidden" name="higher" value="{{$item->number}}">
-                                    <button type="submit" id="right" class="ion-android-arrow-dropright"></button>
+                                    <button type="submit" id="higher{{$item->number}}"  class="ion-android-arrow-dropright"></button>
                                 </form>
                                 @endif
                                 @if($item->number > 1)
@@ -22,7 +22,7 @@
                                     @method('POST')
                                     @csrf
                                     <input type="hidden" name="lower" value="{{$item->number}}">
-                                    <button type="submit" id="left" class="ion-android-arrow-dropleft"></button>
+                                    <button type="submit" id="lower{{$item->number}}" class="ion-android-arrow-dropleft"></button>
                                 </form>
                                 @endif
                         </div>
@@ -38,7 +38,7 @@
                                 @method('DELETE')
                                 @csrf
                             </form>
-                            <button type="submit" class="btn btn-danger" onclick="confirmSubmit({{$item}})">Verwijderen</button>
+                            <button type="submit" id="delete{{$item->id}}" class="btn btn-danger" onclick="confirmSubmit({{$item}})">Verwijderen</button>
                         </div>
                     </div>
                 </div>
@@ -58,7 +58,7 @@
                                 <input type="text" name="name" placeholder="Naam">
                                 <label for="link">Link:</label>
                                 <input type="text" name="link" placeholder="Link">
-                                <button type="submit" class="btn btn-primary float-right mt-4">+</button>
+                                <button id="addNavigation" type="submit" class="btn btn-primary float-right mt-4">+</button>
                             </form>
                         </div>
                     </div>
