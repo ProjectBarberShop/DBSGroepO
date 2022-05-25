@@ -64,8 +64,11 @@
                            var start = String(calEvent.start);
                            var end = String(calEvent.end);
 
+                           var startDate = new Date(start).toLocaleString();
+                           var endDate = new Date(end).toLocaleString();
+
                            document.getElementById("exampleModalLabel").innerHTML = calEvent.title;
-                           document.getElementById("date").innerHTML = start.substring(0, start.length - 8) + " - " + end.substring(0, end.length - 8);
+                           document.getElementById("date").innerHTML = startDate + " - " + endDate;
                            document.getElementById("description").innerHTML = calEvent.description;
                            if(calEvent.location != null) {
                               document.getElementById("location").innerHTML = calEvent.location;
