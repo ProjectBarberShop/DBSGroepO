@@ -29,50 +29,52 @@
                   <h3 class="card-title">Categorieen</h3>
                </div>
                <div class="card-body">
-                  <table id="table_id" class="table table-bordered table-hover">
-                     <thead>
-                        <tr>
-                           <th>Titel</th>
-                           <th>Aangemaakt op</th>
-                           <th>Bijwerken</th>
-                           <th>Verwijderen</th>
-                        </tr>
-                     </thead>
-                     <tbody>
-                        @foreach($categories as $c)
-                        <tr>
-                            <form id="update-categorie{{$c->id}}" method="POST">
-                                @csrf
-                                @method('PUT')
-                                 <td>
-                                     <input type="text" name="title" id="title{{$c->id}}" value="{{$c->title}}" class="form-control" required/>
-                                </td>
-
-                            </form>
-                           <td>{{$c->created_at}}</td>
-                           <td>
-                            <button type="submit" form="update-categorie{{$c->id}}" formaction="{{ route('categorie.update', $c->id) }}" id="update{{$c->id}}" class="btn btn-success">Bijwerken</button>
-                            </td>
-                            <td>
-                                <form action="{{ route('categorie.destroy', $c->id) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" id="delete{{$c->id}}" class="btn btn-danger">Verwijderen</button>
-                                </form>
-                            </td>
-                          </div>
-                        </tr>
-                        @endforeach
-                     </tbody>
-                     <tfoot>
-                        <tr>
+                <div class="table-responsive">
+                    <table id="table_id" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
                             <th>Titel</th>
                             <th>Aangemaakt op</th>
                             <th>Bijwerken</th>
                             <th>Verwijderen</th>
-                         </tr>
-                     </tfoot>
-                  </table>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($categories as $c)
+                            <tr>
+                                <form id="update-categorie{{$c->id}}" method="POST">
+                                    @csrf
+                                    @method('PUT')
+                                    <td>
+                                        <input type="text" name="title" id="title{{$c->id}}" value="{{$c->title}}" class="form-control" required/>
+                                    </td>
+
+                                </form>
+                            <td>{{$c->created_at}}</td>
+                            <td>
+                                <button type="submit" form="update-categorie{{$c->id}}" formaction="{{ route('categorie.update', $c->id) }}" id="update{{$c->id}}" class="btn btn-success">Bijwerken</button>
+                                </td>
+                                <td>
+                                    <form action="{{ route('categorie.destroy', $c->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" id="delete{{$c->id}}" class="btn btn-danger">Verwijderen</button>
+                                    </form>
+                                </td>
+                            </div>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Titel</th>
+                                <th>Aangemaakt op</th>
+                                <th>Bijwerken</th>
+                                <th>Verwijderen</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
                </div>
             </div>
          </div>
@@ -80,7 +82,7 @@
    </div>
    <div class="container-fluid">
     <div class="row">
-        <div class="col-4 col-sm-4">
+        <div class="col-2">
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">Categoriee aanmaken</h3>

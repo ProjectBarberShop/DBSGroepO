@@ -54,7 +54,7 @@
 var i = 0;
 $("#addRemoveText").click(function () {
     ++i;
-    let test = '<div class="col-6 remove-me" id="multiForm"><div class="card"><div class="card-header"><h3 class="card-title">Kolom teksten</h3></div><div class="card-body"><div class="remove-me"><input class="mb-4" name="multiInput['+i+'][colom_title_text]" placeholder="collom title"><textarea class="mb-2" name="multiInput['+i+'][colomn_text]" placeholder="main text"></textarea><button type="button" class="remove-item btn btn-danger mt-4">Delete</button></div></div>'
+    let test = '<div class="col-6 remove-me" id="multiForm"><div class="card"><div class="card-header"><h3 class="card-title">Kolom teksten</h3></div><div class="card-body"><div class="remove-me"><input class="mb-4" name="multiInput['+i+'][colom_title_text]" placeholder="column title"><textarea class="mb-2" name="multiInput['+i+'][colomn_text]" placeholder="main text"></textarea><button type="button" class="remove-item btn btn-danger mt-4">Delete</button></div></div>'
     $("#multiForm").append(''+test+'');
         tinymce.init({
             selector: 'textarea',
