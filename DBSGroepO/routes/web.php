@@ -107,6 +107,10 @@ Route::group([
         Route::post('paginas/{pagina}/card', 'store')->name('card.store');
     });
 
+    Route::controller(NavbarController::class)->group(function() {
+        Route::post('navbar/change/{id}' , 'changeOrder')->name('navbar.order');
+    });
+
     Route::resource('agenda', AgendaCMSController::class);
     Route::resource('footer', FooterController::class);
     Route::resource('navbar', NavbarController::class);

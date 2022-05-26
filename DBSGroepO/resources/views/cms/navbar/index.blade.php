@@ -6,7 +6,26 @@
             <div class="col-md-3">
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Navigatie balk item</h3>
+                        <h3 class="card-title">Navigatie balk item {{$item->number}}</h3>
+                        <input type="number" id="pageNumber" hidden class="allign right-4" value="{{$item->number}}"/>
+                        <div class="d-flex flex-row-reverse">
+                                @if($item->number < count($navitems))
+                                <form action="{{route('navbar.order' , $item->id)}}" method="POST">
+                                    @method('POST')
+                                    @csrf
+                                    <input type="hidden" name="higher" value="{{$item->number}}">
+                                    <button type="submit" id="higher{{$item->number}}"  class="ion-android-arrow-dropright"></button>
+                                </form>
+                                @endif
+                                @if($item->number > 1)
+                                <form action="{{route('navbar.order' , $item->id)}}" method="POST">
+                                    @method('POST')
+                                    @csrf
+                                    <input type="hidden" name="lower" value="{{$item->number}}">
+                                    <button type="submit" id="lower{{$item->number}}" class="ion-android-arrow-dropleft"></button>
+                                </form>
+                                @endif
+                        </div>
                     </div>
                     <div class="card-body">
                         <p class="mb-1">Naam: {{$item->name}}</p> <br>
@@ -19,7 +38,7 @@
                                 @method('DELETE')
                                 @csrf
                             </form>
-                            <button type="submit" class="btn btn-danger" onclick="confirmSubmit({{$item}})">Verwijderen</button>
+                            <button type="submit" id="delete{{$item->id}}" class="btn btn-danger" onclick="confirmSubmit({{$item}})">Verwijderen</button>
                         </div>
                     </div>
                 </div>
@@ -39,7 +58,7 @@
                                 <input type="text" name="name" placeholder="Naam">
                                 <label for="link">Link:</label>
                                 <input type="text" name="link" placeholder="Link">
-                                <button type="submit" class="btn btn-primary float-right mt-4">+</button>
+                                <button id="addNavigation" type="submit" class="btn btn-primary float-right mt-4">+</button>
                             </form>
                         </div>
                     </div>

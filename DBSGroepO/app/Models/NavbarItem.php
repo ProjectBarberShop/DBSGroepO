@@ -13,6 +13,7 @@ class NavbarItem extends Model
     protected $fillable = [
         'name',
         'link',
+        'number',
     ];
 
     public function dropdownItems(): \Illuminate\Database\Eloquent\Relations\HasMany
