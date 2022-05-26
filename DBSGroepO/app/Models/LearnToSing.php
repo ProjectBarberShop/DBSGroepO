@@ -15,12 +15,11 @@ class LearnToSing extends Model
 
     protected $with = ['category'];
 
-    public function category(): \Illuminate\Database\Eloquent\Relations\BelongsTo
-    {
-        return $this->belongsTo(LearnToSingCat::class, 'category_id');
-    }
-
     public function image() {
         return $this->belongsTo(Image::class, 'image_id');
+    }
+    public function category(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(LearnToSingCat::class);
     }
 }
