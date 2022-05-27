@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name')->nullable(false);
             $table->string("link")->nullable(true)->default('#');
+            $table->integer("number")->nullable(false);
             $table->timestamps();
         });
     }
