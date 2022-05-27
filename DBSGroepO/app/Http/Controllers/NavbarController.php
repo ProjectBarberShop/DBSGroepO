@@ -14,8 +14,7 @@ class NavbarController extends Controller
      */
     public function index()
     {
-        $navitems = NavbarItem::all();
-
+        $navitems = NavbarItem::orderBy('number')->get();
         return view('cms.navbar.index', compact('navitems'));
     }
 
@@ -43,23 +42,13 @@ class NavbarController extends Controller
         $navitem = new NavbarItem();
         $link = $request->input('link');
         $navitem->name = $request->input('name');
+        $navitem->number = NavbarItem::count() + 1;
         if(!(empty($link))){
             $navitem->link = $request->input('link');
         }
         $navitem->save();
 
         return redirect(route('navbar.index'));
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -85,13 +74,24 @@ class NavbarController extends Controller
     {
         $request->validate([
             'name' => 'required',
-
         ]);
 
         NavbarItem::where('id', $id)->update([
             'name' => $request->input('name'),
             'link' => $request->input('link'),
         ]);
+
+        return redirect(route('navbar.index'));
+    }
+
+    public function changeOrder(Request $request, $id) {
+        $navbaritem = NavbarItem::find($id);
+        $number = $request->higher ? $request->higher + 1 : $request->lower - 1;
+        $higher = isset($request->higher);
+
+        $findNavbaritem = NavbarItem::where('number', $number)->first();
+        $findNavbaritem->update(['number'=> $higher ? $findNavbaritem->number - 1 : $findNavbaritem->number + 1]);
+        $navbaritem->update(['number' => $number]);
 
         return redirect(route('navbar.index'));
     }
@@ -104,7 +104,13 @@ class NavbarController extends Controller
      */
     public function destroy($id)
     {
+        $navbaritem = NavbarItem::find($id);
+        $navbaritems = NavbarItem::where('number' , '>' , $navbaritem->number)->get();
+
         NavbarItem::find($id)->delete();
+        foreach($navbaritems as $item) {
+            $item->update(['number'=> $item->number - 1]);
+        }
         return redirect(route('navbar.index'));
     }
 }
