@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Image;
 use App\Models\LearnToSing;
-use App\Models\LearnToSingCat;
 use Illuminate\Http\Request;
+use App\Models\LearnToSingCat;
 
 class LearnToSingController extends Controller
 {
@@ -15,7 +16,12 @@ class LearnToSingController extends Controller
      */
     public function index()
     {
-        return view('cms.learntosing.index', ['courses' => LearnToSing::all()]);
+        $images = [];
+
+        foreach(LearnToSing::all() as $course){
+            array_push($images, Image::find($course->image_id));
+        }
+        return view('cms.learntosing.index', [ 'courses' => LearnToSing::all(), 'images' => $images]);
     }
 
     /**
@@ -26,7 +32,7 @@ class LearnToSingController extends Controller
     public function create()
     {
 
-        return view('cms.learntosing.create', ['categories' => LearnToSingCat::all()]);
+        return view('cms.learntosing.create', ['categories' => LearnToSingCat::all(), 'imagesdata' => Image::all()]);
     }
 
     /**
@@ -37,6 +43,7 @@ class LearnToSingController extends Controller
      */
     public function store(Request $request)
     {   
+        
         $request->validate([
             'title' => 'required',
             'category_id' => 'required',
@@ -70,7 +77,8 @@ class LearnToSingController extends Controller
      */
     public function edit($id)
     {
-        //
+     
+        return view('cms.learntosing.edit', ['course' => LearnToSing::findOrFail($id), 'imagesdata' => Image::all(), 'categories' => LearnToSingCat::all()]);
     }
 
     /**
@@ -81,8 +89,20 @@ class LearnToSingController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //
+    {   
+   
+        $request->validate([
+            'title' => 'required',
+            'category_id' => 'required',
+            'description' => 'max:255'
+        ]);
+
+        $attributes = $request->all();
+        
+        if(!isset($attributes['price'])) $attributes['price'] = 0;
+        LearnToSing::find($id)->update($attributes);
+        
+        return redirect('cms/learntosing')->with('success', 'Cursus succesvol Bijgewerkt');
     }
 
     /**

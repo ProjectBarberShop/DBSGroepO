@@ -16,11 +16,11 @@
     @foreach($courses as $course)
         <div class="col-md-3">
             <div class="card card-primary">
-                <div class="card-header">
-                    <h3 class="card-title">Cursus</h3>
+                <div class="card-header bg-white">
+                    <h3 class="card-title"><strong>Titel: {{$course->title}}</strong></h3><br>
+                    <img src="data:image/jpg;base64,{{ chunk_split(base64_encode($images[$loop->index]->photo)) }}" class="img-fluid w-50 h-50">
                 </div>
                 <div class="card-body">
-                    <p class="mb-1">Titel: {{$course->title}}</p> <br>
                     <p class="mb-1">Beschrijving: {{$course->description}}</p> <br>
                     <p class="mb-1">Categorie: {{$course->category->title}}</p> <br> 
                     <p class="mb-1">Datum: {{$course->date}}</p> <br> 
@@ -34,7 +34,7 @@
                             @method('DELETE')
                             @csrf
                         </form>
-                        <button type="submit" class="btn btn-danger" onclick="confirmSubmit({{$course}})">Verwijderen</button>
+                        <button type="submit" class="btn btn-danger" id="remove" onclick="confirmSubmit({{$course}})">Verwijderen</button>
                     </div>
                 </div>
             </div>

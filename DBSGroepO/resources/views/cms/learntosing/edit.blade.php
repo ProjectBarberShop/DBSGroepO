@@ -3,15 +3,16 @@
 @section('content')
 <div class="container">
 
-<form action="{{route ('learntosing.store')}}" method="POST" class="d-flex flex-column">
+<form action="{{ route('learntosing.update', $course->id) }}" method="POST" class="d-flex flex-column">
     @csrf
+    @method('PUT')
     <label for="title">Titel:</label>
-    <input type="text" name="title" value="{{ old('title') }}">
+    <input type="text" name="title" value="{{ $course->title }}">
     @error('title')
         <p class="text-danger">{{ $message }}</p>
     @enderror
     <label for="description">Beschrijving:</label>
-    <textarea id="description" name="description">{{ old('description') }}</textarea>
+    <textarea id="description" name="description">{{ $course->description }}</textarea>
     <p id="count" class="h5 m-0">Tekens over: 255</p>
     @error('description')
     <p class="text-danger">{{ $message }}</p>
@@ -20,11 +21,12 @@
     <div class="d-flex flex-column">
         <label for="image">Foto:</label>
         @foreach($imagesdata as $img)
-            @if(old('imageId') == $img->id)
-                <img src="data:image/jpg;base64,{{ chunk_split(base64_encode($img->photo)) }}" class="img-fluid">
+            @if($course->image_id == $img->id)
+                <img src="data:image/jpg;base64,{{ chunk_split(base64_encode($img->photo)) }}" class="img-fluid w-25 h-25">
             @endif
         @endforeach
-        <div class="imagePosition"></div>
+                <label for="image">Nieuwe foto:</label>
+                <div class="imagePosition"></div>
     </div>
     <button class="btn btn-secondary" onclick="modalShow()">Selecteer foto</button>
     <div class="modal justify-content-center align-items-center" id="modal-info" aria-modal="true" role="dialog">
@@ -37,7 +39,7 @@
                 @forelse($imagesdata as $img)
                     <div class="d-flex justify-content-center align-items-center col-4 p-0">
                         <a onclick="cloneimage({{$img->id}}, 'b', 'imagePosition', null, null, true), modalClose()" class="ml-2 mt-2">
-                            <img src="data:image/jpg;base64,{{ chunk_split(base64_encode($img->photo)) }}" class="img-fluid " id="{{$img->id}}b">
+                            <img src="data:image/jpg;base64,{{ chunk_split(base64_encode($img->photo)) }}" class="img-fluid" id="{{$img->id}}b">
                         </a>
                     </div>
                 @empty
@@ -46,25 +48,25 @@
             </div>
         </div>
     </div>
-    <input type="hidden" name="image_id" id="selectedImage_id">
+    <input type="hidden" name="image_id" id="selectedImage_id" value="{{ $course->image_id }}">
 
 
     <label for="category_id">Categorie</label>
     <select name="category_id">
 
         @foreach($categories as $category)
-        <option {{ old('title') == $category->id ? ' selected' : ''}} value="{{ $category->id }}">{{ $category->title }}</option>
+        <option {{ $course->category->id == $category->id ? ' selected' : ''}} value="{{ $category->id }}">{{ $category->title }}</option>
         @endforeach
     </select>
     <label for="date">Datum en tijd:</label>
-    <input type="datetime-local" name="date" id="date" value="{{ old('date') }}">
+    <input type="datetime-local" name="date" id="date" value="{{ $course->date }}">
     <label for="location">Locatie:</label>
-    <input type="text" name="location" value="{{ old('location') }}">
+    <input type="text" name="location" value="{{ $course->location }}">
     <label for="mentor">Begeleider:</label>
-    <input type="text" name="mentor" value="{{ old('mentor') }}" >
+    <input type="text" name="mentor" value="{{ $course->mentor }}" >
     <label for="price">prijs:</label>
-    <input type="number" step="0.01" name="price" value= {{ old('price') }}>
-    <button type="submit" class="btn btn-primary float-right mt-4" id='create'>Aanmaken</button>
+    <input type="number" step="0.01" name="price" value= {{ $course->price }}>
+    <button type="submit" class="btn btn-primary float-right mt-4" id="edit">Wijzigen</button>
 </form>
 </div>
 @endsection
@@ -118,7 +120,7 @@ function cloneimage(imageId, uniqueId, classname, imgWidth, imgHeight, overwrite
     for(i = 0; i < imageClasses.length; i++) {
         let newImage = selectedImage.cloneNode(true);
         newImage.setAttribute("style", "width:" + imgWidth + "px !important", "height:" + imgHeight + "px !important");
-        newImage.className += " img w-50 h-50";
+        newImage.className += " img w-25 h-25";
         imageClasses[i].append(newImage);
     }
 
