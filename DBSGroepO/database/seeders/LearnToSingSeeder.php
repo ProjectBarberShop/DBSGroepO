@@ -17,6 +17,6 @@ class LearnToSingSeeder extends Seeder
      */
     public function run()
     {
-        LearnToSing::factory(20)->create();
+        LearnToSing::factory(10)->create();
     }
 }

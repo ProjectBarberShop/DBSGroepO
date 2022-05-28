@@ -6,6 +6,7 @@ use App\Models\Image;
 use App\Models\LearnToSingCat;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class LearnToSing extends Model
 {
@@ -18,8 +19,9 @@ class LearnToSing extends Model
     public function image() {
         return $this->belongsTo(Image::class, 'image_id');
     }
-    public function category(): \Illuminate\Database\Eloquent\Relations\HasOne
+
+    public function category(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->hasOne(LearnToSingCat::class);
+        return $this->belongsTo(LearnToSingCat::class, 'category_id');
     }
 }

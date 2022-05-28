@@ -22,7 +22,6 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             WebpageSeeder::class,
             LearnToSingCategorySeeder::class,
-            LearnToSingSeeder::class
         ]);
     }
 }
