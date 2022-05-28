@@ -55,7 +55,7 @@
     <select name="category_id">
 
         @foreach($categories as $category)
-        <option {{ $course->category->id == $category->id ? ' selected' : ''}} value="{{ $category->id }}">{{ $category->title }}</option>
+        <option {{ $course->category?->id == $category->id ? ' selected' : ''}} value="{{ $category->id }}">{{ $category->title }}</option>
         @endforeach
     </select>
     <label for="date">Datum en tijd:</label>

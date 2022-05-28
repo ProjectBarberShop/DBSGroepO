@@ -47,7 +47,8 @@ class LearnToSingController extends Controller
         $request->validate([
             'title' => 'required',
             'category_id' => 'required',
-            'description' => 'max:255'
+            'description' => 'max:255',
+            'image_id' => 'required'
         ]);
 
         $attributes = $request->all();
@@ -94,7 +95,8 @@ class LearnToSingController extends Controller
         $request->validate([
             'title' => 'required',
             'category_id' => 'required',
-            'description' => 'max:255'
+            'description' => 'max:255',
+            'image_id' => 'required'
         ]);
 
         $attributes = $request->all();

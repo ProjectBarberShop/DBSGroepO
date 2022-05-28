@@ -47,7 +47,9 @@
         </div>
     </div>
     <input type="hidden" name="image_id" id="selectedImage_id">
-
+    @error('image_id')
+      <p class="text-danger">{{ $message }}</p>
+    @enderror
 
     <label for="category_id">Categorie</label>
     <select name="category_id">
@@ -56,6 +58,9 @@
         <option {{ old('title') == $category->id ? ' selected' : ''}} value="{{ $category->id }}">{{ $category->title }}</option>
         @endforeach
     </select>
+    @error('category_id')
+        <p class="text-danger">{{ $message }}</p>
+    @enderror
     <label for="date">Datum en tijd:</label>
     <input type="datetime-local" name="date" id="date" value="{{ old('date') }}">
     <label for="location">Locatie:</label>

@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('learn_to_sings', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('category_id')->constrained('learntosing_categorie');
+            $table->foreignId('category_id')->nullable()->constrained("learntosing_categorie")->cascadeOnUpdate()->nullOnDelete();
             $table->foreignId('image_id')->constrained('image');
             $table->string('title');
             $table->tinyText('description')->nullable();
