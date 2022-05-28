@@ -58,6 +58,7 @@
         <option {{ old('title') == $category->id ? ' selected' : ''}} value="{{ $category->id }}">{{ $category->title }}</option>
         @endforeach
     </select>
+    <a href='/cms/learntosing/categorie'>Categorie aanmaken</a>
     @error('category_id')
         <p class="text-danger">{{ $message }}</p>
     @enderror

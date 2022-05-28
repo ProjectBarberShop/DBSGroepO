@@ -49,7 +49,9 @@
         </div>
     </div>
     <input type="hidden" name="image_id" id="selectedImage_id" value="{{ $course->image_id }}">
-
+    @error('image_id')
+    <p class="text-danger">{{ $message }}</p>
+     @enderror
 
     <label for="category_id">Categorie</label>
     <select name="category_id">
@@ -58,6 +60,10 @@
         <option {{ $course->category?->id == $category->id ? ' selected' : ''}} value="{{ $category->id }}">{{ $category->title }}</option>
         @endforeach
     </select>
+    <a href='/cms/learntosing/categorie'>Categorie aanmaken</a>
+    @error('category_id')
+    <p class="text-danger">{{ $message }}</p>
+    @enderror
     <label for="date">Datum en tijd:</label>
     <input type="datetime-local" name="date" id="date" value="{{ $course->date }}">
     <label for="location">Locatie:</label>
