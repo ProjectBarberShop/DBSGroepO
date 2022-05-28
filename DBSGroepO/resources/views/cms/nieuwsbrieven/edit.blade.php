@@ -10,17 +10,19 @@
                 <label for="image">Nieuwe foto:</label>
                 <div class="imagePosition"></div>
             </div>
-            <button class="btn btn-secondary" onclick="modalShow()">Selecteer foto</button>
-            <div class="modal justify-content-center align-items-center" id="modal-info" aria-modal="true" role="dialog">
+            <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modal-info">Selecteer foto</button>
+            <div class="modal fade" id="modal-info" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog"></div>
+                <div class="modal-dialog-scrollable d-flex justify-content-center align-content-center">
                     <div class="modal-content bg-info w-75">
                         <div class="modal-header">
                             <h2 class="modal-title">Selecteer foto</h2>
-                            <button class="close fs-2" onclick="modalClose()">×</button>
+                            <button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="row m-0 pr-2 overflow-auto" style="height: 80vh;">
+                        <div class="modal-body row m-0 h-100">
                             @forelse($imagesdata as $img)
-                                <div class="d-flex justify-content-center align-items-center col-4 p-0">
-                                    <a onclick="cloneimage({{$img->id}}, 'a', 'imagePosition', null, null, true), modalClose()" class="ml-2 mt-2">
+                                <div class="d-flex justify-content-center align-items-center col-6 col-md-4 p-0">
+                                    <a onclick="cloneimage({{$img->id}}, 'a', 'imagePosition', null, null, true)" data-bs-dismiss="modal" class="m-2">
                                         <img src="data:image/jpg;base64,{{ chunk_split(base64_encode($img->photo)) }}" class="img-fluid" id="{{$img->id}}a">
                                     </a>
                                 </div>
@@ -30,6 +32,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
             <form action="{{route ('nieuwsbrieven.update' , $newsletterdata->id)}}" method="POST" class="d-flex flex-column">
                 @method('PUT')
                 @csrf
@@ -52,14 +55,6 @@ function confirmSubmit(formId, uniqueId) {
     if(confirm("Weet u zeker dat u " + newFormId.querySelector("input").name + " wilt verwijderen?")) {
         newFormId.submit();
     }
-}
-
-function modalShow() {
-    document.getElementById("modal-info").style.display = "flex";
-}
-
-function modalClose() {
-    document.getElementById("modal-info").style.display = "none";
 }
 
 function cloneimage(imageId, uniqueId, classname, imgWidth, imgHeight, overwrite) {

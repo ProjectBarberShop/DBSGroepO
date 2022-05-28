@@ -20,9 +20,9 @@
                                 </div>
                                 <div class="card-body">
                                     <input hidden name="collomMainText[{{ $collom->id }}][id]" value="{{ $collom->id }}">
-                                    <label for="collomMainText[{{ $collom->id }}][colom_title_text]">Collom titeltekst</label>
+                                    <label for="collomMainText[{{ $collom->id }}][colom_title_text]">Column titeltekst</label>
                                     <input class="md-4" name="collomMainText[{{ $collom->id }}][colom_title_text]" id="{{ $collom->id }}" value="{{ $collom->colom_title_text }}">
-                                    <label for="collomMainText[{{ $collom->id }}][colomn_text]">Collom hoofdtekst</label>
+                                    <label for="collomMainText[{{ $collom->id }}][colomn_text]">Column hoofdtekst</label>
                                     <textarea class="md-4" name="collomMainText[{{ $collom->id }}][colomn_text]" id="textarea{{ $collom->id }}">{{ $collom->colomn_text }}</textarea>
                                 </div>
                             </div>
@@ -39,8 +39,8 @@
         $("#addRemoveText").click(function() {
             ++i;
             let divform =
-                '<div class="col-6 remove-me" id="multiForm"><div class="card"><div class="card-header"><h3 class="card-title">Kolom teksten</h3></div><div class="card-body"><div class="remove-me"><input class="mb-4" name="multiInput[' +
-                i + '][colom_title_text]" placeholder="collom title"><textarea id="columtext'+i+'" class="mb-2" name="multiInput[' + i +
+                '<div class="col-6 remove-me" id="multiForm"><div class="card"><div class="card-header"><h3 class="card-title">Kolom teksten</h3></div><div class="card-body"><div class="remove-me"><input class="mb-4 w-100" name="multiInput[' +
+                i + '][colom_title_text]" placeholder="column title"><textarea id="columtext'+i+'" class="mb-2" name="multiInput[' + i +
                 '][colomn_text]" placeholder="main text"></textarea><button type="button" id="delete'+i+'" class="remove-item btn btn-danger mt-4">Delete</button></div></div>'
             $("#multiForm").append('' + divform + '');
             tinymce.init({
