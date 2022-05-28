@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('learntosing_categorie', function (Blueprint $table) {
             $table->id();
-            $table->string('title')->unique();
+            $table->string('title');
             $table->timestamps();
         });
     }

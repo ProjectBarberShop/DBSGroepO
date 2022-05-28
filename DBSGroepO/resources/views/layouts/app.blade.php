@@ -9,7 +9,8 @@
     <title>Barbershop</title>
 
     <!-- Scripts -->
-    <script type="text/javascript" src="{{ asset('js/app.js') }}" defer></script>
+    <script type="text/javascript" src="{{ config('app.env') === 'production' ? secure_asset('js/app.js') : asset('js/app.js') }}" defer></script>
+
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
             integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -44,11 +45,14 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
           integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/contact.css') }}" rel="stylesheet">
 
-    <div id="fb-root"></div>
+    <link href="{{ config('app.env') === 'production' ? secure_asset('css/app.css') : asset('css/app.css')}}" rel="stylesheet">
+    <link href="{{ config('app.env') === 'production' ? secure_asset('css/contact.css') : asset('css/contact.css') }}" rel="stylesheet">
+
+
+    
+
+    
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/nl_NL/sdk.js#xfbml=1&version=v13.0" nonce="BRVg9Kka"></script>
 </head>
 <body class="bg-white">
