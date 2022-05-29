@@ -90,6 +90,7 @@ class imageController extends Controller
         return redirect(route('paginas.index'))->with('success','afbeelding succesvol toegevoegd');
         }else{
             $images = Image::all();
+            
             return view('cms.image.createMultiple' , ['pageID' => $pageID, 'afbeeldingen'=> $images]);
         }
     }
