@@ -23,8 +23,8 @@ use App\Http\Controllers\LearnToSingCategorie;
 
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\ContactFormController;
+use App\Http\Controllers\LearnToSingCMSController;
 use App\Http\Controllers\LearnToSingController;
-use App\Http\Controllers\LearntosingController;
 use App\Http\Controllers\PerformanceController;
 
 
@@ -118,7 +118,7 @@ Route::group([
     Route::resource('footer', FooterController::class);
     Route::resource('navbar', NavbarController::class);
     Route::resource('dropdown', DropdownController::class);
-    Route::resource('learntosing', LearnToSingController::class);
+    Route::resource('learntosing', LearnToSingCMSController::class);
 
     Route::get('/home', function () {
         return View::make('cms.home');

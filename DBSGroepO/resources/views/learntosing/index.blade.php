@@ -19,9 +19,11 @@
             <div class="card mb-3" style="max-width: 25em;">
                 <img src="data:image/jpg;base64,{{ chunk_split(base64_encode($c->image->photo)) }}" class="card-img-top img-thumbnail img-fluid" alt="{{$c->title}} afbeelding">
                 <div class="card-body">
-                    <h5 class="card-title">{{$c->title}}</h5>
+                    <h3 class="card-title">{{$c->title}}</h3>
                     <p class="card-text">{{$c->description}}</p>
                     <p class="card-text"><small class="text-muted">Datum: {{$c->date}}</small></p>
+                    <p class="card-text"><small class="text-muted">Mentor: {{$c->mentor}}</small></p>
+                    <p class="card-text"><small class="text-muted">Prijs: {{$c->price}}</small></p>
                 </div>
             </div>
         @endforeach
