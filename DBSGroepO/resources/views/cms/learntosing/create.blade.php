@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
 
-<form action="{{route ('learntosing.store')}}" method="POST" class="d-flex flex-column">
+<form action="{{route ('learntosing-beheer.store')}}" method="POST" class="d-flex flex-column">
     @csrf
     <label for="title">Titel:</label>
     <input type="text" name="title" value="{{ old('title') }}">

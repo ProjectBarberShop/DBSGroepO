@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
 
-<form action="{{ route('learntosing.update', $course->id) }}" method="POST" class="d-flex flex-column">
+<form action="{{ route('learntosing-beheer.update', $course->id) }}" method="POST" class="d-flex flex-column">
     @csrf
     @method('PUT')
     <label for="title">Titel:</label>

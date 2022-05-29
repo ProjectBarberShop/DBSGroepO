@@ -10,7 +10,7 @@
     </div>
 @endif
 
-<a href="{{ route('learntosing.create') }}" class="h3 link-primary" >Aanmaken</a>
+<a href="{{ route('learntosing-beheer.create') }}" class="h3 link-primary" >Aanmaken</a>
 
 <div class="row mt-3">
     @foreach($courses as $course)
@@ -28,8 +28,8 @@
                     <p class="mb-1">Begeleider: {{$course->mentor}}</p> <br> 
                     <p class="mb-1">Prijs: {{$course->price}}</p> <br> 
                     <div class="d-flex flex-row justify-content-end mt-4">
-                        <a href="{{ route('learntosing.edit', $course->id) }}" class="mr-2 btn btn-primary">Bijwerken</a>
-                        <form id="{{str_replace(' ', '', $course->title).$course->id}}"  action="{{ route('learntosing.destroy', $course->id) }}" method="POST">
+                        <a href="{{ route('learntosing-beheer.edit', $course->id) }}" class="mr-2 btn btn-primary">Bijwerken</a>
+                        <form id="{{str_replace(' ', '', $course->title).$course->id}}"  action="{{ route('learntosing-beheer.destroy', $course->id) }}" method="POST">
                             <input type="hidden" name="title" value="{{$course->title}}">
                             @method('DELETE')
                             @csrf
