@@ -149,7 +149,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{url('cms/learntosing')}}" class="nav-link">
+                <a href="{{url('cms/learntosing-beheer')}}" class="nav-link">
                   <i class="far ion-ios-list-outline nav-icon"></i>
                   <p>Cursussen</p>
                 </a>

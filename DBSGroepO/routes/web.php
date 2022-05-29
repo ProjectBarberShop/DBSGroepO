@@ -118,7 +118,7 @@ Route::group([
     Route::resource('footer', FooterController::class);
     Route::resource('navbar', NavbarController::class);
     Route::resource('dropdown', DropdownController::class);
-    Route::resource('learntosing', LearnToSingCMSController::class);
+    Route::resource('learntosing-beheer', LearnToSingCMSController::class);
 
     Route::get('/home', function () {
         return View::make('cms.home');

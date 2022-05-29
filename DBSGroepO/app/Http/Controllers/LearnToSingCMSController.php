@@ -56,7 +56,7 @@ class LearnToSingCMSController extends Controller
         if(!isset($attributes['price'])) $attributes['price'] = 0;
         LearnToSing::create($attributes);
         
-        return redirect('cms/learntosing')->with('success', 'Cursus succesvol aangemaakt');
+        return redirect('cms/learntosing-beheer')->with('success', 'Cursus succesvol aangemaakt');
     }
 
     /**
@@ -104,7 +104,7 @@ class LearnToSingCMSController extends Controller
         if(!isset($attributes['price'])) $attributes['price'] = 0;
         LearnToSing::find($id)->update($attributes);
         
-        return redirect('cms/learntosing')->with('success', 'Cursus succesvol Bijgewerkt');
+        return redirect('cms/learntosing-beheer')->with('success', 'Cursus succesvol Bijgewerkt');
     }
 
     /**
