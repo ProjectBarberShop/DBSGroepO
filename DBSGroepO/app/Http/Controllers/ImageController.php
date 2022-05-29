@@ -5,22 +5,23 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Image;
 use App\Models\webpages;
+use App\Models\Tag;
 
 class imageController extends Controller
 {
 
     public function index(Request $request)
     {
-        $categories = Image::select('category')->distinct()->get();
+        $labels = Tag::all();
         $images = Image::query();
 
         if($request->filled('search')){
             $images->where('title', 'like', '%' . $request->search . '%')->get();
         }
         if($request->filled('filter')){
-            $images->where('category', '=', $request->filter)->get();
+            $images->where('tagName', '=', $request->filter)->get();
         }
-        return view('cms.image.index', ['images'=>$images->get(), 'categories'=> $categories]);
+        return view('cms.image.index', ['images'=>$images->get(), 'labels'=> $labels]);
     }
 
     public function store(Request $request)
@@ -28,19 +29,27 @@ class imageController extends Controller
         $request->validate([
             'title' => 'required',
             'photo' => 'required|max:294|image',
-            'category' => 'required',
+            'tag' => 'required',
         ]);
 
-        $imagedata = new Image;
-        $imagedata->title = $request->input('title');
-        $img = $request->file('photo');
-        $contentsImg = $img->openFile()->fread($img->getSize());
-        $imagedata->photo = $contentsImg;
-        $imagedata->useInSlider = false;
-        $imagedata->category = $request->input('category');
-        $imagedata->save();
-        if($request->filled('webpage')){$imagedata->webpages()->attach($request->webpage);}
+        try{
+            $tag = new Tag;
+            if(Tag::where('tag', $request->input('tag'))->count() === 0){
+                $tag->tag = $request->input('tag');
+                $tag->save();
+            }
+            $imagedata = new Image;
+            $imagedata->title = $request->input('title');
+            $img = $request->file('photo');
+            $contentsImg = $img->openFile()->fread($img->getSize());
+            $imagedata->photo = $contentsImg;
+            $imagedata->useInSlider = false;
+            $imagedata->tagName = $request->input('tag');
+            $imagedata->save();
+            if($request->filled('webpage')){$imagedata->webpages()->attach($request->webpage);}
+        } catch (Throwable $e) {
 
+        }
         return redirect(route('fotos.index'));
     }
 

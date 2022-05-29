@@ -36,7 +36,7 @@ class AppServiceProvider extends ServiceProvider
             ->where('is_published', true)->first();
             $contactsdata = Contact::where('is_published', true)->get();
             $footerdata = Footer::find(1);
-            $navbardata = NavbarItem::all();
+            $navbardata = NavbarItem::orderBy('number')->get();
 
             if($footerdata == null){
                 $seeder = new FooterSeeder();
@@ -47,7 +47,7 @@ class AppServiceProvider extends ServiceProvider
             if($navbardata == null){
                 $seeder = new NavbarSeeder();
                 $seeder->run();
-                $navbardata = NavbarItem::all();
+                $navbardata = NavbarItem::orderBy('number')->get();
             }
 
             $view->with(['newsletterdata' => $newsletterdata,

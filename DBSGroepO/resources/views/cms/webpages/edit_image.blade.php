@@ -13,33 +13,35 @@
                     <form id="submition-form"  method="POST">
                         @csrf
                         @method('POST')
-                        <table class="table" id="multiForm">
-                            <thead>
-                                <tr>
-                                    <th>image id</th>
-                                    <th>Niewe image</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                    @foreach($page->Image as $img)
-                                        <tr>
-                                            <td>
-                                                <select id="images" name="oldInput[{{++$img->id }}][image_id]" class="w-100">
-                                                    @foreach($afbeeldingen as $af)
-                                                        <option value="{{$af->id}}"  {{$af->id == $img->id ? 'selected' : ''}}>{{$af->title}}</option>
-                                                    @endforeach
-                                                </select>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th>image id</th>
-                                    <th>Niewe image</th>
-                                </tr>
-                            </tfoot>
-                        </table>
+                        <div class="table-responsive">
+                            <table class="table" id="multiForm">
+                                <thead>
+                                    <tr>
+                                        <th>image id</th>
+                                        <th>Niewe image</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                        @foreach($page->Image as $img)
+                                            <tr>
+                                                <td>
+                                                    <select id="images" name="oldInput[{{++$img->id }}][image_id]" class="w-100">
+                                                        @foreach($afbeeldingen as $af)
+                                                            <option value="{{$af->id}}"  {{$af->id == $img->id ? 'selected' : ''}}>{{$af->title}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>image id</th>
+                                        <th>Niewe image</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
                     </form>
                 @endforeach
                 <div class="card-body">

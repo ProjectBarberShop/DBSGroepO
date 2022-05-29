@@ -13,28 +13,30 @@
                     <form id="submition-form" method="post">
                         @csrf
                         @method('post')
-                        <table class="table" id="multiForm">
-                            <thead>
-                                <tr>
-                                    <th>Youtube key</th>
-                                    <th>Nieuwe key</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($page->youtube as $y)
+                        <div class="table-responsive">
+                            <table class="table" id="multiForm">
+                                <thead>
                                     <tr>
-                                        <td><input type="text" name="oldInput[{{ $y->id }}][youtube_video_key]" class="form-control" value="{{ $y->youtube_video_key }}" required /></td>
+                                        <th>Youtube key</th>
+                                        <th>Nieuwe key</th>
                                     </tr>
-                                @endforeach
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th>Youtube key</th>
-                                    <th>Nieuwe key</th>
-                                </tr>
-                            </tfoot>
-                        </table>
-                        <div class="card-body">
+                                </thead>
+                                <tbody>
+                                    @foreach ($page->youtube as $y)
+                                        <tr>
+                                            <td><input type="text" name="oldInput[{{ $y->id }}][youtube_video_key]" class="form-control" value="{{ $y->youtube_video_key }}" required /></td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>Youtube key</th>
+                                        <th>Nieuwe key</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <div class="card-body d-flex">
                             @foreach ($page->youtube as $y)
                                 @component('components.youtube')
                                     @slot('youtube_key')

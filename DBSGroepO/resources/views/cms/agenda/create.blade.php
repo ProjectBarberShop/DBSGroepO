@@ -21,7 +21,7 @@
                 </div>
                 <div class="form-group">
                     <label for="description">Beschrijving</label>
-                    <input type="text" class="form-control" name="description" value="{{ old('description') }}" required>
+                    <textarea type="text" class="form-control" name="description" value="{{ old('description') }}" required></textarea>
                 </div>
                 <div class="form-group">
                     <label for="start">Start</label>
@@ -48,9 +48,9 @@
                     <label for="locationURL">Google Maps URL (optioneel)</label>
                     <input type="text" class="form-control" name="locationURL" value="{{ old('locationURL') }}">
                 </div>
-                <div class="row">
-                    <a href="/cms/agenda" class="btn btn-outline-secondary col-md-1 ml-2 mr-2">Terug</a>
-                    <button id="createsubmit" type="submit" class="btn btn-primary col-md-1">Submit</button>
+                <div>
+                    <a href="/cms/agenda" class="btn btn-outline-secondary col-md-1 mr-2">Terug</a>
+                    <button id="createsubmit" type="submit" class="btn btn-primary col-md-1 mt-2 mt-md-0">Submit</button>
                 </div>
             </form>
         </div>

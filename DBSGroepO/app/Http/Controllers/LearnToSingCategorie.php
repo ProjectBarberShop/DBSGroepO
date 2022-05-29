@@ -17,9 +17,7 @@ class LearnToSingCategorie extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => [
-                'required'
-            ]
+            'title' => 'required|unique:learntosing_categorie,title'
         ]);
         LearnToSingCat::create($request->all());
         return redirect()->back();
@@ -28,9 +26,7 @@ class LearnToSingCategorie extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'title' => [
-                'required'
-            ]
+            'title' => 'required|unique:learntosing_categorie,title'
         ]);
         $cat = LearnToSingCat::find($id);
         $cat->update($request->all());

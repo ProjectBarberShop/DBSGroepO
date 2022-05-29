@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\LearnToSing;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class image extends Model
 {
@@ -23,4 +24,9 @@ class image extends Model
     public function Webpages() {
         return $this->belongsToMany(Webpages::class);
     }
+
+    public function courses() {
+        return $this->belongsToMany(LearnToSing::class);
+    }
+    
 }

@@ -23,6 +23,8 @@ use App\Http\Controllers\LearnToSingCategorie;
 
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\ContactFormController;
+use App\Http\Controllers\LearnToSingCMSController;
+use App\Http\Controllers\LearnToSingController;
 use App\Http\Controllers\PerformanceController;
 
 
@@ -41,6 +43,7 @@ Route::get('/agenda', [AgendaController::class , 'index'])->name('webpage_agenda
 Route::resource('/optredens', PerformanceController::class);
 Route::resource('/', HomeController::class)->only(['index']);
 Route::resource('/contact', ContactFormController::class);
+Route::resource('/learntosing', LearntosingController::class);
 Route::get('/nieuws', [NewsletterController::class, 'getNews'])->name('nieuws.index');
 
 Auth::routes();
@@ -107,10 +110,15 @@ Route::group([
         Route::post('paginas/{pagina}/card', 'store')->name('card.store');
     });
 
+    Route::controller(NavbarController::class)->group(function() {
+        Route::post('navbar/change/{id}' , 'changeOrder')->name('navbar.order');
+    });
+
     Route::resource('agenda', AgendaCMSController::class);
     Route::resource('footer', FooterController::class);
     Route::resource('navbar', NavbarController::class);
     Route::resource('dropdown', DropdownController::class);
+    Route::resource('learntosing-beheer', LearnToSingCMSController::class);
 
     Route::get('/home', function () {
         return View::make('cms.home');

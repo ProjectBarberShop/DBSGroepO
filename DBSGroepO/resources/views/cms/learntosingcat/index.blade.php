@@ -11,6 +11,15 @@
             <p>{{ $message }}</p>
         </div>
     @endif
+    @if($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 <section class="content">
    <div class="container-fluid">
       <div class="row">
@@ -19,29 +28,29 @@
                <div class="card-header">
                   <h3 class="card-title">Categorieen</h3>
                </div>
-               <div class="card-body">
-                  <table id="table_id" class="table table-bordered table-hover">
-                     <thead>
+               <div class="card-body table-responsive">
+                <table id="table_id" class="table table-bordered table-hover">
+                    <thead>
                         <tr>
-                           <th>Titel</th>
-                           <th>Aangemaakt op</th>
-                           <th>Bijwerken</th>
-                           <th>Verwijderen</th>
+                        <th>Titel</th>
+                        <th>Aangemaakt op</th>
+                        <th>Bijwerken</th>
+                        <th>Verwijderen</th>
                         </tr>
-                     </thead>
-                     <tbody>
+                    </thead>
+                    <tbody>
                         @foreach($categories as $c)
                         <tr>
                             <form id="update-categorie{{$c->id}}" method="POST">
                                 @csrf
                                 @method('PUT')
-                                 <td>
-                                     <input type="text" name="title" id="title{{$c->id}}" value="{{$c->title}}" class="form-control" required/>
+                                <td>
+                                    <input type="text" name="title" id="title{{$c->id}}" value="{{$c->title}}" class="form-control" required/>
                                 </td>
 
                             </form>
-                           <td>{{$c->created_at}}</td>
-                           <td>
+                        <td>{{$c->created_at}}</td>
+                        <td>
                             <button type="submit" form="update-categorie{{$c->id}}" formaction="{{ route('categorie.update', $c->id) }}" id="update{{$c->id}}" class="btn btn-success">Bijwerken</button>
                             </td>
                             <td>
@@ -51,19 +60,19 @@
                                     <button type="submit" id="delete{{$c->id}}" class="btn btn-danger">Verwijderen</button>
                                 </form>
                             </td>
-                          </div>
+                        </div>
                         </tr>
                         @endforeach
-                     </tbody>
-                     <tfoot>
+                    </tbody>
+                    <tfoot>
                         <tr>
                             <th>Titel</th>
                             <th>Aangemaakt op</th>
                             <th>Bijwerken</th>
                             <th>Verwijderen</th>
-                         </tr>
-                     </tfoot>
-                  </table>
+                        </tr>
+                    </tfoot>
+                </table>
                </div>
             </div>
          </div>
@@ -71,7 +80,7 @@
    </div>
    <div class="container-fluid">
     <div class="row">
-        <div class="col-4 col-sm-4">
+        <div class="col-md-4">
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">Categoriee aanmaken</h3>

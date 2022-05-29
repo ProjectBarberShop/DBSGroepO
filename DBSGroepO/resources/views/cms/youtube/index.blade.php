@@ -36,7 +36,7 @@
                             <p>Pagina titel : {{$y->slug}}</p>
                             @endforeach
                         </div>
-                        <div class="card-body">
+                        <div class="card-body d-flex">
                             @component('components.youtube')
                                 @slot('youtube_key')
                                     {{$v->youtube_video_key}}

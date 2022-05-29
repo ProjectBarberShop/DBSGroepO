@@ -28,6 +28,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" >
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" ></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
+  <script src="//unpkg.com/alpinejs" defer></script>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -147,6 +148,12 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{url('cms/learntosing-beheer')}}" class="nav-link">
+                  <i class="far ion-ios-list-outline nav-icon"></i>
+                  <p>Cursussen</p>
+                </a>
+              </li>
               <li class="nav-item">
                 <a href="{{url('cms/learntosing/categorie')}}" class="nav-link">
                   <i class="far ion-ios-musical-note nav-icon"></i>
