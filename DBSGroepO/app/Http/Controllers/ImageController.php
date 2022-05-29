@@ -76,22 +76,14 @@ class imageController extends Controller
 
     public function storeMultiple(Request $request , $pageID)
     {
-        if($request->multiInput != null){
         $request->validate([
             'multiInput.*.image_id' => 'required',
         ]);
-        
-            foreach($request->multiInput as $key => $value) {
-                $page = Webpages::find($pageID);
-                $page->Image()->attach($value);
-            }
-        
-        
-        return redirect(route('paginas.index'))->with('success','afbeelding succesvol toegevoegd');
-        }else{
-            $images = Image::all();
-            return view('cms.image.createMultiple' , ['pageID' => $pageID, 'afbeeldingen'=> $images]);
+        foreach($request->multiInput as $key => $value) {
+            $page = Webpages::find($pageID);
+            $page->Image()->attach($value);
         }
+        return redirect(route('paginas.index'))->with('success','afbeelding succesvol toegevoegd');
     }
 
     public function editImage($webpage) {
