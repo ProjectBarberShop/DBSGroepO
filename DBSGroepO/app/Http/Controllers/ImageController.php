@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Throwable;
+use App\Models\Tag;
 use App\Models\Image;
 use App\Models\webpages;
-use App\Models\Tag;
+use Illuminate\Http\Request;
 
 class imageController extends Controller
 {
@@ -87,15 +88,23 @@ class imageController extends Controller
     {
         if($request->multiInput != null){
         $request->validate([
-            'multiInput.*.image_id' => 'required',
+            'multiInput.*.image_id' => 'required'
         ]);
-        
+
             foreach($request->multiInput as $key => $value) {
-                $page = Webpages::find($pageID);
-                $page->Image()->attach($value);
+                $page = Webpages::find($pageID)->with('Image')->first();
+                foreach($page->Image as $image) {
+                    if($image->id == $value['image_id']) {
+                        $images = Image::all();
+                        return redirect(route('Afbeelding.createMultiple' , $pageID))->withErrors(['error' => 'De gekozen afbeeldingen zijn helaas al gekozen voor deze pagina. Kies een andere afbeelding of maak een nieuwe afbeelding aan bij foto\'s.']);
+                    }
+                }
+                if(!$page->Image->contains($value['image_id'])){
+                    $page->Image()->attach($value);
+                }
             }
-        
-        
+
+
         return redirect(route('paginas.index'))->with('success','afbeelding succesvol toegevoegd');
         }else{
             $images = Image::all();
@@ -109,26 +118,32 @@ class imageController extends Controller
         return view('cms.webpages.edit_image' , ['pagecontent' => $pagecontent , 'afbeeldingen' => $images]);
     }
 
-    public function updateImage(Request $request, $webpage)
+    public function updateImage(Request $request, $webpageID)
     {
         $request->validate([
             'multiInput.*.image_id' => 'required',
             'oldInput.*.image_id' => 'required',
         ]);
-        $webpage = Webpages::find($webpage);
-
         if($request->oldInput != null) {
+            $webpage = Webpages::find($webpageID);
             foreach($request->oldInput as $key => $value) {
-                $webpage->Image()->update(['image_id' => $value['image_id']]);
+                $webpage->Image()->wherePivot('webpages_id' , $webpageID)->wherePivot('image_id' , $value['image_id'])->updateExistingPivot($value['image_id'], ['image_id' => $value['image_id']]);
             }
         }
         if($request->multiInput != null) {
+            $webpage = Webpages::find($webpageID);
+            $page = Webpages::find($webpageID)->with('Image')->first();
             foreach($request->multiInput as $key => $value) {
-                $webpage->Image()->attach($key);
+                    foreach($page->Image as $image) {
+                        if($image->id == $value['image_id']) {
+                            return redirect(route('imageWebpage.editImage' , $webpageID))->withErrors(['error' => 'De gekozen afbeeldingen zijn helaas al gekozen voor deze pagina. Kies een andere afbeelding of maak een nieuwe afbeelding aan bij foto\'s.']);
+                        }
+                    }
+                    if(!$page->Image->contains($value['image_id'])){
+                        $webpage->Image()->attach($value['image_id']);
+                    }
+                }
             }
-        }
-
-
-        return redirect()->route('paginas.index')->with('success','Alles is succesvol bijgewerkt indien er dingen verwijdert moeten worden kan dat via de show');
+     return redirect()->route('paginas.index')->with('success','Alles is succesvol bijgewerkt indien er dingen verwijdert moeten worden kan dat via de show');
     }
 }
