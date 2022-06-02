@@ -46,6 +46,7 @@
             tinymce.init({
                 body_id: 'columtext'+i+'',
                 selector: 'textarea',
+                min_height: 300,
                 toolbar: 'a11ycheck addcomment showcomments casechange checklist code export formatpainter pageembed permanentpen table',
                 toolbar_mode: 'floating',
                 tinycomments_mode: 'embedded',
@@ -60,6 +61,7 @@
         tinymce.init({
             selector: 'textarea',
             language: 'nl',
+            min_height: 300,
             plugins: 'autolink lists media table ',
             toolbar: 'a11ycheck addcomment showcomments casechange checklist code export formatpainter pageembed permanentpen table',
             toolbar_mode: 'floating',
