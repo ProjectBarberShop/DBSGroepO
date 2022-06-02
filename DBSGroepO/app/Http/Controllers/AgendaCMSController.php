@@ -29,7 +29,7 @@ class AgendaCMSController extends Controller
         else {
             $agendapunten = Agendapunt::with('Category')->paginate(5);
         }
-        $categories = Category::get();
+        $categories = Category::with("Agenda")->get();
         return view('cms.agenda.index', compact('agendapunten', 'categories'));
     }
 

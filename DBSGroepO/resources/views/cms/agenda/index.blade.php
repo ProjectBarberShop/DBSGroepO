@@ -23,7 +23,8 @@
                     <form class="col-md-2 offset-md-3 p-1" action="{{route('category.destroy', $c->id)}}", method="POST">
                     @csrf
                     @method('delete')
-                    <button class="btn" id="catdeletebutton" type="submit"><i class="far fa-trash-alt"></i></button>
+                    <input type="hidden" value="{{$c->Agenda->count()}}">
+                    <button class="btn" onclick="return OnDeleteClick('{{$c->title}}', '{{$c->Agenda->count()}}')" id="catdeletebutton" type="submit"><i class="far fa-trash-alt"></i></button>
                     </form>
                 </div>
             @endforeach
@@ -94,3 +95,11 @@
     @endif
 </div>
 @endsection
+
+<script>
+    function OnDeleteClick(catname, count) {
+        if(!confirm(`Door het verwijderen van de categorie ${catname} worden bij ${count} rijen de categorie verwijderd. Weet je zeker dat je wilt doorgaan?`)) {
+            event.preventDefault();
+        }
+    }
+</script>
