@@ -40,6 +40,7 @@
       tinymce.init({
         body_id : "body",
         selector: 'textarea',
+        min_height: 500,
         language: 'nl',
         plugins: 'autolink lists media table ',
         toolbar: 'a11ycheck addcomment showcomments casechange checklist code export formatpainter pageembed permanentpen table',
