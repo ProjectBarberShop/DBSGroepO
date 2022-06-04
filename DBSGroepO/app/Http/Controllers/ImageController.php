@@ -21,6 +21,7 @@ class imageController extends Controller
         if($request->filled('filter')){
             $images->where('tagName', '=', $request->filter)->get();
         }
+        $images->with('tags')->get();
         return view('cms.image.index', ['images'=>$images->get(), 'labels'=> $labels]);
     }
 
@@ -36,6 +37,7 @@ class imageController extends Controller
             $tag = new Tag;
             if(Tag::where('tag', $request->input('tag'))->count() === 0){
                 $tag->tag = $request->input('tag');
+                $tag->color = $request->input('tag-color');
                 $tag->save();
             }
             $imagedata = new Image;
@@ -127,8 +129,6 @@ class imageController extends Controller
                 $webpage->Image()->attach($key);
             }
         }
-
-
         return redirect()->route('paginas.index')->with('success','Alles is succesvol bijgewerkt indien er dingen verwijdert moeten worden kan dat via de show');
     }
 }
