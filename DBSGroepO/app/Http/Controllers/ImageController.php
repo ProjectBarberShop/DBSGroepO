@@ -39,6 +39,12 @@ class imageController extends Controller
                 $tag->save();
             }
             $imagedata = new Image;
+            if(!$request->filled('discription')){
+                $imagedata->discription = "Geen beschrijving";
+            }else{
+                $imagedata->discription = $request->input('discription');
+            }
+            
             $imagedata->title = $request->input('title');
             $img = $request->file('photo');
             $contentsImg = $img->openFile()->fread($img->getSize());

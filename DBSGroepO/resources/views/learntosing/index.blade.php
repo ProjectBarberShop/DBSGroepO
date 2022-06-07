@@ -17,7 +17,7 @@
         <div class="card-deck">
         @foreach($row as $c)
             <div class="card mb-3" style="max-width: 25em;">
-                <img src="data:image/jpg;base64,{{ chunk_split(base64_encode($c->image->photo)) }}" class="card-img-top img-thumbnail img-fluid" alt="{{$c->title}} afbeelding">
+                <img src="data:image/jpg;base64,{{ chunk_split(base64_encode($c->image->photo)) }}" class="card-img-top img-thumbnail img-fluid" alt="{{$c->discription}}">
                 <div class="card-body">
                     <h3 class="card-title">{{$c->title}}</h3>
                     <p class="card-text">{{$c->description}}</p>
