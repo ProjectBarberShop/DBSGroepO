@@ -2,6 +2,28 @@
 @section('content')
 
 <div class="container">
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Categorie verwijderen</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <p id="modaltext"></p>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+            <form id="catform" action="" method="POST">
+                @csrf
+                @method('delete')
+                <button type="submit" class="btn btn-secondary">Delete</button>
+            </form>
+        </div>
+        </div>
+    </div>
+    </div>
     @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
@@ -20,11 +42,7 @@
             @foreach($categories as $c)
                 <div class="row mb-1">
                     <p id="cattitle" class="col-md-6">{{$c->title}}</p>
-                    <form class="col-md-2 offset-md-3 p-1" action="{{route('category.destroy', $c->id)}}", method="POST">
-                    @csrf
-                    @method('delete')
-                    <button class="btn" id="catdeletebutton" type="submit"><i class="far fa-trash-alt"></i></button>
-                    </form>
+                    <button class="btn col-md-6" onclick="return OnDeleteClick('{{$c->title}}','{{route('category.destroy', $c->id)}}', '{{$c->Agenda->count()}}')" id="catdeletebutton" type="submit"><i class="far fa-trash-alt"></i></button>
                 </div>
             @endforeach
             </div>
@@ -94,3 +112,12 @@
     @endif
 </div>
 @endsection
+
+<script>
+    function OnDeleteClick(catname,action,count) {
+        var myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
+        document.getElementById('catform').action = action;
+        document.getElementById('modaltext').innerHTML = `Weet je zeker dat je <strong>${catname}</strong> wilt verwijderen? Deze categorie wordt bij <strong>${count}</strong> agendapunten verwijderd.`;
+        myModal.show();
+    }
+</script>
