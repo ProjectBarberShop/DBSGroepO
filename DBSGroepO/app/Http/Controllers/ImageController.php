@@ -90,12 +90,10 @@ class imageController extends Controller
         $request->validate([
             'multiInput.*.image_id' => 'required'
         ]);
-
+            $page = Webpages::where('id' , $pageID)->with('Image')->first();
             foreach($request->multiInput as $key => $value) {
-                $page = Webpages::find($pageID)->with('Image')->first();
                 foreach($page->Image as $image) {
                     if($image->id == $value['image_id']) {
-                        $images = Image::all();
                         return redirect(route('Afbeelding.createMultiple' , $pageID))->withErrors(['error' => 'De gekozen afbeeldingen zijn helaas al gekozen voor deze pagina. Kies een andere afbeelding of maak een nieuwe afbeelding aan bij foto\'s.']);
                     }
                 }
