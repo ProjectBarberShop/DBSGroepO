@@ -125,20 +125,17 @@ class imageController extends Controller
         if($request->oldInput != null) {
             $webpage = Webpages::find($webpageID);
             foreach($request->oldInput as $key => $value) {
-                $webpage->Image()->wherePivot('webpages_id' , $webpageID)->wherePivot('image_id' , $value['image_id'])->updateExistingPivot($value['image_id'], ['image_id' => $value['image_id']]);
+                $test = $webpage->Image()->wherePivot('webpages_id' , $webpageID)->wherePivot('image_id' , $value['image_id'])->updateExistingPivot($value['image_id'], ['image_id' => $value['image_id']]);
             }
         }
         if($request->multiInput != null) {
             $webpage = Webpages::find($webpageID);
             $page = Webpages::find($webpageID)->with('Image')->first();
             foreach($request->multiInput as $key => $value) {
-                    foreach($page->Image as $image) {
-                        if($image->id == $value['image_id']) {
-                            return redirect(route('imageWebpage.editImage' , $webpageID))->withErrors(['error' => 'De gekozen afbeeldingen zijn helaas al gekozen voor deze pagina. Kies een andere afbeelding of maak een nieuwe afbeelding aan bij foto\'s.']);
-                        }
-                    }
-                    if(!$page->Image->contains($value['image_id'])){
+                    if(!$page->Image()->where('image_id', $value['image_id'])->exists()){
                         $webpage->Image()->attach($value['image_id']);
+                    } else {
+                        return redirect(route('imageWebpage.editImage' , $webpageID))->withErrors(['error' => 'Aii niet alle images zijn geupdate omdat je deze al gekoppeld zijn aan de webpage\'s.']);
                     }
                 }
             }
