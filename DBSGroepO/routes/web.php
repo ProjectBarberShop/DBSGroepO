@@ -63,8 +63,8 @@ Route::group([
         Route::controller(ImageController::class)->group(function(){
             Route::get('paginas/{pagina}/afbeelding/create', 'createMultiple')->name('Afbeelding.createMultiple');
             Route::post('paginas/{pagina}/afbeelding', 'storeMultiple')->name('Afbeelding.storeMultiple');
-            Route::get('paginas/{pagina}/afbeelding/edit' , 'editImage')->name('imageWebpage.editYoutube');
-            Route::post('paginas/{pagina}/afbeelding/update' , 'updateImage')->name('imageWebpage.updateYoutube');
+            Route::get('paginas/{pagina}/afbeelding/edit' , 'editImage')->name('imageWebpage.editImage');
+            Route::post('paginas/{pagina}/afbeelding/update' , 'updateImage')->name('imageWebpage.updateImage');
         });
 
     Route::resource('fotos', ImageController::class);
