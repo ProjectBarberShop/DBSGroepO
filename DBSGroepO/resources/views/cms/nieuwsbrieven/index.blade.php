@@ -51,7 +51,7 @@
                     <div class="imagePosition p-2"></div>
                 </div>
                 <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modal-info">Selecteer foto</button>
-                <div class="modal fade" id="modal-info" tabindex="-1" aria-hidden="true">
+                <div class="modal" id="modal-info" tabindex="-1" aria-hidden="true">
                     <div class="modal-dialog"></div>
                     <div class="modal-dialog-scrollable d-flex justify-content-center align-content-center">
                         <div class="modal-content bg-info w-75">
@@ -69,6 +69,9 @@
                                 @empty
                                     <p class="fs-5">Er zijn nog geen foto's beschikbaar. Ga naar: <a href="{{ route('fotos.index') }}">foto's pagina</a></p>
                                 @endforelse
+                                @if($imagesdata != null)
+                                    {{ $imagesdata->links() }}
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -98,34 +101,44 @@
     </div>
 </div>
 @endsection
-
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
-function confirmSubmit(formId, uniqueId) {
-    let newFormId = document.getElementById(formId + uniqueId);
-    if(confirm("Weet u zeker dat u " + newFormId.querySelector("input").name + " wilt verwijderen?")) {
-        newFormId.submit();
+    window.addEventListener("DOMContentLoaded", () => {
+        if(localStorage.getItem("ModalOpen") == "True") {
+        var myModal = new bootstrap.Modal(document.getElementById('modal-info'));
+        myModal.show();
+        localStorage.setItem("ModalOpen", "False");
     }
-}
-
-function cloneimage(imageId, uniqueId, classname, imgWidth, imgHeight, overwrite) {
-    if(overwrite == true) {
-        const allImages = document.querySelectorAll('.' + classname + ' > .img');
-        for(i = 0; i < allImages.length; i++) {
-            allImages[i].remove();
+    });
+    $(document).on('click','.pagination', function(){
+        localStorage.setItem("ModalOpen", "True");
+    });
+    function confirmSubmit(formId, uniqueId) {
+        let newFormId = document.getElementById(formId + uniqueId);
+        if(confirm("Weet u zeker dat u " + newFormId.querySelector("input").name + " wilt verwijderen?")) {
+            newFormId.submit();
         }
     }
 
-    const imageClasses = document.querySelectorAll('.' + classname);
-    const selectedImage = document.getElementById(imageId + uniqueId);
+    function cloneimage(imageId, uniqueId, classname, imgWidth, imgHeight, overwrite) {
+        if(overwrite == true) {
+            const allImages = document.querySelectorAll('.' + classname + ' > .img');
+            for(i = 0; i < allImages.length; i++) {
+                allImages[i].remove();
+            }
+        }
 
-    for(i = 0; i < imageClasses.length; i++) {
-        let newImage = selectedImage.cloneNode(true);
-        newImage.setAttribute("style", "width:" + imgWidth + "px !important", "height:" + imgHeight + "px !important");
-        newImage.className += " img";
-        imageClasses[i].append(newImage);
+        const imageClasses = document.querySelectorAll('.' + classname);
+        const selectedImage = document.getElementById(imageId + uniqueId);
+
+        for(i = 0; i < imageClasses.length; i++) {
+            let newImage = selectedImage.cloneNode(true);
+            newImage.setAttribute("style", "width:" + imgWidth + "px !important", "height:" + imgHeight + "px !important");
+            newImage.className += " img";
+            imageClasses[i].append(newImage);
+        }
+
+        let imageInputField = document.getElementById("imageField");
+        imageInputField.setAttribute('value', imageId);
     }
-
-    let imageInputField = document.getElementById("imageField");
-    imageInputField.setAttribute('value', imageId);
-}
 </script>
