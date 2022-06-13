@@ -17,12 +17,12 @@ class imageController extends Controller
         $images = Image::query();
 
         if($request->filled('search')){
-            $images->where('title', 'like', '%' . $request->search . '%')->get();
+            $images->where('title', 'like', '%' . $request->search . '%')->paginate(2);
         }
         if($request->filled('filter')){
-            $images->where('tagName', '=', $request->filter)->get();
+            $images->where('tagName', '=', $request->filter)->paginate(2);
         }
-        return view('cms.image.index', ['images'=>$images->get(), 'labels'=> $labels]);
+        return view('cms.image.index', ['images'=>$images->paginate(2), 'labels'=> $labels]);
     }
 
     public function store(Request $request)

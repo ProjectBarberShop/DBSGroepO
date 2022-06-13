@@ -105,6 +105,9 @@
             </td>
         </tr>
         @endforeach
+        @if($images != null)
+            {{ $images->links() }}
+        @endif
         @endif
     </table>
     </div>
