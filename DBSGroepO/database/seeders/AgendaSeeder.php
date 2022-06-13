@@ -19,7 +19,7 @@ class AgendaSeeder extends Seeder
      */
     public function run()
     {
-        Agendapunt::factory(15)->create();
+        Agendapunt::factory(30)->create();
         
         $categories = Category::all();
         Agendapunt::all()->each(function ($agendapunt) use ($categories) { 
