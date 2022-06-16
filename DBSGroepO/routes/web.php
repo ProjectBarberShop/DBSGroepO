@@ -118,6 +118,7 @@ Route::group([
         Route::delete('agenda/deletearchive/{id}', 'deleteArchived')->name('agenda.deletearchived');
         Route::delete('agenda/deleteallarchived', 'deleteAllArchived')->name('agenda.deleteallarchived');
         Route::get('agenda/archiveall', 'ArchiveAll')->name('agenda.archiveall');
+        Route::put('agenda/archive/{id}', 'ArchiveSingle')->name('agenda.archive');
     });
     Route::resource('agenda', AgendaCMSController::class);
 

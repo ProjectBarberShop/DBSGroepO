@@ -39,6 +39,11 @@ class AgendaCMSController extends Controller
         return redirect()->back();
     }
 
+    public function ArchiveSingle($id) {
+        Agendapunt::where('id', $id)->update(['isArchived' => true]);
+        return redirect()->back();
+    }
+
     public function getArchived() {
         $agendapunten = Agendapunt::where('isArchived', True)->paginate(5);
         return view('cms.agenda.archive', compact('agendapunten'));
