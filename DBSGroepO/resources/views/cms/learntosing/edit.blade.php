@@ -29,24 +29,8 @@
                 <div class="imagePosition"></div>
     </div>
     <button class="btn btn-secondary" onclick="modalShow()">Selecteer foto</button>
-    <div class="modal justify-content-center align-items-center" id="modal-info" aria-modal="true" role="dialog">
-        <div class="modal-content bg-info w-75">
-            <div class="modal-header">
-                <h2 class="modal-title">Selecteer foto</h2>
-                <button class="close fs-2" onclick="modalClose()">×</button>
-            </div>
-            <div class="row m-0 pr-2 overflow-auto" style="height: 80vh;">
-                @forelse($imagesdata as $img)
-                    <div class="d-flex justify-content-center align-items-center col-4 p-0">
-                        <a onclick="cloneimage({{$img->id}}, 'b', 'imagePosition', null, null, true), modalClose()" class="ml-2 mt-2">
-                            <img src="data:image/jpg;base64,{{ chunk_split(base64_encode($img->photo)) }}" class="img-fluid" id="{{$img->id}}b">
-                        </a>
-                    </div>
-                @empty
-                    <p class="fs-5">Er zijn nog geen foto's beschikbaar. Ga naar: <a href="{{ route('fotos.index') }}">foto's pagina</a></p>
-                @endforelse
-            </div>
-        </div>
+    <div id="image-data">
+        @include('components\images')
     </div>
     <input type="hidden" name="image_id" id="selectedImage_id" value="{{ $course->image_id }}">
     @error('image_id')
@@ -76,8 +60,35 @@
 </form>
 </div>
 @endsection
-
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
+$(document).ready(function(){
+
+$(document).on('click', '.pagination a', function(event){
+    event.preventDefault(); 
+    var page = $(this).attr('href').split('page=')[1];
+    fetch_data(page);
+});
+
+$(document).on('hidden.bs.modal','#modal-info', function (e) {
+    $("body").css("overflow", "auto");
+})
+
+function fetch_data(page)
+{
+    $.ajax({
+        url:"/cms/fotos/fetch_data?page="+page,
+        success:function(data)
+        {
+            $('#image-data').html(data);
+            var myModal = new bootstrap.Modal(document.getElementById('modal-info'));
+            myModal.show();
+            $('.modal-backdrop').first().remove();
+        }
+    });
+}
+
+});
     let textarea = null;
 
 setTimeout(() => {

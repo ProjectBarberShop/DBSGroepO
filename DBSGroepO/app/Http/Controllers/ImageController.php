@@ -144,7 +144,7 @@ class imageController extends Controller
 
     public function fetch_data(Request $request) {
         if($request->ajax()) {
-            $imagesdata = Image::paginate(10);
+            $imagesdata = Image::paginate(5);
             return view('components\images', compact('imagesdata'))->render();
         }
     }
