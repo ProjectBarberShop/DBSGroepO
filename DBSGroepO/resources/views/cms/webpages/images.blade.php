@@ -15,7 +15,7 @@
                                 <form action="{{ route('paginas.destroyImage', [$webpage->id , $img->id]) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">Remove</button>
+                                    <button type="submit" id="ImageRemove{{$img->id}}" class="btn btn-danger">Remove</button>
                                 </form>
                             </div>
                         </div>
