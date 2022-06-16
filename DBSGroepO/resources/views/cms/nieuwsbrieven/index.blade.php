@@ -51,30 +51,8 @@
                     <div class="imagePosition p-2"></div>
                 </div>
                 <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modal-info">Selecteer foto</button>
-                <div class="modal" id="modal-info" tabindex="-1" aria-hidden="true">
-                    <div class="modal-dialog"></div>
-                    <div class="modal-dialog-scrollable d-flex justify-content-center align-content-center">
-                        <div class="modal-content bg-info w-75">
-                            <div class="modal-header">
-                                <h2 class="modal-title">Selecteer foto</h2>
-                                <button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body row m-0 h-100">
-                                @forelse($imagesdata as $img)
-                                    <div class="d-flex justify-content-center align-items-center col-6 col-md-4 p-0">
-                                        <a onclick="cloneimage({{$img->id}}, 'b', 'imagePosition', null, null, true)" data-bs-dismiss="modal" class="m-2">
-                                            <img src="data:image/jpg;base64,{{ chunk_split(base64_encode($img->photo)) }}" class="img-fluid" id="{{$img->id}}b">
-                                        </a>
-                                    </div>
-                                @empty
-                                    <p class="fs-5">Er zijn nog geen foto's beschikbaar. Ga naar: <a href="{{ route('fotos.index') }}">foto's pagina</a></p>
-                                @endforelse
-                                @if($imagesdata != null)
-                                    {{ $imagesdata->links() }}
-                                @endif
-                            </div>
-                        </div>
-                    </div>
+                <div id="image-data">
+                    @include('components\images')
                 </div>
                 <form action="{{ route('nieuwsbrieven.store') }}" method="POST" class="d-flex flex-column" enctype="multipart/form-data">
                     @csrf
@@ -103,16 +81,34 @@
 @endsection
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
-    window.addEventListener("DOMContentLoaded", () => {
-        if(localStorage.getItem("ModalOpen") == "True") {
-        var myModal = new bootstrap.Modal(document.getElementById('modal-info'));
-        myModal.show();
-        localStorage.setItem("ModalOpen", "False");
-    }
+    $(document).ready(function(){
+
+        $(document).on('click', '.pagination a', function(event){
+            event.preventDefault(); 
+            var page = $(this).attr('href').split('page=')[1];
+            fetch_data(page);
+        });
+
+        $(document).on('hidden.bs.modal','#modal-info', function (e) {
+            $("body").css("overflow", "auto");
+        })
+
+        function fetch_data(page)
+        {
+            $.ajax({
+                url:"/cms/fotos/fetch_data?page="+page,
+                success:function(data)
+                {
+                    $('#image-data').html(data);
+                    var myModal = new bootstrap.Modal(document.getElementById('modal-info'));
+                    myModal.show();
+                    $('.modal-backdrop').first().remove();
+                }
+            });
+        }
+
     });
-    $(document).on('click','.pagination', function(){
-        localStorage.setItem("ModalOpen", "True");
-    });
+
     function confirmSubmit(formId, uniqueId) {
         let newFormId = document.getElementById(formId + uniqueId);
         if(confirm("Weet u zeker dat u " + newFormId.querySelector("input").name + " wilt verwijderen?")) {

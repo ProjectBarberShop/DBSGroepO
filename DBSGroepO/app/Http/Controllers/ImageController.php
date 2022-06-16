@@ -141,4 +141,11 @@ class imageController extends Controller
             }
      return redirect()->route('paginas.index')->with('success','Alles is succesvol bijgewerkt indien er dingen verwijdert moeten worden kan dat via de show');
     }
+
+    public function fetch_data(Request $request) {
+        if($request->ajax()) {
+            $imagesdata = Image::paginate(10);
+            return view('components\images', compact('imagesdata'))->render();
+        }
+    }
 }

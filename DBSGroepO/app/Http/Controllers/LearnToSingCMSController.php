@@ -32,7 +32,7 @@ class LearnToSingCMSController extends Controller
     public function create()
     {
 
-        return view('cms.learntosing.create', ['categories' => LearnToSingCat::all(), 'imagesdata' => Image::all()]);
+        return view('cms.learntosing.create', ['categories' => LearnToSingCat::all(), 'imagesdata' => Image::paginate(10)]);
     }
 
     /**

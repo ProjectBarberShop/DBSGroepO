@@ -15,7 +15,7 @@ class NewsletterController extends Controller
      */
     public function index()
     {
-        $imagesdata = Image::paginate(5);
+        $imagesdata = Image::paginate(10);
         $newsletterdata = Newsletter::with('image')->orderBy('created_at', 'desc')->get();
 
         return view('cms.nieuwsbrieven.index', compact(['newsletterdata', 'imagesdata']));
