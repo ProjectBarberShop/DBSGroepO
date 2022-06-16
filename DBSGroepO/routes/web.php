@@ -94,6 +94,8 @@ Route::group([
         Route::post('paginas/{pagina}/duplicate' , 'duplicatePage')->name('paginas.duplicate');
         Route::put('paginas/update/{id}', 'updateTemplate')->name('paginas.updateTemplate');
         Route::delete('paginas/removeTemplate/{id}', 'removeTemplate')->name('paginas.removeTemplate');
+        Route::get('paginas/afbeeldingen/{webpageID}', 'showAllImagesWebpage')->name('paginas.getAllImagesWebpage');
+        Route::delete('paginas/afbeeldingen/{webpageID}/{imageId}', 'destroyImage')->name('paginas.destroyImage');
     });
 
     Route::resource('agenda', AgendaCMSController::class);
