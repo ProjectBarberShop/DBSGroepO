@@ -28,7 +28,7 @@
                 <label for="image">Nieuwe foto:</label>
                 <div class="imagePosition"></div>
     </div>
-    <button class="btn btn-secondary" onclick="modalShow()">Selecteer foto</button>
+    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modal-info">Selecteer foto</button>
     <div id="image-data">
         @include('components\images')
     </div>
@@ -64,29 +64,29 @@
 <script>
 $(document).ready(function(){
 
-$(document).on('click', '.pagination a', function(event){
-    event.preventDefault(); 
-    var page = $(this).attr('href').split('page=')[1];
-    fetch_data(page);
-});
-
-$(document).on('hidden.bs.modal','#modal-info', function (e) {
-    $("body").css("overflow", "auto");
-})
-
-function fetch_data(page)
-{
-    $.ajax({
-        url:"/cms/fotos/fetch_data?page="+page,
-        success:function(data)
-        {
-            $('#image-data').html(data);
-            var myModal = new bootstrap.Modal(document.getElementById('modal-info'));
-            myModal.show();
-            $('.modal-backdrop').first().remove();
-        }
+    $(document).on('click', '.pagination a', function(event){
+        event.preventDefault(); 
+        var page = $(this).attr('href').split('page=')[1];
+        fetch_data(page);
     });
-}
+
+    $(document).on('hidden.bs.modal','#modal-info', function (e) {
+        $("body").css("overflow", "auto");
+    })
+
+    function fetch_data(page)
+    {
+        $.ajax({
+            url:"/cms/fotos/fetch_data?page="+page,
+            success:function(data)
+            {
+                $('#image-data').html(data);
+                var myModal = new bootstrap.Modal(document.getElementById('modal-info'));
+                myModal.show();
+                $('.modal-backdrop').first().remove();
+            }
+        });
+    }
 
 });
     let textarea = null;
@@ -112,17 +112,6 @@ function textareaLengthCheck() {
     count.innerHTML = "Tekens over: " + charactersLeft;
 }
 
-
-function modalShow() {
-    event.preventDefault();
-    document.getElementById("modal-info").style.display = "flex";
-}
-
-function modalClose() {
-    event.preventDefault();
-    document.getElementById("modal-info").style.display = "none";
-}
-
 function cloneimage(imageId, uniqueId, classname, imgWidth, imgHeight, overwrite) {
     if(overwrite == true) {
         const allImages = document.querySelectorAll('.' + classname + ' > .img');
@@ -143,7 +132,6 @@ function cloneimage(imageId, uniqueId, classname, imgWidth, imgHeight, overwrite
 
     let imageInputField = document.getElementById("selectedImage_id");
     imageInputField.setAttribute('value', imageId);
-    modalClose();
 }
 
 </script>
