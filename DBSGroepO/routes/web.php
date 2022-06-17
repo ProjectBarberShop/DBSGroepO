@@ -96,7 +96,6 @@ Route::group([
         Route::delete('paginas/removeTemplate/{id}', 'removeTemplate')->name('paginas.removeTemplate');
     });
 
-    Route::resource('agenda', AgendaCMSController::class);
     Route::resource('category', CategoryController::class);
 
     Route::controller(ColumnTextController::class)->group(function() {
@@ -114,7 +113,15 @@ Route::group([
         Route::post('navbar/change/{id}' , 'changeOrder')->name('navbar.order');
     });
 
+    Route::controller(AgendaCMSController::class)->group(function() {
+        Route::get('agenda/archived', 'getArchived')->name('agenda.archived');
+        Route::delete('agenda/deletearchive/{id}', 'deleteArchived')->name('agenda.deletearchived');
+        Route::delete('agenda/deleteallarchived', 'deleteAllArchived')->name('agenda.deleteallarchived');
+        Route::get('agenda/archiveall', 'ArchiveAll')->name('agenda.archiveall');
+        Route::put('agenda/archive/{id}', 'ArchiveSingle')->name('agenda.archive');
+    });
     Route::resource('agenda', AgendaCMSController::class);
+
     Route::resource('footer', FooterController::class);
     Route::resource('navbar', NavbarController::class);
     Route::resource('dropdown', DropdownController::class);

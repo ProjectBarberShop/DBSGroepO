@@ -5,7 +5,7 @@ namespace Tests\Browser\Pages;
 use Laravel\Dusk\Browser;
 use Laravel\Dusk\Page;
 
-class AgendaCMS extends Page
+class AgendaArchive extends Page
 {
     /**
      * Get the URL for the page.
@@ -14,7 +14,7 @@ class AgendaCMS extends Page
      */
     public function url()
     {
-        return '/cms/agenda';
+        return '/cms/agenda/archived';
     }
 
     /**
@@ -36,14 +36,8 @@ class AgendaCMS extends Page
     public function elements()
     {
         return [
-            '@createbutton' => '#createbutton',
-            '@createsubmit' => '#createsubmit',
-            '@cattitle' => '#cattitle',
-            '@categories' => '#dLabel',
-            '@catcreatebutton' => '#cataddbutton',
-            '@catdeletebutton' => '#catdeletebutton',
-            '@agendaeditbutton' => '#editbutton',
-            '@agendaarchive' => 'div > div.content-wrapper > section > div > div > div:nth-child(5) > div.card-header > div > div:nth-child(3) > form > button > i'
+            '@deleteall' => 'div > div.content-wrapper > section > div > div > div.row.mb-2 > div.col-md-2 > form > button',
+            '@back' => 'div > div.content-wrapper > section > div > div > div.row.mb-2 > div.col-md-1 > a'
         ];
     }
 }
