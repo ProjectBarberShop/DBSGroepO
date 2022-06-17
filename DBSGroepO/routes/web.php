@@ -66,7 +66,9 @@ Route::group([
             Route::get('paginas/{pagina}/afbeelding/edit' , 'editImage')->name('imageWebpage.editImage');
             Route::post('paginas/{pagina}/afbeelding/update' , 'updateImage')->name('imageWebpage.updateImage');
         });
-
+    Route::controller(ImageController::class)->group(function() {
+        Route::get('fotos/fetch_data', 'fetch_data')->name('fotos.fetchdata');
+    });
     Route::resource('fotos', ImageController::class);
     Route::resource('contactpersonen', ContactsController::class);
     Route::resource('learntosing/categorie', LearnToSingCategorie::class);
@@ -78,6 +80,7 @@ Route::group([
         Route::delete('/contactverzoeken/{id}', 'destroy')->name('contactverzoeken.destroy');
     });
 
+    
     Route::resource('nieuwsbrieven', NewsletterController::class);
     Route::resource('youtube', YoutubeController::class)->except('update');
 
