@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\DropdownItem;
-use App\Models\NavbarItem;
-use Illuminate\Http\Request;
-use App\Models\Webpages;
-use App\Models\colom_context as context_colomn;
-use App\Models\colom_context_webpages;
+use App\Models\Image;
 use App\Models\Template;
+use App\Models\Webpages;
+use App\Models\NavbarItem;
 use Illuminate\Support\Str;
+use App\Models\DropdownItem;
+use Illuminate\Http\Request;
+use App\Models\colom_context_webpages;
+use App\Models\colom_context as context_colomn;
 
 class WebPageController extends Controller
 {
@@ -255,5 +256,18 @@ class WebPageController extends Controller
                 $item->delete();
             }
         }
+    }
+
+    public function showAllImagesWebpage($id) {
+
+        $webpage = Webpages::find($id);
+        $images = $webpage->Image;
+        return view('cms.webpages.images' , compact('images' , 'webpage'));
+    }
+
+    public function destroyImage($webpageID , $imageId) {
+        $webpage = Webpages::find($webpageID);
+        $webpage->Image()->detach($imageId);
+        return redirect()->route('paginas.index')->with('success','Afbeelding succesvol losgekoppeld van pagina '. $webpage->title);
     }
 }
