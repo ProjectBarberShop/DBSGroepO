@@ -147,9 +147,13 @@ class WebPageController extends Controller
      */
     public function show($slug)
     {
-        $pagecontent = Webpages::with('ColomContext' , 'youtube')->where('slug' , $slug)->get();
+        $pagecontent = Webpages::with('ColomContext' , 'youtube' , 'Image')->where('slug' , $slug)->get();
+        $templateID = 0;
+        foreach($pagecontent as $content) {
+            $templateID = $content->template_id;
+        }
         if($pagecontent->isEmpty()) abort(404);
-        return view('contentpage' , compact('pagecontent'));
+        return view('templates.template'.$templateID , compact('pagecontent'));
     }
 
     /**
