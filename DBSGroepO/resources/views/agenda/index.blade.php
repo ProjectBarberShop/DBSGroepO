@@ -32,6 +32,7 @@
         <p class="fw-bold" id="date"></p>
         <p id="description"></p>
         <p id="location"></p>
+        <p id="category"></p>
         <a target="_blank" id="location_URL"></a>
       </div>
       <div class="modal-footer">
@@ -70,6 +71,7 @@
                            document.getElementById("exampleModalLabel").innerHTML = calEvent.title;
                            document.getElementById("date").innerHTML = startDate + " - " + endDate;
                            document.getElementById("description").innerHTML = calEvent.description;
+
                            if(calEvent.location != null) {
                               document.getElementById("location").innerHTML = calEvent.location;
                            } else {
@@ -94,7 +96,6 @@
                         selectable: true,
                         selectHelper: true,
                      });
-
    });
    function refreshCalendar() {
       $('#calendar').fullCalendar("refetchEvents");

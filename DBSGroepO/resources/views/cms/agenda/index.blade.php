@@ -41,16 +41,17 @@
             <div class="pre-scrollable container">
             @foreach($categories as $c)
                 <div class="row mb-1">
-                    <p id="cattitle" class="col-md-6">{{$c->title}}</p>
+                    <p id="cattitle" class="col-md-6" style="background-color: {{$c->color}}"">{{$c->title}}</p>
                     <button class="btn col-md-6" onclick="return OnDeleteClick('{{$c->title}}','{{route('category.destroy', $c->id)}}', '{{$c->Agenda->count()}}')" id="catdeletebutton" type="submit"><i class="far fa-trash-alt"></i></button>
                 </div>
             @endforeach
             </div>
             <form action="{{route('category.store')}}" method="POST">
             @csrf
-            <div class="form-group">
-                <label for="category">Categorie toevoegen</label>
-                <input type="text" class="form-control" id="category" name="title">
+            <label for="category">Categorie toevoegen</label>
+            <div class="form-group d-flex flex-row">    
+                <input type="text" class="form-control w-75" id="category" name="title">
+                <input type="color" class="form-control w-25" id="color" name="color">
             </div>
             <button id="cataddbutton" type="submit" class="btn btn-success">Submit</button>
             </form>

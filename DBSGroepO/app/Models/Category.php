@@ -12,7 +12,8 @@ class Category extends Model
     protected $primaryKey = 'id';
 
     protected $fillable =  [
-        'title'
+        'title',
+        'color'
     ];
 
     public function Agenda() {

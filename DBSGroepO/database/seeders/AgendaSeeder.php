@@ -22,8 +22,15 @@ class AgendaSeeder extends Seeder
         Agendapunt::factory(15)->create();
         
         $categories = Category::all();
+
         Agendapunt::all()->each(function ($agendapunt) use ($categories) { 
-            $agendapunt->Category()->attach($categories->get(mt_rand(0, $categories->count())));
+            $value = $categories->find(mt_rand(0, $categories->count()));
+            if($value !== null){
+                $agendapunt->Category()->attach($value);
+                $temp = $categories->find($value);
+                $agendapunt->color = $temp->color;
+                $agendapunt->save();
+            }
         });
     }
 }

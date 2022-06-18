@@ -146,7 +146,7 @@ class WebPageController extends Controller
      */
     public function show($slug)
     {
-        $pagecontent = Webpages::with('ColomContext' , 'youtube')->where('slug' , $slug)->get();
+        $pagecontent = Webpages::with('ColomContext', 'youtube')->where('slug' , $slug)->get();
         if($pagecontent->isEmpty()) abort(404);
         return view('contentpage' , compact('pagecontent'));
     }
