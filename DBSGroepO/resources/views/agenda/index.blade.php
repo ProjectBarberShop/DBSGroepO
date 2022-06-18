@@ -43,7 +43,7 @@
 <script>
    $(document).ready(function () {
 
-   var SITEURL = "{{ url('https://2122-prj78-o.azurewebsites.net') }}";
+   var SITEURL = "{{ url('http://127.0.0.1:8000') }}";
    $.ajaxSetup({
          headers: {
          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
