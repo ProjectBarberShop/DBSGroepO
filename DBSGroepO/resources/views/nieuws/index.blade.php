@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-{{-- <div class="d-flex"> --}}
 @if(empty($newsletterdata->count()))
     <h2 class="p-4">Er is nog geen nieuws beschikbaar</h2>
 @else
@@ -27,5 +26,4 @@
     </div>
 
 @endif
-{{-- </div> --}}
 @endsection
