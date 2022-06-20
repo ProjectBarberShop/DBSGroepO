@@ -57,8 +57,8 @@ class NewsletterController extends Controller
 
     public function getNews() {
         $newsletterdata = Newsletter::with('image')
-        ->where('is_published', true)->orderBy('created_at', 'desc')->get();
-
+        ->where('is_published', true)->orderBy('created_at', 'desc')->paginate(5);
+     
         return view('nieuws.index', compact('newsletterdata'));
     }
 
