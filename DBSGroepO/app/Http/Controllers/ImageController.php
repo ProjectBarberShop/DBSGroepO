@@ -17,12 +17,12 @@ class imageController extends Controller
         $images = Image::query();
 
         if($request->filled('search')){
-            $images->where('title', 'like', '%' . $request->search . '%')->get();
+            $images->where('title', 'like', '%' . $request->search . '%')->paginate(20);
         }
         if($request->filled('filter')){
-            $images->where('tagName', '=', $request->filter)->get();
+            $images->where('tagName', '=', $request->filter)->paginate(20);
         }
-        return view('cms.image.index', ['images'=>$images->get(), 'labels'=> $labels]);
+        return view('cms.image.index', ['images'=>$images->paginate(20), 'labels'=> $labels]);
     }
 
     public function store(Request $request)
@@ -40,6 +40,12 @@ class imageController extends Controller
                 $tag->save();
             }
             $imagedata = new Image;
+            if(!$request->filled('discription')){
+                $imagedata->discription = "Geen beschrijving";
+            }else{
+                $imagedata->discription = $request->input('discription');
+            }
+            
             $imagedata->title = $request->input('title');
             $img = $request->file('photo');
             $contentsImg = $img->openFile()->fread($img->getSize());
@@ -140,5 +146,12 @@ class imageController extends Controller
                 }
             }
      return redirect()->route('paginas.index')->with('success','Alles is succesvol bijgewerkt indien er dingen verwijdert moeten worden kan dat via de show');
+    }
+
+    public function fetch_data(Request $request) {
+        if($request->ajax()) {
+            $imagesdata = Image::paginate(5);
+            return view('components\images', compact('imagesdata'))->render();
+        }
     }
 }

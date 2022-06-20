@@ -12,6 +12,8 @@
                 <label for="photo">foto:</label>
                 <img id="preview" src="#" alt="afbeelding" class="w-50 h-50"/>
                 <input type="file" name="photo" id="file" accept="image/*" onchange="getImgData()">
+                <label for="discription">Beschrijving:</label>
+                <Textarea name="discription" id="discription"></Textarea>
                 <label for="tag">Categorie:</label>
                 <input name="tag" list="tags" id="tag">
                 <datalist id="tags" class="w-100">
@@ -105,6 +107,9 @@
             </td>
         </tr>
         @endforeach
+        @if($images != null)
+            {{ $images->links() }}
+        @endif
         @endif
     </table>
     </div>

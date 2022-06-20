@@ -28,6 +28,7 @@ class AgendapuntFactory extends Factory
             'start' => $start,
             'end' => $end,
             'location' => $this->faker->address(),
+            'isArchived' => $this->faker->boolean()
         ];
     }
 }

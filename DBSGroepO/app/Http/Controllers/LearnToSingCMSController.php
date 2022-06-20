@@ -32,7 +32,7 @@ class LearnToSingCMSController extends Controller
     public function create()
     {
 
-        return view('cms.learntosing.create', ['categories' => LearnToSingCat::all(), 'imagesdata' => Image::all()]);
+        return view('cms.learntosing.create', ['categories' => LearnToSingCat::all(), 'imagesdata' => Image::paginate(5)]);
     }
 
     /**
@@ -77,9 +77,8 @@ class LearnToSingCMSController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-
-        return view('cms.learntosing.edit', ['course' => LearnToSing::findOrFail($id), 'imagesdata' => Image::all(), 'categories' => LearnToSingCat::all()]);
+    {   
+        return view('cms.learntosing.edit', ['course' => LearnToSing::findOrFail($id), 'imagesdata' => Image::paginate(5), 'categories' => LearnToSingCat::all()]);
     }
 
     /**

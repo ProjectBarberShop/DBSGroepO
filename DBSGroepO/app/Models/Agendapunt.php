@@ -17,7 +17,8 @@ class Agendapunt extends Model
         'start',
         'end',
         'location',
-        'locationURL'
+        'locationURL',
+        'isArchived'
     ];
 
     public function Category() {
