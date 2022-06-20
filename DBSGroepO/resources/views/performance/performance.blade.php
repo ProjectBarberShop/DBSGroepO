@@ -20,5 +20,10 @@
     </div>
     
     @endforeach
+    {{ $optredens->links() }}
 </section>
+
+    
+
+
 @endsection
