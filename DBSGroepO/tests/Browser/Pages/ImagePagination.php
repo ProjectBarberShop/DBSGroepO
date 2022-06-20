@@ -5,7 +5,7 @@ namespace Tests\Browser\Pages;
 use Laravel\Dusk\Browser;
 use Laravel\Dusk\Page;
 
-class AgendaCMS extends Page
+class ImagePagination extends Page
 {
     /**
      * Get the URL for the page.
@@ -14,7 +14,7 @@ class AgendaCMS extends Page
      */
     public function url()
     {
-        return '/cms/agenda';
+        return '/cms/nieuwsbrieven';
     }
 
     /**
@@ -36,14 +36,9 @@ class AgendaCMS extends Page
     public function elements()
     {
         return [
-            '@createbutton' => '#createbutton',
-            '@createsubmit' => '#createsubmit',
-            '@cattitle' => '#cattitle',
-            '@categories' => '#dLabel',
-            '@catcreatebutton' => '#cataddbutton',
-            '@catdeletebutton' => '#catdeletebutton',
-            '@agendaeditbutton' => '#editbutton',
-            '@agendaarchive' => 'div > div.content-wrapper > section > div > div > div:nth-child(5) > div.card-header > div > div:nth-child(3) > form > button > i'
+            '@paginator' => '#modal-info > div.modal-dialog-scrollable.d-flex.justify-content-center.align-content-center > div > div.modal-body.row.m-0.h-100 > nav > ul',
+            '@paginatornext' => '#modal-info > div.modal-dialog-scrollable.d-flex.justify-content-center.align-content-center > div > div.modal-body.row.m-0.h-100 > nav > ul > li:nth-child(3) > a',
+            '@modaltoggle' => 'div > div.content-wrapper > section > div > div:nth-child(2) > div > div > div.card-body > button'
         ];
     }
 }
