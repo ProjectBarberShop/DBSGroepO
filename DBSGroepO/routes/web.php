@@ -109,10 +109,6 @@ Route::group([
         Route::delete('paginas/{collomtext}/column/{page}', 'destroy')->name('column.destroy');
     });
 
-    Route::controller(CardController::class)->group(function() {
-        Route::get('paginas/{pagina}/card/create', 'create')->name('card.create');
-        Route::post('paginas/{pagina}/card', 'store')->name('card.store');
-    });
 
     Route::controller(NavbarController::class)->group(function() {
         Route::post('navbar/change/{id}' , 'changeOrder')->name('navbar.order');
