@@ -114,7 +114,9 @@
                 @yield('content')
         @endif
         </div>
-        <div id="sidebar" class="my-5 p-3 h-100 mx-auto position-sticky sticky-top d-none d-sm-block">
+        <div id="sidebar">
+            <div class="my-5 p-3 h-100 mx-auto position-sticky sticky-top d-none d-sm-block">
+
         <section class="flex-shrink-1 bg-danger card h-100 mx-auto d-none d-sm-block">
             <div class="h-75 card-body">
                 <div id="sidebarInfoLogin">
@@ -161,6 +163,7 @@
                         </div>
                     </div>
                 @endif
+            </div>
             </div>
         </div>
     </section>
