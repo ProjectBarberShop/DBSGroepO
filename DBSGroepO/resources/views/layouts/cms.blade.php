@@ -167,6 +167,12 @@
                 </a>
               </li>
             </ul>
+          <li class="nav-item">
+            <a href="{{url('cms/boeking')}}" class="nav-link">
+              <i class="nav-icon fas fa-ticket-alt"></i>
+              <p>Tickets</p>
+            </a>
+          </li>
           </li>
         </ul>
       </nav>

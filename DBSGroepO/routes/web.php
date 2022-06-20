@@ -26,7 +26,8 @@ use App\Http\Controllers\ContactFormController;
 use App\Http\Controllers\LearnToSingCMSController;
 use App\Http\Controllers\LearnToSingController;
 use App\Http\Controllers\PerformanceController;
-
+use App\Http\Controllers\TicketCMSController;
+use App\Http\Controllers\TicketController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +46,11 @@ Route::resource('/', HomeController::class)->only(['index']);
 Route::resource('/contact', ContactFormController::class);
 Route::resource('/learntosing', LearntosingController::class);
 Route::get('/nieuws', [NewsletterController::class, 'getNews'])->name('nieuws.index');
+// Route::resource('/boeking', TicketController::class);
+// Route::controller(TicketController::class)->group(function() {
+    // Route::get('/boeking', 'index')->name('ticket.index');
+    Route::get('/boeking/sent', [TicketController::class, 'sent'])->name('ticket.sent');
+// });
 
 Auth::routes();
 
@@ -80,7 +86,7 @@ Route::group([
         Route::delete('/contactverzoeken/{id}', 'destroy')->name('contactverzoeken.destroy');
     });
 
-    
+
     Route::resource('nieuwsbrieven', NewsletterController::class);
     Route::resource('youtube', YoutubeController::class)->except('update');
 
@@ -131,6 +137,13 @@ Route::group([
     Route::resource('navbar', NavbarController::class);
     Route::resource('dropdown', DropdownController::class);
     Route::resource('learntosing-beheer', LearnToSingCMSController::class);
+
+    Route::resource('boeking', TicketCMSController::class);
+    Route::controller(TicketCMSController::class)->group(function() {
+        Route::put('boeking/update', 'update')->name('ticket.update');
+        Route::put('boeking/destroy/{id}', 'destroy')->name('ticket.destroy');
+        Route::get('boeking/edit/{id}', 'edit')->name('ticket.edit');
+    });
 
     Route::get('/home', function () {
         return View::make('cms.home');
