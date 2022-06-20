@@ -53,9 +53,9 @@
     <link href="{{ config('app.env') === 'production' ? secure_asset('css/contact.css') : asset('css/contact.css') }}" rel="stylesheet">
 
 
-    
 
-    
+
+
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/nl_NL/sdk.js#xfbml=1&version=v13.0" nonce="BRVg9Kka"></script>
 </head>
 <body class="bg-white">
@@ -246,9 +246,7 @@
                         <!-- Copyright -->
                         <div class="p-3 h5">
                             © {{now()->year}} Copyright:
-                            <a class="text-white" href=" www.duketownbs.nl"
-                            > www.duketownbs.nl</a
-                            >
+                            <a class="text-white" href=" www.duketownbs.nl">www.duketownbs.nl</a>
                         </div>
                         <!-- Copyright -->
                     </div>
