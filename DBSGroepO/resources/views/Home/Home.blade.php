@@ -10,13 +10,13 @@
                         <div class="carousel-item active">
                             <img src="data:image/jpg;base64,{{ chunk_split(base64_encode($slider[$i]->photo)) }}" style="float: left;
                         height: 350px;
-                        object-fit: scale-down;"class="d-block w-100" alt="...">
+                        object-fit: scale-down;"class="d-block w-100" alt="{{$slider[$i]->discription}}">
                         </div>
                     @else
                         <div class="carousel-item">
                             <img src="data:image/jpg;base64,{{ chunk_split(base64_encode($slider[$i]->photo)) }}" style="float: left;
                         height: 350px;
-                        object-fit: scale-down;" class="d-block w-100" alt="...">
+                        object-fit: scale-down;" class="d-block w-100" alt="{{$slider[$i]->discription}}">
                         </div>
                     @endif
                 @endfor

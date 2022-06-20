@@ -15,6 +15,7 @@ class image extends Model
     public $fillable = [
         'title',
         'photo',
+        'discription',
         'useInSlider'
     ];
 
