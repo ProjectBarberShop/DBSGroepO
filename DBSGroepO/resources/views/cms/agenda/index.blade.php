@@ -1,6 +1,8 @@
 @extends('layouts.cms')
 @section('content')
-
+<head>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+</head>
 <div class="container">
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -34,15 +36,16 @@
     </div>
     @endif
     <div class="dropdown">
-        <button id="dLabel" type="button" class="btn btn-primary mb-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <button id="dLabel" type="button" class="btn btn-primary mb-2" data-bs-toggle="dropdown" aria-haspopup="true" data-bs-auto-close="outside" aria-expanded="false">
             Categorieën beheren
         </button>
         <div class="dropdown-menu p-4" aria-labelledby="dLabel">
             <div class="pre-scrollable container">
             @foreach($categories as $c)
                 <div class="row mb-1">
-                    <p id="cattitle" class="col-md-6" style="background-color: {{$c->color}}"">{{$c->title}}</p>
-                    <button class="btn col-md-6" onclick="return OnDeleteClick('{{$c->title}}','{{route('category.destroy', $c->id)}}', '{{$c->Agenda->count()}}')" id="catdeletebutton" type="submit"><i class="far fa-trash-alt"></i></button>
+                    <p class="col-md-8" class="editabletext" style="background-color: {{$c->color}}"><span class="editablecat" id="{{$c->id}}" contenteditable="true">{{$c->title}}</span></p>
+                    <input type="color" value="{{$c->color}}" class="coloredits col-md-2" id="{{$c->id}}" name="coloredit">
+                    <button class="btn col-md-2" onclick="return OnDeleteClick('{{$c->title}}','{{route('category.destroy', $c->id)}}', '{{$c->Agenda->count()}}')" id="catdeletebutton" type="submit"><i class="far fa-trash-alt"></i></button>
                 </div>
             @endforeach
             </div>
@@ -113,8 +116,52 @@
     @endif
 </div>
 @endsection
-
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
+    $(document).ready(function () {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        var editable = document.getElementsByClassName('editablecat');
+        for (var i = 0 ; i < editable.length; i++) {
+            editable[i].addEventListener('click' , function(event) {updateCatText(event.target)} , false ) ; 
+        }
+
+        var coloredits = document.getElementsByClassName('coloredits');
+        for (var i = 0 ; i < coloredits.length; i++) {
+            coloredits[i].addEventListener('click' , function(event) {updateCatColor(event.target)} , false ) ; 
+        }
+        function updateCatText(element) {
+            console.log(element.id);
+            $.ajax({
+                url:"{{url('cms/category/updatetext/')}}",  
+                method:"PUT",
+                data:{
+                    cat_id : element.id,
+                    text: element.innerHTML
+                },                              
+                success: function( data ) {
+                    console.log(data);
+                }
+            });
+        }
+
+        function updateCatColor(element) {
+            $.ajax({
+                url:"{{url('cms/category/updatecolor/')}}",  
+                method:"PUT",  
+                data:{
+                    cat_id : element.id,
+                    color: element.value
+                },                              
+                success: function( data ) {
+                    console.log(data);
+                }
+            });
+        }
+    });
     function OnDeleteClick(catname,action,count) {
         var myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
         document.getElementById('catform').action = action;
