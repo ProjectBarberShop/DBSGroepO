@@ -129,7 +129,6 @@
             });
             editable[i].addEventListener("keypress", function(event) {
                 if(event.key == "Enter") {
-                    alert("Enters zijn niet toegestaan");
                     event.preventDefault();
                 }
             });
