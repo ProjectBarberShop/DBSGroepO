@@ -18,7 +18,7 @@ class Agendapunt extends Model
         'end',
         'location',
         'locationURL',
-        'color'
+        'color',
         'isArchived'
     ];
 

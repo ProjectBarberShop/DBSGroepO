@@ -1,15 +1,13 @@
 @extends('layouts.cms')
 
 @section('content')
-<div class="card responsive w-50">
-<img class="card-img" src="data:image/jpg;base64,{{ chunk_split(base64_encode($image->photo)) }}" alt="{{$image->discription}}">
+<div class="card responsive">
+<img class="card-img-top img-fluid" style="width:300px; height:auto" src="data:image/jpg;base64,{{ chunk_split(base64_encode($image->photo)) }}" alt="Card image cap">
   <div class="card-body">
     <h4 class="card-title">Title: {{$image->title}}</h4>
     <p class="card-text">
-    label: {{$image->tagName}}<br>
-    <strong>Beschrijving:</strong><br>
-    {{$image->discription}}<br>
-    <strong>Gekoppeld aan:</strong><br>
+    label: {{$image->category}}<br>
+    Gekoppeld aan:<br>
         @foreach($image->Webpages as $page)
     	    - {{$page->slug}}<br>
         @endforeach
