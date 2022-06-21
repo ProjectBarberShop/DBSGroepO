@@ -28,9 +28,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
 
     <!-- scripts agenda -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.css" />
@@ -51,7 +49,7 @@
 
     <link href="{{ config('app.env') === 'production' ? secure_asset('css/app.css') : asset('css/app.css')}}" rel="stylesheet">
     <link href="{{ config('app.env') === 'production' ? secure_asset('css/contact.css') : asset('css/contact.css') }}" rel="stylesheet">
-    
+
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/nl_NL/sdk.js#xfbml=1&version=v13.0" nonce="BRVg9Kka"></script>
 </head>
 <body class="bg-white">
@@ -116,7 +114,9 @@
                 @yield('content')
         @endif
         </div>
-        <div id="sidebar" class="my-5 p-3 h-100 mx-auto position-sticky sticky-top w-25">
+        <div id="sidebar">
+            <div class="my-5 p-3 h-100 mx-auto position-sticky sticky-top d-none d-sm-block">
+
         <section class="flex-shrink-1 bg-danger card h-100 mx-auto d-none d-sm-block">
             <div class="h-75 card-body">
                 <div id="sidebarInfoLogin">
@@ -163,6 +163,7 @@
                         </div>
                     </div>
                 @endif
+            </div>
             </div>
         </div>
     </section>

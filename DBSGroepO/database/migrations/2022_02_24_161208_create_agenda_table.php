@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('location')->nullable();
             $table->text('locationURL')->nullable();
             $table->text('color')->nullable();
+            $table->boolean('isArchived')->default(false);
             $table->timestamps();
         });
     }

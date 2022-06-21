@@ -63,10 +63,12 @@ Route::group([
         Route::controller(ImageController::class)->group(function(){
             Route::get('paginas/{pagina}/afbeelding/create', 'createMultiple')->name('Afbeelding.createMultiple');
             Route::post('paginas/{pagina}/afbeelding', 'storeMultiple')->name('Afbeelding.storeMultiple');
-            Route::get('paginas/{pagina}/afbeelding/edit' , 'editImage')->name('imageWebpage.editYoutube');
-            Route::post('paginas/{pagina}/afbeelding/update' , 'updateImage')->name('imageWebpage.updateYoutube');
+            Route::get('paginas/{pagina}/afbeelding/edit' , 'editImage')->name('imageWebpage.editImage');
+            Route::post('paginas/{pagina}/afbeelding/update' , 'updateImage')->name('imageWebpage.updateImage');
         });
-
+    Route::controller(ImageController::class)->group(function() {
+        Route::get('fotos/fetch_data', 'fetch_data')->name('fotos.fetchdata');
+    });
     Route::resource('fotos', ImageController::class);
     Route::resource('contactpersonen', ContactsController::class);
     Route::resource('learntosing/categorie', LearnToSingCategorie::class);
@@ -78,6 +80,7 @@ Route::group([
         Route::delete('/contactverzoeken/{id}', 'destroy')->name('contactverzoeken.destroy');
     });
 
+    
     Route::resource('nieuwsbrieven', NewsletterController::class);
     Route::resource('youtube', YoutubeController::class)->except('update');
 
@@ -94,6 +97,8 @@ Route::group([
         Route::post('paginas/{pagina}/duplicate' , 'duplicatePage')->name('paginas.duplicate');
         Route::put('paginas/update/{id}', 'updateTemplate')->name('paginas.updateTemplate');
         Route::delete('paginas/removeTemplate/{id}', 'removeTemplate')->name('paginas.removeTemplate');
+        Route::get('paginas/afbeeldingen/{webpageID}', 'showAllImagesWebpage')->name('paginas.getAllImagesWebpage');
+        Route::delete('paginas/afbeeldingen/{webpageID}/{imageId}', 'destroyImage')->name('paginas.destroyImage');
     });
 
     Route::resource('agenda', AgendaCMSController::class);
@@ -101,6 +106,7 @@ Route::group([
         Route::put('category/updatecolor', 'updatecolor')->name('category.updatecolor');
         Route::put('category/updatetext', 'updatetext')->name('category.updatetext');
     });
+
     Route::resource('category', CategoryController::class);
 
     Route::controller(ColumnTextController::class)->group(function() {
@@ -109,16 +115,20 @@ Route::group([
         Route::delete('paginas/{collomtext}/column/{page}', 'destroy')->name('column.destroy');
     });
 
-    Route::controller(CardController::class)->group(function() {
-        Route::get('paginas/{pagina}/card/create', 'create')->name('card.create');
-        Route::post('paginas/{pagina}/card', 'store')->name('card.store');
-    });
 
     Route::controller(NavbarController::class)->group(function() {
         Route::post('navbar/change/{id}' , 'changeOrder')->name('navbar.order');
     });
 
+    Route::controller(AgendaCMSController::class)->group(function() {
+        Route::get('agenda/archived', 'getArchived')->name('agenda.archived');
+        Route::delete('agenda/deletearchive/{id}', 'deleteArchived')->name('agenda.deletearchived');
+        Route::delete('agenda/deleteallarchived', 'deleteAllArchived')->name('agenda.deleteallarchived');
+        Route::get('agenda/archiveall', 'ArchiveAll')->name('agenda.archiveall');
+        Route::put('agenda/archive/{id}', 'ArchiveSingle')->name('agenda.archive');
+    });
     Route::resource('agenda', AgendaCMSController::class);
+
     Route::resource('footer', FooterController::class);
     Route::resource('navbar', NavbarController::class);
     Route::resource('dropdown', DropdownController::class);

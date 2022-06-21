@@ -9,7 +9,7 @@
    </div>
    <div class="row">
       <div class="offset-md-12">
-      <select onchange="refreshCalendar()" name="" id="dropdown">
+      <select class="form-select col-sm-2" onchange="refreshCalendar()" name="" id="dropdown">
          <option value="0"></option>
          @foreach($categories as $c)
             <option value="{{$c->id}}">{{$c->title}}</option>
@@ -41,6 +41,7 @@
     </div>
   </div>
 </div>
+
 <script>
    $(document).ready(function () {
 
@@ -61,7 +62,6 @@
                            }
                         ],
                         eventClick: function(calEvent, jsEvent, view) {
-                           var myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
                            var start = String(calEvent.start);
                            var end = String(calEvent.end);
 
@@ -81,10 +81,15 @@
                               document.getElementById("location_URL").innerHTML = "Locatie";
                               document.getElementById("location_URL").href = calEvent.locationURL;
                            }
-                           myModal.show();
+                           $('#exampleModal').modal('show')
                         },
                         height: 500,
                         editable: false,
+                        themeSystem: 'bootstrap4',
+                        firstDay: 1,
+                        titleFormat: 'D MMM YYYY',
+                        timeFormat: 'H(:mm)',
+                        timezone: 'local',
                         displayEventTime: true,
                         eventRender: function (event, element, view) {
                            if (event.allDay === 'true') {

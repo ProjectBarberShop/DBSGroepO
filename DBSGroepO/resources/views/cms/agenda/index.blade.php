@@ -33,8 +33,11 @@
         </ul>
     </div>
     @endif
-    <div class="dropdown" style="width:auto">
-        <button id="dLabel" type="button" class="btn btn-primary mb-2" data-bs-toggle="dropdown" aria-haspopup="true" data-bs-auto-close="outside" aria-expanded="false">
+    <div class="mb-2">
+        <a class="btn btn-warning" href="{{route('agenda.archived')}}" role="button">Archief</a>
+    </div>
+    <div class="dropdown">
+        <button id="dLabel" type="button" class="btn btn-primary mb-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Categorieën beheren
         </button>
         <div class="dropdown-menu p-4" aria-labelledby="dLabel">
@@ -59,20 +62,25 @@
         </div>
     </div>
     <form action="agenda" method="GET">
-        <div class="d-flex justify-content-between mb-2">
-            <div>
+        <div class="row mb-2">
+            <div class="col-md-2">
                 <a class="btn btn-success" id="createbutton" href="{{route('agenda.create')}}">Nieuw agendapunt maken</a>
             </div>
-            <div class="d-flex flex-column flex-md-row">
-                <div class="mr-md-2">
-                    <select name="category" class="form-select" aria-label="Categorie">
-                    <option selected></option>
-                    @foreach($categories as $c)
-                    <option value="{{$c->id}}">{{$c->title}}</option>
-                    @endforeach
-                    </select>
+            <div class="col-md-2">
+                <a class="btn btn-success" onclick="return confirm('weet je zeker dat je alle oude agendapunten wilt archiveren? Deze actie kan niet ongedaan worden.')" id="createbutton" href="{{route('agenda.archiveall')}}">Archiveer alle oude agendapunten</a>
+            </div>
+            <div class="col-md-3 offset-md-5">
+                <div class="row">
+                    <div class="col">
+                        <select name="category" class="form-select" aria-label="Categorie">
+                        <option selected></option>
+                        @foreach($categories as $c)
+                        <option value="{{$c->id}}">{{$c->title}}</option>
+                        @endforeach
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-success col">Submit</button>
                 </div>
-                <button type="submit" class="btn btn-success">Submit</button>
             </div>
         </div>
     </form>
@@ -80,13 +88,20 @@
     <div class="card" dusk="agenda">
         <div class="card-header">
             <div class="row">
-                <div class="col-md-10">
+                <div class="col-md-9">
                     @foreach($agendapunt->Category as $categorie)
                     {{$categorie->title}}
                     @endforeach
                 </div>
                 <div class="col-md-1">
                     <a href="{{route('agenda.edit', ['agenda' => $agendapunt->id])}}" id="editbutton" class="btn btn-primary"><i class="far fa-edit" aria-hidden="true"></i></a>
+                </div>
+                <div class="col-md-1">
+                    <form action="{{route('agenda.archive', $agendapunt->id)}}", method="POST">
+                        @csrf
+                        @method('put')
+                        <button type="submit" class="btn btn-warning px-3"><i class="fa fa-archive" aria-hidden="true"></i></button>
+                    </form>
                 </div>
                 <div class="col-md-1">
                     <form action="{{route('agenda.destroy', $agendapunt->id)}}", method="POST">

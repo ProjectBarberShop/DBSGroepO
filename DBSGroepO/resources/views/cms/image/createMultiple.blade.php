@@ -21,12 +21,12 @@
             <label id="selectedImages">Geselecteerde images: </label>
         </div>
         <div class="card-columns mt-2">
-            @foreach($afbeeldingen as $img)          
+            @foreach($afbeeldingen as $img)
                 <div class="card m-1" onclick="SelectImg({{$img->id}}, '{{$img->title}}')" id="image{{$img->id}}">
                     <img src="data:image/jpg;base64,{{ chunk_split(base64_encode($img->photo)) }}" class="card-img-top h-75" style="object-fit: scale-down;">
                     <div class="card-body" style="display: none"></div>
                     <div class="card-footer">
-                        <small class="text-muted">{{$img->title}}</small> 
+                        <small class="text-muted">{{$img->title}}</small>
                     </div>
                 </div>
                 </a>
@@ -51,11 +51,25 @@
             let text = document.getElementById("selectedImages").innerText;
             if(i == 1){
                 text += " "+title;
-            }else{
-                text += " | "+ title;
             }
+            else{
+                let titles = text.split(" ");
+                let found = false;
+                for(let j = 0; j < titles.length; j++){
+                    if(titles[j] == title){
+                        found = true;
+                        i--;
+                        alert("deze afbeelding is al gekozen");
+                    }
+                }
+                if(!found){
+                    text += " | "+title;
+                }
+            }
+
+
             document.getElementById("selectedImages").innerText = text;
-        } 
+        }
     }
 </script>
 @endsection

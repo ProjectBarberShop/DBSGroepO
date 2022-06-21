@@ -14,7 +14,7 @@ return [
     */
 
     'failed' => 'Verkeerde inloggegevens.',
-    'password' => 'The provided password is incorrect.',
+    'password' => 'Het ingevoerde wachtwoord is onjuist.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
 
 ];

@@ -22,6 +22,15 @@
                         </datalist>
                     <input name="tag-color" type="color" id="tag-color">
                 </div>
+                <label for="discription">Beschrijving:</label>
+                <Textarea name="discription" id="discription"></Textarea>
+                <label for="tag">Categorie:</label>
+                <input name="tag" list="tags" id="tag">
+                  <datalist id="tags" class="w-100">
+                        @foreach($labels as $l)
+                            <option value="{{$l->tag}}">{{$l->tag}}</option>
+                        @endforeach
+                    </datalist>
                 <button type="submit" class="btn btn-primary float-right mt-4">+</button>
             </form>
             @if ($errors->any())
@@ -114,6 +123,9 @@
             </td>
         </tr>
         @endforeach
+        @if($images != null)
+            {{ $images->links() }}
+        @endif
         @endif
     </table>
     </div>
