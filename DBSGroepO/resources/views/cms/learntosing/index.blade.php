@@ -22,11 +22,11 @@
                 </div>
                 <div class="card-body">
                     <p class="mb-1">Beschrijving: {{$course->description}}</p> <br>
-                    <p class="mb-1">Categorie: {{$course->category?->title}}</p> <br> 
-                    <p class="mb-1">Datum: {{$course->date}}</p> <br> 
-                    <p class="mb-1">Locatie: {{$course->location}}</p> <br> 
-                    <p class="mb-1">Begeleider: {{$course->mentor}}</p> <br> 
-                    <p class="mb-1">Prijs: {{$course->price}}</p> <br> 
+                    <p class="mb-1">Categorie: {{$course->category?->title}}</p> <br>
+                    <p class="mb-1">Datum: {{$course->date}}</p> <br>
+                    <p class="mb-1">Locatie: {{$course->location}}</p> <br>
+                    <p class="mb-1">Begeleider: {{$course->mentor}}</p> <br>
+                    <p class="mb-1">Prijs: {{$course->price}}</p> <br>
                     <div class="d-flex flex-row justify-content-end mt-4">
                         <a href="{{ route('learntosing-beheer.edit', $course->id) }}" class="mr-2 btn btn-primary">Bijwerken</a>
                         <form id="{{str_replace(' ', '', $course->title).$course->id}}"  action="{{ route('learntosing-beheer.destroy', $course->id) }}" method="POST">
@@ -40,6 +40,7 @@
             </div>
         </div>
         @endforeach
+        {{ $courses->links() }}
 </div>
 @endsection
 
