@@ -19,7 +19,8 @@ class CategoryController extends Controller
     public function updatetext(Request $request) {
         // Category::all()->where('id', $request->id)->first()->update(['title' => $request->text]);
         $cat = Category::find($request->cat_id);
-        $cat->title = $request->text;
+        $catreg = strip_tags($request->text);
+        $cat->title = $catreg;
         $cat->save();
     }
     public function updatecolor(Request $request) {

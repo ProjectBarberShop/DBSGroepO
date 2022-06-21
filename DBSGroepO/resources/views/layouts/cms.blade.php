@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Barbershop | Dashboard</title>
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 
   <script type="text/javascript" src="{{ asset('js/adminlts.js') }}" defer></script>
   <script src="https://cdn.tiny.cloud/1/8g15vw4dufcpo94n1f86rvcmv7vqqi7pacte3g6cgy0ln3fb/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>

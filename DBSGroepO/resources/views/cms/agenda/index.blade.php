@@ -1,8 +1,6 @@
 @extends('layouts.cms')
 @section('content')
-<head>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-</head>
+<link href="{{ asset('css/agenda.css') }}" rel="stylesheet">
 <div class="container">
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -35,7 +33,7 @@
         </ul>
     </div>
     @endif
-    <div class="dropdown">
+    <div class="dropdown" style="width:auto">
         <button id="dLabel" type="button" class="btn btn-primary mb-2" data-bs-toggle="dropdown" aria-haspopup="true" data-bs-auto-close="outside" aria-expanded="false">
             Categorieën beheren
         </button>
@@ -43,7 +41,7 @@
             <div class="pre-scrollable container">
             @foreach($categories as $c)
                 <div class="row mb-1">
-                    <p class="col-md-8" class="editabletext" style="background-color: {{$c->color}}"><span class="editablecat" id="{{$c->id}}" contenteditable="true">{{$c->title}}</span></p>
+                    <p class="col-md-8" class="editabletext"><span class="editablecat" id="{{$c->id}}" contenteditable="true">{{$c->title}}</span></p>
                     <input type="color" value="{{$c->color}}" class="coloredits col-md-2" id="{{$c->id}}" name="coloredit">
                     <button class="btn col-md-2" onclick="return OnDeleteClick('{{$c->title}}','{{route('category.destroy', $c->id)}}', '{{$c->Agenda->count()}}')" id="catdeletebutton" type="submit"><i class="far fa-trash-alt"></i></button>
                 </div>
@@ -126,12 +124,22 @@
         });
         var editable = document.getElementsByClassName('editablecat');
         for (var i = 0 ; i < editable.length; i++) {
-            editable[i].addEventListener('click' , function(event) {updateCatText(event.target)} , false ) ; 
+            $(editable[i]).on('DOMSubtreeModified',function(event){
+                updateCatText(event.target);
+            });
+            editable[i].addEventListener("keypress", function(event) {
+                if(event.key == "Enter") {
+                    alert("Enters zijn niet toegestaan");
+                    event.preventDefault();
+                }
+            });
         }
 
         var coloredits = document.getElementsByClassName('coloredits');
         for (var i = 0 ; i < coloredits.length; i++) {
-            coloredits[i].addEventListener('click' , function(event) {updateCatColor(event.target)} , false ) ; 
+            $(coloredits[i]).on('change',function(event){
+                updateCatColor(event.target);
+            });
         }
         function updateCatText(element) {
             console.log(element.id);
