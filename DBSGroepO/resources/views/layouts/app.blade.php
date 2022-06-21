@@ -49,6 +49,7 @@
 
     <link href="{{ config('app.env') === 'production' ? secure_asset('css/app.css') : asset('css/app.css')}}" rel="stylesheet">
     <link href="{{ config('app.env') === 'production' ? secure_asset('css/contact.css') : asset('css/contact.css') }}" rel="stylesheet">
+
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/nl_NL/sdk.js#xfbml=1&version=v13.0" nonce="BRVg9Kka"></script>
 
 </head>

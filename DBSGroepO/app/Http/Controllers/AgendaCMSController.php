@@ -85,7 +85,10 @@ class AgendaCMSController extends Controller
         ]);
 
         $agendapunt = Agendapunt::create($request->all());
+        $temp = Category::find($request->category);
+        $agendapunt->color = $temp->color;
         $agendapunt->Category()->attach($request->category);
+        $agendapunt->save();
         return redirect('/cms/agenda');
     }
 
@@ -139,6 +142,9 @@ class AgendaCMSController extends Controller
         $agenda->update($request->all());
         $agenda->Category()->detach();
         $agenda->Category()->attach($request->category);
+        $temp = Category::find($request->category);
+        $agenda->color = $temp->color;
+        $agenda->save();
         return redirect('/cms/agenda');
     }
 

@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('imageTag', function (Blueprint $table) {
             $table->id();
             $table->string('tag');
+            $table->string('color');
             $table->timestamps();
         });
     }

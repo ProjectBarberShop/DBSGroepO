@@ -1,0 +1,9 @@
+span {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    width: 100%;
+    max-width: 20ch;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
