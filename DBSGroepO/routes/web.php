@@ -47,10 +47,10 @@ Route::resource('/contact', ContactFormController::class);
 Route::resource('/learntosing', LearntosingController::class);
 Route::get('/nieuws', [NewsletterController::class, 'getNews'])->name('nieuws.index');
 // Route::resource('/boeking', TicketController::class);
-// Route::controller(TicketController::class)->group(function() {
-    // Route::get('/boeking', 'index')->name('ticket.index');
-    Route::get('/boeking/sent', [TicketController::class, 'sent'])->name('ticket.sent');
-// });
+Route::controller(TicketController::class)->group(function() {
+    Route::get('/boeking', 'index')->name('ticket.index');
+    Route::get('/boeking/send', 'send')->name('ticket.send');
+});
 
 Auth::routes();
 

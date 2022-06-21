@@ -17,7 +17,7 @@
                         <div class="card-body bg-secondary text-white">
                             <p class="fs-4 m-0">{{Str::limit($a->description)}}</p>
                         </div>
-                        <form action="{{ route('ticket.sent', $a->id) }}" method="POST" id="{{$a->id}}a">
+                        <form action="{{ route('ticket.send', $a->id) }}" method="GET" id="{{$a->id}}a">
                             @csrf
                             <label for="email">email:</label>
                             <input type="email" name="email" placeholder="Email">
