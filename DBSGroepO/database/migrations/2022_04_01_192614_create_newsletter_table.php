@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('newsletter', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('image_id')->references('id')->on('image');
+            $table->foreignId('image_id')->references('id')->on('image')->cascadeOnDelete();
             $table->string('title')->require;
             $table->mediumText('message')->require;
             $table->boolean('is_published')->default(0);

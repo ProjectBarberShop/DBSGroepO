@@ -14,7 +14,6 @@ return new class extends Migration
     public function up()
     {
         Schema::create('newsletter_webpage', function (Blueprint $table) {
-            $table->id();
             $table->foreignId('webpages_id')->references('id')->on('webpage')->cascadeOnDelete();
             $table->foreignId('newsletter_id')->references('id')->on('newsletter')->cascadeOnDelete();
             $table->timestamps();
