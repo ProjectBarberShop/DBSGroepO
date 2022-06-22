@@ -67,7 +67,7 @@
                             <div class="card-block">
                                 <img class="card-img-top" src="data:image/jpg;base64,{{ chunk_split(base64_encode($i->photo)) }}" style="width: 100%; height: 15vw; object-fit: scale-down;" alt="Card image cap">
                                 <div class="card-body">
-                                    <p class="card-text">{{$i->tagName}}</p>
+                                    <p class="card-text">{{$i->discription}}</p>
                                 </div>
                             </div>
                         </div>

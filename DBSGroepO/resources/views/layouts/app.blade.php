@@ -28,7 +28,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
 
     <!-- scripts agenda -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
@@ -50,7 +49,9 @@
 
     <link href="{{ config('app.env') === 'production' ? secure_asset('css/app.css') : asset('css/app.css')}}" rel="stylesheet">
     <link href="{{ config('app.env') === 'production' ? secure_asset('css/contact.css') : asset('css/contact.css') }}" rel="stylesheet">
+
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/nl_NL/sdk.js#xfbml=1&version=v13.0" nonce="BRVg9Kka"></script>
+
 </head>
 <body class="bg-white">
 <div id="app">
@@ -115,55 +116,56 @@
         @endif
         </div>
         <div id="sidebar" class="my-5 p-3 h-100 mx-auto position-sticky sticky-top w-25 d-none d-sm-block">
-        <section class="flex-shrink-1 bg-danger card h-100 mx-auto d-none d-sm-block">
-            <div class="h-75 card-body">
-                <div id="sidebarInfoLogin">
-                    <div id="sidebarFacebook" class=" bg-yellow mb-3">
-                        <h4 class="text-center"><b> Facebook </b></h4>
-                        <div class="fb-page w-100 mx-auto" data-href="https://www.facebook.com/DuketownBarbershopSingers"
-                        data-tabs="timeline"  data-height="400" data-small-header="true"
-                        data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
-                        <blockquote cite="https://www.facebook.com/DuketownBarbershopSingers" class="fb-xfbml-parse-ignore">
-                            <a href="https://www.facebook.com/DuketownBarbershopSingers">Duketown Barbershop Singers</a>
-                        </blockquote>
-                    </div>
-                </div>
-                <div id="sidebarAgenda" class="rounded bg-yellow w-100">
-                    <h4 class="text-center"><b> Agenda </b></h4>
-                        <div class="overflow-auto p-2 mh-25" style="max-Height: 300px">
-                            @foreach ($schedules as $schedule)
-                                <p><b>{{ $schedule->title}}:</b> <br> begint op: {{ $schedule->start}}</p>
-                                <hr>
-                            @endforeach
-                        </div>
-                </div>
-                @if(!empty($newsletterdata))
-                    <div class="d-flex mt-3">
-                        <div class="d-flex align-items-center justify-content-center flex-column bg-light w-100">
-                            <img src="data:image/jpg;base64,{{ chunk_split(base64_encode($newsletterdata->image->photo)) }}" class="img-fluid">
-                            <div class="text-center position-relative w-75">
-                                <h3>{{$newsletterdata->title}}</h3>
-                                <p class="fs-6 m-0">{{Str::limit($newsletterdata->message, 20)}}</p>
-                                <a class="text-primary cursor-pointer" onclick="modalShow()">Lees meer</a>
+            <section class="flex-shrink-1 bg-danger card h-100 mx-auto d-none d-sm-block">
+                    <div class="h-75 card-body">
+                        <div id="sidebarInfoLogin">
+                            <div id="sidebarFacebook" class=" bg-yellow mb-3">
+                                <h4 class="text-center"><b> Facebook </b></h4>
+                                <div class="fb-page w-100 mx-auto" data-href="https://www.facebook.com/DuketownBarbershopSingers"
+                                data-tabs="timeline"  data-height="400" data-small-header="true"
+                                data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+                                <blockquote cite="https://www.facebook.com/DuketownBarbershopSingers" class="fb-xfbml-parse-ignore">
+                                    <a href="https://www.facebook.com/DuketownBarbershopSingers">Duketown Barbershop Singers</a>
+                                </blockquote>
                             </div>
                         </div>
-                    </div>
+                        <div id="sidebarAgenda" class="rounded bg-yellow w-100">
+                            <h4 class="text-center"><b> Agenda </b></h4>
+                                <div class="overflow-auto p-2 mh-25" style="max-Height: 300px">
+                                    @foreach ($schedules as $schedule)
+                                        <p><b>{{ $schedule->title}}:</b> <br> begint op: {{ $schedule->start}}</p>
+                                        <hr>
+                                    @endforeach
+                                </div>
+                        </div>
+                        @if(!empty($newsletterdata))
+                            <div class="d-flex mt-3">
+                                <div class="d-flex align-items-center justify-content-center flex-column bg-light w-100">
+                                    <img src="data:image/jpg;base64,{{ chunk_split(base64_encode($newsletterdata->image->photo)) }}" class="img-fluid">
+                                    <div class="text-center position-relative w-75">
+                                        <h3>{{$newsletterdata->title}}</h3>
+                                        <p class="fs-6 m-0">{{Str::limit($newsletterdata->message, 20)}}</p>
+                                        <a class="text-primary cursor-pointer" onclick="modalShow()">Lees meer</a>
+                                    </div>
+                                </div>
+                            </div>
 
-                    <div class="modal justify-content-center align-items-center" id="modal-info" aria-modal="true" role="dialog">
-                        <div class="modal-content bg-light w-75">
-                            <div class="modal-header">
-                                <h2 class="modal-title">{{$newsletterdata->title}}</h2>
-                                <button class="close fs-2" onclick="modalClose()">x</button>
+                            <div class="modal justify-content-center align-items-center" id="modal-info" aria-modal="true" role="dialog">
+                                <div class="modal-content bg-light w-75">
+                                    <div class="modal-header">
+                                        <h2 class="modal-title">{{$newsletterdata->title}}</h2>
+                                        <button class="close fs-2" onclick="modalClose()">x</button>
+                                    </div>
+                                    <div class="row m-0 p-2 overflow-auto" style="height: 50vh;">
+                                        <p class="p-0 m-0 fs-5">{{$newsletterdata->message}}</p>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="row m-0 p-2 overflow-auto" style="height: 50vh;">
-                                <p class="p-0 m-0 fs-5">{{$newsletterdata->message}}</p>
-                            </div>
+                        @endif
                         </div>
                     </div>
-                @endif
+                </section>
             </div>
-        </div>
-    </section>
     </main>
     {{--start footer--}}
     <footer class="text-center text-lg-start text-white bg-danger">
@@ -240,9 +242,7 @@
                         <!-- Copyright -->
                         <div class="p-3 h5">
                             © {{now()->year}} Copyright:
-                            <a class="text-white" href=" www.duketownbs.nl"
-                            > www.duketownbs.nl</a
-                            >
+                            <a class="text-white" href=" www.duketownbs.nl">www.duketownbs.nl</a>
                         </div>
                         <!-- Copyright -->
                     </div>

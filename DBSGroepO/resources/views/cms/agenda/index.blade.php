@@ -1,6 +1,6 @@
 @extends('layouts.cms')
 @section('content')
-
+<link href="{{ asset('css/agenda.css') }}" rel="stylesheet">
 <div class="container">
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -44,16 +44,18 @@
             <div class="pre-scrollable container">
             @foreach($categories as $c)
                 <div class="row mb-1">
-                    <p id="cattitle" class="col-md-6">{{$c->title}}</p>
-                    <button class="btn col-md-6" onclick="return OnDeleteClick('{{$c->title}}','{{route('category.destroy', $c->id)}}', '{{$c->Agenda->count()}}')" id="catdeletebutton" type="submit"><i class="far fa-trash-alt"></i></button>
+                    <p class="col-md-8" class="editabletext"><span class="editablecat" id="{{$c->id}}" contenteditable="true">{{$c->title}}</span></p>
+                    <input type="color" value="{{$c->color}}" class="coloredits col-md-2" id="{{$c->id}}" name="coloredit">
+                    <button class="btn col-md-2" onclick="return OnDeleteClick('{{$c->title}}','{{route('category.destroy', $c->id)}}', '{{$c->Agenda->count()}}')" id="catdeletebutton" type="submit"><i class="far fa-trash-alt"></i></button>
                 </div>
             @endforeach
             </div>
             <form action="{{route('category.store')}}" method="POST">
             @csrf
-            <div class="form-group">
-                <label for="category">Categorie toevoegen</label>
-                <input type="text" class="form-control" id="category" name="title">
+            <label for="category">Categorie toevoegen</label>
+            <div class="form-group d-flex flex-row">    
+                <input type="text" class="form-control w-75" id="category" name="title">
+                <input type="color" class="form-control w-25" id="color" name="color">
             </div>
             <button id="cataddbutton" type="submit" class="btn btn-success">Submit</button>
             </form>
@@ -127,8 +129,61 @@
     @endif
 </div>
 @endsection
-
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
+    $(document).ready(function () {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        var editable = document.getElementsByClassName('editablecat');
+        for (var i = 0 ; i < editable.length; i++) {
+            $(editable[i]).on('DOMSubtreeModified',function(event){
+                updateCatText(event.target);
+            });
+            editable[i].addEventListener("keypress", function(event) {
+                if(event.key == "Enter") {
+                    event.preventDefault();
+                }
+            });
+        }
+
+        var coloredits = document.getElementsByClassName('coloredits');
+        for (var i = 0 ; i < coloredits.length; i++) {
+            $(coloredits[i]).on('change',function(event){
+                updateCatColor(event.target);
+            });
+        }
+        function updateCatText(element) {
+            console.log(element.id);
+            $.ajax({
+                url:"{{url('cms/category/updatetext/')}}",  
+                method:"PUT",
+                data:{
+                    cat_id : element.id,
+                    text: element.innerHTML
+                },                              
+                success: function( data ) {
+                    console.log(data);
+                }
+            });
+        }
+
+        function updateCatColor(element) {
+            $.ajax({
+                url:"{{url('cms/category/updatecolor/')}}",  
+                method:"PUT",  
+                data:{
+                    cat_id : element.id,
+                    color: element.value
+                },                              
+                success: function( data ) {
+                    console.log(data);
+                }
+            });
+        }
+    });
     function OnDeleteClick(catname,action,count) {
         var myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
         document.getElementById('catform').action = action;

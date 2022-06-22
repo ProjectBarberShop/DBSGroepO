@@ -14,9 +14,9 @@ class Tag extends Model
 
     protected $fillable = [
         'image_id',
-        'title'
+        'title',
+        'color'
     ];
-
     public function Images()
     {
         return $this->hasMany(Image::class);

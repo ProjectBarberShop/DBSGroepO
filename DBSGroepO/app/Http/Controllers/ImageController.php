@@ -22,7 +22,7 @@ class imageController extends Controller
         if($request->filled('filter')){
             $images->where('tagName', '=', $request->filter)->paginate(20);
         }
-        return view('cms.image.index', ['images'=>$images->paginate(20), 'labels'=> $labels]);
+        return view('cms.image.index', ['images'=>$images->paginate(10), 'labels'=> $labels]);
     }
 
     public function store(Request $request)
@@ -37,9 +37,16 @@ class imageController extends Controller
             $tag = new Tag;
             if(Tag::where('tag', $request->input('tag'))->count() === 0){
                 $tag->tag = $request->input('tag');
+                $tag->color = $request->input('tag-color');
                 $tag->save();
             }
             $imagedata = new Image;
+            if(!$request->filled('discription')){
+                $imagedata->discription = "Geen beschrijving";
+            }else{
+                $imagedata->discription = $request->input('discription');
+            }
+            
             $imagedata->title = $request->input('title');
             $img = $request->file('photo');
             $contentsImg = $img->openFile()->fread($img->getSize());
@@ -139,7 +146,7 @@ class imageController extends Controller
                     }
                 }
             }
-     return redirect()->route('paginas.index')->with('success','Alles is succesvol bijgewerkt indien er dingen verwijdert moeten worden kan dat via de show');
+        return redirect()->route('paginas.index')->with('success','Alles is succesvol bijgewerkt indien er dingen verwijdert moeten worden kan dat via de show');
     }
 
     public function fetch_data(Request $request) {

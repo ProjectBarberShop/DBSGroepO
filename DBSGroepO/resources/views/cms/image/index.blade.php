@@ -12,9 +12,21 @@
                 <label for="photo">foto:</label>
                 <img id="preview" src="#" alt="afbeelding" class="w-50 h-50"/>
                 <input type="file" name="photo" id="file" accept="image/*" onchange="getImgData()">
+                <label for="tag">Categorie:</label>             
+                <div>
+                    <input name="tag" list="tags" id="tag">
+                        <datalist id="tags" class="w-100">
+                            @foreach($labels as $l)
+                                <option value="{{$l->tag}}">{{$l->tag}}</option>
+                            @endforeach
+                        </datalist>
+                    <input name="tag-color" type="color" id="tag-color">
+                </div>
+                <label for="discription">Beschrijving:</label>
+                <Textarea name="discription" id="discription"></Textarea>
                 <label for="tag">Categorie:</label>
                 <input name="tag" list="tags" id="tag">
-                <datalist id="tags" class="w-100">
+                  <datalist id="tags" class="w-100">
                         @foreach($labels as $l)
                             <option value="{{$l->tag}}">{{$l->tag}}</option>
                         @endforeach
@@ -69,7 +81,13 @@
                     @endif
                 </form></td>
                 <td><img src="data:image/jpg;base64,{{ chunk_split(base64_encode($img->photo)) }}" class="w-25 h-25 "></td>
-                <td>{{$img->tagName}}</td>     
+                @foreach($labels as $l)
+                    @if($l->tag == $img->tagName)
+                        <td style="background-color:{{$l->color}}">{{$img->tagName}}</td>  
+                        @break;
+                    @endif 
+                @endforeach
+        
             <td>  
             <a href="{{ route('fotos.show', $img->id) }}" class="mr-2 btn btn-primary">Details</a>
                 <form action="{{ route('fotos.destroy', $img->id) }}" method="POST">
