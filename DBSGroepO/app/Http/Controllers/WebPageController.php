@@ -48,13 +48,13 @@ class WebPageController extends Controller
     {
        $request->validate([
            'main_text' => 'required',
-           'slug' => 'required',
+           'slug' => ['required', 'max:50'],
            'multiInput.*.colom_title_text' => 'required',
            'multiInput.*.colomn_text' => 'required',
        ]);
        $webpage = new Webpages;
        $webpage->template_id = 1;
-       $webpage->slug = Str::slug($request->input('slug'));
+       $webpage->slug = Str::slug(preg_replace('[^a-zA-Z0-9 -]','-',$request->input('slug')));
        $webpage->main_text = $request->input('main_text');
        $webpage->save();
        $webpageID = Webpages::latest('id')->first();
@@ -182,11 +182,11 @@ class WebPageController extends Controller
     {
         $request->validate([
             'body' => 'required',
-            'title' => 'required'
+            'title' => ['required', 'max:50']
         ]);
         $webpage = Webpages::find($id);
         $webpage->main_text = $request->input('body');
-        $webpage->slug = Str::slug($request->input('title'));
+        $webpage->slug = Str::slug(preg_replace('[^a-zA-Z0-9 -]','-',$request->input('title')));
 
         $navItem = DropdownItem::where('link', $webpage->getOriginal('slug'))->first() ?? NavbarItem::where('link', $webpage->getOriginal('slug'))->first();
         $navItem->link = $webpage->slug;

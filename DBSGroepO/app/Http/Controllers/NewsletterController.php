@@ -16,7 +16,7 @@ class NewsletterController extends Controller
     public function index()
     {
         $imagesdata = Image::paginate(5);
-        $newsletterdata = Newsletter::with('image')->orderBy('created_at', 'desc')->get();
+        $newsletterdata = Newsletter::with('image')->orderBy('created_at', 'desc')->paginate(5);
 
         return view('cms.nieuwsbrieven.index', compact(['newsletterdata', 'imagesdata']));
     }
@@ -63,17 +63,6 @@ class NewsletterController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -81,7 +70,7 @@ class NewsletterController extends Controller
      */
     public function edit($id)
     {
-        $imagesdata = Image::all();
+        $imagesdata = Image::paginate(5);
         $newsletterdata = Newsletter::with('image')->find($id);
 
         return view('cms.nieuwsbrieven.edit', compact(['newsletterdata', 'imagesdata']));

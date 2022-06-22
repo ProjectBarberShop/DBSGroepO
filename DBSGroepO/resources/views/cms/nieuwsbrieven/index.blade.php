@@ -32,6 +32,9 @@
             </div>
         </div>
     @endforeach
+    @if($newsletterdata != null)
+        {{ $newsletterdata->links() }}
+    @endif
 </div>
 
 <div class="row">
@@ -83,7 +86,7 @@
 <script>
     $(document).ready(function(){
 
-        $(document).on('click', '.pagination a', function(event){
+        $(document).on('click', '#modal-info .pagination a', function(event){
             event.preventDefault(); 
             var page = $(this).attr('href').split('page=')[1];
             fetch_data(page);
