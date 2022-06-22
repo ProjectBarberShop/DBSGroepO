@@ -24,6 +24,5 @@
         </div>
         {{ $newsletterdata->links() }}
     </div>
-
 @endif
 @endsection

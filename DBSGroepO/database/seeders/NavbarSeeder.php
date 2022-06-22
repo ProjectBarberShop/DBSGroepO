@@ -24,6 +24,7 @@ class NavbarSeeder extends Seeder
             ['id' => 6, 'name' => 'Informatie', 'link' => '#', 'number' => 6],
             ['id' => 7, 'name' => 'Nieuws', 'link' => 'nieuws', 'number' => 7],
             ['id' => 8, 'name' => 'Contact', 'link' => 'contact', 'number' => 8],
+            ['id' => 9, 'name' => 'Ticket boeken', 'link' => 'boeking', 'number' => 9],
         ];
 
         $dropdownitems = [
