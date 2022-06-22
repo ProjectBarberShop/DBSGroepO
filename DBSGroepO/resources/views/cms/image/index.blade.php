@@ -24,13 +24,6 @@
                 </div>
                 <label for="discription">Beschrijving:</label>
                 <Textarea name="discription" id="discription"></Textarea>
-                <label for="tag">Categorie:</label>
-                <input name="tag" list="tags" id="tag">
-                  <datalist id="tags" class="w-100">
-                        @foreach($labels as $l)
-                            <option value="{{$l->tag}}">{{$l->tag}}</option>
-                        @endforeach
-                    </datalist>
                 <button type="submit" class="btn btn-primary float-right mt-4">+</button>
             </form>
             @if ($errors->any())
@@ -63,7 +56,8 @@
             <th scope="col">Titel</th>
             <th scope="col">Wordt in slider gebruikt?</th>
             <th scope="col">Foto preview</th>
-            <th scope="col">category</th>
+            <th scope="col">Categorie</th>
+            <th scope="col">Kleur</th>
             <th scope="col"></th>
         </tr>
         </thead>
@@ -81,9 +75,10 @@
                     @endif
                 </form></td>
                 <td><img src="data:image/jpg;base64,{{ chunk_split(base64_encode($img->photo)) }}" class="w-25 h-25 "></td>
+                <td>{{$img->tagName}}</td> 
                 @foreach($labels as $l)
                     @if($l->tag == $img->tagName)
-                        <td style="background-color:{{$l->color}}">{{$img->tagName}}</td>  
+                        <td style="background-color:{{$l->color}}"></td>  
                         @break;
                     @endif 
                 @endforeach

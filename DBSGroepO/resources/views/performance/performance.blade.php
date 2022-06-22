@@ -20,8 +20,8 @@
             </div>
         </div>
         @endforeach
+        {{ $optredens->links() }}
     </div>
-    {{ $optredens->links() }}
 </section>
 
 
