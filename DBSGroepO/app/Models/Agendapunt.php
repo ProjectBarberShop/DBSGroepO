@@ -25,4 +25,8 @@ class Agendapunt extends Model
     public function Category() {
         return $this->belongsToMany(Category::class);
     }
+
+    public function tickets() {
+        return $this->belongsToMany(Ticket::class);
+    }
 }

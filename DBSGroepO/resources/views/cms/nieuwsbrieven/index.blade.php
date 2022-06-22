@@ -6,17 +6,17 @@
         <div class="card card-primary m-2 col-md-3 p-0">
             <img src="data:image/jpg;base64,{{ chunk_split(base64_encode($n->image->photo)) }}" style="height: 250px; object-fit: cover;">
             <div class="card-header">
-            <h3 class="card-title w-100 mb-2">{{$n->title}}</h3>
-            <p class="d-inline">{{$n->created_at}}</p>
+                <h3 class="card-title w-100 mb-2">{{$n->title}}</h3>
+                <p>{{$n->created_at}}</p>
+                <p class="fs-6 m-0">
+                    @if($n->is_published)
+                        Gepubliceerd op de website
+                    @else
+                        Niet gepubliceerd op de website
+                    @endif
+                </p>
             </div>
-            <div class="p-2">
-                {{$n->message}}<br>
-                @if($n->is_published)
-                    Gepubliceerd op de website
-                @else
-                    Niet gepubliceerd op de website
-                @endif<br>
-            </div>
+            <p class="p-2">{{$n->message}}</p>
             <div class="card-body d-flex justify-content-end align-items-end p-2">
                 <form action="{{ route('nieuwsbrieven.destroy', $n->id) }}" method="post" id="{{$n->id}}a">
                     <input type="hidden" name="{{$n->title}}">
@@ -84,7 +84,7 @@
     $(document).ready(function(){
 
         $(document).on('click', '.pagination a', function(event){
-            event.preventDefault(); 
+            event.preventDefault();
             var page = $(this).attr('href').split('page=')[1];
             fetch_data(page);
         });
