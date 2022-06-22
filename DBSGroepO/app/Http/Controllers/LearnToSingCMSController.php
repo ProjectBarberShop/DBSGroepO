@@ -16,12 +16,10 @@ class LearnToSingCMSController extends Controller
      */
     public function index()
     {
-        $images = [];
 
-        foreach(LearnToSing::all() as $course){
-            array_push($images, Image::find($course->image_id));
-        }
-        return view('cms.learntosing.index', [ 'courses' => LearnToSing::paginate(4), 'images' => $images]);
+        $courses = LearnToSing::with('image')->paginate(5);
+
+        return view('cms.learntosing.index', [ 'courses' => $courses]);
     }
 
     /**
@@ -77,7 +75,7 @@ class LearnToSingCMSController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {   
+    {
         return view('cms.learntosing.edit', ['course' => LearnToSing::findOrFail($id), 'imagesdata' => Image::paginate(5), 'categories' => LearnToSingCat::all()]);
     }
 

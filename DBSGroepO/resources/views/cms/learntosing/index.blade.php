@@ -13,32 +13,34 @@
 <a href="{{ route('learntosing-beheer.create') }}" class="h3 link-primary" >Aanmaken</a>
 
 <div class="row mt-3">
-    @foreach($courses as $course)
-        <div class="col-md-3">
-            <div class="card card-primary">
-                <div class="card-header bg-white">
-                    <h3 class="card-title"><strong>Titel: {{$course->title}}</strong></h3><br>
-                    <img src="data:image/jpg;base64,{{ chunk_split(base64_encode($images[$loop->index]->photo)) }}" class="img-fluid w-50 h-50">
-                </div>
-                <div class="card-body">
-                    <p class="mb-1">Beschrijving: {{$course->description}}</p> <br>
-                    <p class="mb-1">Categorie: {{$course->category?->title}}</p> <br>
-                    <p class="mb-1">Datum: {{$course->date}}</p> <br>
-                    <p class="mb-1">Locatie: {{$course->location}}</p> <br>
-                    <p class="mb-1">Begeleider: {{$course->mentor}}</p> <br>
-                    <p class="mb-1">Prijs: {{$course->price}}</p> <br>
-                    <div class="d-flex flex-row justify-content-end mt-4">
-                        <a href="{{ route('learntosing-beheer.edit', $course->id) }}" class="mr-2 btn btn-primary">Bijwerken</a>
-                        <form id="{{str_replace(' ', '', $course->title).$course->id}}"  action="{{ route('learntosing-beheer.destroy', $course->id) }}" method="POST">
-                            <input type="hidden" name="title" value="{{$course->title}}">
-                            @method('DELETE')
-                            @csrf
-                        </form>
-                        <button type="submit" class="btn btn-danger" id="remove" onclick="confirmSubmit({{$course}})">Verwijderen</button>
+    @foreach($courses->chunk(3) as $course)
+        @foreach($course as $c)
+            <div class="col-md-3">
+                <div class="card mb-3" style="max-width: 25em;">
+                    <div class="card-header bg-white">
+                        <h3 class="card-title"><strong>Titel: {{$c->title}}</strong></h3><br>
+                            <img src="data:image/jpg;base64,{{ chunk_split(base64_encode($c->image->photo)) }}" class="img-fluid w-50 h-50">
+                    </div>
+                    <div class="card-body">
+                        <p class="mb-1">Beschrijving: {{$c->description}}</p> <br>
+                        <p class="mb-1">Categorie: {{$c->category?->title}}</p> <br>
+                        <p class="mb-1">Datum: {{$c->date}}</p> <br>
+                        <p class="mb-1">Locatie: {{$c->location}}</p> <br>
+                        <p class="mb-1">Begeleider: {{$c->mentor}}</p> <br>
+                        <p class="mb-1">Prijs: {{$c->price}}</p> <br>
+                        <div class="d-flex flex-row justify-content-end mt-4">
+                            <a href="{{ route('learntosing-beheer.edit', $c->id) }}" class="mr-2 btn btn-primary">Bijwerken</a>
+                            <form id="{{str_replace(' ', '', $c->title).$c->id}}"  action="{{ route('learntosing-beheer.destroy', $c->id) }}" method="POST">
+                                <input type="hidden" name="title" value="{{$c->title}}">
+                                @method('DELETE')
+                                @csrf
+                            </form>
+                            <button type="submit" class="btn btn-danger" id="remove" onclick="confirmSubmit({{$course}})">Verwijderen</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+            @endforeach
         @endforeach
         {{ $courses->links() }}
 </div>
