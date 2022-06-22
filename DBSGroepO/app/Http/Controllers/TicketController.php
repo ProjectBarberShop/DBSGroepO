@@ -36,6 +36,8 @@ class TicketController extends Controller
         if($ticket != null && $ticket->email == $request->input('email')) {
             return redirect()->route('boeking.index')->with('success','Pagina succesvol bijgewerkt');
         }
+        $ticket->amount_of_tickets = $ticket->amount_of_tickets - $request->input('amount');
+        $ticket->save();
 
         $data["name"] = $request->input('name');
         $data["address"] = $request->input('address');

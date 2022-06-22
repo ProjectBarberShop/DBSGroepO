@@ -10,7 +10,7 @@
                         <div class="card-header">
                             <h3 class="card-title w-100 mb-2">{{$a->title}}</h3>
                             <p>{{$a->start}} / {{$a->end}}</p>
-                            <p>Aantal tickets besteld: {{$t->amount_of_tickets}}</p>
+                            <p>Aantal tickets: {{$t->amount_of_tickets}}</p>
                             <p class="fs-6 m-0">
                                 @if($t->is_published)
                                     Gepubliceerd op de website
@@ -19,13 +19,13 @@
                                 @endif
                             </p>
                         </div>
-                        <p class="p-2">{{$t->description}}</p>
+                        <p class="p-2">{{$a->description}}</p>
                         <div class="card-body d-flex justify-content-end align-items-end p-2">
                             <a href="{{ route('tickets.edit', $t->id) }}" class="mr-2 btn btn-primary">Bijwerken</a>
                             <form action="{{route('tickets.destroy', $t->id)}}", method="POST">
                                 @csrf
                                 @method('delete')
-                                <button type="submit" class="btn btn-danger">Verwijderen</button>
+                                <button type="submit" class="btn btn-danger md-2">Verwijderen</button>
                             </form>
                         </div>
                     </div>
