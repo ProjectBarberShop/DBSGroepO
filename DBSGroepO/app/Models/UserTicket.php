@@ -14,6 +14,7 @@ class UserTicket extends Model
 
     protected $fillable = [
         'name',
+        'ticket_id',
         'address',
         'postalcode',
         'place',

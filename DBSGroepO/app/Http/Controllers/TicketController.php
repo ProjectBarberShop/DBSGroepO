@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Agendapunt;
 use App\Models\Ticket;
+use App\Models\UserTicket;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
@@ -13,13 +14,11 @@ class TicketController extends Controller
 {
     public function index()
     {
-        $agendadata = Agendapunt::where('is_published', true)
-        ->where('start', '>', Carbon::now())
-        ->orderBy('start', 'asc')
-        ->where('amount_of_tickets', '>', 0)
-        ->paginate(5);
+        $agendadata = Agendapunt::where('start', '>', Carbon::now())
+        ->orderBy('start', 'asc')->get();
+        $ticketdata = Ticket::where('is_published', true)->where('amount_of_tickets', '>', 0)->paginate(5);
 
-        return view('boeking.index', compact('agendadata'));
+        return view('boeking.index', compact('agendadata' , 'ticketdata'));
     }
 
     public function send(Request $request, $id) {
@@ -52,14 +51,19 @@ class TicketController extends Controller
         $data["start"] = $event->start;
         $data["end"] = $event->end;
         $data["description"] = $event->description;
-        $data["price"] = $event->price;
-        $data["total_price"] = $event->price * $request->input('amount');
+        $data["price"] = $ticket->price;
+        $data["total_price"] = $ticket->price * $request->input('amount');
 
-        $ticket = new Ticket;
-        $ticket->agenda_id = $event->id;
-        $ticket->email = $data["email"];
-        $ticket->total_price = $data["total_price"];
-        $ticket->save();
+        $userTicket = new UserTicket();
+        $userTicket->ticket_id = $ticket->id;
+        $userTicket->name = $request->input('name');
+        $userTicket->address = $request->input('address');
+        $userTicket->postalcode = $request->input('postalcode');
+        $userTicket->place = $request->input('place');
+        $userTicket->phonenumber = $request->input('phonenumber');
+        $userTicket->email = $request->input('email');
+        $userTicket->amount_of_tickets = $request->input('amount');
+        $userTicket->save();
 
         view('pdfTicket', compact('data'));
 
@@ -72,6 +76,6 @@ class TicketController extends Controller
             ->attachData($pdf->output(), "barbershop_ticket.pdf");
         });
 
-        return redirect()->route('boeking.index')->with('success','Pagina succesvol bijgewerkt');
+        return redirect()->route('boeking.index')->with('success','Tickets succesvol besteld');
     }
 }
