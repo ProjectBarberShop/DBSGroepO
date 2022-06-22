@@ -19,9 +19,6 @@ class Agendapunt extends Model
         'location',
         'locationURL',
         'isArchived',
-        'is_published',
-        'amount_of_tickets',
-        'price'
     ];
 
     public function Category() {

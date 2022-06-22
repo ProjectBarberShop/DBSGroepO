@@ -22,9 +22,6 @@ return new class extends Migration
             $table->string('location')->nullable();
             $table->text('locationURL')->nullable();
             $table->boolean('isArchived')->default(false);
-            $table->string('is_published')->default(false);
-            $table->integer('amount_of_tickets')->default(0);
-            $table->string('price')->default(0);
             $table->timestamps();
         });
     }

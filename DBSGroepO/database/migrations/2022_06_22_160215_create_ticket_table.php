@@ -16,8 +16,9 @@ return new class extends Migration
         Schema::create('ticket', function (Blueprint $table) {
             $table->id();
             $table->foreignId('agenda_id')->references('id')->on('agenda')->cascadeOnDelete();
-            $table->string('email');
-            $table->string('total_price');
+            $table->integer('amount_of_tickets')->require;
+            $table->string('price')->require;
+            $table->boolean('is_published')->default(0);
             $table->timestamps();
         });
     }

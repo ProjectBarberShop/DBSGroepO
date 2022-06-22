@@ -2,33 +2,33 @@
 
 @section('content')
 <div class="row">
-    @foreach($agendadata as $a)
-        @if($a->amount_of_tickets > 0 )
+    @foreach($ticketdata as $t)
+        @if($t->amount_of_tickets > 0)
             <div class="card card-primary m-2 col-md-3 p-0">
                 <div class="card-header">
-                    <h3 class="card-title w-100 mb-2">{{$a->title}}</h3>
-                    <p>{{$a->start}} / {{$a->end}}</p>
-                    <p>Aantal tickets besteld: {{$a->amount_of_tickets}}</p>
+                    <h3 class="card-title w-100 mb-2">{{$t->title}}</h3>
+                    <p>{{$t->start}} / {{$t->end}}</p>
+                    <p>Aantal tickets besteld: {{$t->amount_of_tickets}}</p>
                     <p class="fs-6 m-0">
-                        @if($a->is_published)
+                        @if($t->is_published)
                             Gepubliceerd op de website
                         @else
                             Niet gepubliceerd op de website
                         @endif
                     </p>
                 </div>
-                <p class="p-2">{{$a->description}}</p>
+                <p class="p-2">{{$t->description}}</p>
                 <div class="card-body d-flex justify-content-end align-items-end p-2">
-                    <form action="{{ route('ticket.destroy', $a->id) }}" method="POST" id="{{$a->id}}a">
-                        <input type="hidden" name="{{$a->title}}">
+                    <form action="{{ route('ticket.destroy', $t->id) }}" method="POST" id="{{$t->id}}a">
+                        <input type="hidden" name="{{$t->title}}">
                         @method('PUT')
                         @csrf
                     </form>
                     <div>
-                        <a href="{{ route('ticket.edit', $a->id) }}" class="mr-2 btn btn-primary">Bijwerken</a>
+                        <a href="{{ route('ticket.edit', $t->id) }}" class="mr-2 btn btn-primary">Bijwerken</a>
                     </div>
                     <div>
-                        <button class="btn btn-primary" onclick="confirmSubmit({{$a->id}}, 'a')" id="remove">Verwijderen</button>
+                        <button class="btn btn-primary" onclick="confirmSubmit({{$t->id}}, 'a')" id="remove">Verwijderen</button>
                     </div>
                 </div>
             </div>
