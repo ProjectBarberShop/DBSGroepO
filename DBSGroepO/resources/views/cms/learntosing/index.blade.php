@@ -19,7 +19,7 @@
                 <div class="card mb-3" style="max-width: 25em;">
                     <div class="card-header bg-white">
                         <h3 class="card-title"><strong>Titel: {{$c->title}}</strong></h3><br>
-                            <img src="data:image/jpg;base64,{{ chunk_split(base64_encode($c->image->photo)) }}" class="img-fluid w-50 h-50">
+                        <img src="data:image/jpg;base64,{{ chunk_split(base64_encode($c->image->photo)) }}" class="img-fluid w-50 h-50">
                     </div>
                     <div class="card-body">
                         <p class="mb-1">Beschrijving: {{$c->description}}</p> <br>
