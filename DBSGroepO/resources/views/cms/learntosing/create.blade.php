@@ -110,17 +110,6 @@ function textareaLengthCheck() {
     count.innerHTML = "Tekens over: " + charactersLeft;
 }
 
-
-// function modalShow() {
-//     event.preventDefault();
-//     document.getElementById("modal-info").style.display = "flex";
-// }
-
-// function modalClose() {
-//     event.preventDefault();
-//     document.getElementById("modal-info").style.display = "none";
-// }
-
 function cloneimage(imageId, uniqueId, classname, imgWidth, imgHeight, overwrite) {
     if(overwrite == true) {
         const allImages = document.querySelectorAll('.' + classname + ' > .img');

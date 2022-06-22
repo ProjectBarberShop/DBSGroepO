@@ -37,7 +37,7 @@
         <a class="btn btn-warning" href="{{route('agenda.archived')}}" role="button">Archief</a>
     </div>
     <div class="dropdown">
-        <button id="dLabel" type="button" class="btn btn-primary mb-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <button id="dLabel" type="button" class="btn btn-primary mb-2" data-bs-auto-close="outside" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Categorieën beheren
         </button>
         <div class="dropdown-menu p-4" aria-labelledby="dLabel">
@@ -130,6 +130,7 @@
 </div>
 @endsection
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script>
     $(document).ready(function () {
         $.ajaxSetup({
