@@ -12,22 +12,24 @@ class TicketCMSController extends Controller
     {
         $agendadata = Agendapunt::where('start', '>', Carbon::now())->orderBy('start', 'asc')->paginate(5);
 
-        return view('cms.boeking.index', compact('agendadata'));
+        return view('cms.tickets.index', compact('agendadata'));
     }
 
     public function update(Request $request)
     {
         $request->validate([
             'amount' => 'required|not_in:0',
-            'agenda' => 'not_in:0'
+            'price' => 'required',
+            'agenda' => 'not_in:0',
         ]);
 
         $agendapunt = Agendapunt::where('start', '>', Carbon::now())->find(($request->agenda));
         $agendapunt->amount_of_tickets = intval($request->input('amount'));
+        $agendapunt->price = intval($request->input('price'));
         $agendapunt->is_published = isset($request['ispublished']) ? true : false;
         $agendapunt->save();
 
-        return redirect()->route('cms.boeking.index')->with('success','Pagina succesvol bijgewerkt');
+        return redirect()->route('tickets.index')->with('success','Pagina succesvol bijgewerkt');
     }
 
     public function destroy($id)
@@ -37,13 +39,13 @@ class TicketCMSController extends Controller
         $agendapunt->is_published = false;
         $agendapunt->save();
 
-        return redirect()->route('cms.boeking.index')->with('success','Pagina succesvol bijgewerkt');
+        return redirect()->route('tickets.index')->with('success','Pagina succesvol bijgewerkt');
     }
 
     public function edit($id)
     {
         $agendapunt = Agendapunt::where('start', '>', Carbon::now())->find($id);
 
-        return view('cms.boeking.edit', compact('agendapunt'));
+        return view('cms.tickets.edit', compact('agendapunt'));
     }
 }

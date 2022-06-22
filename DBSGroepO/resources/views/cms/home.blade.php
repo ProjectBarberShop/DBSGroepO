@@ -166,7 +166,7 @@
       <div class="icon">
          <i class="ion ion-person-add"></i>
       </div>
-      <a href="{{url('cms/boeking')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+      <a href="{{url('cms/tickets')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
    </div>
 </div>
 @endsection

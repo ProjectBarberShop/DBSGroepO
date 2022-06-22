@@ -13,7 +13,9 @@ class Ticket extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
+        'agenda_id',
         'email',
+        'total_price',
     ];
 
     public function agendaItem() {

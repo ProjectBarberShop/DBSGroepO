@@ -16,8 +16,10 @@
         "laravel/sanctum": "^2.14",
         "laravel/tinker": "^2.7",
         "laravel/ui": "^3.4",
+        "mpdf/mpdf": "v8.0.17",
         "nesbot/carbon": "^2.57",
-        "niklasravnsborg/laravel-pdf": "^4.1"
+        "niklasravnsborg/laravel-pdf": "^4.1",
+        "psr/log": "v2.*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

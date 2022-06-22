@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('agenda_id')->references('id')->on('agenda')->cascadeOnDelete();
             $table->string('email');
+            $table->string('total_price');
             $table->timestamps();
         });
     }

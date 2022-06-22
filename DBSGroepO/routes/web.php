@@ -46,10 +46,9 @@ Route::resource('/', HomeController::class)->only(['index']);
 Route::resource('/contact', ContactFormController::class);
 Route::resource('/learntosing', LearntosingController::class);
 Route::get('/nieuws', [NewsletterController::class, 'getNews'])->name('nieuws.index');
-// Route::resource('/boeking', TicketController::class);
 Route::controller(TicketController::class)->group(function() {
-    Route::get('/boeking', 'index')->name('ticket.index');
-    Route::get('/boeking/send', 'send')->name('ticket.send');
+    Route::get('/boeking', 'index')->name('boeking.index');
+    Route::get('/boeking/send/{id}', 'send')->name('ticket.send');
 });
 
 Auth::routes();
@@ -138,11 +137,11 @@ Route::group([
     Route::resource('dropdown', DropdownController::class);
     Route::resource('learntosing-beheer', LearnToSingCMSController::class);
 
-    Route::resource('boeking', TicketCMSController::class);
+    Route::resource('tickets', TicketCMSController::class);
     Route::controller(TicketCMSController::class)->group(function() {
-        Route::put('boeking/update', 'update')->name('ticket.update');
-        Route::put('boeking/destroy/{id}', 'destroy')->name('ticket.destroy');
-        Route::get('boeking/edit/{id}', 'edit')->name('ticket.edit');
+        Route::put('tickets/update', 'update')->name('ticket.update');
+        Route::put('tickets/destroy/{id}', 'destroy')->name('ticket.destroy');
+        Route::get('tickets/edit/{id}', 'edit')->name('ticket.edit');
     });
 
     Route::get('/home', function () {
