@@ -157,12 +157,6 @@
               </li>
               <li class="nav-item">
                 <a href="{{url('cms/learntosing/categorie')}}" class="nav-link">
-                  <i class="far ion-ios-musical-note nav-icon"></i>
-                  <p>Muziek</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{url('cms/learntosing/categorie')}}" class="nav-link">
                   <i class="far ion-ios-list-outline nav-icon"></i>
                   <p>Categorie</p>
                 </a>

@@ -106,7 +106,6 @@ Route::group([
         Route::delete('paginas/afbeeldingen/{webpageID}/{imageId}', 'destroyImage')->name('paginas.destroyImage');
     });
 
-    Route::resource('agenda', AgendaCMSController::class);
     Route::controller(CategoryController::class)->group(function() {
         Route::put('category/updatecolor', 'updatecolor')->name('category.updatecolor');
         Route::put('category/updatetext', 'updatetext')->name('category.updatetext');

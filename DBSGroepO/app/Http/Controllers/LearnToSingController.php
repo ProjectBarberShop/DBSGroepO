@@ -16,7 +16,7 @@ class LearntosingController extends Controller
     public function index(Request $request)
     {
         if(isset($request->coursesearch)) {
-            $courses = LearnToSing::with('image')->where('title', 'LIKE', '%'.$request->coursesearch.'%');
+            $courses = LearnToSing::with('image')->whereRaw('LOWER(title) LIKE ? ',[trim(strtolower($request->coursesearch)).'%']);
         }
         else {
             $courses = LearnToSing::with('image');

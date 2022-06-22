@@ -1,6 +1,5 @@
 @extends('layouts.cms')
 @section('content')
-
 <div class="container">
     @if ($errors->any())
     <div class="alert alert-danger">
@@ -12,6 +11,7 @@
     </div>
     @endif
     @if($agendapunten->isEmpty())
+    <a class="btn btn-secondary" href="{{route('agenda.index')}}">Terug</a>
     <p>Er zijn geen gearchiveerde agendapunten</p>
     @else
     <div class="row mb-2">
