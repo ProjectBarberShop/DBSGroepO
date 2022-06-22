@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Barbershop | Dashboard</title>
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 
   <script type="text/javascript" src="{{ asset('js/adminlts.js') }}" defer></script>
   <script src="https://cdn.tiny.cloud/1/8g15vw4dufcpo94n1f86rvcmv7vqqi7pacte3g6cgy0ln3fb/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
@@ -12,8 +13,8 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <!-- Datatables bootstrap -->
   <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css" />
   <!-- Ionicons -->
@@ -156,17 +157,17 @@
               </li>
               <li class="nav-item">
                 <a href="{{url('cms/learntosing/categorie')}}" class="nav-link">
-                  <i class="far ion-ios-musical-note nav-icon"></i>
-                  <p>Muziek</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{url('cms/learntosing/categorie')}}" class="nav-link">
                   <i class="far ion-ios-list-outline nav-icon"></i>
                   <p>Categorie</p>
                 </a>
               </li>
             </ul>
+          <li class="nav-item">
+            <a href="{{url('cms/tickets')}}" class="nav-link">
+              <i class="nav-icon fas fa-ticket-alt"></i>
+              <p>Tickets</p>
+            </a>
+          </li>
           </li>
         </ul>
       </nav>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Agendapunt;
 use App\Models\Category;
+use Carbon\Carbon;
 use Database\Seeders\AgendaSeeder;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
@@ -24,13 +25,38 @@ class AgendaCMSController extends Controller
             $cats[] = $request->input("category");
             $agendapunten = Agendapunt::whereHas('Category', function($q) use($cats) {
                 $q->whereIn('category_id', $cats);
-            })->paginate(5);
+            })->where('isArchived', false)->paginate(5);
         }
         else {
-            $agendapunten = Agendapunt::with('Category')->paginate(5);
+            $agendapunten = Agendapunt::with('Category')->where('isArchived', false)->paginate(5);
         }
-        $categories = Category::get();
+        $categories = Category::with("Agenda")->get();
         return view('cms.agenda.index', compact('agendapunten', 'categories'));
+    }
+
+    public function ArchiveAll() {
+        Agendapunt::where('end', '<', Carbon::now())->update(['isArchived' => true]);
+        return redirect()->back();
+    }
+
+    public function ArchiveSingle($id) {
+        Agendapunt::where('id', $id)->update(['isArchived' => true]);
+        return redirect()->back();
+    }
+
+    public function getArchived() {
+        $agendapunten = Agendapunt::where('isArchived', True)->paginate(5);
+        return view('cms.agenda.archive', compact('agendapunten'));
+    }
+
+    public function deleteArchived($id) {
+        Agendapunt::destroy($id);
+        return redirect()->back();
+    }
+
+    public function deleteAllArchived() {
+        Agendapunt::where('isArchived', true)->delete();
+        return redirect()->back();
     }
 
     /**
@@ -59,7 +85,10 @@ class AgendaCMSController extends Controller
         ]);
 
         $agendapunt = Agendapunt::create($request->all());
+        $temp = Category::find($request->category);
+        $agendapunt->color = $temp->color;
         $agendapunt->Category()->attach($request->category);
+        $agendapunt->save();
         return redirect('/cms/agenda');
     }
 
@@ -113,6 +142,9 @@ class AgendaCMSController extends Controller
         $agenda->update($request->all());
         $agenda->Category()->detach();
         $agenda->Category()->attach($request->category);
+        $temp = Category::find($request->category);
+        $agenda->color = $temp->color;
+        $agenda->save();
         return redirect('/cms/agenda');
     }
 

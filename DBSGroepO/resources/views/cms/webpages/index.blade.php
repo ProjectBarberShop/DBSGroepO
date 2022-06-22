@@ -34,10 +34,10 @@
                                     <th>Hoofdtekst</th>
                                     <th>Pagina title</th>
                                     <th>Toegevoegd op</th>
-                                    <th>Card toevoegen</th>
                                     <th>Youtube video toevoegen</th>
                                     <th>Afbeeldingen toevoegen</th>
                                     <th>Template</th>
+                                    <th>Images</th>
                                     <th>Bijwerken</th>
                                     <th>Kopieren</th>
                                     <th>Verwijderen</th>
@@ -49,7 +49,6 @@
                                     <td>{{strip_tags($w->main_text)}}</td>
                                     <td>{{$w->slug}}</td>
                                     <td>{{$w->created_at}}</td>
-                                    <td><a class="btn btn-primary" href="{{ route('card.create' , $w->id) }}"> Nieuwe cards maken</a></td>
                                     <td><a class="btn btn-primary" href="{{ route('youtube.createMultiple' , $w->id) }}"> Youtube video toevoegen</a></td>
                                     <td><a class="btn btn-primary" href="{{ route('Afbeelding.createMultiple' , $w->id) }}"> Afbeeldingen toevoegen</a></td>
                                     <td>
@@ -85,20 +84,19 @@
                                                 </div>
                                             </div>
                                         </div>
-
-                                        <form action="{{ route('paginas.removeTemplate', $w->id) }}" method="post" id="{{$w->id}}a">
-                                            @method('DELETE')
-                                            @csrf
-                                        </form>
-                                        <button class="btn btn-primary mt-4" onclick="confirmSubmit('{{$w->id}}', 'a')" id="remove">Template verwijderen</button>
-
                                         <form action="{{ route('paginas.updateTemplate', $w->id) }}" method="POST" class="d-flex flex-column" enctype="multipart/form-data">
                                             @method('PUT')
                                             @csrf
                                             <input type="hidden" name="imageId" id="template{{$w->id}}">
                                             <input type="submit" class="btn btn-primary float-right mt-2" value="Template bijwerken" id="changeTemplate">
                                         </form>
+                                        <form action="{{ route('paginas.removeTemplate', $w->id) }}" method="post" id="{{$w->id}}a">
+                                            @method('DELETE')
+                                            @csrf
+                                        </form>
+                                        <button class="btn btn-primary mt-4" onclick="confirmSubmit('{{$w->id}}', 'a')" id="remove">Template verwijderen</button>
                                     </td>
+                                    <td><a class="btn btn-danger" id="allImages{{$w->id}}" href="{{ route('paginas.getAllImagesWebpage',$w->id) }}">Images</a></td>
                                     <td><a class="btn btn-success" id="update{{$w->id}}" href="{{ route('paginas.edit',$w->id) }}">Bijwerken</a></td>
                                     <td>
                                         <form action="{{ route('paginas.duplicate', $w->id) }}" method="POST">
@@ -122,10 +120,10 @@
                                     <th>Hoofdtekst</th>
                                     <th>Pagina title</th>
                                     <th>Toegevoegd op</th>
-                                    <th>Card toevoegen</th>
                                     <th>Youtube video toevoegen</th>
                                     <th>Afbeeldingen toevoegen</th>
                                     <th>Template</th>
+                                    <th>Images</th>
                                     <th>Bijwerken</th>
                                     <th>Kopieren</th>
                                     <th>Verwijderen</th>

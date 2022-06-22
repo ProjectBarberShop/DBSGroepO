@@ -122,7 +122,7 @@ class YoutubeController extends Controller
                     $youtube->save();
             }
         }
-        return redirect()->route('imageWebpage.editYoutube' , $webpage);
+        return redirect()->route('imageWebpage.editImage' , $webpage);
     }
 
     /**

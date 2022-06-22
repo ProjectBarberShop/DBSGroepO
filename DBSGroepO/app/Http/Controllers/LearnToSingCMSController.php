@@ -16,12 +16,10 @@ class LearnToSingCMSController extends Controller
      */
     public function index()
     {
-        $images = [];
 
-        foreach(LearnToSing::all() as $course){
-            array_push($images, Image::find($course->image_id));
-        }
-        return view('cms.learntosing.index', [ 'courses' => LearnToSing::all(), 'images' => $images]);
+        $courses = LearnToSing::with('image')->paginate(5);
+
+        return view('cms.learntosing.index', [ 'courses' => $courses]);
     }
 
     /**
@@ -32,7 +30,7 @@ class LearnToSingCMSController extends Controller
     public function create()
     {
 
-        return view('cms.learntosing.create', ['categories' => LearnToSingCat::all(), 'imagesdata' => Image::all()]);
+        return view('cms.learntosing.create', ['categories' => LearnToSingCat::all(), 'imagesdata' => Image::paginate(5)]);
     }
 
     /**
@@ -42,8 +40,8 @@ class LearnToSingCMSController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   
-        
+    {
+
         $request->validate([
             'title' => 'required',
             'category_id' => 'required',
@@ -52,10 +50,10 @@ class LearnToSingCMSController extends Controller
         ]);
 
         $attributes = $request->all();
-        
+
         if(!isset($attributes['price'])) $attributes['price'] = 0;
         LearnToSing::create($attributes);
-        
+
         return redirect('cms/learntosing-beheer')->with('success', 'Cursus succesvol aangemaakt');
     }
 
@@ -78,8 +76,7 @@ class LearnToSingCMSController extends Controller
      */
     public function edit($id)
     {
-     
-        return view('cms.learntosing.edit', ['course' => LearnToSing::findOrFail($id), 'imagesdata' => Image::all(), 'categories' => LearnToSingCat::all()]);
+        return view('cms.learntosing.edit', ['course' => LearnToSing::findOrFail($id), 'imagesdata' => Image::paginate(5), 'categories' => LearnToSingCat::all()]);
     }
 
     /**
@@ -90,8 +87,8 @@ class LearnToSingCMSController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {   
-   
+    {
+
         $request->validate([
             'title' => 'required',
             'category_id' => 'required',
@@ -100,10 +97,10 @@ class LearnToSingCMSController extends Controller
         ]);
 
         $attributes = $request->all();
-        
+
         if(!isset($attributes['price'])) $attributes['price'] = 0;
         LearnToSing::find($id)->update($attributes);
-        
+
         return redirect('cms/learntosing-beheer')->with('success', 'Cursus succesvol Bijgewerkt');
     }
 

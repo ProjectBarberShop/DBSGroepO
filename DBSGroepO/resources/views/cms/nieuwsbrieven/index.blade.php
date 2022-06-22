@@ -6,17 +6,17 @@
         <div class="card card-primary m-2 col-md-3 p-0">
             <img src="data:image/jpg;base64,{{ chunk_split(base64_encode($n->image->photo)) }}" style="height: 250px; object-fit: cover;">
             <div class="card-header">
-            <h3 class="card-title w-100 mb-2">{{$n->title}}</h3>
-            <p class="d-inline">{{$n->created_at}}</p>
+                <h3 class="card-title w-100 mb-2">{{$n->title}}</h3>
+                <p>{{$n->created_at}}</p>
+                <p class="fs-6 m-0">
+                    @if($n->is_published)
+                        Gepubliceerd op de website
+                    @else
+                        Niet gepubliceerd op de website
+                    @endif
+                </p>
             </div>
-            <div class="p-2">
-                {{$n->message}}<br>
-                @if($n->is_published)
-                    Gepubliceerd op de website
-                @else
-                    Niet gepubliceerd op de website
-                @endif<br>
-            </div>
+            <p class="p-2">{{$n->message}}</p>
             <div class="card-body d-flex justify-content-end align-items-end p-2">
                 <form action="{{ route('nieuwsbrieven.destroy', $n->id) }}" method="post" id="{{$n->id}}a">
                     <input type="hidden" name="{{$n->title}}">
@@ -32,6 +32,9 @@
             </div>
         </div>
     @endforeach
+    @if($newsletterdata != null)
+        {{ $newsletterdata->links() }}
+    @endif
 </div>
 
 <div class="row">
@@ -51,27 +54,8 @@
                     <div class="imagePosition p-2"></div>
                 </div>
                 <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modal-info">Selecteer foto</button>
-                <div class="modal fade" id="modal-info" tabindex="-1" aria-hidden="true">
-                    <div class="modal-dialog"></div>
-                    <div class="modal-dialog-scrollable d-flex justify-content-center align-content-center">
-                        <div class="modal-content bg-info w-75">
-                            <div class="modal-header">
-                                <h2 class="modal-title">Selecteer foto</h2>
-                                <button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body row m-0 h-100">
-                                @forelse($imagesdata as $img)
-                                    <div class="d-flex justify-content-center align-items-center col-6 col-md-4 p-0">
-                                        <a onclick="cloneimage({{$img->id}}, 'b', 'imagePosition', null, null, true)" data-bs-dismiss="modal" class="m-2">
-                                            <img src="data:image/jpg;base64,{{ chunk_split(base64_encode($img->photo)) }}" class="img-fluid" id="{{$img->id}}b">
-                                        </a>
-                                    </div>
-                                @empty
-                                    <p class="fs-5">Er zijn nog geen foto's beschikbaar. Ga naar: <a href="{{ route('fotos.index') }}">foto's pagina</a></p>
-                                @endforelse
-                            </div>
-                        </div>
-                    </div>
+                <div id="image-data">
+                    @include('components\images')
                 </div>
                 <form action="{{ route('nieuwsbrieven.store') }}" method="POST" class="d-flex flex-column" enctype="multipart/form-data">
                     @csrf
@@ -98,34 +82,61 @@
     </div>
 </div>
 @endsection
-
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
-function confirmSubmit(formId, uniqueId) {
-    let newFormId = document.getElementById(formId + uniqueId);
-    if(confirm("Weet u zeker dat u " + newFormId.querySelector("input").name + " wilt verwijderen?")) {
-        newFormId.submit();
-    }
-}
+    $(document).ready(function(){
+        $(document).on('click', '#modal-info .pagination a', function(event){
+            event.preventDefault(); 
+            var page = $(this).attr('href').split('page=')[1];
+            fetch_data(page);
+        });
 
-function cloneimage(imageId, uniqueId, classname, imgWidth, imgHeight, overwrite) {
-    if(overwrite == true) {
-        const allImages = document.querySelectorAll('.' + classname + ' > .img');
-        for(i = 0; i < allImages.length; i++) {
-            allImages[i].remove();
+        $(document).on('hidden.bs.modal','#modal-info', function (e) {
+            $("body").css("overflow", "auto");
+        })
+
+        function fetch_data(page)
+        {
+            $.ajax({
+                url:"/cms/fotos/fetch_data?page="+page,
+                success:function(data)
+                {
+                    $('#image-data').html(data);
+                    var myModal = new bootstrap.Modal(document.getElementById('modal-info'));
+                    myModal.show();
+                    $('.modal-backdrop').first().remove();
+                }
+            });
+        }
+
+    });
+
+    function confirmSubmit(formId, uniqueId) {
+        let newFormId = document.getElementById(formId + uniqueId);
+        if(confirm("Weet u zeker dat u " + newFormId.querySelector("input").name + " wilt verwijderen?")) {
+            newFormId.submit();
         }
     }
 
-    const imageClasses = document.querySelectorAll('.' + classname);
-    const selectedImage = document.getElementById(imageId + uniqueId);
+    function cloneimage(imageId, uniqueId, classname, imgWidth, imgHeight, overwrite) {
+        if(overwrite == true) {
+            const allImages = document.querySelectorAll('.' + classname + ' > .img');
+            for(i = 0; i < allImages.length; i++) {
+                allImages[i].remove();
+            }
+        }
 
-    for(i = 0; i < imageClasses.length; i++) {
-        let newImage = selectedImage.cloneNode(true);
-        newImage.setAttribute("style", "width:" + imgWidth + "px !important", "height:" + imgHeight + "px !important");
-        newImage.className += " img";
-        imageClasses[i].append(newImage);
+        const imageClasses = document.querySelectorAll('.' + classname);
+        const selectedImage = document.getElementById(imageId + uniqueId);
+
+        for(i = 0; i < imageClasses.length; i++) {
+            let newImage = selectedImage.cloneNode(true);
+            newImage.setAttribute("style", "width:" + imgWidth + "px !important", "height:" + imgHeight + "px !important");
+            newImage.className += " img";
+            imageClasses[i].append(newImage);
+        }
+
+        let imageInputField = document.getElementById("imageField");
+        imageInputField.setAttribute('value', imageId);
     }
-
-    let imageInputField = document.getElementById("imageField");
-    imageInputField.setAttribute('value', imageId);
-}
 </script>

@@ -42,7 +42,8 @@ class AgendaCMS extends Page
             '@categories' => '#dLabel',
             '@catcreatebutton' => '#cataddbutton',
             '@catdeletebutton' => '#catdeletebutton',
-            '@agendaeditbutton' => '#editbutton'
+            '@agendaeditbutton' => '#editbutton',
+            '@agendaarchive' => 'div > div.content-wrapper > section > div > div > div:nth-child(5) > div.card-header > div > div:nth-child(3) > form > button > i'
         ];
     }
 }

@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="card responsive">
-<img class="card-img-top" src="data:image/jpg;base64,{{ chunk_split(base64_encode($image->photo)) }}" alt="Card image cap">
+<img class="card-img-top img-fluid" style="width:300px; height:auto" src="data:image/jpg;base64,{{ chunk_split(base64_encode($image->photo)) }}" alt="Card image cap">
   <div class="card-body">
     <h4 class="card-title">Title: {{$image->title}}</h4>
     <p class="card-text">

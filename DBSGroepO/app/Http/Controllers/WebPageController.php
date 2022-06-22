@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\DropdownItem;
-use App\Models\NavbarItem;
-use Illuminate\Http\Request;
-use App\Models\Webpages;
-use App\Models\colom_context as context_colomn;
-use App\Models\colom_context_webpages;
+use App\Models\Image;
 use App\Models\Template;
+use App\Models\Webpages;
+use App\Models\NavbarItem;
 use Illuminate\Support\Str;
+use App\Models\DropdownItem;
+use Illuminate\Http\Request;
+use App\Models\colom_context_webpages;
+use App\Models\colom_context as context_colomn;
 
 class WebPageController extends Controller
 {
@@ -47,13 +48,13 @@ class WebPageController extends Controller
     {
        $request->validate([
            'main_text' => 'required',
-           'slug' => 'required',
+           'slug' => ['required', 'max:50'],
            'multiInput.*.colom_title_text' => 'required',
            'multiInput.*.colomn_text' => 'required',
        ]);
        $webpage = new Webpages;
        $webpage->template_id = 1;
-       $webpage->slug = Str::slug($request->input('slug'));
+       $webpage->slug = Str::slug(preg_replace('[^a-zA-Z0-9 -]','-',$request->input('slug')));
        $webpage->main_text = $request->input('main_text');
        $webpage->save();
        $webpageID = Webpages::latest('id')->first();
@@ -146,9 +147,13 @@ class WebPageController extends Controller
      */
     public function show($slug)
     {
-        $pagecontent = Webpages::with('ColomContext' , 'youtube')->where('slug' , $slug)->get();
+        $pagecontent = Webpages::with('ColomContext' , 'youtube' , 'Image')->where('slug' , $slug)->get();
+        $templateID = 0;
+        foreach($pagecontent as $content) {
+            $templateID = $content->template_id;
+        }
         if($pagecontent->isEmpty()) abort(404);
-        return view('contentpage' , compact('pagecontent'));
+        return view('templates.template'.$templateID , compact('pagecontent'));
     }
 
     /**
@@ -177,11 +182,11 @@ class WebPageController extends Controller
     {
         $request->validate([
             'body' => 'required',
-            'title' => 'required'
+            'title' => ['required', 'max:50']
         ]);
         $webpage = Webpages::find($id);
         $webpage->main_text = $request->input('body');
-        $webpage->slug = Str::slug($request->input('title'));
+        $webpage->slug = Str::slug(preg_replace('[^a-zA-Z0-9 -]','-',$request->input('title')));
 
         $navItem = DropdownItem::where('link', $webpage->getOriginal('slug'))->first() ?? NavbarItem::where('link', $webpage->getOriginal('slug'))->first();
         $navItem->link = $webpage->slug;
@@ -255,5 +260,18 @@ class WebPageController extends Controller
                 $item->delete();
             }
         }
+    }
+
+    public function showAllImagesWebpage($id) {
+
+        $webpage = Webpages::find($id);
+        $images = $webpage->Image;
+        return view('cms.webpages.images' , compact('images' , 'webpage'));
+    }
+
+    public function destroyImage($webpageID , $imageId) {
+        $webpage = Webpages::find($webpageID);
+        $webpage->Image()->detach($imageId);
+        return redirect()->route('paginas.index')->with('success','Afbeelding succesvol losgekoppeld van pagina '. $webpage->title);
     }
 }

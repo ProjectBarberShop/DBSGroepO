@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Throwable;
+use App\Models\Tag;
 use App\Models\Image;
 use App\Models\webpages;
-use App\Models\Tag;
+use Illuminate\Http\Request;
 
 class imageController extends Controller
 {
@@ -16,12 +17,12 @@ class imageController extends Controller
         $images = Image::query();
 
         if($request->filled('search')){
-            $images->where('title', 'like', '%' . $request->search . '%')->get();
+            $images->where('title', 'like', '%' . $request->search . '%')->paginate(20);
         }
         if($request->filled('filter')){
-            $images->where('tagName', '=', $request->filter)->get();
+            $images->where('tagName', '=', $request->filter)->paginate(20);
         }
-        return view('cms.image.index', ['images'=>$images->get(), 'labels'=> $labels]);
+        return view('cms.image.index', ['images'=>$images->paginate(10), 'labels'=> $labels]);
     }
 
     public function store(Request $request)
@@ -36,9 +37,16 @@ class imageController extends Controller
             $tag = new Tag;
             if(Tag::where('tag', $request->input('tag'))->count() === 0){
                 $tag->tag = $request->input('tag');
+                $tag->color = $request->input('tag-color');
                 $tag->save();
             }
             $imagedata = new Image;
+            if(!$request->filled('discription')){
+                $imagedata->discription = "Geen beschrijving";
+            }else{
+                $imagedata->discription = $request->input('discription');
+            }
+            
             $imagedata->title = $request->input('title');
             $img = $request->file('photo');
             $contentsImg = $img->openFile()->fread($img->getSize());
@@ -87,15 +95,21 @@ class imageController extends Controller
     {
         if($request->multiInput != null){
         $request->validate([
-            'multiInput.*.image_id' => 'required',
+            'multiInput.*.image_id' => 'required'
         ]);
-        
+            $page = Webpages::where('id' , $pageID)->with('Image')->first();
             foreach($request->multiInput as $key => $value) {
-                $page = Webpages::find($pageID);
-                $page->Image()->attach($value);
+                foreach($page->Image as $image) {
+                    if($image->id == $value['image_id']) {
+                        return redirect(route('Afbeelding.createMultiple' , $pageID))->withErrors(['error' => 'De gekozen afbeeldingen zijn helaas al gekozen voor deze pagina. Kies een andere afbeelding of maak een nieuwe afbeelding aan bij foto\'s.']);
+                    }
+                }
+                if(!$page->Image->contains($value['image_id'])){
+                    $page->Image()->attach($value);
+                }
             }
-        
-        
+
+
         return redirect(route('paginas.index'))->with('success','afbeelding succesvol toegevoegd');
         }else{
             $images = Image::all();
@@ -109,26 +123,36 @@ class imageController extends Controller
         return view('cms.webpages.edit_image' , ['pagecontent' => $pagecontent , 'afbeeldingen' => $images]);
     }
 
-    public function updateImage(Request $request, $webpage)
+    public function updateImage(Request $request, $webpageID)
     {
         $request->validate([
             'multiInput.*.image_id' => 'required',
             'oldInput.*.image_id' => 'required',
         ]);
-        $webpage = Webpages::find($webpage);
-
         if($request->oldInput != null) {
+            $webpage = Webpages::find($webpageID);
             foreach($request->oldInput as $key => $value) {
-                $webpage->Image()->update(['image_id' => $value['image_id']]);
+                $test = $webpage->Image()->wherePivot('webpages_id' , $webpageID)->wherePivot('image_id' , $value['image_id'])->updateExistingPivot($value['image_id'], ['image_id' => $value['image_id']]);
             }
         }
         if($request->multiInput != null) {
+            $webpage = Webpages::find($webpageID);
+            $page = Webpages::find($webpageID)->with('Image')->first();
             foreach($request->multiInput as $key => $value) {
-                $webpage->Image()->attach($key);
+                    if(!$page->Image()->where('image_id', $value['image_id'])->exists()){
+                        $webpage->Image()->attach($value['image_id']);
+                    } else {
+                        return redirect(route('imageWebpage.editImage' , $webpageID))->withErrors(['error' => 'Aii niet alle images zijn geupdate omdat je deze al gekoppeld zijn aan de webpage\'s.']);
+                    }
+                }
             }
-        }
-
-
         return redirect()->route('paginas.index')->with('success','Alles is succesvol bijgewerkt indien er dingen verwijdert moeten worden kan dat via de show');
+    }
+
+    public function fetch_data(Request $request) {
+        if($request->ajax()) {
+            $imagesdata = Image::paginate(5);
+            return view('components\images', compact('imagesdata'))->render();
+        }
     }
 }

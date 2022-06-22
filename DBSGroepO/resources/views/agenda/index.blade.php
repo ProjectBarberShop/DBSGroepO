@@ -9,7 +9,7 @@
    </div>
    <div class="row">
       <div class="offset-md-12">
-      <select onchange="refreshCalendar()" name="" id="dropdown">
+      <select class="form-select col-sm-2" onchange="refreshCalendar()" name="" id="dropdown">
          <option value="0"></option>
          @foreach($categories as $c)
             <option value="{{$c->id}}">{{$c->title}}</option>
@@ -32,6 +32,7 @@
         <p class="fw-bold" id="date"></p>
         <p id="description"></p>
         <p id="location"></p>
+        <p id="category"></p>
         <a target="_blank" id="location_URL"></a>
       </div>
       <div class="modal-footer">
@@ -40,10 +41,11 @@
     </div>
   </div>
 </div>
+
 <script>
    $(document).ready(function () {
 
-   var SITEURL = "{{ url('https://2122-prj78-o.azurewebsites.net') }}";
+   var SITEURL = "{{ url('http://127.0.0.1:8000') }}";
    $.ajaxSetup({
          headers: {
          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -60,7 +62,6 @@
                            }
                         ],
                         eventClick: function(calEvent, jsEvent, view) {
-                           var myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
                            var start = String(calEvent.start);
                            var end = String(calEvent.end);
 
@@ -70,6 +71,7 @@
                            document.getElementById("exampleModalLabel").innerHTML = calEvent.title;
                            document.getElementById("date").innerHTML = startDate + " - " + endDate;
                            document.getElementById("description").innerHTML = calEvent.description;
+
                            if(calEvent.location != null) {
                               document.getElementById("location").innerHTML = calEvent.location;
                            } else {
@@ -79,10 +81,15 @@
                               document.getElementById("location_URL").innerHTML = "Locatie";
                               document.getElementById("location_URL").href = calEvent.locationURL;
                            }
-                           myModal.show();
+                           $('#exampleModal').modal('show')
                         },
                         height: 500,
                         editable: false,
+                        themeSystem: 'bootstrap4',
+                        firstDay: 1,
+                        titleFormat: 'D MMM YYYY',
+                        timeFormat: 'H(:mm)',
+                        timezone: 'local',
                         displayEventTime: true,
                         eventRender: function (event, element, view) {
                            if (event.allDay === 'true') {
@@ -94,7 +101,6 @@
                         selectable: true,
                         selectHelper: true,
                      });
-
    });
    function refreshCalendar() {
       $('#calendar').fullCalendar("refetchEvents");

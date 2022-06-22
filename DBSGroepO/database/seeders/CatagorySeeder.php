@@ -19,12 +19,15 @@ class CatagorySeeder extends Seeder
     {
         DB::table('category')->insert([
             'title' => 'optredens',
+            'color' => '#DFF900'
         ]);
         DB::table('category')->insert([
             'title' => 'verjaardag',
+            'color' => '#F900F1'
         ]);
         DB::table('category')->insert([
             'title' => 'uitje',
+            'color' => '#00F9F9'
         ]);
     }
 }

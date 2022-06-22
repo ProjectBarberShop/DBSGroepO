@@ -15,6 +15,7 @@ class image extends Model
     public $fillable = [
         'title',
         'photo',
+        'discription',
         'useInSlider'
     ];
 
@@ -24,9 +25,10 @@ class image extends Model
     public function Webpages() {
         return $this->belongsToMany(Webpages::class);
     }
-
     public function courses() {
         return $this->belongsToMany(LearnToSing::class);
     }
-    
+    public function tags() {
+        return $this->belongsTo(Tag::class);
+    }
 }

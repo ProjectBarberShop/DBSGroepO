@@ -17,10 +17,16 @@ class Agendapunt extends Model
         'start',
         'end',
         'location',
-        'locationURL'
+        'locationURL',
+        'color',
+        'isArchived'
     ];
 
     public function Category() {
         return $this->belongsToMany(Category::class);
+    }
+
+    public function tickets() {
+        return $this->belongsToMany(Ticket::class);
     }
 }

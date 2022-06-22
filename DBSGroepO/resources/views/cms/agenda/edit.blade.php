@@ -22,7 +22,7 @@
                 </div>
                 <div class="form-group">
                     <label for="description">Beschrijving</label>
-                    <textarea type="text" class="form-control" name="description" value="{{ old('description', $agendapunt->description) }}" required></textarea>
+                    <textarea type="text" class="form-control" name="description" required>{{ old('description', $agendapunt->description) }}</textarea>
                 </div>
                 <div class="form-group">
                     <label for="start">Start</label>
