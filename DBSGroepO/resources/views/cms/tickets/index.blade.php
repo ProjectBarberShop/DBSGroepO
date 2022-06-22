@@ -3,36 +3,35 @@
 @section('content')
 <div class="row">
     @foreach($ticketdata as $t)
-        @if($t->amount_of_tickets > 0)
-            <div class="card card-primary m-2 col-md-3 p-0">
-                <div class="card-header">
-                    <h3 class="card-title w-100 mb-2">{{$t->title}}</h3>
-                    <p>{{$t->start}} / {{$t->end}}</p>
-                    <p>Aantal tickets besteld: {{$t->amount_of_tickets}}</p>
-                    <p class="fs-6 m-0">
-                        @if($t->is_published)
-                            Gepubliceerd op de website
-                        @else
-                            Niet gepubliceerd op de website
-                        @endif
-                    </p>
-                </div>
-                <p class="p-2">{{$t->description}}</p>
-                <div class="card-body d-flex justify-content-end align-items-end p-2">
-                    <form action="{{ route('ticket.destroy', $t->id) }}" method="POST" id="{{$t->id}}a">
-                        <input type="hidden" name="{{$t->title}}">
-                        @method('PUT')
-                        @csrf
-                    </form>
-                    <div>
-                        <a href="{{ route('ticket.edit', $t->id) }}" class="mr-2 btn btn-primary">Bijwerken</a>
+        @foreach($agendadata as $a)
+            @if($t->agenda_id === $a->id)
+                @if($t->amount_of_tickets > 0)
+                    <div class="card card-primary m-2 col-md-3 p-0">
+                        <div class="card-header">
+                            <h3 class="card-title w-100 mb-2">{{$a->title}}</h3>
+                            <p>{{$a->start}} / {{$a->end}}</p>
+                            <p>Aantal tickets besteld: {{$t->amount_of_tickets}}</p>
+                            <p class="fs-6 m-0">
+                                @if($t->is_published)
+                                    Gepubliceerd op de website
+                                @else
+                                    Niet gepubliceerd op de website
+                                @endif
+                            </p>
+                        </div>
+                        <p class="p-2">{{$t->description}}</p>
+                        <div class="card-body d-flex justify-content-end align-items-end p-2">
+                            <a href="{{ route('tickets.edit', $t->id) }}" class="mr-2 btn btn-primary">Bijwerken</a>
+                            <form action="{{route('tickets.destroy', $t->id)}}", method="POST">
+                                @csrf
+                                @method('delete')
+                                <button type="submit" class="btn btn-danger">Verwijderen</button>
+                            </form>
+                        </div>
                     </div>
-                    <div>
-                        <button class="btn btn-primary" onclick="confirmSubmit({{$t->id}}, 'a')" id="remove">Verwijderen</button>
-                    </div>
-                </div>
-            </div>
-        @endif
+                @endif
+            @endif
+        @endforeach
     @endforeach
 </div>
 
@@ -43,13 +42,12 @@
                 <h3 class="card-title">Maak nieuwe ticket aan</h3>
             </div>
             <div class="card-body">
-                <form action="{{ route('ticket.update') }}" method="POST" class="d-flex flex-column" enctype="multipart/form-data">
-                    @method('PUT')
+                <form action="{{ route('tickets.store') }}" method="POST" class="d-flex flex-column" enctype="multipart/form-data">
+                    @method('POST')
                     @csrf
                     <label for="title">Titel:</label>
                     <select name="agenda">
-                        <option value="0" selected>-- Tickets --</option>
-                        @foreach ($agendadata as $a)
+                        @foreach ($agenda as $a)
                             @if(!$a->amount_of_tickets > 0)
                                 <option value="{{$a->id}}">{{$a->title}} / {{$a->start}} / {{$a->end}}</option>
                             @endif

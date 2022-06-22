@@ -114,11 +114,6 @@ Route::group([
         Route::delete('paginas/{collomtext}/column/{page}', 'destroy')->name('column.destroy');
     });
 
-    Route::controller(CardController::class)->group(function() {
-        Route::get('paginas/{pagina}/card/create', 'create')->name('card.create');
-        Route::post('paginas/{pagina}/card', 'store')->name('card.store');
-    });
-
     Route::controller(NavbarController::class)->group(function() {
         Route::post('navbar/change/{id}' , 'changeOrder')->name('navbar.order');
     });
@@ -138,11 +133,7 @@ Route::group([
     Route::resource('learntosing-beheer', LearnToSingCMSController::class);
 
     Route::resource('tickets', TicketCMSController::class);
-    Route::controller(TicketCMSController::class)->group(function() {
-        Route::put('tickets/update', 'update')->name('ticket.update');
-        Route::put('tickets/destroy/{id}', 'destroy')->name('ticket.destroy');
-        Route::get('tickets/edit/{id}', 'edit')->name('ticket.edit');
-    });
+
 
     Route::get('/home', function () {
         return View::make('cms.home');

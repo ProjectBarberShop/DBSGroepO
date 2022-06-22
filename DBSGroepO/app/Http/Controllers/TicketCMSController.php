@@ -11,28 +11,24 @@ class TicketCMSController extends Controller
 {
     public function index()
     {
-        // $ticketAmount = Ticket::with('agendaItem')->where('agenda_id', 6)->count();
         $agendadata = Agendapunt::where('start', '>', Carbon::now())->orderBy('start', 'asc')->paginate(5);
-        // $ticketdata = Ticket::with('agenda');
-        $ticketdata = Ticket::with('agendaItem')->get();
+        $agenda = Agendapunt::where('start', '>' , Carbon::now())->orderBy('start', 'asc')->get();
+        $ticketdata = Ticket::all();
 
-        return view('cms.tickets.index', compact('ticketdata', 'agendadata'));
+        return view('cms.tickets.index', compact('ticketdata', 'agendadata' , 'agenda'));
     }
 
-    public function update(Request $request)
+    public function store(Request $request)
     {
         $request->validate([
             'amount' => 'required|not_in:0',
             'price' => 'required',
             'agenda' => 'not_in:0',
         ]);
-
-        // $agendapunt = Agendapunt::where('start', '>', Carbon::now())->find(($request->agenda));
-
         $ticket = new Ticket;
-        $ticket->agenda_id = intval($request->input('agenda'));
-        $ticket->amount_of_tickets = intval($request->input('amount'));
-        $ticket->price = intval($request->input('price'));
+        $ticket->agenda_id = $request->input('agenda');
+        $ticket->amount_of_tickets = $request->input('amount');
+        $ticket->price = $request->input('price');
         $ticket->is_published = isset($request['ispublished']) ? true : false;
         $ticket->save();
 
@@ -41,18 +37,33 @@ class TicketCMSController extends Controller
 
     public function destroy($id)
     {
-        $agendapunt = Agendapunt::where('start', '>', Carbon::now())->find($id);
-        $agendapunt->amount_of_tickets = 0;
-        $agendapunt->is_published = false;
-        $agendapunt->save();
+        $ticket = Ticket::find($id);
+        $ticket->delete();
 
         return redirect()->route('tickets.index')->with('success','Pagina succesvol bijgewerkt');
     }
 
     public function edit($id)
     {
-        $agendapunt = Agendapunt::where('start', '>', Carbon::now())->find($id);
+        $tickets = Ticket::find($id);
+        $agendapunt = Agendapunt::find($tickets->agenda_id);
 
-        return view('cms.tickets.edit', compact('agendapunt'));
+        return view('cms.tickets.edit', compact('agendapunt' , 'tickets'));
+    }
+
+
+    public function update(Request $request , $id) {
+        $request->validate([
+            'amount' => 'required|not_in:0',
+            'price' => 'required',
+            'agenda' => 'not_in:0',
+        ]);
+        $ticket = Ticket::find($id);
+        $ticket->amount_of_tickets = $request->input('amount');
+        $ticket->price = $request->input('price');
+        $ticket->is_published = isset($request['ispublished']) ? true : false;
+        $ticket->update();
+
+        return redirect()->route('tickets.index')->with('success','Pagina succesvol bijgewerkt');
     }
 }
