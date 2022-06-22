@@ -14,7 +14,7 @@ class TicketController extends Controller
 {
     public function index()
     {
-        $agendadata = Agendapunt::where('start', '>', Carbon::now())
+        $agendadata = Agendapunt::where('start', '>=', Carbon::now())
         ->orderBy('start', 'asc')->get();
         $ticketdata = Ticket::where('is_published', true)->where('amount_of_tickets', '>', 0)->paginate(5);
 
@@ -36,7 +36,11 @@ class TicketController extends Controller
         if($ticket != null && $ticket->email == $request->input('email')) {
             return redirect()->route('boeking.index')->with('success','Pagina succesvol bijgewerkt');
         }
-        $ticket->amount_of_tickets = $ticket->amount_of_tickets - $request->input('amount');
+        $ticket_amount = $ticket->amount_of_tickets - $request->input('amount');
+        $ticket->amount_of_tickets = $ticket_amount;
+        if($ticket_amount < 0) {
+            return redirect()->route('boeking.index')->with('warning','Er zijn niet genoeg tickets beschikbaar');
+        }
         $ticket->save();
 
         $data["name"] = $request->input('name');

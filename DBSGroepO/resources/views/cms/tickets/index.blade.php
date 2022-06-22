@@ -3,7 +3,7 @@
 @section('content')
 <div class="row">
     @foreach($ticketdata as $t)
-        @foreach($agendadata as $a)
+        @foreach($agenda as $a)
             @if($t->agenda_id === $a->id)
                 @if($t->amount_of_tickets > 0)
                     <div class="card card-primary m-2 col-md-3 p-0">
@@ -25,7 +25,7 @@
                             <form action="{{route('tickets.destroy', $t->id)}}", method="POST">
                                 @csrf
                                 @method('delete')
-                                <button type="submit" class="btn btn-danger md-2">Verwijderen</button>
+                                <button type="submit" class="btn btn-danger">Verwijderen</button>
                             </form>
                         </div>
                     </div>

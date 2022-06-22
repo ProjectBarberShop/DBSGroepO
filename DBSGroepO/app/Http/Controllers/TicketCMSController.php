@@ -11,18 +11,17 @@ class TicketCMSController extends Controller
 {
     public function index()
     {
-        $agendadata = Agendapunt::where('start', '>', Carbon::now())->orderBy('start', 'asc')->paginate(5);
-        $agenda = Agendapunt::where('start', '>' , Carbon::now())->orderBy('start', 'asc')->get();
+        $agenda = Agendapunt::where('start', '>=' , Carbon::now())->orderBy('start', 'asc')->get();
         $ticketdata = Ticket::all();
 
-        return view('cms.tickets.index', compact('ticketdata', 'agendadata' , 'agenda'));
+        return view('cms.tickets.index', compact('ticketdata' , 'agenda'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
             'amount' => 'required|not_in:0',
-            'price' => 'required',
+            'price' => 'required|integer',
             'agenda' => 'not_in:0',
         ]);
         $ticket = new Ticket;
@@ -55,7 +54,7 @@ class TicketCMSController extends Controller
     public function update(Request $request , $id) {
         $request->validate([
             'amount' => 'required|not_in:0',
-            'price' => 'required',
+            'price' => 'required|integer',
             'agenda' => 'not_in:0',
         ]);
         $ticket = Ticket::find($id);
