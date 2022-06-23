@@ -23,7 +23,7 @@ class Agendapunt extends Model
     ];
 
     public function Category() {
-        return $this->belongsToMany(Category::class);
+        return $this->belongsToMany(Category::class , 'agendapunt_category', 'agendapunt_id', 'category_id');
     }
 
     public function tickets() {

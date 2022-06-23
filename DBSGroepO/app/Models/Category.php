@@ -17,6 +17,6 @@ class Category extends Model
     ];
 
     public function Agenda() {
-        return $this->belongsToMany(Agendapunt::class);
+        return $this->belongsToMany(Agendapunt::class, 'agendapunt_category', 'agendapunt_id', 'category_id');
     }
 }
