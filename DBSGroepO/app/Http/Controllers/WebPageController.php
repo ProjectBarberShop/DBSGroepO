@@ -70,8 +70,13 @@ class WebPageController extends Controller
     }
        if($request->input('navItem') == 0){
            $navItem = new NavbarItem();
+           $navbarItem = NavbarItem::latest('id')->limit(1)->get();
+           foreach($navbarItem as $navitem) {
+                $navNumber = $navitem->number;
+           }
            $navItem->name = $request->input('slug');
            $navItem->link = $webpage->slug;
+           $navItem->number = $navNumber + 1;
            $navItem->save();
        }
        else{

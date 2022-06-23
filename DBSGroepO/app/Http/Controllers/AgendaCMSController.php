@@ -117,7 +117,7 @@ class AgendaCMSController extends Controller
         $agendapunt->start = date('Y-m-d\TH:i', $agendapunt->start);
         $agendapunt->end = strtotime($agendapunt->end);
         $agendapunt->end = date('Y-m-d\TH:i', $agendapunt->end);
-        
+
         $categories = Category::all();
 
         return view('cms.agenda.edit', compact('agendapunt', 'categories'));
